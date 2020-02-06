@@ -19,6 +19,8 @@ npm-debug.log*
 package-lock.json
 tsconfig.spec.json
 karma.conf.js
+yarn.lock
+README.md
 
 */.idea
 */.ionic
