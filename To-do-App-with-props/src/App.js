@@ -1,34 +1,61 @@
-import React from 'react';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Header from "./pages/Header";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import AddTodo from "./pages/AddTodo";
+import ViewTodos from "./pages/ViewTodos";
+import ViewTodo from "./pages/ViewTodo";
 
-function App() {
-  return (
-    <div className="App">
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">To-do App</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+class App extends Component {
+  state = {
+    appName: "To-do App",
+    todos: []
+  };
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-          <ul class="navbar-nav mr-auto">
-          </ul>
-          <form class="form-inline my-2 my-lg-0"><ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Add To-do</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Contact</a>
-            </li>
-          </ul>
-          </form>
+  componentDidMount() {
+    console.log("From componentDidMount()");
+
+    let todos = [
+      {
+        id: 1,
+        title: "One",
+        description: "Description goes here"
+      },
+      {
+        id: 2,
+        title: "Two",
+        description: "Description goes here"
+      }
+    ];
+
+    this.setState({ todos });
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Header appName={this.state.appName} />
+          <div className="container">
+            <Switch>
+              <Route
+                exact
+                path="/"
+                component={() => <ViewTodos todos={this.state.todos} />}
+              />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/contact-us" component={Contact} />
+              <Route exact path="/add-todo" component={AddTodo} />
+              <Route exact path="/view-todos" component={ViewTodos} />
+              <Route exact path="/:id" component={ViewTodo} />
+            </Switch>
+          </div>
         </div>
-      </nav>
-    </div>
-  );
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
