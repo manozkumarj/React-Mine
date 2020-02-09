@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ViewTodos = props => {
   console.log("props from ViewTodos page are showing below");
   console.log(props);
 
   let todosList =
-    props.todos.length > 0 ? (
+    props.todos && props.todos.length > 0 ? (
       props.todos.map(todo => {
         return (
           <div
@@ -15,7 +16,7 @@ const ViewTodos = props => {
           >
             <div className="card-body">
               <h5 className="card-title" style={titleStyle}>
-                {todo.title}
+                <Link to={`/${todo.id}`}>{todo.title}</Link>
               </h5>
               <p className="card-text">{todo.description}</p>
             </div>
