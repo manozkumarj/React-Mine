@@ -50,6 +50,19 @@ class App extends Component {
     this.setState({ todo: filterTodo });
   };
 
+  deleteTodo = async todoId => {
+    let getTodos = await JSON.parse(localStorage.getItem("todos"));
+    let filterTodos;
+    if (getTodos && getTodos.length > 0) {
+      // console.log(`App - getTodos - ${JSON.stringify(getTodos)}`);
+      filterTodos = await getTodos.filter(todoo => +todoo.id !== todoId);
+    }
+    console.log("filterTodos", JSON.stringify(filterTodos));
+    this.setState({ todos: filterTodos });
+    localStorage.removeItem("todos");
+    localStorage.setItem("todos", JSON.stringify(filterTodos));
+  };
+
   render() {
     return (
       <BrowserRouter>
@@ -60,7 +73,13 @@ class App extends Component {
               <Route
                 exact
                 path="/"
-                component={() => <ViewTodos todos={this.state.todos} />}
+                render={props => (
+                  <ViewTodos
+                    {...props}
+                    todos={this.state.todos}
+                    deleteTodo={this.deleteTodo}
+                  />
+                )}
               />
               <Route exact path="/about" component={About} />
               <Route exact path="/contact-us" component={Contact} />
@@ -69,7 +88,6 @@ class App extends Component {
                 path="/add-todo"
                 component={() => <AddTodo addTodo={this.addTodo} />}
               />
-              <Route exact path="/view-todos" component={ViewTodos} />
               <Route
                 exact
                 path="/:id"

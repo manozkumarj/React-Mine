@@ -16,15 +16,15 @@ class ViewTodo extends Component {
     const thisTodo =
       currentTodo.length > 0 ? (
         <div
-          key={currentTodo.id}
+          key={currentTodo[0].id}
           className="card"
           style={{ width: "90%", margin: "auto" }}
         >
           <div className="card-body">
             <h5 className="card-title" style={titleStyle}>
-              {currentTodo.title}
+              {currentTodo[0].title}
             </h5>
-            <p className="card-text">{currentTodo.description}</p>
+            <p className="card-text">{currentTodo[0].description}</p>
           </div>
         </div>
       ) : (

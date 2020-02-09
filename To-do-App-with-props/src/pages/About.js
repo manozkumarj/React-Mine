@@ -1,7 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
-const About = () => {
-  return <>This is About Page</>;
-};
+class About extends Component {
+  componentDidMount() {
+    console.log("About - From componentDidMount()");
+    console.log(this.props);
+  }
 
-export default About;
+  render() {
+    return <>This is About Page</>;
+  }
+}
+
+export default withRouter(About);
