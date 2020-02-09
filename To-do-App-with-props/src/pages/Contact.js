@@ -1,15 +1,14 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 
-class Contact extends Component {
-  componentDidMount() {
+const Contact = props => {
+  useEffect(() => {
     console.log("Contact - From componentDidMount()");
-    console.log(this.props);
-  }
+    console.log(props);
+    // eslint-disable-next-line
+  }, []);
 
-  render() {
-    return <>This is Contact Page</>;
-  }
-}
+  return <>This is Contact Page</>;
+};
 
 export default withRouter(Contact);

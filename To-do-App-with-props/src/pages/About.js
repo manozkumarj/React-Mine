@@ -1,15 +1,14 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 
-class About extends Component {
-  componentDidMount() {
+const About = props => {
+  useEffect(() => {
     console.log("About - From componentDidMount()");
-    console.log(this.props);
-  }
+    console.log(props);
+    // eslint-disable-next-line
+  }, []);
 
-  render() {
-    return <>This is About Page</>;
-  }
-}
+  return <>This is About Page</>;
+};
 
 export default withRouter(About);
