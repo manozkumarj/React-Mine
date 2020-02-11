@@ -22,6 +22,7 @@ karma.conf.js
 yarn.lock
 README.md
 
+*/.gitignore
 */.idea
 */.ionic
 */.sass-cache
