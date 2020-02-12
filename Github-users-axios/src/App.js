@@ -4,14 +4,13 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./pages/Header";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import AddTodo from "./pages/AddTodo";
-import ViewTodos from "./pages/ViewTodos";
-import ViewTodo from "./pages/ViewTodo";
+import ViewUsers from "./pages/ViewUsers";
+import ViewUser from "./pages/ViewUser";
 // import uuid from "uuid/v3";
 
 class App extends Component {
   state = {
-    appName: 'Github users - AXIOS'
+    appName: "Github users - AXIOS"
   };
 
   componentDidMount() {
@@ -28,14 +27,15 @@ class App extends Component {
               <Route
                 exact
                 path="/"
-                render={props => (
-                  <ViewTodos
-                    {...props}
-                  />
-                )}
+                render={props => <ViewUsers {...props} />}
               />
               <Route exact path="/about" component={About} />
               <Route exact path="/contact-us" component={Contact} />
+              <Route
+                exact
+                path="/:id"
+                render={props => <ViewUser {...props} />}
+              />
             </Switch>
           </div>
         </div>
