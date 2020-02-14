@@ -1,15 +1,13 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 // import { Link } from "react-router-dom";
 
-class ViewUsers extends Component {
-  componentDidMount() {
+const ViewUsers = props => {
+  useEffect(() => {
     console.log("props from ViewUsers page are showing below");
-    console.log(this.props);
-  }
+    console.log(props);
+  },[]);
 
-  render() {
     return <> This is ViewUsers page </>;
-  }
 }
 
 export default ViewUsers;
