@@ -21,6 +21,7 @@ tsconfig.spec.json
 karma.conf.js
 yarn.lock
 README.md
+.env.local
 
 */.gitignore
 */.idea
@@ -29,6 +30,7 @@ README.md
 */.sourcemaps
 */.versions
 */.vscode
+*/.env.local
 */coverage
 */dist
 */node_modules
@@ -38,3 +40,4 @@ README.md
 */plugins
 */www
 */resources
+*/netlify.toml

@@ -12,22 +12,33 @@ import axios from "axios";
 class App extends Component {
   state = {
     appName: "Github users - AXIOS",
-    users: []
+    users: [],
+    user: []
   };
 
-  getGithubUsers(){
-    axios.get("https://api.github.com/users")
-      .then(results => {
-        this.setState({users: results.data});
-      })
-      .error(e=>{
-        console.log("Something went wrong while fetching users from Github API.");
-      });
+  async componentDidMount() {
+    console.log("props from App page are showing below");
+    console.log(this.props);
+    console.log(
+      `process.env.REACT_APP_GITHUB_CLIENT_ID -> ${process.env.REACT_APP_GITHUB_CLIENT_ID}`
+    );
+    console.log(
+      `process.env.REACT_APP_GITHUB_CLIENT_SECRET -> ${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    );
+
+    let results = await axios.get(
+      `https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    );
+    this.setState({ users: results.data });
   }
 
-  componentDidMount() {
-    console.log("App - From componentDidMount()");
-  }
+  getUser = async id => {
+    console.log("Received userId is -> " + id);
+    let results = await axios.get(
+      `https://api.github.com/users/${id}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    );
+    this.setState({ user: results.data });
+  };
 
   render() {
     return (
@@ -39,14 +50,22 @@ class App extends Component {
               <Route
                 exact
                 path="/"
-                render={props => <ViewUsers {...props} users={this.state.users} />}
+                render={props => (
+                  <ViewUsers {...props} users={this.state.users} />
+                )}
               />
               <Route exact path="/about" component={About} />
               <Route exact path="/contact-us" component={Contact} />
               <Route
                 exact
                 path="/:id"
-                render={props => <ViewUser {...props} />}
+                render={props => (
+                  <ViewUser
+                    {...props}
+                    getUser={this.getUser}
+                    user={this.state.user}
+                  />
+                )}
               />
             </Switch>
           </div>
