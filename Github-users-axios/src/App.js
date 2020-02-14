@@ -9,6 +9,17 @@ import ViewUser from "./pages/ViewUser";
 import axios from "axios";
 // import uuid from "uuid/v3";
 
+let githubClientId;
+let githubClientSecret;
+
+if (process.env.NODE_ENV !== "production") {
+  githubClientId = githubClientId;
+  githubClientSecret = githubClientSecret;
+} else {
+  githubClientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
+  githubClientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
+}
+
 class App extends Component {
   state = {
     appName: "Github users - AXIOS",
@@ -19,15 +30,11 @@ class App extends Component {
   async componentDidMount() {
     console.log("props from App page are showing below");
     console.log(this.props);
-    console.log(
-      `process.env.REACT_APP_GITHUB_CLIENT_ID -> ${process.env.REACT_APP_GITHUB_CLIENT_ID}`
-    );
-    console.log(
-      `process.env.REACT_APP_GITHUB_CLIENT_SECRET -> ${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-    );
+    console.log(`githubClientId -> ${githubClientId}`);
+    console.log(`githubClientSecret -> ${githubClientSecret}`);
 
     let results = await axios.get(
-      `https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/users?client_id=${githubClientId}&client_secret=${githubClientSecret}`
     );
     this.setState({ users: results.data });
   }
@@ -35,7 +42,7 @@ class App extends Component {
   getUser = async id => {
     console.log("Received userId is -> " + id);
     let results = await axios.get(
-      `https://api.github.com/users/${id}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/users/${id}?client_id=${githubClientId}&client_secret=${githubClientSecret}`
     );
     this.setState({ user: results.data });
   };

@@ -40,4 +40,5 @@ README.md
 */plugins
 */www
 */resources
+*/build
 */netlify.toml
