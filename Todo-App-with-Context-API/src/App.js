@@ -9,6 +9,7 @@ import ViewTodos from "./pages/ViewTodos";
 import ViewTodo from "./pages/ViewTodo";
 import ThemeContextProvider from "./contexts/ThemeContext";
 // import uuid from "uuid/v3";
+import ThemeToggle from "./pages/ThemeToggle";
 
 class App extends Component {
   state = {
@@ -25,6 +26,7 @@ class App extends Component {
         <div className="App">
           <ThemeContextProvider>
             <Header appName={this.state.appName} />
+            <ThemeToggle />
             <div className="container">
               <Switch>
                 <Route
