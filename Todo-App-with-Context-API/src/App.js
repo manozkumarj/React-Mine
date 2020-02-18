@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./pages/Header";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import AddTodo from "./pages/AddTodo";
+// import AddTodo from "./pages/AddTodo";
 import ViewTodos from "./pages/ViewTodos";
 import ViewTodo from "./pages/ViewTodo";
 import ThemeContextProvider from "./contexts/ThemeContext";
@@ -18,7 +18,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    console.log("App - From componentDidMount()");
+    // console.log("App - From componentDidMount()");
   }
 
   render() {
@@ -36,11 +36,11 @@ class App extends Component {
                     path="/"
                     render={props => <ViewTodos {...props} />}
                   />
-                  <Route
+                  {/* <Route
                     exact
                     path="/add-todo"
                     render={props => <AddTodo {...props} />}
-                  />
+                  /> */}
                   <Route exact path="/about" component={About} />
                   <Route exact path="/contact-us" component={Contact} />
                   <Route

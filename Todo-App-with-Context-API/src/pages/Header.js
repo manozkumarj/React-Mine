@@ -5,8 +5,8 @@ import { AuthContext } from "./../contexts/AuthContext";
 
 class Header extends Component {
   componentDidMount = () => {
-    console.log("props from Header page are showing below");
-    console.log(this.props);
+    // console.log("props from Header page are showing below");
+    // console.log(this.props);
     // eslint-disable-next-line
   };
 
@@ -56,11 +56,11 @@ class Header extends Component {
                               Home
                             </NavLink>
                           </li>
-                          <li className="nav-item active">
+                          {/* <li className="nav-item active">
                             <NavLink className="nav-link" to="/add-todo">
                               Add Todo
                             </NavLink>
-                          </li>
+                          </li> */}
                           <li className="nav-item active">
                             <NavLink className="nav-link" to="/about">
                               About

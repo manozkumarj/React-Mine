@@ -6,8 +6,8 @@ const AddTodo = props => {
   const [description, setDescription] = useState("");
 
   useEffect(() => {
-    console.log("AddTodo - From componentDidMount()");
-    console.log(props);
+    // console.log("AddTodo - From componentDidMount()");
+    // console.log(props);
     // eslint-disable-next-line
   }, []);
 
@@ -28,13 +28,19 @@ const AddTodo = props => {
       description
     };
     // console.log(addTodoObj);
-    props.addTodo(addTodoObj);
-    props.history.push("/");
+    props.addNewTodo(addTodoObj);
+    setTitle("");
+    setDescription("");
+    // props.history.push("/");
   };
 
   return (
     <React.Fragment>
-      <form method="post" onSubmit={handleSubmit}>
+      <form
+        method="post"
+        onSubmit={handleSubmit}
+        style={{ margin: "5rem 0 20rem 0" }}
+      >
         <div className="form-group">
           <label htmlFor="exampleFormControlInput1">Title</label>
           <input
