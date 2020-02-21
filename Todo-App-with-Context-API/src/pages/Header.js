@@ -52,7 +52,7 @@ class Header extends Component {
                       <form className="form-inline my-2 my-lg-0">
                         <ul className="navbar-nav mr-auto">
                           <li className="nav-item active">
-                            <NavLink className="nav-link" to="/">
+                            <NavLink className="nav-link" to="/viewTodos">
                               Home
                             </NavLink>
                           </li>

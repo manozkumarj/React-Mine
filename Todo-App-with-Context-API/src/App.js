@@ -11,6 +11,10 @@ import ThemeContextProvider from "./contexts/ThemeContext";
 import AuthContextProvider from "./contexts/AuthContext";
 // import uuid from "uuid/v3";
 import Toggler from "./pages/Toggler";
+import Navbar from "./components/Navbar";
+import BookContextProvider from "./contexts/BookContext";
+import BookList from "./components/BookList";
+import NewBookForm from "./components/NewBookForm";
 
 class App extends Component {
   state = {
@@ -25,6 +29,11 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
+          <BookContextProvider>
+            <Navbar />
+            <BookList />
+            <NewBookForm />
+          </BookContextProvider>
           <ThemeContextProvider>
             <AuthContextProvider>
               <Header appName={this.state.appName} />
@@ -33,7 +42,7 @@ class App extends Component {
                 <Switch>
                   <Route
                     exact
-                    path="/"
+                    path="/viewTodos"
                     render={props => <ViewTodos {...props} />}
                   />
                   {/* <Route
