@@ -6,7 +6,11 @@ const users = require("./routes/users");
 const posts = require("./routes/posts");
 const config = require("./config");
 const app = express();
+const connectDB = require("./config/db");
 const port = 8088;
+
+// Connect to Database
+connectDB();
 
 // parsing the data
 app.use(bodyParser.json({ limit: "100mb" }));
