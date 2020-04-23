@@ -1,0 +1,7 @@
+{
+  "project_name": "My project",
+  "deployment_type": "development-mode",
+  "database": "mypro",
+  "user": "root",
+  "password": "manoz62665"
+}
