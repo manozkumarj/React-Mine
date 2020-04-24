@@ -124,6 +124,7 @@ router.delete("/:id", async (req, res) => {
 // @access      Public
 router.put(
   "/:id",
+  auth,
   [check("name", "Please add name").not().isEmpty()],
   async (req, res) => {
     const errors = validationResult(req);
@@ -160,8 +161,10 @@ router.put(
   }
 );
 
-// Authenticate
-router.post("/authenticate", (req, res, next) => {
+// @route       PUT api/users/authenticate
+// @desc        authenticate a user
+// @access      Private
+router.post("/authenticate", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
@@ -174,7 +177,7 @@ router.post("/authenticate", (req, res, next) => {
     User.comparePassword(password, user.password, (err, isMatch) => {
       if (err) new Error(err);
       if (isMatch) {
-        const token = jwt.sign({ data: user }, config.secret, {
+        const token = jwt.sign({ data: user }, config.jwtSecret, {
           expiresIn: 604800, // 1 week
         });
         res.json({

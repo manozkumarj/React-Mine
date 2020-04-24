@@ -1,5 +1,4 @@
 {
   "mongoURI": "mongodb+srv://manoz123:manoz123@cluster0-khcg3.mongodb.net/test?retryWrites=true&w=majority",
-  "jwtSecret": "secret",
-  "secret": "abcdefghijklmnopqrstuvwxyz0123456789"
+  "jwtSecret": "abcdefghijklmnopqrstuvwxyz0123456789"
 }
