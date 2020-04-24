@@ -91,4 +91,92 @@ router.get("/postedBy/:id", async (req, res) => {
   }
 });
 
+router.put(
+  "/addReaction/:id",
+  auth,
+  [check("reactionId", "Please include reactionId").not().isEmpty()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    let postId = req.params.id;
+    try {
+      const post = await Post.findById(postId);
+
+      if (!post) {
+        res.status(400).json({ msg: "Post doesn't exist" });
+      }
+
+      let userId = req.user._id;
+      console.log("postId -> " + postId);
+      console.log("userId -> " + userId);
+      const { reactionId } = req.body;
+
+      let updatedPost = await Post.findByIdAndUpdate(
+        postId,
+        {
+          $push: {
+            reactions: {
+              reactionId: reactionId,
+              reactedBy: userId,
+            },
+          },
+        },
+        { new: true }
+      );
+
+      res.json(updatedPost);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
+);
+
+router.put(
+  "/addComment/:id",
+  auth,
+  [check("comment", "Please include comment").not().isEmpty()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    let postId = req.params.id;
+    try {
+      const post = await Post.findById(postId);
+
+      if (!post) {
+        res.status(400).json({ msg: "Post doesn't exist" });
+      }
+
+      let userId = req.user._id;
+      console.log("postId -> " + postId);
+      console.log("userId -> " + userId);
+      const { comment } = req.body;
+
+      let updatedPost = await Post.findByIdAndUpdate(
+        postId,
+        {
+          $push: {
+            comments: {
+              comment: comment,
+              reactedBy: userId,
+            },
+          },
+        },
+        { new: true }
+      );
+
+      res.json(updatedPost);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
+);
+
 module.exports = router;

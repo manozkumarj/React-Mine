@@ -65,6 +65,9 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
+
+          let randomChars = randomString();
+          token = randomChars + "-" + token;
           res.json({ token });
         }
       );
