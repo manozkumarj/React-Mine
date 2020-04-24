@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middlewares/auth");
+const randomString = require("../helpers/helpers");
 
 const User = require("../models/User");
 
@@ -180,9 +181,10 @@ router.post("/authenticate", (req, res) => {
         const token = jwt.sign({ data: user }, config.jwtSecret, {
           expiresIn: 604800, // 1 week
         });
+        let randomChars = randomString();
         res.json({
           success: true,
-          token: "JWT " + token,
+          token: randomChars + "-" + token,
           user: {
             id: user._id,
             name: user.name,

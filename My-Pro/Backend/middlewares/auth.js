@@ -1,17 +1,20 @@
 const jwt = require("jsonwebtoken");
 const config = require("config");
 
-module.exports = function(req, res, next) {
+module.exports = function (req, res, next) {
   // Get the token from header
-  const token = req.header("x-auth-token");
+  const tempToken = req.header("x-auth-token");
 
   // Check if not token
-  if (!token) {
+  if (!tempToken) {
     console.log("No token found, Authorization denied");
     return res
       .status(401)
       .json({ msg: "No token found, Authorization denied" });
   }
+
+  let splitToken = tempToken.split("-");
+  const token = splitToken[1];
 
   try {
     const decoded = jwt.verify(token, config.get("jwtSecret"));
