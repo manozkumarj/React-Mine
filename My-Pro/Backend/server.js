@@ -5,6 +5,7 @@ const cors = require("cors");
 const users = require("./routes/users");
 const posts = require("./routes/posts");
 const config = require("./config");
+var request = require("request");
 const app = express();
 const connectDB = require("./config/db");
 const port = 8088;
@@ -30,6 +31,19 @@ app.get("/details", (req, res) => {
   res.json({
     projectName,
     deploymentType,
+  });
+});
+
+// Making use of Request package
+app.get("/sample", (req, res) => {
+  request("https://jsonplaceholder.typicode.com/posts", function (
+    error,
+    response,
+    body
+  ) {
+    console.log("error:", error); // Print the error if one occurred
+    console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
+    res.json(response); // Print the HTML for the Google homepage.
   });
 });
 
