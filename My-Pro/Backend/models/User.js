@@ -15,6 +15,10 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  accountStatus: {
+    type: String,
+    default: "active",
+  },
   date: {
     type: Date,
     default: Date.now,

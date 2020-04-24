@@ -27,6 +27,10 @@ const PostSchema = mongoose.Schema({
       postedBy: { type: ObjectId, ref: "User" },
     },
   ],
+  postStatus: {
+    type: String,
+    default: "active",
+  },
   date: {
     type: Date,
     default: Date.now,
