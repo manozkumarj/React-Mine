@@ -21,15 +21,15 @@ const PostSchema = mongoose.Schema({
   },
   reactions: [
     {
-      reactionId: { type: Number },
+      reactionTypeId: { type: Number },
       reactedBy: { type: ObjectId, ref: "User" },
-      created: { type: Date, default: Date.now },
+      createdAt: { type: Date, default: Date.now },
     },
   ],
   comments: [
     {
       comment: String,
-      created: { type: Date, default: Date.now },
+      createdAt: { type: Date, default: Date.now },
       postedBy: { type: ObjectId, ref: "User" },
     },
   ],

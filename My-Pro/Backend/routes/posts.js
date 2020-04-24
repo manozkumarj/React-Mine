@@ -106,7 +106,7 @@ router.get("/postedBy/:id", async (req, res) => {
 router.put(
   "/addReaction/:id",
   auth,
-  [check("reactionId", "Please include reactionId").not().isEmpty()],
+  [check("reactionTypeId", "Please include reactionTypeId").not().isEmpty()],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -124,14 +124,14 @@ router.put(
       let userId = req.user._id;
       console.log("postId -> " + postId);
       console.log("userId -> " + userId);
-      const { reactionId } = req.body;
+      const { reactionTypeId } = req.body;
 
       let updatedPost = await Post.findByIdAndUpdate(
         postId,
         {
           $push: {
             reactions: {
-              reactionId: reactionId,
+              reactionTypeId: reactionTypeId,
               reactedBy: userId,
             },
           },
@@ -159,14 +159,14 @@ router.put("/deleteReaction/:id", auth, async (req, res) => {
     let userId = req.user._id;
     console.log("postId -> " + postId);
     console.log("userId -> " + userId);
-    const { reactionId } = req.body;
+    const { reactionTypeId } = req.body;
 
     let updatedPost = await Post.findByIdAndUpdate(
       postId,
       {
         $pull: {
           reactions: {
-            reactionId: reactionId,
+            reactionTypeId: reactionTypeId,
             reactedBy: userId,
           },
         },
@@ -268,6 +268,36 @@ router.delete("/:id", async (req, res) => {
     }
 
     const post = await Post.findByIdAndDelete(postId);
+    res.json(post);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+router.get("/comment/:commentId", async (req, res) => {
+  let commentId = req.params.commentId;
+  try {
+    const post = await Post.find({
+      comments: { $elemMatch: { _id: commentId } },
+    }).sort({
+      date: -1,
+    });
+    res.json(post);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+router.get("/reaction/:reactionId", async (req, res) => {
+  let reactionId = req.params.reactionId;
+  try {
+    const post = await Post.find({
+      reactions: { $elemMatch: { _id: reactionId } },
+    }).sort({
+      date: -1,
+    });
     res.json(post);
   } catch (err) {
     console.error(err.message);

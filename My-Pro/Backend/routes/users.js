@@ -173,37 +173,52 @@ router.put(
 // @route       PUT api/users/authenticate
 // @desc        authenticate a user
 // @access      Private
-router.post("/authenticate", (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-
-  User.getUserByEmail(email, (err, user) => {
-    if (err) new Error(err);
-    if (!user) {
-      return res.json({ success: false, msg: "User not found" });
+router.post(
+  "/authenticate",
+  [
+    check("email", "Please include valid email").isEmail(),
+    check(
+      "password",
+      "Please enter a password with 6 or more charactors"
+    ).isLength({ min: 6 }),
+  ],
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
 
-    User.comparePassword(password, user.password, (err, isMatch) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    User.getUserByEmail(email, (err, user) => {
       if (err) new Error(err);
-      if (isMatch) {
-        const token = jwt.sign({ data: user }, config.jwtSecret, {
-          expiresIn: 604800, // 1 week
-        });
-        let randomChars = randomString();
-        res.json({
-          success: true,
-          token: randomChars + "-" + token,
-          user: {
-            id: user._id,
-            name: user.name,
-            email: user.email,
-          },
-        });
-      } else {
-        return res.json({ success: false, msg: "Wrong password" });
+      if (!user) {
+        return res.json({ success: false, msg: "User not found" });
       }
+
+      User.comparePassword(password, user.password, (err, isMatch) => {
+        if (err) new Error(err);
+        if (isMatch) {
+          const token = jwt.sign({ data: user }, config.jwtSecret, {
+            expiresIn: 604800, // 1 week
+          });
+          let randomChars = randomString();
+          res.json({
+            success: true,
+            token: randomChars + "-" + token,
+            user: {
+              id: user._id,
+              name: user.name,
+              email: user.email,
+            },
+          });
+        } else {
+          return res.json({ success: false, msg: "Wrong password" });
+        }
+      });
     });
-  });
-});
+  }
+);
 
 module.exports = router;
