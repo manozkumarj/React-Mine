@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const { ObjectId } = mongoose.Schema;
 
 const UserSchema = mongoose.Schema({
   name: {
@@ -14,6 +15,18 @@ const UserSchema = mongoose.Schema({
   password: {
     type: String,
     required: true,
+  },
+  friends: [
+    {
+      friendId: { type: ObjectId, ref: "User" },
+      friendshipAction: { type: String },
+      status: { type: String },
+      createdAt: { type: Date, default: Date.now },
+    },
+  ],
+  emailStatus: {
+    type: String,
+    default: "active",
   },
   accountStatus: {
     type: String,

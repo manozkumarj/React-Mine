@@ -49,8 +49,8 @@ router.post(
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
       await user.save();
-      console.log("User object is below");
-      console.log(user);
+      // console.log("User object is below");
+      // console.log(user);
       const payload = {
         user: {
           id: user.id,
@@ -220,5 +220,95 @@ router.post(
     });
   }
 );
+
+// Send Friend Request route
+router.put("/send-friend-request/:userId/:friendId", async (req, res) => {
+  try {
+    let friendId = req.params.friendId;
+    const getUser = await User.findById(friendId);
+
+    if (!getUser) {
+      res.status(400).json({ msg: "User doesn't exist" });
+    }
+
+    let userId = req.params.userId;
+    console.log("friendId -> " + friendId);
+    console.log("userId -> " + userId);
+
+    let sentUserDetails = await User.findByIdAndUpdate(
+      userId,
+      {
+        $push: {
+          friends: {
+            friendId: friendId,
+            friendshipAction: "sent",
+            status: "sent",
+          },
+        },
+      },
+      { new: true }
+    );
+
+    let receivedUserDetails = await User.findByIdAndUpdate(
+      friendId,
+      {
+        $push: {
+          friends: {
+            friendId: userId,
+            friendshipAction: "received",
+            status: "pending",
+          },
+        },
+      },
+      { new: true }
+    );
+
+    res.json(sentUserDetails);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// Send Friend Request route
+router.put("/accept-friend-request/:userId/:friendId", async (req, res) => {
+  try {
+    let friendId = req.params.friendId;
+    const getUser = await User.findById(friendId);
+
+    if (!getUser) {
+      res.status(400).json({ msg: "User doesn't exist" });
+    }
+
+    let userId = req.params.userId;
+    console.log("friendId -> " + friendId);
+    console.log("userId -> " + userId);
+
+    let sentUserDetails = await User.findOneAndUpdate(
+      { _id: userId, "friends.friendId": friendId },
+      {
+        $set: {
+          "friends.$.status": "friend",
+        },
+      },
+      { new: true }
+    );
+
+    let receivedUserDetails = await User.findOneAndUpdate(
+      { _id: friendId, "friends.friendId": userId },
+      {
+        $set: {
+          "friends.$.status": "friend",
+        },
+      },
+      { new: true }
+    );
+
+    res.json(sentUserDetails);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;
