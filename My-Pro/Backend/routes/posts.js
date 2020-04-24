@@ -10,6 +10,18 @@ router.get("/test", (req, res) => {
   res.status(200).json({ msg: "This is Posts home route" });
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const posts = await Post.find().sort({
+      date: -1,
+    });
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 router.post(
   "/",
   auth,
@@ -135,6 +147,40 @@ router.put(
   }
 );
 
+router.put("/deleteReaction/:id", auth, async (req, res) => {
+  let postId = req.params.id;
+  try {
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      res.status(400).json({ msg: "Post doesn't exist" });
+    }
+
+    let userId = req.user._id;
+    console.log("postId -> " + postId);
+    console.log("userId -> " + userId);
+    const { reactionId } = req.body;
+
+    let updatedPost = await Post.findByIdAndUpdate(
+      postId,
+      {
+        $pull: {
+          reactions: {
+            reactionId: reactionId,
+            reactedBy: userId,
+          },
+        },
+      },
+      { new: true }
+    );
+
+    res.json(updatedPost);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 router.put(
   "/addComment/:id",
   auth,
@@ -178,5 +224,55 @@ router.put(
     }
   }
 );
+
+router.put("/deleteComment/:id", auth, async (req, res) => {
+  let postId = req.params.id;
+  try {
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      res.status(400).json({ msg: "Post doesn't exist" });
+    }
+
+    let userId = req.user._id;
+    console.log("postId -> " + postId);
+    console.log("userId -> " + userId);
+    const { comment } = req.body;
+
+    let updatedPost = await Post.findByIdAndUpdate(
+      postId,
+      {
+        $pull: {
+          comments: {
+            comment: comment,
+            reactedBy: userId,
+          },
+        },
+      },
+      { new: true }
+    );
+
+    res.json(updatedPost);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  let postId = req.params.id;
+  try {
+    let getPost = await Post.findById(postId);
+    if (!getPost) {
+      res.status(400).json({ msg: "Post doesn't exist" });
+    }
+
+    const post = await Post.findByIdAndDelete(postId);
+    res.json(post);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;

@@ -115,6 +115,11 @@ router.get("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   let userId = req.params.id;
   try {
+    let getUser = await User.findById(userId);
+    if (!getUser) {
+      res.status(400).json({ msg: "User doesn't exist" });
+    }
+
     const user = await User.findByIdAndDelete(userId);
     res.json(user);
   } catch (err) {
