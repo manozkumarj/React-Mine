@@ -1,5 +1,5 @@
 import React from "react";
-import "./layout.css";
+import "./backDrop.css";
 
 const BackDrop = ({ close }) => {
   return <div onClick={close} className="backdrop" />;

@@ -1,5 +1,6 @@
 import React from "react";
-import "./layout.css";
+import { Link } from "react-router-dom";
+import "./sideNavBar.css";
 
 const SideNavBar = ({ close, display }) => {
   let Classes = "side-nav-bar";
@@ -8,12 +9,14 @@ const SideNavBar = ({ close, display }) => {
   }
   return (
     <nav className={Classes}>
-      <ul>
-        <li onClick={close}>
-          <i className="material-icons">close</i>
+      <ul onClick={close}>
+        <li>Close</li>
+        <li>
+          <Link to="/register">Register</Link>
         </li>
-        <li> Dashboard </li>
-        <li> Services</li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
       </ul>
     </nav>
   );
