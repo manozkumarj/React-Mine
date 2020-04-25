@@ -270,7 +270,7 @@ router.put("/send-friend-request/:userId/:friendId", async (req, res) => {
   }
 });
 
-// Send Friend Request route
+// Accept Friend Request route
 router.put("/accept-friend-request/:userId/:friendId", async (req, res) => {
   try {
     let friendId = req.params.friendId;
@@ -299,6 +299,53 @@ router.put("/accept-friend-request/:userId/:friendId", async (req, res) => {
       {
         $set: {
           "friends.$.status": "friend",
+        },
+      },
+      { new: true }
+    );
+
+    res.json(sentUserDetails);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// Delete Friend Request route
+router.put("/delete-friend-request/:userId/:friendId", async (req, res) => {
+  try {
+    let friendId = req.params.friendId;
+    const getUser = await User.findById(friendId);
+
+    if (!getUser) {
+      res.status(400).json({ msg: "User doesn't exist" });
+    }
+
+    let userId = req.params.userId;
+    console.log("friendId -> " + friendId);
+    console.log("userId -> " + userId);
+
+    let sentUserDetails = await User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: {
+          friends: {
+            friendId: friendId,
+            status: "sent",
+          },
+        },
+      },
+      { new: true }
+    );
+
+    let receivedUserDetails = await User.findByIdAndUpdate(
+      friendId,
+      {
+        $pull: {
+          friends: {
+            friendId: userId,
+            status: "pending",
+          },
         },
       },
       { new: true }

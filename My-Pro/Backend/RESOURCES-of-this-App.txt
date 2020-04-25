@@ -2,3 +2,8 @@
 * Make use of -> https://github.com/bradtraversy/contact-keeper/tree/master/middleware
 * Make use of -> https://github.com/kaloraat/nodeapi/blob/master/controllers/post.js
 * 
+
+
+
+* https://stackoverflow.com/questions/15691224/mongoose-update-values-in-array-of-objects
+* 
