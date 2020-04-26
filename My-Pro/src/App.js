@@ -14,17 +14,19 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
-          <ScriptsContextProvider>
-            <Menus />
-          </ScriptsContextProvider>
-          <div className="common-container">
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/home" component={Home} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="*" component={NotFound} />
-            </Switch>
+          <div className="app-container">
+            <ScriptsContextProvider>
+              <Menus />
+            </ScriptsContextProvider>
+            <div className="common-container">
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/home" component={Home} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="*" component={NotFound} />
+              </Switch>
+            </div>
           </div>
         </Fragment>
       </Router>

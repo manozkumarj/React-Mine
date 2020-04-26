@@ -15,7 +15,6 @@ body {
   height: 100%;
   font-size: 14px;
   line-height: 20px;
-  overflow-y: scroll;
 }
 
 textarea {
@@ -39,4 +38,10 @@ textarea {
   max-width: var(--max-width);
   margin: auto;
   margin-top: 50px;
+}
+
+.dots {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
