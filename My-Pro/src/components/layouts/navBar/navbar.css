@@ -10,6 +10,7 @@
   line-height: 35px;
   padding: 5px;
   text-align: center;
+  z-index: 10;
 }
 
 .main-container {
@@ -20,8 +21,9 @@
 }
 
 .nav-logo {
-  margin-left: 3rem;
+  /* margin-left: 3rem; */
   cursor: pointer;
+  font-size: 20px;
 }
 
 .nav-logo a {
@@ -32,11 +34,13 @@
 .nav-icon {
   cursor: pointer;
   margin-left: 5px;
+  margin-right: 25px;
 }
 
 .nav-items ul {
   list-style: none;
   margin: 0;
+  margin-right: 5px;
   padding: 0;
   list-style: none;
   text-decoration: none;
@@ -78,20 +82,10 @@ span {
   .nav-items {
     display: none;
   }
-  #hamnav label {
-    display: inline-block;
-    color: white;
-    background: #a02620;
-    font-style: normal;
-    font-size: 1.2em;
-    padding: 10px;
-  }
 }
 
-/*
 @media (min-width: 703px) {
   .nav-icon {
     display: none;
   }
 }
-*/
