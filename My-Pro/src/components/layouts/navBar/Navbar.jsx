@@ -5,25 +5,26 @@ import "./navbar.css";
 const Navbar = ({ open }) => {
   return (
     <nav className="nav-bar">
-      <div onClick={open} className="nav-icon">
-        <input type="checkbox" />
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <div className="nav-logo">
-        <Link to="/">Logo</Link>
-      </div>
-      <div className="nav-space" />
-      <div className="nav-items">
-        <ul>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-        </ul>
+      <div className="main-container">
+        <div onClick={open} className="nav-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div className="nav-logo">
+          <Link to="/">Logo</Link>
+        </div>
+        <div className="nav-space" />
+        <div className="nav-items">
+          <ul>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
   );

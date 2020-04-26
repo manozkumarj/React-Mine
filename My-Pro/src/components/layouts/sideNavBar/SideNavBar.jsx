@@ -12,6 +12,9 @@ const SideNavBar = ({ close, display }) => {
       <ul onClick={close}>
         <li>Close</li>
         <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
           <Link to="/register">Register</Link>
         </li>
         <li>

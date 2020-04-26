@@ -1,20 +1,22 @@
 /* nav-bar styles */
 .nav-bar {
-  background: rgb(68, 68, 68);
+  background: var(--site-color);
   color: white;
   width: 100%;
   top: 0;
   left: 0;
   position: fixed;
   height: 35px;
-  display: flex;
-  align-items: center;
+  line-height: 35px;
   padding: 5px;
+  text-align: center;
 }
 
-#hamnav label,
-#hamburger {
-  display: none;
+.main-container {
+  max-width: var(--max-width);
+  display: flex;
+  align-items: center;
+  margin: auto;
 }
 
 .nav-logo {
@@ -35,7 +37,6 @@
 .nav-items ul {
   list-style: none;
   margin: 0;
-  margin-right: 20px;
   padding: 0;
   list-style: none;
   text-decoration: none;
@@ -57,14 +58,7 @@
   text-decoration: none;
 }
 
-input {
-  display: none;
-  cursor: pointer;
-}
-
-/*
- * Just a quick hamburger
- */
+/* hamburger related styles */
 span {
   display: block;
   width: 30px;
@@ -78,14 +72,7 @@ span {
   transform-origin: 4px 0px;
   transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 }
-
-#menuToggle span:first-child {
-  transform-origin: 0% 0%;
-}
-
-#menuToggle span:nth-last-child(2) {
-  transform-origin: 0% 100%;
-}
+/* hamburger related styles */
 
 @media (max-width: 702px) {
   .nav-items {
@@ -101,8 +88,10 @@ span {
   }
 }
 
+/*
 @media (min-width: 703px) {
   .nav-icon {
     display: none;
   }
 }
+*/

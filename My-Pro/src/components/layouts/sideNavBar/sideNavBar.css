@@ -1,14 +1,14 @@
 /* side-nav-bar styles */
 .side-nav-bar {
   height: 100%;
-  background: rgb(63, 63, 63);
+  background: var(--site-color);
+  color: white;
   width: 50%;
   max-width: 200px;
   position: fixed;
   z-index: 300;
   top: 0;
   left: 0;
-  color: white;
   transform: translateX(-100%);
   transition: transform 0.4s;
 }
@@ -24,8 +24,16 @@
 }
 
 .side-nav-bar ul li {
-  margin-bottom: 20px;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #fff;
 }
+
+.side-nav-bar ul li a {
+  display: block;
+  color: white;
+}
+
 .side-nav-bar ul li:hover {
   color: yellow;
   cursor: pointer;
