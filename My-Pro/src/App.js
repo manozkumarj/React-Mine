@@ -6,12 +6,17 @@ import Register from "./components/pages/register/Register";
 import Login from "./components/pages/login/Login";
 import NotFound from "./components/pages/notFound/NotFound";
 
+// Contexts
+import ScriptsContextProvider from "./contexts/ScriptsContext";
+
 class App extends Component {
   render() {
     return (
       <Router>
         <Fragment>
-          <Menus />
+          <ScriptsContextProvider>
+            <Menus />
+          </ScriptsContextProvider>
           <div className="common-container">
             <Switch>
               <Route exact path="/" component={Home} />

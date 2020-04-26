@@ -1,38 +1,23 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import NavBar from "./../navBar/Navbar";
 import SideNavBar from "./../sideNavBar/SideNavBar";
 import BackDrop from "./../backDrop/BackDrop";
+import { ScriptsContext } from "./../../../contexts/ScriptsContext";
 
-class Menus extends Component {
-  state = {
-    sideBarOpen: false,
-  };
+const Menus = (props) => {
+  let { isSideBarOpen, toggleSidebar } = useContext(ScriptsContext);
 
-  handleOpen = () => {
-    this.setState({
-      sideBarOpen: true,
-    });
-  };
-
-  handleClose = () => {
-    this.setState({
-      sideBarOpen: false,
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <NavBar open={this.handleOpen} />
-        {this.state.sideBarOpen ? (
-          <div>
-            <BackDrop close={this.handleClose} />{" "}
-          </div>
-        ) : null}
-        <SideNavBar close={this.handleClose} display={this.state.sideBarOpen} />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <NavBar open={toggleSidebar} />
+      {isSideBarOpen ? (
+        <div>
+          <BackDrop close={toggleSidebar} />
+        </div>
+      ) : null}
+      <SideNavBar close={toggleSidebar} display={isSideBarOpen} />
+    </div>
+  );
+};
 
 export default Menus;
