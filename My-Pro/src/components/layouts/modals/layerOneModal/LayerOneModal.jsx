@@ -5,9 +5,9 @@ import { ModalsContext } from "./../../../../contexts/ModalsContext";
 const LayerOneModal = () => {
   let {
     openLayerOne,
-    toggleOpenLayerOne,
     closeLayerOne,
     toggleCloseLayerOne,
+    toggleOpenLayerTwo,
   } = useContext(ModalsContext);
 
   let classes = openLayerOne
@@ -63,6 +63,10 @@ const LayerOneModal = () => {
           <button id="close" onClick={toggleCloseLayerOne} type="button">
             close Modal
           </button>
+
+          <button id="close" onClick={toggleOpenLayerTwo} type="button">
+            Open second Modal
+          </button>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac
             ornare metus. Duis luctus consequat consectetur. Integer eleifend
@@ -92,6 +96,10 @@ const LayerOneModal = () => {
 
           <button id="close" onClick={toggleCloseLayerOne} type="button">
             close Modal
+          </button>
+
+          <button id="close" onClick={toggleOpenLayerTwo} type="button">
+            Open second Modal
           </button>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac
@@ -131,6 +139,10 @@ const LayerOneModal = () => {
 
           <button id="close" onClick={toggleCloseLayerOne} type="button">
             close Modal
+          </button>
+
+          <button id="close" onClick={toggleOpenLayerTwo} type="button">
+            Open second Modal
           </button>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac

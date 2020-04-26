@@ -6,8 +6,8 @@ class ModalsContextProvider extends Component {
   state = {
     openLayerOne: false,
     closeLayerOne: false,
-    LayerOne: false,
-    isLayerTwo: false,
+    openLayerTwo: false,
+    closeLayerTwo: false,
   };
 
   toggleOpenLayerOne = () => {
@@ -22,8 +22,16 @@ class ModalsContextProvider extends Component {
     // this.toggleOpenLayerOne();
   };
 
-  toggleLayerTwo = () => {
-    this.setState({ isLayerTwo: !this.state.isLayerTwo });
+  toggleOpenLayerTwo = () => {
+    this.setState({ openLayerTwo: !this.state.openLayerTwo });
+    this.setState({ closeLayerTwo: false });
+    // this.toggleCloseLayerTwo();
+  };
+
+  toggleCloseLayerTwo = () => {
+    this.setState({ closeLayerTwo: !this.state.closeLayerTwo });
+    this.setState({ openLayerTwo: false });
+    // this.toggleOpenLayerTwo();
   };
 
   render() {
@@ -33,7 +41,8 @@ class ModalsContextProvider extends Component {
           ...this.state,
           toggleOpenLayerOne: this.toggleOpenLayerOne,
           toggleCloseLayerOne: this.toggleCloseLayerOne,
-          toggleLayerTwo: this.toggleLayerTwo,
+          toggleOpenLayerTwo: this.toggleOpenLayerTwo,
+          toggleCloseLayerTwo: this.toggleCloseLayerTwo,
         }}
       >
         {this.props.children}
