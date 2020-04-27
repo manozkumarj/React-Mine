@@ -10,19 +10,19 @@ const LeftSideSection = () => {
         <div className="profileDpsSection">
           <img
             src={zuck}
-            alt="primary-dp"
+            alt="User name"
             className="primary-dp"
             width="120px"
           />
           <img
             src={mark}
-            alt="secondary-dp"
+            alt="User name"
             className="secondary-dp"
             width="120px"
           />
         </div>
 
-        <div class="userFullnameDiv hover-ul">
+        <div class="userFullnameDiv">
           <a href="#" className="hover-ul">
             Manoj Kumar
           </a>

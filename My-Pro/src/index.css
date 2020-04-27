@@ -3,6 +3,7 @@
   --global-bg-color: #e9e9e9;
   --max-width: 1190px;
 }
+
 * {
   margin: 0px;
   padding: 0px;
@@ -16,6 +17,8 @@ body {
   min-height: 100%;
   font-size: 14px;
   line-height: 20px;
+  margin: 0px;
+  padding: 0px;
 }
 
 textarea {
@@ -36,8 +39,8 @@ textarea {
 
 /* Common styles */
 .common-container {
-  max-width: var(--max-width);
-  margin: auto;
+  /* max-width: var(--max-width); */
+  /* margin: auto; */
   margin-top: 50px;
 }
 
@@ -52,4 +55,16 @@ textarea {
 }
 .hover-ul:hover {
   text-decoration: underline;
+}
+.pointer {
+  cursor: pointer;
+}
+
+#root,
+.app-container {
+  position: absolute;
+  width: 100%;
+}
+.showing-modal {
+  overflow: hidden;
 }

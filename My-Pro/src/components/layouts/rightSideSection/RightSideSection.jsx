@@ -21,7 +21,7 @@ const RightSideSection = () => {
         of Lorem Ipsum.
       </p>
 
-      <button onClick={toggleOpenLayerOne}>Click me</button>
+      <button id="openSamplePopup">Click me</button>
     </div>
   );
 };

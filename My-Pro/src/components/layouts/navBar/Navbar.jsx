@@ -15,7 +15,7 @@ const Navbar = ({ open }) => {
           <div className="nav-logo">
             <Link to="/">Logo</Link>
           </div>
-          <div className="nav-space" />
+          {/* <div className="nav-space" /> */}
           <div className="nav-items">
             <ul>
               <li>

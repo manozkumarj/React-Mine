@@ -14,13 +14,11 @@ const LayerTwoModal = () => {
   if (openLayerTwo) {
     var scrollBarWidth = window.innerWidth - document.body.offsetWidth;
     console.log(scrollBarWidth);
-    // document.getElementById("main").style.position = "fixed";
-    // document.getElementById("main").style.overflowY = "hidden";
+    document.body.style.marginRight = scrollBarWidth + "px";
+    document.body.style.overflowY = "hidden";
     document.getElementById("modal-layer-two").style.display = "block";
     document.getElementById("modal-layer-two").style.overflowY = "scroll";
     document.getElementById("modal-layer-two").scrollTo(0, 0);
-    document.body.style.overflowY = "hidden";
-    document.body.style.marginRight = scrollBarWidth + "px";
     document.getElementById("modal-layer-two").focus();
   }
 

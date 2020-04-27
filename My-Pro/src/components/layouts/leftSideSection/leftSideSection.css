@@ -26,6 +26,7 @@
 .userFullnameDiv a {
   font-size: 22px;
   font-weight: bold;
+  color: var(--site-color);
 }
 .primary-dp {
   position: absolute;

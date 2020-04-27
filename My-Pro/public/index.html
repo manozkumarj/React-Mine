@@ -52,6 +52,37 @@
       $(function () {
         $("textarea").autosize();
       });
+
+      $(document).ready(function () {
+        $("#openSamplePopup").click(function () {
+          open_popup("sample_popup");
+        });
+
+        $(".closeLayerOne").click(function () {
+          closer();
+        });
+
+        function open_popup(popup_name) {
+          var scrollBarWidth = window.innerWidth - document.body.offsetWidth;
+          $("body")
+            .css("margin-right", scrollBarWidth)
+            .addClass("showing-modal");
+          $(
+            "#layerOneModalContainer, .layerOneModalInner, ." + popup_name
+          ).show();
+          $("#layerOneModalContainer").scrollTop(0);
+          $("#layerOneModalContainer").focus();
+          $("#layerOneModalContainer").css("overflow-y", "scroll");
+        }
+
+        function closer() {
+          $(
+            "#layerOneModalContainer, .layerOneModalInner, .sample_popup"
+          ).hide();
+          $("body").css("margin-right", "");
+          $("body").removeClass("showing-modal");
+        }
+      });
     </script>
   </body>
 </html>

@@ -83,6 +83,10 @@
 /* Greet div related - ends */
 
 /* posts related - starts */
+.all-posts-container {
+  margin-bottom: 20em;
+}
+
 .post-n-user-details-container {
   height: 45px;
   display: flex;
@@ -97,16 +101,27 @@
   height: 45px;
   width: 45px;
   border-radius: 2px;
+  cursor: pointer;
 }
 
 .postInfo-n-user-details-div {
   margin-left: 6px;
 }
 .post-details-div {
-  color: var(--site-color);
   font-weight: bold;
   font-size: 17px;
 }
+
+.post-details-div a {
+  color: var(--site-color);
+}
+
+.post-details-div a:hover {
+  color: var(--site-color);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .post-timestamp-div {
   font-size: 13px;
   color: #505050;
@@ -128,4 +143,5 @@
 
 .post-picture-div img {
   max-width: 100%;
+  cursor: pointer;
 }

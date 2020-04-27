@@ -4,13 +4,11 @@
   width: 100%;
 }
 .nav-bar {
+  position: fixed;
   background: var(--site-color);
   color: white;
   width: 100%;
   top: 0;
-  left: 0;
-  right: 20;
-  position: fixed;
   height: 35px;
   line-height: 35px;
   padding: 5px;
@@ -22,7 +20,7 @@
 }
 
 .main-container {
-  max-width: var(--max-width);
+  /* max-width: var(--max-width); */
   display: flex;
   align-items: center;
   margin: auto;
