@@ -1,6 +1,7 @@
 import React, { Fragment, useContext } from "react";
 import "./home.css";
 import { ModalsContext } from "./../../../contexts/ModalsContext";
+import LeftSideSection from "./../../layouts/leftSideSection/LeftSideSection";
 
 export default function Home() {
   let { toggleOpenLayerOne } = useContext(ModalsContext);
@@ -9,7 +10,7 @@ export default function Home() {
     <Fragment>
       <div className="three-divs-container" id="main">
         <div className="left-section">
-          <div className="fixed-div">This is leftside div</div>
+          <LeftSideSection />
         </div>
 
         <div className="middle-section">

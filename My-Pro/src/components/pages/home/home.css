@@ -20,7 +20,7 @@
 .fixed-div {
   position: fixed;
   width: 25%;
-  height: 80%;
+  height: auto;
   border: 1px solid red;
 }
 

@@ -1,0 +1,75 @@
+#left-fixed-div {
+  padding: 30px 0px;
+  border: none;
+  /* border: 1px solid #cccccc;
+  background: #fff;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 5px; */
+}
+
+.profileDpsSection,
+.animateLinksDiv {
+  position: relative;
+  width: 64%;
+  height: 120px;
+  margin: auto;
+  text-align: center;
+  /* border: 1px solid red; */
+}
+
+.userFullnameDiv {
+  margin: auto;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.userFullnameDiv a {
+  font-size: 22px;
+  font-weight: bold;
+}
+.primary-dp {
+  position: absolute;
+  left: 0;
+  border-radius: 100px;
+  z-index: 2;
+}
+.secondary-dp {
+  position: absolute;
+  left: 95px;
+  border-radius: 100px;
+  z-index: 1;
+}
+
+.animateLinksDiv ul.nav {
+  margin-top: 30px;
+  list-style: none;
+  display: block;
+  width: 100%;
+}
+
+.animateLinksDiv li {
+  margin: 5px 0 0 0;
+}
+
+.animateLinksDiv ul.nav li a {
+  background: var(--site-color);
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  color: #fff;
+  padding: 7px 15px 7px 15px;
+  -webkit-border-top-right-radius: 10px;
+  border-top-right-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 80%;
+  display: block;
+  text-decoration: none;
+  -webkit-box-shadow: 2px 2px 4px #888;
+  box-shadow: 2px 2px 4px #888;
+}
+
+.animateLinksDiv ul.nav li a:hover {
+  color: #67a5cd;
+  padding: 7px 15px 7px 30px;
+  font-weight: bold;
+}
