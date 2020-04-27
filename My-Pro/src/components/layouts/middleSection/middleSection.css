@@ -40,6 +40,7 @@
   border-radius: 2px;
 }
 .post-button {
+  background: #fff;
   padding: 3px 10px;
   border: 0;
   border-radius: 2px;
@@ -57,6 +58,7 @@
   border-radius: 3px;
 }
 
+/* Greet div related - starts */
 .greet-div {
   height: 120px;
   align-items: center;
@@ -77,4 +79,53 @@
   font-weight: bold;
   zoom: 1;
   color: var(--site-color);
+}
+/* Greet div related - ends */
+
+/* posts related - starts */
+.post-n-user-details-container {
+  height: 45px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+}
+.post-dp-div {
+  height: 100%;
+}
+.post-user-dp {
+  height: 45px;
+  width: 45px;
+  border-radius: 2px;
+}
+
+.postInfo-n-user-details-div {
+  margin-left: 6px;
+}
+.post-details-div {
+  color: var(--site-color);
+  font-weight: bold;
+  font-size: 17px;
+}
+.post-timestamp-div {
+  font-size: 13px;
+  color: #505050;
+}
+.post-description-div {
+  height: auto;
+  padding: 12px 10px;
+  border-top: 1px solid #ccc;
+}
+.post-description {
+  word-wrap: break-word;
+  font-size: 15px;
+  font-weight: normal;
+  zoom: 1;
+}
+.post-picture-div {
+  width: 100%;
+}
+
+.post-picture-div img {
+  max-width: 100%;
 }
