@@ -131,6 +131,28 @@
   padding: 12px 10px;
   border-top: 1px solid #ccc;
 }
+.pad-12-10 {
+  padding: 12px 10px;
+}
+.border-2px {
+  border-width: 2px;
+}
+.border-3px {
+  border-width: 3px;
+}
+
+.double {
+  border-style: double;
+}
+.solid {
+  border-style: solid;
+}
+.dashed {
+  border-style: dashed;
+}
+.dotted {
+  border-style: dotted;
+}
 .post-description {
   word-wrap: break-word;
   font-size: 15px;

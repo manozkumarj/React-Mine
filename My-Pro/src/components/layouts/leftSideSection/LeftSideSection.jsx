@@ -32,6 +32,15 @@ const LeftSideSection = () => {
         <div className="animateLinksDiv">
           <ul className="nav">
             <li>
+              <Link to="/register">Register</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
               <Link to="/">View Profile</Link>
             </li>
             <li>

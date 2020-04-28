@@ -39,8 +39,14 @@
 
 .nav-icon {
   cursor: pointer;
-  margin-left: 5px;
+  margin-left: 100px;
   margin-right: 25px;
+  text-align: center;
+  /* border: 1px solid red; */
+}
+
+.nav-items {
+  margin-left: 915px;
 }
 
 .nav-items ul {
