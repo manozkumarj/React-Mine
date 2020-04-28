@@ -1,12 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./rightSideSection.css";
-import zuck from "../../../images/zuck.jpg";
-import mark from "../../../images/mark.jpg";
-import { ModalsContext } from "./../../../contexts/ModalsContext";
 
 const RightSideSection = () => {
-  let { toggleOpenLayerOne } = useContext(ModalsContext);
-
   return (
     <div className="fixed-div" id="right-fixed-div">
       <p style={{ margin: "20px 10px" }}>
@@ -21,7 +16,7 @@ const RightSideSection = () => {
         of Lorem Ipsum.
       </p>
 
-      <button id="openSamplePopup">Click me</button>
+      <button className="openLayerOneModal">Click me</button>
     </div>
   );
 };

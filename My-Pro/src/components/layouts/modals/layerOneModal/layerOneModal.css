@@ -13,7 +13,7 @@
   display: none;
 }
 
-.close_popup {
+.fancyCloseIcon {
   font-size: 22px;
   line-height: 0.5;
   position: absolute;
@@ -36,7 +36,7 @@
   display: none;
 }
 
-.sample_popup {
+.sample-LayerOne {
   background-color: #fff;
   border-radius: 3px;
   box-shadow: 0 2px 26px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
@@ -48,9 +48,4 @@
   margin: 50px auto;
   padding: 20px;
   display: none;
-}
-
-/* Placed on the body while a modal is open to prevent scrolling. */
-.showing-modal {
-  overflow: hidden;
 }

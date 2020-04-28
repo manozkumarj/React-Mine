@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./leftSideSection.css";
 import zuck from "../../../images/zuck.jpg";
 import mark from "../../../images/mark.jpg";
@@ -22,22 +23,22 @@ const LeftSideSection = () => {
           />
         </div>
 
-        <div class="userFullnameDiv">
-          <a href="#" className="hover-ul">
+        <div className="userFullnameDiv">
+          <Link to="/" className="hover-ul">
             Manoj Kumar
-          </a>
+          </Link>
         </div>
 
-        <div class="animateLinksDiv">
-          <ul class="nav">
+        <div className="animateLinksDiv">
+          <ul className="nav">
             <li>
-              <a href="#">View Profile</a>
+              <Link to="/">View Profile</Link>
             </li>
             <li>
-              <a href="#">Settings</a>
+              <Link to="/">Settings</Link>
             </li>
             <li>
-              <a href="#">Advanced Posts</a>
+              <Link to="/">Advanced Posts</Link>
             </li>
           </ul>
         </div>

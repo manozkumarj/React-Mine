@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./layerOneModal.css";
 
 import overlayClose from "../../../../images/overlay-close.png";
@@ -8,21 +8,25 @@ const LayerOneModal = () => {
   return (
     <div
       id="layerOneModalContainer"
-      tabindex="1"
-      class="layerOneModalContainer"
+      tabIndex="1"
+      className="layerOneModalContainer"
     >
-      <a class="overlay_close closeLayerOne" title="close">
-        <img height="20" src={overlayClose} />
-      </a>
+      <span className="overlay_close layerOneCloser" title="close">
+        <img height="20" src={overlayClose} alt="closer" />
+      </span>
 
-      <div class="layerOneModalInner">
-        <div class="sample_popup">
-          <a class="close_popup" title="close">
-            <img height="30" src={fancyClose} />
-          </a>
+      <div className="layerOneModalInner">
+        <div className="sample-LayerOne">
+          <span className="fancyCloseIcon layerOneCloser" title="close">
+            <img height="30" src={fancyClose} alt="closer" />
+          </span>
 
-          <button id="close" className="closeLayerOne" type="button">
+          <button className="layerOneCloser" type="button">
             close Modal
+          </button>
+          <br />
+          <button className="openLayerTwoModal" type="button">
+            Open 2nd Modal
           </button>
           <br />
           <br />
@@ -57,8 +61,12 @@ const LayerOneModal = () => {
             cursus nunc.
           </p>
 
-          <button id="close" className="closeLayerOne" type="button">
+          <button className="layerOneCloser" type="button">
             close Modal
+          </button>
+          <br />
+          <button className="openLayerTwoModal" type="button">
+            Open 2nd Modal
           </button>
 
           <p>
@@ -91,8 +99,12 @@ const LayerOneModal = () => {
             cursus nunc.
           </p>
 
-          <button id="close" className="closeLayerOne" type="button">
+          <button className="layerOneCloser" type="button">
             close Modal
+          </button>
+          <br />
+          <button className="openLayerTwoModal" type="button">
+            Open 2nd Modal
           </button>
 
           <p>
@@ -115,8 +127,12 @@ const LayerOneModal = () => {
             cursus nunc.
           </p>
 
-          <button id="close" className="closeLayerOne" type="button">
+          <button className="layerOneCloser" type="button">
             close Modal
+          </button>
+          <br />
+          <button className="openLayerTwoModal" type="button">
+            Open 2nd Modal
           </button>
 
           <p>
@@ -139,8 +155,12 @@ const LayerOneModal = () => {
             cursus nunc.
           </p>
 
-          <button id="close" className="closeLayerOne" type="button">
+          <button className="layerOneCloser" type="button">
             close Modal
+          </button>
+          <br />
+          <button className="openLayerTwoModal" type="button">
+            Open 2nd Modal
           </button>
 
           <p>

@@ -1,5 +1,6 @@
 import React from "react";
 import "./middleSection.css";
+import { Link } from "react-router-dom";
 // import zuck from "../../../images/zuck.jpg";
 // import mark from "../../../images/mark.jpg";
 
@@ -17,7 +18,7 @@ const MiddleSection = () => {
             className="textarea"
             name="text"
             placeholder="write something..."
-            spellcheck="false"
+            spellCheck="false"
           ></textarea>
         </div>
         <div className="post-actions-div">
@@ -29,7 +30,7 @@ const MiddleSection = () => {
               <option value="me">Only Me</option>
             </select>
 
-            <button class="post-button">Post</button>
+            <button className="post-button">Post</button>
           </div>
         </div>
       </div>
@@ -48,13 +49,13 @@ const MiddleSection = () => {
         <div className="item">
           <div className="post-n-user-details-container">
             <div className="post-dp-div">
-              <a href="#">
+              <Link to="/">
                 <img className="post-user-dp" src={kohli} alt="User name" />
-              </a>
+              </Link>
             </div>
             <div className="postInfo-n-user-details-div">
               <div className="post-details-div">
-                <a href="#">Manoj Kumar</a>
+                <Link to="/">Manoj Kumar</Link>
               </div>
               <div className="post-timestamp-div">
                 5th Jan 2017 - 08:51:25 AM
@@ -82,13 +83,13 @@ const MiddleSection = () => {
         <div className="item">
           <div className="post-n-user-details-container">
             <div className="post-dp-div">
-              <a href="#">
+              <Link to="/">
                 <img className="post-user-dp" src={kohli} alt="User name" />
-              </a>
+              </Link>
             </div>
             <div className="postInfo-n-user-details-div">
               <div className="post-details-div">
-                <a href="#">Manoj Kumar</a>
+                <Link to="/">Manoj Kumar</Link>
               </div>
               <div className="post-timestamp-div">
                 5th Jan 2017 - 08:51:25 AM
@@ -112,13 +113,13 @@ const MiddleSection = () => {
         <div className="item">
           <div className="post-n-user-details-container">
             <div className="post-dp-div">
-              <a href="#">
+              <Link to="/">
                 <img className="post-user-dp" src={kohli} alt="User name" />
-              </a>
+              </Link>
             </div>
             <div className="postInfo-n-user-details-div">
               <div className="post-details-div">
-                <a href="#">Manoj Kumar</a>
+                <Link to="/">Manoj Kumar</Link>
               </div>
               <div className="post-timestamp-div">
                 5th Jan 2017 - 08:51:25 AM
@@ -142,13 +143,13 @@ const MiddleSection = () => {
         <div className="item">
           <div className="post-n-user-details-container">
             <div className="post-dp-div">
-              <a href="#">
+              <Link to="/">
                 <img className="post-user-dp" src={kohli} alt="User name" />
-              </a>
+              </Link>
             </div>
             <div className="postInfo-n-user-details-div">
               <div className="post-details-div">
-                <a href="#">Manoj Kumar</a>
+                <Link to="/">Manoj Kumar</Link>
               </div>
               <div className="post-timestamp-div">
                 5th Jan 2017 - 08:51:25 AM

@@ -65,6 +65,8 @@ textarea {
   position: absolute;
   width: 100%;
 }
-.showing-modal {
+
+/* Placed on the body while a modal is open to prevent scrolling. */
+.toggleModal {
   overflow: hidden;
 }

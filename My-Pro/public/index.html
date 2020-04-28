@@ -54,19 +54,19 @@
       });
 
       $(document).ready(function () {
-        $("#openSamplePopup").click(function () {
-          open_popup("sample_popup");
+        // Layer one popup functionality - starts
+        $(".openLayerOneModal").click(function () {
+          modalName = "sample-LayerOne";
+          open_layerOne_popup(modalName);
         });
 
-        $(".closeLayerOne").click(function () {
-          closer();
+        $(".layerOneCloser").click(function () {
+          close_layerOne_popup();
         });
 
-        function open_popup(popup_name) {
+        function open_layerOne_popup(popup_name) {
           var scrollBarWidth = window.innerWidth - document.body.offsetWidth;
-          $("body")
-            .css("margin-right", scrollBarWidth)
-            .addClass("showing-modal");
+          $("body").css("margin-right", scrollBarWidth).addClass("toggleModal");
           $(
             "#layerOneModalContainer, .layerOneModalInner, ." + popup_name
           ).show();
@@ -75,13 +75,45 @@
           $("#layerOneModalContainer").css("overflow-y", "scroll");
         }
 
-        function closer() {
+        function close_layerOne_popup() {
           $(
-            "#layerOneModalContainer, .layerOneModalInner, .sample_popup"
+            "#layerOneModalContainer, .layerOneModalInner, .sample-LayerOne"
           ).hide();
           $("body").css("margin-right", "");
-          $("body").removeClass("showing-modal");
+          $("body").removeClass("toggleModal");
         }
+        // Layer one popup functionality - ends
+
+        // Layer two popup functionality - starts
+        $(".openLayerTwoModal").click(function () {
+          modalName = "sample-LayerTwo";
+          open_layerTwo_popup(modalName);
+        });
+
+        $(".layerTwoCloser").click(function () {
+          close_layerTwo_popup();
+        });
+
+        function open_layerTwo_popup(popup_name) {
+          var scrollBarWidth = window.innerWidth - document.body.offsetWidth;
+          $("body").css("margin-right", scrollBarWidth).addClass("toggleModal");
+          $(
+            "#layerTwoModalContainer, .layerTwoModalInner, ." + popup_name
+          ).show();
+          $("#layerTwoModalContainer").scrollTop(0);
+          $("#layerTwoModalContainer").focus();
+          $("#layerTwoModalContainer").css("overflow-y", "scroll");
+        }
+
+        function close_layerTwo_popup() {
+          $(
+            "#layerTwoModalContainer, .layerTwoModalInner, .sample-LayerTwo"
+          ).hide();
+          $("layerOneModalContainer").css("margin-right", "");
+          $("layerOneModalContainer").removeClass("toggleModal");
+          $("#layerOneModalContainer").focus();
+        }
+        // Layer two popup functionality - ends
       });
     </script>
   </body>
