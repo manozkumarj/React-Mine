@@ -5,15 +5,18 @@
 }
 
 .left-section {
-  width: 330px;
+  /* position: absolute; */
+  width: 28%;
+  /* border: 1px solid yellow; */
 }
 .middle-section {
-  width: 505px;
-  /* border: 1px solid yellow; */
-  margin: 0px 30px;
+  /* position: absolute; */
+  width: 40%;
+  margin: 0px 4%;
+  border: 1px solid yellow;
 }
 .right-section {
-  width: 382px;
+  width: 28%;
 }
 
 .fixed-div {
@@ -29,6 +32,6 @@
     display: none;
   }
   .middle-section {
-    width: 70%;
+    width: 600px;
   }
 }

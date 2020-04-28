@@ -1,20 +1,27 @@
 #left-fixed-div {
   padding: 30px 0px;
   border: none;
-  /* border: 1px solid #cccccc;
+  border: 1px solid #cccccc;
   background: #fff;
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 5px; */
+  border-radius: 5px;
 }
 
-.profileDpsSection,
-.animateLinksDiv {
+.profileDpsSection {
   position: relative;
   width: 64%;
   height: 120px;
   margin: auto;
   text-align: center;
   /* border: 1px solid red; */
+}
+
+.animateLinksDiv {
+  height: auto;
+  position: relative;
+  width: 64%;
+  margin: auto;
+  text-align: center;
 }
 
 .userFullnameDiv {

@@ -39,8 +39,8 @@ textarea {
 
 /* Common styles */
 .common-container {
-  /* max-width: var(--max-width); */
-  /* margin: auto; */
+  max-width: var(--max-width);
+  margin: auto;
   margin-top: 50px;
 }
 

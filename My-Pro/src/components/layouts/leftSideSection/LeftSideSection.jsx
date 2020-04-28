@@ -24,7 +24,7 @@ const LeftSideSection = () => {
         </div>
 
         <div className="userFullnameDiv">
-          <Link to="/" className="hover-ul">
+          <Link to="/profile" className="hover-ul">
             Manoj Kumar
           </Link>
         </div>
@@ -41,7 +41,7 @@ const LeftSideSection = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/">View Profile</Link>
+              <Link to="/profile">View Profile</Link>
             </li>
             <li>
               <Link to="/">Settings</Link>

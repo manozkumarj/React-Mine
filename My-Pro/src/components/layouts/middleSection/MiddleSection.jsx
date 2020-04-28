@@ -45,6 +45,37 @@ const MiddleSection = () => {
 
       {/* *******************  All posts section ******************** */}
       <div className="all-posts-container">
+        {/* *******************  Single picture posts section - starts ******************** */}
+        <div className="item">
+          <div className="post-n-user-details-container">
+            <div className="post-dp-div">
+              <Link to="/">
+                <img className="post-user-dp" src={kohli} alt="User name" />
+              </Link>
+            </div>
+            <div className="postInfo-n-user-details-div">
+              <div className="post-details-div">
+                <Link to="/">Manoj Kumar</Link>
+              </div>
+              <div className="post-timestamp-div openLayerOneModal">
+                5th Jan 2017 - 08:51:25 AM
+              </div>
+            </div>
+          </div>
+          <div className="post-description-div">
+            <span className="post-description">
+              This is my first test for updates div. Just to check whether it's
+              working or not.This is my first test for updates div. Just to
+              check whether it's working or not.
+            </span>
+          </div>
+          <div className="post-picture-div">
+            <img src={wow1} alt="Post info" />
+            <span className="more-pics-info">1 of 5</span>
+          </div>
+        </div>
+        {/* *******************  Single picture posts section - ends ******************** */}
+
         {/* *******************  bgNcolorNdottedBrdrLinesAll post section - starts ******************** */}
         <div className="item">
           <div className="post-n-user-details-container">
