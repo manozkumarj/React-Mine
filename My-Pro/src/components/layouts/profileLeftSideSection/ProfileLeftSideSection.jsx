@@ -31,7 +31,7 @@ const ProfileLeftSideSection = () => {
               <Link to="/register">Timeline</Link>
             </li>
             <li>
-              <Link to="/login">Photos</Link>
+              <Link to="/photos">Photos</Link>
             </li>
             <li>
               <Link to="/">Friends</Link>

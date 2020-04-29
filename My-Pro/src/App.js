@@ -8,6 +8,7 @@ import Register from "./components/pages/register/Register";
 import Login from "./components/pages/login/Login";
 import NotFound from "./components/pages/notFound/NotFound";
 import Profile from "./components/pages/profile/Profile";
+import Photos from "./components/pages/photos/Photos";
 
 // Modals
 import LayerOneModal from "./components/layouts/modals/layerOneModal/LayerOneModal";
@@ -34,6 +35,7 @@ class App extends Component {
                   <Route exact path="/" component={Home} />
                   <Route exact path="/home" component={Home} />
                   <Route exact path="/profile" component={Profile} />
+                  <Route exact path="/photos" component={Photos} />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
                   <Route exact path="*" component={NotFound} />
