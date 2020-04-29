@@ -50,6 +50,24 @@ export default function Photos() {
             <div className="individual-pic-div">
               <img src={mark} alt="individual" className="individual-pic" />
             </div>
+            <div className="individual-pic-div">
+              <img src={bikee} alt="individual" className="individual-pic" />
+            </div>
+            <div className="individual-pic-div">
+              <img src={wow1} alt="individual" className="individual-pic" />
+            </div>
+            <div className="individual-pic-div">
+              <img src={wow2} alt="individual" className="individual-pic" />
+            </div>
+            <div className="individual-pic-div">
+              <img src={kohli} alt="individual" className="individual-pic" />
+            </div>
+            <div className="individual-pic-div">
+              <img src={zuck} alt="individual" className="individual-pic" />
+            </div>
+            <div className="individual-pic-div">
+              <img src={mark} alt="individual" className="individual-pic" />
+            </div>
           </div>
         </div>
       </div>

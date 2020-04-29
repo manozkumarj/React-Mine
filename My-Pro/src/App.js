@@ -2,14 +2,6 @@ import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Menus from "./components/layouts/menus/Menus";
 
-// pages
-import Home from "./components/pages/home/Home";
-import Register from "./components/pages/register/Register";
-import Login from "./components/pages/login/Login";
-import NotFound from "./components/pages/notFound/NotFound";
-import Profile from "./components/pages/profile/Profile";
-import Photos from "./components/pages/photos/Photos";
-
 // Modals
 import LayerOneModal from "./components/layouts/modals/layerOneModal/LayerOneModal";
 import LayerTwoModal from "./components/layouts/modals/layerTwoModal/LayerTwoModal";
@@ -17,6 +9,16 @@ import LayerTwoModal from "./components/layouts/modals/layerTwoModal/LayerTwoMod
 // Contexts
 import ScriptsContextProvider from "./contexts/ScriptsContext";
 import ModalsContextProvider from "./contexts/ModalsContext";
+
+// pages
+import Home from "./components/pages/home/Home";
+import Register from "./components/pages/register/Register";
+import Login from "./components/pages/login/Login";
+import NotFound from "./components/pages/notFound/NotFound";
+import Profile from "./components/pages/profile/Profile";
+import Photos from "./components/pages/photos/Photos";
+import Settings from "./components/pages/settings/Settings";
+import Friends from "./components/pages/friends/Friends";
 
 class App extends Component {
   render() {
@@ -37,6 +39,8 @@ class App extends Component {
                   <Route exact path="/profile" component={Profile} />
                   <Route exact path="/photos" component={Photos} />
                   <Route exact path="/register" component={Register} />
+                  <Route exact path="/settings" component={Settings} />
+                  <Route exact path="/friends" component={Friends} />
                   <Route exact path="/login" component={Login} />
                   <Route exact path="*" component={NotFound} />
                 </Switch>

@@ -34,13 +34,13 @@ const ProfileLeftSideSection = () => {
               <Link to="/photos">Photos</Link>
             </li>
             <li>
-              <Link to="/">Friends</Link>
+              <Link to="/friends">Friends</Link>
             </li>
             <li>
               <Link to="/profile">View Profile</Link>
             </li>
             <li>
-              <Link to="/">Settings</Link>
+              <Link to="/settings">Settings</Link>
             </li>
             <li>
               <Link to="/">About</Link>
