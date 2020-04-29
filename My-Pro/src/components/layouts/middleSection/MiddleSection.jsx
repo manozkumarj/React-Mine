@@ -71,7 +71,7 @@ const MiddleSection = () => {
           </div>
           <div className="post-picture-div">
             <img src={wow1} alt="Post info" />
-            <span className="more-pics-info">1 of 5</span>
+            <span className="absolute-bottom-right">1 of 5</span>
           </div>
         </div>
         {/* *******************  Single picture posts section - ends ******************** */}

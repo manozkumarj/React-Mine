@@ -1,0 +1,7 @@
+#right-fixed-div {
+  border: none;
+  border: 1px solid #cccccc;
+  background: #fff;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}

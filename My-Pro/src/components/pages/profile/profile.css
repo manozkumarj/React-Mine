@@ -1,4 +1,43 @@
-.profile-details-container {
+.timeline-pic-div {
+  position: relative;
+  height: 250px;
+  background: #fff;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+}
+.timeline-pic-div img {
+  height: 100%;
   width: 100%;
-  border: 1px solid red;
+  /* object-fit: cover; */
+}
+.left-right-holders {
+  display: flex;
+  height: 50px;
+  align-items: center;
+  flex-direction: row;
+  background: #fff;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 0px 0px 5px 5px;
+  /* border: 1px solid #cccccc; */
+  margin-bottom: 30px;
+  padding: 0px 15px;
+  justify-content: space-between;
+}
+.total-friends-count {
+  font-size: 17px;
+  color: #000;
+  font-weight: bold;
+}
+
+.request-friendshp-btn {
+  font-size: 13px;
+  font-weight: bold;
+  border: 0;
+  outline: none;
+  background: var(--site-color);
+  color: #fff;
+  padding: 8px;
+  border-radius: 3px;
+  cursor: pointer;
 }

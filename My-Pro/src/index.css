@@ -19,6 +19,7 @@ body {
   line-height: 20px;
   margin: 0px;
   padding: 0px;
+  overflow-y: scroll;
 }
 
 textarea {
@@ -42,6 +43,7 @@ textarea {
   max-width: var(--max-width);
   margin: auto;
   margin-top: 50px;
+  /* border: 1px solid red; */
 }
 
 .dots {

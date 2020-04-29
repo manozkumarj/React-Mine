@@ -4,26 +4,30 @@
   min-height: 100%;
 }
 
+.left-and-middle-divs-container {
+  width: 70%;
+  /* border: 1px solid red; */
+}
+
 .left-section {
-  /* position: absolute; */
-  width: 28%;
+  width: 35%;
   /* border: 1px solid yellow; */
 }
 .middle-section {
-  /* position: absolute; */
-  width: 40%;
-  margin: 0px 4%;
-  border: 1px solid yellow;
+  width: 60%;
+  margin-left: 40%;
+  /* border: 1px solid yellow; */
 }
 .right-section {
   width: 28%;
+  margin-left: 2%;
 }
 
 .fixed-div {
   position: fixed;
   width: 330px;
   height: auto;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 /* Media queries */
