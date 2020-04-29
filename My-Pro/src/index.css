@@ -68,7 +68,19 @@ textarea {
   width: 100%;
 }
 
+.global-aTag-style {
+  color: var(--site-color);
+}
+.global-aTag-style:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 /* Placed on the body while a modal is open to prevent scrolling. */
 .toggleModal {
   overflow: hidden;
+}
+
+.show {
+  display: block;
 }

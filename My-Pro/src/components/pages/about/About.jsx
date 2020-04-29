@@ -1,11 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "./friends.css";
+import "./about.css";
 import RightSideSection from "./../../layouts/rightSideSection/RightSideSection";
 import ProfileLeftSideSection from "./../../layouts/profileLeftSideSection/ProfileLeftSideSection";
 import wow2 from "../../../images/wow_2.jpg";
 
-export default function Friends() {
+export default function About() {
   return (
     <div className="three-divs-container" id="main">
       <div className="left-and-middle-divs-container">
@@ -27,23 +26,25 @@ export default function Friends() {
             </div>
           </div>
 
-          <div className="friends-container">
-            <div className="friends-container-header">Friends list</div>
-            <div className="friends">
-              <div className="individual-friend-div">
-                <div className="friend-name">
-                  <Link to="/profile" className="global-aTag-style">
-                    Manoj Kumar
-                  </Link>
-                </div>
-                <div className="friendship-status-div">
-                  <div className="friends-list-individual">Friends V</div>
-                  <div id="myDropdown" class="dropdown-content">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
-                  </div>
-                </div>
+          <div className="about-container">
+            <div className="about-container-header">About</div>
+            <div className="about">
+              <div className="individual-setting-div">
+                <div className="about-heading">Full Name</div>
+                <div className="about-heading">-</div>
+                <div className="about-edit">Manoj Kumar</div>
+              </div>
+
+              <div className="individual-setting-div">
+                <div className="about-heading">Gender</div>
+                <div className="about-heading">-</div>
+                <div className="about-edit">Male</div>
+              </div>
+
+              <div className="individual-setting-div">
+                <div className="about-heading">Joined Date</div>
+                <div className="about-heading">-</div>
+                <div className="about-edit">25th March 2020</div>
               </div>
             </div>
           </div>

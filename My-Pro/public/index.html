@@ -116,6 +116,11 @@
         }
         // Layer two popup functionality - ends
 
+        $(document).on("click", ".friends-list-individual", function () {
+          // alert();
+          document.getElementById("myDropdown").toggle();
+        });
+
         $(window).on("load", function () {
           window.$("textarea").autosize();
         });

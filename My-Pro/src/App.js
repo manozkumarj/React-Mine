@@ -19,6 +19,7 @@ import Profile from "./components/pages/profile/Profile";
 import Photos from "./components/pages/photos/Photos";
 import Settings from "./components/pages/settings/Settings";
 import Friends from "./components/pages/friends/Friends";
+import About from "./components/pages/about/About";
 
 class App extends Component {
   render() {
@@ -41,6 +42,7 @@ class App extends Component {
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/settings" component={Settings} />
                   <Route exact path="/friends" component={Friends} />
+                  <Route exact path="/about" component={About} />
                   <Route exact path="/login" component={Login} />
                   <Route exact path="*" component={NotFound} />
                 </Switch>
