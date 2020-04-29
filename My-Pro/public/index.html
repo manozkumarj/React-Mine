@@ -118,7 +118,13 @@
 
         $(document).on("click", ".friends-list-individual", function () {
           // alert();
-          document.getElementById("myDropdown").toggle();
+          $getId = $(this).attr("id");
+          $("#dropd-" + $getId).toggle();
+          event.stopPropagation();
+        });
+
+        $("body").click(function () {
+          $(".dropdown-content").hide();
         });
 
         $(window).on("load", function () {

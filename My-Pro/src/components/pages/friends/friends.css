@@ -33,7 +33,7 @@
   display: inline-block;
 }
 .dropdown-content {
-  /* display: none; */
+  display: none;
   position: absolute;
   background-color: #f1f1f1;
   min-width: 160px;
@@ -49,6 +49,6 @@
   display: block;
 }
 
-.dropdown a:hover {
+.dropdown-content a:hover {
   background-color: #ddd;
 }

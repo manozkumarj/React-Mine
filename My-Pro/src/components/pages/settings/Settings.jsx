@@ -1,6 +1,5 @@
 import React from "react";
 import "./settings.css";
-import MiddleSection from "./../../layouts/middleSection/MiddleSection";
 import RightSideSection from "./../../layouts/rightSideSection/RightSideSection";
 import ProfileLeftSideSection from "./../../layouts/profileLeftSideSection/ProfileLeftSideSection";
 import wow2 from "../../../images/wow_2.jpg";
