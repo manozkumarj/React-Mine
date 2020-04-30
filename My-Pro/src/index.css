@@ -46,7 +46,7 @@ textarea {
   /* border: 1px solid red; */
 }
 
-.dots {
+.three-dots {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
