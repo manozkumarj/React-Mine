@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./profile.css";
 import MiddleSection from "./../../layouts/middleSection/MiddleSection";
 import RightSideSection from "./../../layouts/rightSideSection/RightSideSection";
@@ -6,6 +6,10 @@ import ProfileLeftSideSection from "./../../layouts/profileLeftSideSection/Profi
 import wow2 from "../../../images/wow_2.jpg";
 
 export default function Profile() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="three-divs-container" id="main">
       <div className="left-and-middle-divs-container">

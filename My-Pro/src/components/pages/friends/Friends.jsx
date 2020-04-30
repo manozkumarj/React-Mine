@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./friends.css";
 import RightSideSection from "./../../layouts/rightSideSection/RightSideSection";
@@ -6,6 +6,10 @@ import ProfileLeftSideSection from "./../../layouts/profileLeftSideSection/Profi
 import wow2 from "../../../images/wow_2.jpg";
 
 export default function Friends() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="three-divs-container" id="main">
       <div className="left-and-middle-divs-container">

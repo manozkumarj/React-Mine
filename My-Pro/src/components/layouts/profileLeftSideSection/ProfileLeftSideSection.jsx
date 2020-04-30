@@ -28,7 +28,7 @@ const ProfileLeftSideSection = () => {
         <div className="animateLinksDiv">
           <ul className="profileRelatedLinks">
             <li>
-              <Link to="/register">Timeline</Link>
+              <Link to="/profile">Timeline</Link>
             </li>
             <li>
               <Link to="/photos">Photos</Link>
@@ -44,6 +44,9 @@ const ProfileLeftSideSection = () => {
             </li>
             <li>
               <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/post-types">Advanced Posts</Link>
             </li>
           </ul>
         </div>

@@ -44,10 +44,10 @@ const LeftSideSection = () => {
               <Link to="/profile">View Profile</Link>
             </li>
             <li>
-              <Link to="/">Settings</Link>
+              <Link to="/settings">Settings</Link>
             </li>
             <li>
-              <Link to="/">Advanced Posts</Link>
+              <Link to="/post-types">Advanced Posts</Link>
             </li>
           </ul>
         </div>

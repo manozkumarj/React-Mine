@@ -20,6 +20,7 @@ import Photos from "./components/pages/photos/Photos";
 import Settings from "./components/pages/settings/Settings";
 import Friends from "./components/pages/friends/Friends";
 import About from "./components/pages/about/About";
+import PostTypes from "./components/pages/postTypes/PostTypes";
 
 class App extends Component {
   render() {
@@ -43,6 +44,7 @@ class App extends Component {
                   <Route exact path="/settings" component={Settings} />
                   <Route exact path="/friends" component={Friends} />
                   <Route exact path="/about" component={About} />
+                  <Route exact path="/post-types" component={PostTypes} />
                   <Route exact path="/login" component={Login} />
                   <Route exact path="*" component={NotFound} />
                 </Switch>

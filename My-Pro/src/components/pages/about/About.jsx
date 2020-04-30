@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./about.css";
 import RightSideSection from "./../../layouts/rightSideSection/RightSideSection";
 import ProfileLeftSideSection from "./../../layouts/profileLeftSideSection/ProfileLeftSideSection";
 import wow2 from "../../../images/wow_2.jpg";
 
 export default function About() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="three-divs-container" id="main">
       <div className="left-and-middle-divs-container">
@@ -29,6 +33,12 @@ export default function About() {
           <div className="about-container">
             <div className="about-container-header">About</div>
             <div className="about">
+              <div className="individual-setting-div">
+                <div className="about-heading">Username</div>
+                <div className="about-heading">-</div>
+                <div className="about-edit">manoz</div>
+              </div>
+
               <div className="individual-setting-div">
                 <div className="about-heading">Full Name</div>
                 <div className="about-heading">-</div>
