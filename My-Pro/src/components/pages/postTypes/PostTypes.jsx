@@ -266,6 +266,17 @@ export default function PostTypes() {
                   Pick post border color
                 </button>
               </div>
+              <div>
+                <select
+                  className="post-privacy-selecter"
+                  placeholder="Select post border sides"
+                >
+                  <option value="">Select post border sides</option>
+                  <option value="all">All sides</option>
+                  <option value="lNr">Left and Right sides</option>
+                  <option value="tNb">Top and Bottom sides</option>
+                </select>
+              </div>
             </div>
 
             <div className="hidden-clrpkrs">
@@ -273,21 +284,19 @@ export default function PostTypes() {
               <input id="textcolor" value="ffffff" readOnly />
               <input id="bordercolor" value="FFF711" readOnly />
             </div>
-            <br />
-            <br />
-            <br />
-            <p>
-              Manoj Kumar - Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Mauris ac ornare metus. Duis luctus consequat consectetur.
-              Integer eleifend metus et condimentum rutrum. Nam vel laoreet
-              diam, in gravida metus. Etiam sagittis diam nec lacus sodales, id
-              hendrerit quam convallis. Proin finibus pretium commodo. Nam et
-              luctus metus. Nulla vitae augue est. Donec vitae tristique urna,
-              id cursus nunc.
-            </p>
-            <button id="postType-openLayerTwoModal" type="button">
-              Open posttype layer 2nd Modal
-            </button>
+
+            <div id="warning-div">Post content can't be empty</div>
+
+            <hr className="dividable-hr" />
+
+            <div className="layerOne-post-actions-div">
+              <button className="layerOne-close-btn layerOneCloser">
+                Cancel
+              </button>
+              <button id="postType-openLayerTwoModal" className="post-button">
+                Preview Post
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -307,17 +316,17 @@ export default function PostTypes() {
             <span className="fancyCloseIcon layerTwoCloser" title="close">
               <img height="30" src={fancyClose} alt="closer" />
             </span>
-            <br />
 
-            <p>
-              Manoj Kumar - Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Mauris ac ornare metus. Duis luctus consequat consectetur.
-              Integer eleifend metus et condimentum rutrum. Nam vel laoreet
-              diam, in gravida metus. Etiam sagittis diam nec lacus sodales, id
-              hendrerit quam convallis. Proin finibus pretium commodo. Nam et
-              luctus metus. Nulla vitae augue est. Donec vitae tristique urna,
-              id cursus nunc.
-            </p>
+            <div id="postContentPreviewDiv"></div>
+
+            <hr className="dividable-hr" />
+
+            <div className="layerOne-post-actions-div">
+              <button className="layerOne-close-btn layerTwoCloser">
+                Back
+              </button>
+              <button className="post-button">Post</button>
+            </div>
           </div>
         </div>
       </div>

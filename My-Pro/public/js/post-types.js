@@ -1,4 +1,8 @@
 $(document).ready(function () {
+  $(document).on("focus", ".postContentTextarea", function () {
+    $("#warning-div").slideUp("slow");
+  });
+
   // Individual post type modal functionality - starts
   $(document).on("click", ".open-post-type-modal", function () {
     $(".postContentDiv").removeClass("postContentDivStyle");
@@ -74,14 +78,23 @@ $(document).ready(function () {
 
   // Individual post type preview N confirm modal functionality - starts
   $(document).on("click", "#postType-openLayerTwoModal", function () {
-    var scrollBarWidth = window.innerWidth - document.body.offsetWidth;
-    $("body").css("margin-right", scrollBarWidth).addClass("toggleModal");
-    $(
-      "#postType-layerTwoModalContainer, .postType-layerTwoModalInner, .postType-sample-LayerTwo"
-    ).show();
-    $("#postType-layerTwoModalContainer").scrollTop(0);
-    $("#postType-layerTwoModalContainer").focus();
-    $("#postType-layerTwoModalContainer").css("overflow-y", "scroll");
+    $postContent = $(".postContentTextarea").val();
+    $postContent = $postContent.trim();
+    if ($postContent) {
+      $("#postContentPreviewDiv").text($postContent);
+      var scrollBarWidth = window.innerWidth - document.body.offsetWidth;
+      $("body").css("margin-right", scrollBarWidth).addClass("toggleModal");
+      $(
+        "#postType-layerTwoModalContainer, .postType-layerTwoModalInner, .postType-sample-LayerTwo"
+      ).show();
+      $("#postType-layerTwoModalContainer").scrollTop(0);
+      $("#postType-layerTwoModalContainer").focus();
+      $("#postType-layerTwoModalContainer").css("overflow-y", "scroll");
+    } else {
+      // alert("Enter some text");
+      $("#warning-div").slideDown("slow");
+      $(".postContentTextarea").val("");
+    }
   });
   // Individual post type preview N confirm  modal functionality - ends
 });
