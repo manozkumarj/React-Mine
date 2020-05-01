@@ -204,5 +204,33 @@
   vertical-align: top;
   font-size: 15px;
   color: #fff;
-  background: #006600;
+  background: inherit;
+}
+
+.dividable-hr {
+  margin: 15px 0px;
+  border: 1px solid var(--site-color);
+}
+
+.colorpickers-titles-container {
+  display: flex;
+  flex-direction: row;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  /* border: 2px solid red; */
+}
+.colorpickers-titles-container div {
+  flex: 1;
+  text-align: center;
+}
+#clrpkr {
+  width: 200px;
+  padding: 5px;
+  outline: 0;
+  border: 1px solid #ccc;
+}
+.hidden-clrpkrs {
+  display: none;
 }

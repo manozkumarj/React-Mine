@@ -234,7 +234,45 @@ export default function PostTypes() {
                 spellCheck="false"
               ></textarea>
             </div>
+            <hr className="dividable-hr" />
+            <div className="colorpickers-titles-container">
+              <div>
+                <button
+                  className="jscolor
+    {valueElement:'bgcolor'}"
+                  id="clrpkr"
+                >
+                  Pick post background color
+                </button>
+              </div>
+              <div>
+                <button
+                  className="jscolor
+    {valueElement:'textcolor'}"
+                  id="clrpkr"
+                >
+                  Pick post text color
+                </button>
+              </div>
+            </div>
 
+            <div className="colorpickers-titles-container">
+              <div>
+                <button
+                  className="jscolor
+    {valueElement:'bordercolor'}"
+                  id="clrpkr"
+                >
+                  Pick post border color
+                </button>
+              </div>
+            </div>
+
+            <div className="hidden-clrpkrs">
+              <input id="bgcolor" value="006600" readOnly />
+              <input id="textcolor" value="ffffff" readOnly />
+              <input id="bordercolor" value="FFF711" readOnly />
+            </div>
             <br />
             <br />
             <br />
