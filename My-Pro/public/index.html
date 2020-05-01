@@ -116,6 +116,20 @@
         }
         // Layer two popup functionality - ends
 
+        // Individual post type modal functionality - starts
+        $(document).on("click", ".open-post-type-modal", function () {
+          $getId = $(this).attr("id");
+          if ($getId == "bg-N-text-type") {
+            alert($getId);
+          } else if ($getId == "bg-N-text-N-border-type") {
+            $getDataAttr = $(this).attr("data-post-type");
+            alert($getId + " *** " + $getDataAttr);
+          } else {
+            alert("Something went wrong");
+          }
+        });
+        // Individual post type modal functionality - ends
+
         $(document).on("click", ".friends-list-individual", function () {
           // alert();
           $getId = $(this).attr("id");
