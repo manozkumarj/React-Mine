@@ -198,30 +198,56 @@ export default function PostTypes() {
       </div>
 
       {/* Post type modals below - Layerone - starts */}
-
       <div
-        id="layerOneModalContainer"
+        id="postType-layerOneModalContainer"
         tabIndex="1"
-        className="layerOneModalContainer"
+        className="postType-layerOneModalContainer"
       >
         <span className="overlay_close layerOneCloser" title="close">
           <img height="20" src={overlayClose} alt="closer" />
         </span>
 
-        <div className="layerOneModalInner">
-          <div className="sample-LayerOne">
+        <div className="postType-layerOneModalInner">
+          <div className="postType-sample-LayerOne">
             <span className="fancyCloseIcon layerOneCloser" title="close">
               <img height="30" src={fancyClose} alt="closer" />
             </span>
 
-            <button className="layerOneCloser" type="button">
-              close Modal
+            <br />
+            <button id="postType-openLayerTwoModal" type="button">
+              Open posttype layer 2nd Modal
             </button>
             <br />
-            <button className="openLayerTwoModal" type="button">
-              Open 2nd Modal
-            </button>
             <br />
+
+            <p>
+              Manoj Kumar - Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit. Mauris ac ornare metus. Duis luctus consequat consectetur.
+              Integer eleifend metus et condimentum rutrum. Nam vel laoreet
+              diam, in gravida metus. Etiam sagittis diam nec lacus sodales, id
+              hendrerit quam convallis. Proin finibus pretium commodo. Nam et
+              luctus metus. Nulla vitae augue est. Donec vitae tristique urna,
+              id cursus nunc.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Post type modals below - LayerTwo - starts */}
+      <div
+        id="postType-layerTwoModalContainer"
+        tabIndex="1"
+        className="postType-layerTwoModalContainer"
+      >
+        <span className="overlay_close layerTwoCloser" title="close">
+          <img height="20" src={overlayClose} alt="closer" />
+        </span>
+
+        <div className="postType-layerTwoModalInner">
+          <div className="postType-sample-LayerOne">
+            <span className="fancyCloseIcon layerTwoCloser" title="close">
+              <img height="30" src={fancyClose} alt="closer" />
+            </span>
             <br />
 
             <p>

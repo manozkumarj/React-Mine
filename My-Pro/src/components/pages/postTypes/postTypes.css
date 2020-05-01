@@ -95,3 +95,90 @@
   border-left: none;
   border-right: none;
 }
+
+/* Post type modals below - Layerone - starts */
+.postType-layerOneModalContainer {
+  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow-y: scroll;
+  z-index: 50;
+  min-height: 100%;
+  max-height: auto;
+  display: none;
+}
+
+.fancyCloseIcon {
+  font-size: 22px;
+  line-height: 0.5;
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  color: #aaa;
+  text-shadow: 0 -1px 1px rbga(0, 0, 0, 0.6);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.overlay_close {
+  position: fixed;
+  top: 13px;
+  right: 35px;
+  cursor: pointer;
+}
+
+.postType-layerOneModalInner {
+  display: none;
+}
+
+.postType-sample-LayerOne {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 26px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0 auto 40px;
+  position: relative;
+  z-index: 55;
+  width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  display: none;
+}
+
+/* Post type modals below - LayerTwo - starts */
+.postType-layerTwoModalContainer {
+  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow-y: scroll;
+  z-index: 60;
+  min-height: 100%;
+  max-height: auto;
+  display: none;
+}
+
+.postType-layerTwoModalInner {
+  display: none;
+}
+
+.postType-sample-LayerTwo {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 26px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0 auto 40px;
+  position: relative;
+  z-index: 65;
+  width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  display: none;
+}

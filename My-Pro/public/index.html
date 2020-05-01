@@ -78,7 +78,10 @@
 
         function close_layerOne_popup() {
           $(
-            "#layerOneModalContainer, .layerOneModalInner, .sample-LayerOne"
+            "#layerOneModalContainer, .layerOneModalInner, .sample-LayerOne,#postType-layerOneModalContainer, .postType-layerOneModalInner, .postType-sample-LayerOne"
+          ).hide();
+          $(
+            "#postType-layerOneModalContainer, .postType-layerOneModalInner, .postType-sample-LayerOne"
           ).hide();
           $("body").css("margin-right", "");
           $("body").removeClass("toggleModal");
@@ -110,6 +113,9 @@
           $(
             "#layerTwoModalContainer, .layerTwoModalInner, .sample-LayerTwo"
           ).hide();
+          $(
+            "#postType-layerTwoModalContainer, .postType-layerTwoModalInner, .postType-sample-LayerTwo"
+          ).hide();
           $("layerOneModalContainer").css("margin-right", "");
           $("layerOneModalContainer").removeClass("toggleModal");
           $("#layerOneModalContainer").focus();
@@ -120,15 +126,37 @@
         $(document).on("click", ".open-post-type-modal", function () {
           $getId = $(this).attr("id");
           if ($getId == "bg-N-text-type") {
-            alert($getId);
+            // alert($getId);
           } else if ($getId == "bg-N-text-N-border-type") {
             $getDataAttr = $(this).attr("data-post-type");
-            alert($getId + " *** " + $getDataAttr);
+            // alert($getId + " *** " + $getDataAttr);
           } else {
             alert("Something went wrong");
           }
+
+          var scrollBarWidth = window.innerWidth - document.body.offsetWidth;
+          $("body").css("margin-right", scrollBarWidth).addClass("toggleModal");
+          $(
+            "#postType-layerOneModalContainer, .postType-layerOneModalInner, .postType-sample-LayerOne"
+          ).show();
+          $("#postType-layerOneModalContainer").scrollTop(0);
+          $("#postType-layerOneModalContainer").focus();
+          $("#postType-layerOneModalContainer").css("overflow-y", "scroll");
         });
         // Individual post type modal functionality - ends
+
+        // Individual post type preview N confirm modal functionality - starts
+        $(document).on("click", "#postType-openLayerTwoModal", function () {
+          var scrollBarWidth = window.innerWidth - document.body.offsetWidth;
+          $("body").css("margin-right", scrollBarWidth).addClass("toggleModal");
+          $(
+            "#postType-layerTwoModalContainer, .postType-layerTwoModalInner, .postType-sample-LayerTwo"
+          ).show();
+          $("#postType-layerTwoModalContainer").scrollTop(0);
+          $("#postType-layerTwoModalContainer").focus();
+          $("#postType-layerTwoModalContainer").css("overflow-y", "scroll");
+        });
+        // Individual post type preview N confirm  modal functionality - ends
 
         $(document).on("click", ".friends-list-individual", function () {
           // alert();
