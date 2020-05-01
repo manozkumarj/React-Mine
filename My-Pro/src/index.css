@@ -38,6 +38,12 @@ textarea {
   outline: 0px;
 }
 
+textarea {
+  border-radius: 3px;
+  outline: 0px;
+  resize: vertical;
+}
+
 /* Common styles */
 .common-container {
   max-width: var(--max-width);

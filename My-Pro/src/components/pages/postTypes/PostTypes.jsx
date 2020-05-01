@@ -24,6 +24,7 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="bg-N-text-type"
+            data-post-type="bg-N-text"
           >
             <div className="individual-type-inner type-bg-color">
               Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -33,6 +34,7 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="bg-N-text-type"
+            data-post-type="text"
           >
             <div className="individual-type-inner type-text-color">
               Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -212,14 +214,18 @@ export default function PostTypes() {
             <span className="fancyCloseIcon layerOneCloser" title="close">
               <img height="30" src={fancyClose} alt="closer" />
             </span>
+            <div className="postContentDiv postContentDivStyle">
+              <textarea
+                className="postContentTextarea"
+                name="text"
+                placeholder="write something..."
+                spellCheck="false"
+              ></textarea>
+            </div>
 
             <br />
-            <button id="postType-openLayerTwoModal" type="button">
-              Open posttype layer 2nd Modal
-            </button>
             <br />
             <br />
-
             <p>
               Manoj Kumar - Lorem ipsum dolor sit amet, consectetur adipiscing
               elit. Mauris ac ornare metus. Duis luctus consequat consectetur.
@@ -229,6 +235,9 @@ export default function PostTypes() {
               luctus metus. Nulla vitae augue est. Donec vitae tristique urna,
               id cursus nunc.
             </p>
+            <button id="postType-openLayerTwoModal" type="button">
+              Open posttype layer 2nd Modal
+            </button>
           </div>
         </div>
       </div>
