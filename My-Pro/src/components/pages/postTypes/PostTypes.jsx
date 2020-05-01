@@ -54,7 +54,8 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
-            data-post-type="solid-all"
+            data-post-border-style="solid"
+            data-post-border-sides="all"
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-solid-border">
@@ -66,7 +67,8 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
-            data-post-type="dashed-all"
+            data-post-border-style="dashed"
+            data-post-border-sides="all"
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-dashed-border">
@@ -78,7 +80,8 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
-            data-post-type="dotted-all"
+            data-post-border-style="dotted"
+            data-post-border-sides="all"
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-dotted-border">
@@ -90,7 +93,8 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
-            data-post-type="double-all"
+            data-post-border-style="double"
+            data-post-border-sides="all"
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-double-border">
@@ -104,7 +108,8 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
-            data-post-type="solid-lNr"
+            data-post-border-style="solid"
+            data-post-border-sides="lNr"
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-solid-border border-lNr">
@@ -115,7 +120,8 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
-            data-post-type="solid-tNb"
+            data-post-border-style="solid"
+            data-post-border-sides="tNb"
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-solid-border border-tNb">
@@ -126,7 +132,8 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
-            data-post-type="dashed-lNr"
+            data-post-border-style="dashed"
+            data-post-border-sides="lNr"
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-dashed-border border-lNr">
@@ -137,7 +144,8 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
-            data-post-type="dashed-tNb"
+            data-post-border-style="dashed"
+            data-post-border-sides="tNb"
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-dashed-border border-tNb">
@@ -151,7 +159,8 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
-            data-post-type="dotted-lNr"
+            data-post-border-style="dotted"
+            data-post-border-sides="lNr"
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-dotted-border border-lNr">
@@ -162,7 +171,8 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
-            data-post-type="dotted-tNb"
+            data-post-border-style="dotted"
+            data-post-border-sides="tNb"
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-dotted-border border-tNb">
@@ -173,7 +183,8 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
-            data-post-type="double-lNr"
+            data-post-border-style="double"
+            data-post-border-sides="lNr"
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-double-border border-lNr">
@@ -184,7 +195,8 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
-            data-post-type="double-tNb"
+            data-post-border-style="double"
+            data-post-border-sides="tNb"
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-double-border border-tNb">

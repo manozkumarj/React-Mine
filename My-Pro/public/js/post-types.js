@@ -26,29 +26,32 @@ $(document).ready(function () {
         width: "95%",
       });
       $(".postContentDiv").addClass("postContentDivStyle");
-      $getDataAttr = $(this).attr("data-post-type");
+      $getDataAttrBorderStyle = $(this).attr("data-post-border-style");
+      $getDataAttrBorderSides = $(this).attr("data-post-border-sides");
       $(".postContentTextarea").css({
         background: "#006600",
         color: "#fff",
         border: "2px solid yellow",
       });
       // alert($getId + " *** " + $getDataAttr);
-      if ($getDataAttr == "dashed-all") {
+      if ($getDataAttrBorderStyle == "dashed") {
         $(".postContentTextarea").css({ "border-style": "dashed" });
-      } else if ($getDataAttr == "dotted-all") {
+      } else if ($getDataAttrBorderStyle == "dotted") {
         $(".postContentTextarea").css({ "border-style": "dotted" });
-      } else if ($getDataAttr == "double-all") {
+      } else if ($getDataAttrBorderStyle == "double") {
         $(".postContentTextarea").css({
           width: "94%",
           "border-style": "double",
           "border-width": "4px",
         });
-      } else if ($getDataAttr == "solid-lNr") {
+      }
+
+      if ($getDataAttrBorderSides == "lNr") {
         $(".postContentTextarea").css({
           "border-top": "none",
           "border-bottom": "none",
         });
-      } else if ($getDataAttr == "solid-tNb") {
+      } else if ($getDataAttrBorderSides == "tNb") {
         $(".postContentTextarea").css({
           "border-left": "none",
           "border-right": "none",
