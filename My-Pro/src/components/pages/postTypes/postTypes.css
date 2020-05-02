@@ -205,6 +205,7 @@
   font-size: 15px;
   color: #fff;
   background: inherit;
+  border-radius: 0px;
 }
 
 .dividable-hr {
@@ -236,7 +237,7 @@
 .hidden-clrpkrs {
   display: none;
 }
-.post-privacy-selecter {
+#post-borders-selecter {
   width: 200px;
   border: 1px solid #ccc;
   padding: 5px;
@@ -277,5 +278,5 @@
   background: inherit;
   width: 100%;
   padding: 10px;
-  border-radius: 3px;
+  /* border-radius: 3px; */
 }

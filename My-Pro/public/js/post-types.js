@@ -57,16 +57,20 @@ $(document).ready(function () {
         border: "2px solid yellow",
       });
 
+      $("#borderStyle").val("solid");
       // alert($getId + " *** " + $getDataAttr);
       if ($getDataAttrBorderStyle == "dashed") {
+        $("#borderStyle").val("dashed");
         $(".postContentTextarea, #postContentPreviewDiv").css({
           "border-style": "dashed",
         });
       } else if ($getDataAttrBorderStyle == "dotted") {
+        $("#borderStyle").val("dotted");
         $(".postContentTextarea, #postContentPreviewDiv").css({
           "border-style": "dotted",
         });
       } else if ($getDataAttrBorderStyle == "double") {
+        $("#borderStyle").val("double");
         $(".postContentTextarea, #postContentPreviewDiv").css({
           width: "94%",
           "border-style": "double",
@@ -76,13 +80,13 @@ $(document).ready(function () {
 
       if ($getDataAttrBorderSides == "lNr") {
         $(".postContentTextarea, #postContentPreviewDiv").css({
-          "border-top": "none",
-          "border-bottom": "none",
+          "border-top": "transparent",
+          "border-bottom": "transparent",
         });
       } else if ($getDataAttrBorderSides == "tNb") {
         $(".postContentTextarea, #postContentPreviewDiv").css({
-          "border-left": "none",
-          "border-right": "none",
+          "border-left": "transparent",
+          "border-right": "transparent",
         });
       }
     } else {
@@ -153,4 +157,40 @@ $(document).ready(function () {
     );
   });
   // Clrpkr change events - ends
+
+  // Post border selector change event - starts
+  $(document).on("change", "#post-borders-selecter", function () {
+    $val = $(this).val();
+    $getBorderStyle = $("#borderStyle").val();
+    $getBorderColor = "#" + $("#bordercolor").val();
+    $borderWidth = "2px ";
+
+    if ($getBorderStyle == "double") {
+      $borderWidth = "3px ";
+    }
+
+    if ($val && $getBorderStyle) {
+      $(".postContentTextarea, #postContentPreviewDiv").css(
+        "border",
+        $borderWidth + $getBorderStyle + " " + $getBorderColor
+      );
+      console.log($val + " ** " + $getBorderStyle + " ** " + $getBorderColor);
+      if ($val == "all") {
+        console.log($val);
+      } else if ($val == "lNr") {
+        $(".postContentTextarea, #postContentPreviewDiv").css({
+          "border-top": "transparent",
+          "border-bottom": "transparent",
+        });
+      } else if ($val == "tNb") {
+        $(".postContentTextarea, #postContentPreviewDiv").css({
+          "border-left": "transparent",
+          "border-right": "transparent",
+        });
+      }
+    } else {
+      alert("Something went wrong");
+    }
+  });
+  // Post border selector change event - ends
 });

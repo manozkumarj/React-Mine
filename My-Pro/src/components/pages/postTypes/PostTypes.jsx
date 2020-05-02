@@ -268,21 +268,21 @@ export default function PostTypes() {
               </div>
               <div>
                 <select
-                  className="post-privacy-selecter"
+                  id="post-borders-selecter"
                   placeholder="Select post border sides"
                 >
-                  <option value="">Select post border sides</option>
-                  <option value="all">All sides</option>
-                  <option value="lNr">Left and Right sides</option>
-                  <option value="tNb">Top and Bottom sides</option>
+                  <option value="all">Border - All sides</option>
+                  <option value="lNr">Border - Left and Right</option>
+                  <option value="tNb">Border - Top and Bottom</option>
                 </select>
               </div>
             </div>
 
             <div className="hidden-clrpkrs">
-              <input id="bgcolor" value="006600" />
-              <input id="textcolor" value="ffffff" />
-              <input id="bordercolor" value="FFF711" />
+              <input id="bgcolor" value="006600" readOnly />
+              <input id="textcolor" value="ffffff" readOnly />
+              <input id="bordercolor" value="FFF711" readOnly />
+              <input id="borderStyle" value="solid" readOnly />
             </div>
 
             <div id="warning-div">Post content can't be empty</div>
