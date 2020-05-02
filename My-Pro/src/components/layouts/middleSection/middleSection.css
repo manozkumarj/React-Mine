@@ -181,3 +181,80 @@
   border-radius: 5px;
   font-weight: bold;
 }
+
+.cornerFold {
+  position: relative;
+  width: 91%;
+  /* padding: 1em 1.5em; */
+  padding: 20px 22px;
+  color: #fff;
+  background: #53a3b4;
+  overflow: hidden;
+}
+
+.cornerFold:before,
+.cornerFold_topRight_bottomLeft:after,
+.cornerFold_topLeft_bottomRight:after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+  display: block;
+  width: 0;
+}
+
+/* Separaters - starts */
+.cornerFold_topRight:before,
+.cornerFold_topRight_bottomLeft:before {
+  border-color: #fff #fff transparent transparent;
+  top: 0;
+  right: 0;
+  border-width: 0 16px 16px 0;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3),
+    -1px 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.cornerFold_bottomRight:before,
+.cornerFold_topLeft_bottomRight:before {
+  border-color: transparent #fff transparent #fff;
+  bottom: 0;
+  right: 0;
+  border-width: 16px 16px 0 0;
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3),
+    -2px -2px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3),
+    -2px -2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), -2px -2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.cornerFold_bottomLeft:before,
+.cornerFold_topRight_bottomLeft:after {
+  border-color: transparent #fff transparent #fff;
+  bottom: 0;
+  left: 0;
+  border-width: 16px 0 0 16px;
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3),
+    1px -2px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3),
+    1px -2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), 1px -2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.cornerFold_topLeft:before,
+.cornerFold_topLeft_bottomRight:after {
+  border-color: #fff transparent #fff transparent;
+  top: 0;
+  left: 0;
+  border-width: 16px 16px 0 0;
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3),
+    -1px 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3),
+    -1px 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.remove_cornerShadow:before,
+.remove_cornerShadow:after {
+  box-shadow: none;
+}
