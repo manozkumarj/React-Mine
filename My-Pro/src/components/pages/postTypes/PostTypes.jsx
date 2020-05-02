@@ -214,6 +214,7 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-fold-type"
+            data-post-foldRcut-class="cornerFold_topRight"
           >
             <div className="individual-type-inner">
               <div class="post-type-cornerFold cornerFold cornerFold_topRight ">
@@ -227,6 +228,7 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-fold-type"
+            data-post-foldRcut-class="cornerFold_bottomRight"
           >
             <div className="individual-type-inner">
               <div class="post-type-cornerFold cornerFold cornerFold_bottomRight ">
@@ -240,6 +242,7 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-fold-type"
+            data-post-foldRcut-class="cornerFold_bottomLeft"
           >
             <div className="individual-type-inner">
               <div class="post-type-cornerFold cornerFold cornerFold_bottomLeft ">
@@ -253,6 +256,7 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-fold-type"
+            data-post-foldRcut-class="cornerFold_topLeft"
           >
             <div className="individual-type-inner">
               <div class="post-type-cornerFold cornerFold cornerFold_topLeft ">
@@ -268,6 +272,7 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-fold-type"
+            data-post-foldRcut-class="cornerFold_topRight_bottomLeft"
           >
             <div className="individual-type-inner">
               <div class="post-type-cornerFold cornerFold cornerFold_topRight_bottomLeft ">
@@ -281,6 +286,7 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-fold-type"
+            data-post-foldRcut-class="cornerFold_topLeft_bottomRight"
           >
             <div className="individual-type-inner">
               <div class="post-type-cornerFold cornerFold cornerFold_topLeft_bottomRight ">
@@ -300,6 +306,7 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-cut-type"
+            data-post-foldRcut-class="cornerFold_topRight"
           >
             <div className="individual-type-inner">
               <div class="post-type-cornerFold cornerFold cornerFold_topRight remove_cornerShadow">
@@ -313,6 +320,7 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-cut-type"
+            data-post-foldRcut-class="cornerFold_bottomRight"
           >
             <div className="individual-type-inner">
               <div class="post-type-cornerFold cornerFold cornerFold_bottomRight remove_cornerShadow">
@@ -326,6 +334,7 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-cut-type"
+            data-post-foldRcut-class="cornerFold_bottomLeft"
           >
             <div className="individual-type-inner">
               <div class="post-type-cornerFold cornerFold cornerFold_bottomLeft remove_cornerShadow">
@@ -339,6 +348,7 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-cut-type"
+            data-post-foldRcut-class="cornerFold_topLeft"
           >
             <div className="individual-type-inner">
               <div class="post-type-cornerFold cornerFold cornerFold_topLeft remove_cornerShadow">
@@ -354,6 +364,7 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-cut-type"
+            data-post-foldRcut-class="cornerFold_topRight_bottomLeft"
           >
             <div className="individual-type-inner">
               <div class="post-type-cornerFold cornerFold cornerFold_topRight_bottomLeft remove_cornerShadow">
@@ -367,6 +378,7 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-cut-type"
+            data-post-foldRcut-class="cornerFold_topLeft_bottomRight"
           >
             <div className="individual-type-inner">
               <div class="post-type-cornerFold cornerFold cornerFold_topLeft_bottomRight remove_cornerShadow">
@@ -454,7 +466,7 @@ export default function PostTypes() {
               <input id="borderStyle" value="solid" readOnly />
             </div>
 
-            <div id="warning-div">Post content can't be empty</div>
+            <div className="warning-div">Post content can't be empty</div>
 
             <hr className="dividable-hr" />
 
@@ -474,7 +486,10 @@ export default function PostTypes() {
             <img height="30" src={fancyClose} alt="closer" />
           </span>
           <div className="brdrFoldNcutPostContentDiv">
-            <div class="cornerFold cornerFoldStyle-modal cornerFold_topRight">
+            <div
+              class="cornerFold cornerFoldStyle-modal"
+              id="cornerFoldStyle-textareaDiv"
+            >
               <textarea
                 id="brdrFoldNcutPostContentTextarea"
                 name="text"
@@ -484,6 +499,45 @@ export default function PostTypes() {
             </div>
           </div>
           <hr className="dividable-hr" />
+          <div className="colorpickers-titles-container picker-div-1">
+            <div>
+              <button
+                className="jscolor {valueElement:'brdrFoldNcutPost-bgclrpkr'}"
+                id="brdrFoldNcut-bgclrpkr"
+              >
+                Pick post background color
+              </button>
+            </div>
+            <div>
+              <button
+                className="jscolor {valueElement:'brdrFoldNcutPost-textclrpkr'}"
+                id="brdrFoldNcut-textclrpkr"
+              >
+                Pick post text color
+              </button>
+            </div>
+          </div>
+
+          <div className="hidden-clrpkrs">
+            <input id="brdrFoldNcutPost-bgclrpkr" value="53a3b4" readOnly />
+            <input id="brdrFoldNcutPost-textclrpkr" value="ffffff" readOnly />
+          </div>
+
+          <div className="warning-div">Post content can't be empty</div>
+
+          <hr className="dividable-hr" />
+
+          <div className="layerOne-post-actions-div">
+            <button className="layerOne-close-btn layerOneCloser">
+              Cancel
+            </button>
+            <button
+              id="brdrFoldNcut-postType-openLayerTwoModal"
+              className="post-button"
+            >
+              Preview Post
+            </button>
+          </div>
         </div>
       </div>
 
@@ -498,7 +552,7 @@ export default function PostTypes() {
         </span>
 
         <div className="postType-layerTwoModalInner">
-          <div className="postType-sample-LayerOne">
+          <div className="postType-sample-LayerTwo">
             <span className="fancyCloseIcon layerTwoCloser" title="close">
               <img height="30" src={fancyClose} alt="closer" />
             </span>
@@ -516,6 +570,30 @@ export default function PostTypes() {
               <button className="post-button">Post</button>
             </div>
           </div>
+
+          {/* LayerTwo sample 2 - starts */}
+          <div className="postType-sample-two-LayerTwo">
+            <span className="fancyCloseIcon layerTwoCloser" title="close">
+              <img height="30" src={fancyClose} alt="closer" />
+            </span>
+
+            <div className="brdrFoldNcutPostContentDiv">
+              <div
+                class="cornerFold cornerFoldStyle-modal"
+                id="brdrFoldNcutPostContentPreviewer"
+              ></div>
+            </div>
+
+            <hr className="dividable-hr" />
+
+            <div className="layerOne-post-actions-div">
+              <button className="layerOne-close-btn layerTwoCloser">
+                Back
+              </button>
+              <button className="post-button">Post</button>
+            </div>
+          </div>
+          {/* LayerTwo sample 2 - ends */}
         </div>
       </div>
     </div>

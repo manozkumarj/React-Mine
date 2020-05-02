@@ -118,7 +118,8 @@
 
 .postType-sample-LayerOne,
 .postType-sample-LayerTwo,
-.postType-sample-two-LayerOne {
+.postType-sample-two-LayerOne,
+.postType-sample-two-LayerTwo {
   background-color: #fff;
   border-radius: 3px;
   box-shadow: 0 2px 26px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
@@ -140,7 +141,8 @@
   z-index: 60;
 }
 
-.postType-sample-LayerTwo {
+.postType-sample-LayerTwo,
+.postType-sample-two-LayerTwo {
   z-index: 65;
 }
 
@@ -237,7 +239,9 @@
 }
 #bgclrpkr,
 #textclrpkr,
-#borderclrpkr {
+#borderclrpkr,
+#brdrFoldNcut-bgclrpkr,
+#brdrFoldNcut-textclrpkr {
   width: 200px;
   padding: 5px;
   outline: 0;
@@ -256,7 +260,7 @@
   flex-direction: row;
   justify-content: space-between;
 }
-#warning-div {
+.warning-div {
   /* display: flex; */
   height: 40px;
   line-height: 40px;

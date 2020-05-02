@@ -96,7 +96,41 @@ $(document).ready(function () {
       }
 
       open_postTypes_layerOne_popup("postType-sample-LayerOne");
-    } else if ($getId == "border-fold-type") {
+    } else if ($getId == "border-fold-type" || $getId == "border-cut-type") {
+      $getDataAttr = $(this).attr("data-post-foldRcut-class");
+      $(
+        "#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer"
+      ).removeClass(
+        "cornerFold_topRight cornerFold_bottomRight cornerFold_bottomLeft cornerFold_topLeft cornerFold_topRight_bottomLeft cornerFold_topLeft_bottomRight remove_cornerShadow"
+      );
+
+      $(
+        "#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer"
+      ).addClass($getDataAttr);
+
+      if ($getId == "border-cut-type") {
+        $(
+          "#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer"
+        ).addClass("remove_cornerShadow");
+      }
+
+      $("#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer").css({
+        background: "#53a3b4",
+        color: "#ffffff",
+      });
+
+      $("#brdrFoldNcutPost-bgclrpkr").val("53a3b4");
+      $("#brdrFoldNcutPost-textclrpkr").val("ffffff");
+
+      $("#brdrFoldNcut-bgclrpkr").css({
+        background: "#53a3b4",
+        color: "#000000",
+      });
+      $("#brdrFoldNcut-textclrpkr").css({
+        background: "#ffffff",
+        color: "#000000",
+      });
+
       open_postTypes_layerOne_popup("postType-sample-two-LayerOne");
     } else {
       alert("Something went wrong");
@@ -115,15 +149,41 @@ $(document).ready(function () {
       open_postTypes_layerTwo_popup("postType-sample-LayerTwo");
     } else {
       // alert("Enter some text");
-      $("#warning-div").slideDown("slow");
+      $(".warning-div").slideDown("slow");
       $(".postContentTextarea").val("");
     }
   });
   // Individual post type preview N confirm  modal functionality - ends
 
+  // Individual brdrFoldNcut-post type preview N confirm modal functionality - starts
+  $(document).on(
+    "click",
+    "#brdrFoldNcut-postType-openLayerTwoModal",
+    function () {
+      $postContent = $("#brdrFoldNcutPostContentTextarea").val();
+      $postContent = $postContent.trim();
+      if ($postContent) {
+        $("#brdrFoldNcutPostContentPreviewer").text($postContent);
+
+        open_postTypes_layerTwo_popup("postType-sample-two-LayerTwo");
+      } else {
+        // alert("Enter some text");
+        $(".warning-div").slideDown("slow");
+        $("#brdrFoldNcutPostContentTextarea").val("");
+      }
+    }
+  );
+  // Individual brdrFoldNcut-post type preview N confirm  modal functionality - ends
+
   // textarea focus event - starts
   $(document).on("focus", ".postContentTextarea", function () {
-    $("#warning-div").slideUp("slow");
+    $(".warning-div").slideUp("slow");
+  });
+  // textarea focus event - ends
+
+  // textarea focus event - starts
+  $(document).on("focus", "#brdrFoldNcutPostContentTextarea", function () {
+    $(".warning-div").slideUp("slow");
   });
   // textarea focus event - ends
 
@@ -151,6 +211,25 @@ $(document).ready(function () {
       "#" + $val
     );
   });
+
+  $(document).on("change", "#brdrFoldNcutPost-bgclrpkr", function () {
+    $val = $(this).val();
+    console.log($val);
+    $("#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer").css(
+      "background",
+      "#" + $val
+    );
+  });
+
+  $(document).on("change", "#brdrFoldNcutPost-textclrpkr", function () {
+    $val = $(this).val();
+    console.log($val);
+    $("#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer").css(
+      "color",
+      "#" + $val
+    );
+  });
+
   // Clrpkr change events - ends
 
   // Post border selector change event - starts
