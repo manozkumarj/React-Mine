@@ -235,12 +235,12 @@ export default function PostTypes() {
               ></textarea>
             </div>
             <hr className="dividable-hr" />
-            <div className="colorpickers-titles-container">
+            <div className="colorpickers-titles-container picker-div-1">
               <div>
                 <button
                   className="jscolor
     {valueElement:'bgcolor'}"
-                  id="clrpkr"
+                  id="bgclrpkr"
                 >
                   Pick post background color
                 </button>
@@ -249,19 +249,19 @@ export default function PostTypes() {
                 <button
                   className="jscolor
     {valueElement:'textcolor'}"
-                  id="clrpkr"
+                  id="textclrpkr"
                 >
                   Pick post text color
                 </button>
               </div>
             </div>
 
-            <div className="colorpickers-titles-container">
+            <div className="colorpickers-titles-container picker-div-2">
               <div>
                 <button
                   className="jscolor
     {valueElement:'bordercolor'}"
-                  id="clrpkr"
+                  id="borderclrpkr"
                 >
                   Pick post border color
                 </button>
@@ -280,9 +280,9 @@ export default function PostTypes() {
             </div>
 
             <div className="hidden-clrpkrs">
-              <input id="bgcolor" value="006600" readOnly />
-              <input id="textcolor" value="ffffff" readOnly />
-              <input id="bordercolor" value="FFF711" readOnly />
+              <input id="bgcolor" value="006600" />
+              <input id="textcolor" value="ffffff" />
+              <input id="bordercolor" value="FFF711" />
             </div>
 
             <div id="warning-div">Post content can't be empty</div>
@@ -317,7 +317,9 @@ export default function PostTypes() {
               <img height="30" src={fancyClose} alt="closer" />
             </span>
 
-            <div id="postContentPreviewDiv"></div>
+            <div className="postContentDiv postContentDivStyle">
+              <div id="postContentPreviewDiv"></div>
+            </div>
 
             <hr className="dividable-hr" />
 

@@ -87,6 +87,7 @@
           ).hide();
           $("body").css("margin-right", "");
           $("body").removeClass("toggleModal");
+          $("#warning-div").slideUp("slow");
         }
         // Layer one popup functionality - ends
 
@@ -137,27 +138,6 @@
 
         $(window).on("load", function () {
           $("textarea").autosize();
-        });
-
-        $(document).on("change", "#bgcolor", function () {
-          $val = $(this).val();
-          console.log($val);
-          $(".postContentTextarea, .postContentDiv").css(
-            "background",
-            "#" + $val
-          );
-        });
-
-        $(document).on("change", "#textcolor", function () {
-          $val = $(this).val();
-          console.log($val);
-          $(".postContentTextarea").css("color", "#" + $val);
-        });
-
-        $(document).on("change", "#bordercolor", function () {
-          $val = $(this).val();
-          console.log($val);
-          $(".postContentTextarea").css("border-color", "#" + $val);
         });
       });
     </script>

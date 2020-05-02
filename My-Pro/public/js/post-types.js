@@ -1,49 +1,73 @@
 $(document).ready(function () {
-  $(document).on("focus", ".postContentTextarea", function () {
-    $("#warning-div").slideUp("slow");
-  });
-
   // Individual post type modal functionality - starts
   $(document).on("click", ".open-post-type-modal", function () {
+    $("#bgcolor").val("006600");
+    $("#textcolor").val("ffffff");
+    $("#bordercolor").val("FFF711");
+
+    $("#bgclrpkr").css({ background: "#006600", color: "#FFF" });
+    $("#textclrpkr").css({ background: "#ffffff", color: "#000000" });
+    $("#borderclrpkr").css({ background: "#FFF711", color: "#000000" });
+
     $(".postContentDiv").removeClass("postContentDivStyle");
     $getId = $(this).attr("id");
     if ($getId == "bg-N-text-type") {
-      $(".postContentTextarea").css({
+      $(".picker-div-2").hide();
+      $(".postContentTextarea, #postContentPreviewDiv").css({
         width: "96%",
       });
       $getDataAttr = $(this).attr("data-post-type");
       if ($getDataAttr == "bg-N-text") {
-        $(".postContentTextarea").css({
+        $("#bgcolor").val("ff0066");
+        $("#textcolor").val("ffffff");
+
+        $("#bgclrpkr").css({ background: "#ff0066", color: "#FFF" });
+        $("#textclrpkr").css({ background: "#ffffff", color: "#000000" });
+
+        $(".postContentTextarea, #postContentPreviewDiv").css({
           background: "#ff0066",
           color: "#fff",
           border: "none",
         });
       } else if ($getDataAttr == "text") {
-        $(".postContentTextarea").css({
+        $("#bgcolor").val("ffffff");
+        $("#textcolor").val("ff0066");
+
+        $("#bgclrpkr").css({ background: "#ffffff", color: "#000000" });
+        $("#textclrpkr").css({ background: "#ff0066", color: "#000000" });
+        $(".postContentTextarea, #postContentPreviewDiv").css({
           background: "#fff",
           color: "#ff0066",
           border: "none",
         });
       }
     } else if ($getId == "bg-N-text-N-border-type") {
-      $(".postContentTextarea").css({
+      $(".picker-div-2").show();
+      $(".postContentTextarea, #postContentPreviewDiv").css({
         width: "95%",
       });
       $(".postContentDiv").addClass("postContentDivStyle");
       $getDataAttrBorderStyle = $(this).attr("data-post-border-style");
       $getDataAttrBorderSides = $(this).attr("data-post-border-sides");
-      $(".postContentTextarea").css({
+      $(".postContentTextarea, #postContentPreviewDiv, .postContentDiv").css({
         background: "#006600",
         color: "#fff",
+      });
+      $(".postContentTextarea, #postContentPreviewDiv").css({
         border: "2px solid yellow",
       });
+
       // alert($getId + " *** " + $getDataAttr);
       if ($getDataAttrBorderStyle == "dashed") {
-        $(".postContentTextarea").css({ "border-style": "dashed" });
+        $(".postContentTextarea, #postContentPreviewDiv").css({
+          "border-style": "dashed",
+        });
       } else if ($getDataAttrBorderStyle == "dotted") {
-        $(".postContentTextarea").css({ "border-style": "dotted" });
+        $(".postContentTextarea, #postContentPreviewDiv").css({
+          "border-style": "dotted",
+        });
       } else if ($getDataAttrBorderStyle == "double") {
-        $(".postContentTextarea").css({
+        $(".postContentTextarea, #postContentPreviewDiv").css({
           width: "94%",
           "border-style": "double",
           "border-width": "4px",
@@ -51,12 +75,12 @@ $(document).ready(function () {
       }
 
       if ($getDataAttrBorderSides == "lNr") {
-        $(".postContentTextarea").css({
+        $(".postContentTextarea, #postContentPreviewDiv").css({
           "border-top": "none",
           "border-bottom": "none",
         });
       } else if ($getDataAttrBorderSides == "tNb") {
-        $(".postContentTextarea").css({
+        $(".postContentTextarea, #postContentPreviewDiv").css({
           "border-left": "none",
           "border-right": "none",
         });
@@ -97,4 +121,36 @@ $(document).ready(function () {
     }
   });
   // Individual post type preview N confirm  modal functionality - ends
+
+  // textarea focus event - starts
+  $(document).on("focus", ".postContentTextarea", function () {
+    $("#warning-div").slideUp("slow");
+  });
+  // textarea focus event - ends
+
+  // Clrpkr change events - starts
+  $(document).on("change", "#bgcolor", function () {
+    $val = $(this).val();
+    console.log($val);
+    $(".postContentTextarea, .postContentDiv, #postContentPreviewDiv").css(
+      "background",
+      "#" + $val
+    );
+  });
+
+  $(document).on("change", "#textcolor", function () {
+    $val = $(this).val();
+    console.log($val);
+    $(".postContentTextarea, #postContentPreviewDiv").css("color", "#" + $val);
+  });
+
+  $(document).on("change", "#bordercolor", function () {
+    $val = $(this).val();
+    console.log($val);
+    $(".postContentTextarea, #postContentPreviewDiv").css(
+      "border-color",
+      "#" + $val
+    );
+  });
+  // Clrpkr change events - ends
 });

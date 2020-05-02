@@ -225,7 +225,9 @@
   flex: 1;
   text-align: center;
 }
-#clrpkr {
+#bgclrpkr,
+#textclrpkr,
+#borderclrpkr {
   width: 200px;
   padding: 5px;
   outline: 0;
@@ -269,4 +271,11 @@
 .layerOne-post-actions-div button:hover {
   background: var(--site-color);
   color: #fff;
+}
+
+#postContentPreviewDiv {
+  background: inherit;
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
 }
