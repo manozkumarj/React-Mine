@@ -17,6 +17,7 @@ $(document).ready(function () {
         width: "96%",
       });
       $getDataAttr = $(this).attr("data-post-type");
+      // bg-N-text - starts below
       if ($getDataAttr == "bg-N-text") {
         $("#bgcolor").val("ff0066");
         $("#textcolor").val("ffffff");
@@ -29,6 +30,7 @@ $(document).ready(function () {
           color: "#fff",
           border: "none",
         });
+        // text - starts below
       } else if ($getDataAttr == "text") {
         $("#bgcolor").val("ffffff");
         $("#textcolor").val("ff0066");
@@ -41,6 +43,9 @@ $(document).ready(function () {
           border: "none",
         });
       }
+
+      open_postTypes_layerOne_popup("postType-sample-LayerOne");
+      // bg-N-text-N-border-type - starts below
     } else if ($getId == "bg-N-text-N-border-type") {
       $(".picker-div-2").show();
       $(".postContentTextarea, #postContentPreviewDiv").css({
@@ -89,18 +94,14 @@ $(document).ready(function () {
           "border-right": "transparent",
         });
       }
+
+      open_postTypes_layerOne_popup("postType-sample-LayerOne");
+    } else if ($getId == "border-fold-type") {
+      open_postTypes_layerOne_popup("postType-sample-two-LayerOne");
     } else {
       alert("Something went wrong");
+      return false;
     }
-
-    var scrollBarWidth = window.innerWidth - document.body.offsetWidth;
-    $("body").css("margin-right", scrollBarWidth).addClass("toggleModal");
-    $(
-      "#postType-layerOneModalContainer, .postType-layerOneModalInner, .postType-sample-LayerOne"
-    ).show();
-    $("#postType-layerOneModalContainer").scrollTop(0);
-    $("#postType-layerOneModalContainer").focus();
-    $("#postType-layerOneModalContainer").css("overflow-y", "scroll");
   });
   // Individual post type modal functionality - ends
 
@@ -110,14 +111,8 @@ $(document).ready(function () {
     $postContent = $postContent.trim();
     if ($postContent) {
       $("#postContentPreviewDiv").text($postContent);
-      var scrollBarWidth = window.innerWidth - document.body.offsetWidth;
-      $("body").css("margin-right", scrollBarWidth).addClass("toggleModal");
-      $(
-        "#postType-layerTwoModalContainer, .postType-layerTwoModalInner, .postType-sample-LayerTwo"
-      ).show();
-      $("#postType-layerTwoModalContainer").scrollTop(0);
-      $("#postType-layerTwoModalContainer").focus();
-      $("#postType-layerTwoModalContainer").css("overflow-y", "scroll");
+
+      open_postTypes_layerTwo_popup("postType-sample-LayerTwo");
     } else {
       // alert("Enter some text");
       $("#warning-div").slideDown("slow");
@@ -166,7 +161,7 @@ $(document).ready(function () {
     $borderWidth = "2px ";
 
     if ($getBorderStyle == "double") {
-      $borderWidth = "3px ";
+      $borderWidth = "4px ";
     }
 
     if ($val && $getBorderStyle) {
@@ -193,4 +188,28 @@ $(document).ready(function () {
     }
   });
   // Post border selector change event - ends
+
+  function open_postTypes_layerOne_popup(popup_name) {
+    var scrollBarWidth = window.innerWidth - document.body.offsetWidth;
+    $("body").css("margin-right", scrollBarWidth).addClass("toggleModal");
+    $(
+      "#postType-layerOneModalContainer, .postType-layerOneModalInner, ." +
+        popup_name
+    ).show();
+    $("#postType-layerOneModalContainer").scrollTop(0);
+    $("#postType-layerOneModalContainer").focus();
+    $("#postType-layerOneModalContainer").css("overflow-y", "scroll");
+  }
+
+  function open_postTypes_layerTwo_popup(popup_name) {
+    var scrollBarWidth = window.innerWidth - document.body.offsetWidth;
+    $("body").css("margin-right", scrollBarWidth).addClass("toggleModal");
+    $(
+      "#postType-layerTwoModalContainer, .postType-layerTwoModalInner, ." +
+        popup_name
+    ).show();
+    $("#postType-layerTwoModalContainer").scrollTop(0);
+    $("#postType-layerTwoModalContainer").focus();
+    $("#postType-layerTwoModalContainer").css("overflow-y", "scroll");
+  }
 });
