@@ -74,7 +74,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFold_topRight_bottomLeft remove_cornerShadow">
+            <div class="cornerFold cornerFoldStyle cornerFold_topRight_bottomLeft remove_cornerShadow">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -105,7 +105,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFold_topLeft_bottomRight remove_cornerShadow">
+            <div class="cornerFold cornerFoldStyle cornerFold_topLeft_bottomRight remove_cornerShadow">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -136,7 +136,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFold_topLeft_bottomRight">
+            <div class="cornerFold cornerFoldStyle cornerFold_topLeft_bottomRight">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -167,7 +167,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFold_topRight_bottomLeft">
+            <div class="cornerFold cornerFoldStyle cornerFold_topRight_bottomLeft">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -198,7 +198,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFold_topLeft">
+            <div class="cornerFold cornerFoldStyle cornerFold_topLeft">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -229,7 +229,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFold_bottomLeft">
+            <div class="cornerFold cornerFoldStyle cornerFold_bottomLeft">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -260,7 +260,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFold_bottomRight">
+            <div class="cornerFold cornerFoldStyle cornerFold_bottomRight">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -291,7 +291,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFold_topRight">
+            <div class="cornerFold cornerFoldStyle cornerFold_topRight">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just

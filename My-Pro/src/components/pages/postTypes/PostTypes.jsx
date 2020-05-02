@@ -205,6 +205,178 @@ export default function PostTypes() {
             </div>
           </div>
         </div>
+
+        <div className="types_title_holder">
+          <span className="type_title">Border fold type:-</span>
+        </div>
+
+        <div className="types-container">
+          <div
+            className="individual-type open-post-type-modal"
+            id="border-folder-type"
+          >
+            <div className="individual-type-inner">
+              <div class="post-type-cornerFold cornerFold cornerFold_topRight ">
+                <span className="post-description">
+                  Lorem Ipsum is simply dummy text of the printing.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="individual-type open-post-type-modal"
+            id="border-folder-type"
+          >
+            <div className="individual-type-inner">
+              <div class="post-type-cornerFold cornerFold cornerFold_bottomRight ">
+                <span className="post-description">
+                  Lorem Ipsum is simply dummy text of the printing.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="individual-type open-post-type-modal"
+            id="border-folder-type"
+          >
+            <div className="individual-type-inner">
+              <div class="post-type-cornerFold cornerFold cornerFold_bottomLeft ">
+                <span className="post-description">
+                  Lorem Ipsum is simply dummy text of the printing.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="individual-type open-post-type-modal"
+            id="border-folder-type"
+          >
+            <div className="individual-type-inner">
+              <div class="post-type-cornerFold cornerFold cornerFold_topLeft ">
+                <span className="post-description">
+                  Lorem Ipsum is simply dummy text of the printing.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="types-container">
+          <div
+            className="individual-type open-post-type-modal"
+            id="border-folder-type"
+          >
+            <div className="individual-type-inner">
+              <div class="post-type-cornerFold cornerFold cornerFold_topRight_bottomLeft ">
+                <span className="post-description">
+                  Lorem Ipsum is simply dummy text of the printing.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="individual-type open-post-type-modal"
+            id="border-folder-type"
+          >
+            <div className="individual-type-inner">
+              <div class="post-type-cornerFold cornerFold cornerFold_topLeft_bottomRight ">
+                <span className="post-description">
+                  Lorem Ipsum is simply dummy text of the printing.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="types_title_holder">
+          <span className="type_title">Border cut type:-</span>
+        </div>
+
+        <div className="types-container">
+          <div
+            className="individual-type open-post-type-modal"
+            id="border-folder-type"
+          >
+            <div className="individual-type-inner">
+              <div class="post-type-cornerFold cornerFold cornerFold_topRight remove_cornerShadow">
+                <span className="post-description">
+                  Lorem Ipsum is simply dummy text of the printing.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="individual-type open-post-type-modal"
+            id="border-folder-type"
+          >
+            <div className="individual-type-inner">
+              <div class="post-type-cornerFold cornerFold cornerFold_bottomRight remove_cornerShadow">
+                <span className="post-description">
+                  Lorem Ipsum is simply dummy text of the printing.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="individual-type open-post-type-modal"
+            id="border-folder-type"
+          >
+            <div className="individual-type-inner">
+              <div class="post-type-cornerFold cornerFold cornerFold_bottomLeft remove_cornerShadow">
+                <span className="post-description">
+                  Lorem Ipsum is simply dummy text of the printing.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="individual-type open-post-type-modal"
+            id="border-folder-type"
+          >
+            <div className="individual-type-inner">
+              <div class="post-type-cornerFold cornerFold cornerFold_topLeft remove_cornerShadow">
+                <span className="post-description">
+                  Lorem Ipsum is simply dummy text of the printing.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="types-container">
+          <div
+            className="individual-type open-post-type-modal"
+            id="border-folder-type"
+          >
+            <div className="individual-type-inner">
+              <div class="post-type-cornerFold cornerFold cornerFold_topRight_bottomLeft remove_cornerShadow">
+                <span className="post-description">
+                  Lorem Ipsum is simply dummy text of the printing.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="individual-type open-post-type-modal"
+            id="border-folder-type"
+          >
+            <div className="individual-type-inner">
+              <div class="post-type-cornerFold cornerFold cornerFold_topLeft_bottomRight remove_cornerShadow">
+                <span className="post-description">
+                  Lorem Ipsum is simply dummy text of the printing.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="right-section">

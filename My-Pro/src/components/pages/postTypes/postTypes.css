@@ -280,3 +280,13 @@
   padding: 10px;
   /* border-radius: 3px; */
 }
+
+.post-type-cornerFold {
+  position: relative;
+  width: 100px;
+  height: 90px;
+  padding: 16px 10px;
+  color: #fff;
+  background: #53a3b4;
+  overflow: hidden;
+}
