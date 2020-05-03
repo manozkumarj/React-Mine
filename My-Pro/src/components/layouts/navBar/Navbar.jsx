@@ -34,29 +34,49 @@ const Navbar = ({ open }) => {
                 <div id="search_results_div">
                   <ul>
                     <li>
-                      <img src={kohli} className="search_result_user_dp" />
+                      <img
+                        src={kohli}
+                        className="search_result_user_dp"
+                        alt="Username"
+                      />
                       <span className="search_result_user_name">
                         Manoj Kumar J
                       </span>
                     </li>
                     <li>
-                      <img src={zuck} className="search_result_user_dp" />
+                      <img
+                        src={zuck}
+                        className="search_result_user_dp"
+                        alt="Username"
+                      />
                       <span className="search_result_user_name">
                         Mahesh Kumar J
                       </span>
                     </li>
                     <li>
-                      <img src={mark} className="search_result_user_dp" />
+                      <img
+                        src={mark}
+                        className="search_result_user_dp"
+                        alt="Username"
+                      />
                       <span className="search_result_user_name">Kranthi</span>
                     </li>
                     <li>
-                      <img src={kohli} className="search_result_user_dp" />
+                      <img
+                        src={kohli}
+                        className="search_result_user_dp"
+                        alt="Username"
+                      />
                       <span className="search_result_user_name">
                         Manoj Kumar J
                       </span>
                     </li>
                     <li>
-                      <img src={zuck} className="search_result_user_dp" />
+                      <img
+                        src={zuck}
+                        className="search_result_user_dp"
+                        alt="Manoj Kumar"
+                      />
                       <span className="search_result_user_name">
                         Mahesh Kumar J
                       </span>
@@ -64,10 +84,12 @@ const Navbar = ({ open }) => {
                   </ul>
                   <ul className="search-more-container">
                     <li>
-                      <span className="search_result_user_name">
-                        See more results for -
-                        <span className="search-word"> Manoj Kumar J</span>
-                      </span>
+                      <Link to="/search/word">
+                        <span className="search_result_user_name">
+                          See more results for -
+                          <span className="search-word"> Manoj Kumar J</span>
+                        </span>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -80,6 +102,7 @@ const Navbar = ({ open }) => {
                 className="navbar-right-item navbar-current-user-dp"
                 src={kohli}
                 id="navbar-dp-n-name-container"
+                alt="Username"
               />
               <span
                 className="navbar-right-item navbar-current-user-name"

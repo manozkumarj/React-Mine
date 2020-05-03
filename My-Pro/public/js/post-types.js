@@ -97,7 +97,7 @@ $(document).ready(function () {
 
       open_postTypes_layerOne_popup("postType-sample-LayerOne");
     } else if ($getId == "border-fold-type" || $getId == "border-cut-type") {
-      $getDataAttr = $(this).attr("data-post-foldRcut-class");
+      $getDataAttr = $(this).attr("data-post-fold-or-cut-class");
       $(
         "#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer"
       ).removeClass(

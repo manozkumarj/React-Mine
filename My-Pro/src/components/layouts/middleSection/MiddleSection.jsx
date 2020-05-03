@@ -17,7 +17,7 @@ const MiddleSection = () => {
       <div className="post-menu-section">
         <div className="post-textarea">
           <textarea
-            className="textarea"
+            className="textarea textarea-auto-height"
             name="text"
             placeholder="write something..."
             spellCheck="false"

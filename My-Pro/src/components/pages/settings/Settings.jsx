@@ -36,13 +36,13 @@ export default function Settings() {
               <div className="individual-setting-div">
                 <div className="settings-heading">Full Name</div>
                 <div className="settings-edit">
-                  <input type="text" value="Manoj Kumar" />
+                  <input type="text" value="Manoj Kumar" readOnly />
                 </div>
               </div>
               <div className="individual-setting-div">
                 <div className="settings-heading">Username</div>
                 <div className="settings-edit">
-                  <input type="text" value="manoz" />
+                  <input type="text" value="manoz" readOnly />
                 </div>
               </div>
               <div className="individual-setting-div">

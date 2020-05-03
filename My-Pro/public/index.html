@@ -17,19 +17,13 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
     <script
-      src="js/jquery-3.5.0.min.js"
+      src="./js/jquery-3.5.0.min.js"
       type="text/javascript"
       crossorigin="anonymous"
     ></script>
-    <script src="js/jquery.autosize.js" type="text/javascript"></script>
-    <script src="js/jscolor.js" type="text/javascript"></script>
-    <script src="js/post-types.js" type="text/javascript"></script>
+    <script src="./js/jscolor.js" type="text/javascript"></script>
+    <script src="./js/post-types.js" type="text/javascript"></script>
 
-    <script type="text/javascript">
-      $(window).on("load", function () {
-        $("textarea").autosize();
-      });
-    </script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -158,10 +152,15 @@
           if (evt.target.id != "navbar-dp-n-name-container") {
             $("#navbar-rightside-dropdown-div").hide();
           }
+
+          if (evt.target.id != "individual-friend-div") {
+            $(".dropdown-content").hide();
+          }
         });
 
-        $(window).on("load", function () {
-          $("textarea").autosize();
+        $(document).on("input", ".textarea-auto-height", function () {
+          this.style.height = "5px";
+          this.style.height = this.scrollHeight + "px";
         });
       });
     </script>

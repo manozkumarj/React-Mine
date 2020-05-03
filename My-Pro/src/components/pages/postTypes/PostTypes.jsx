@@ -214,10 +214,10 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-fold-type"
-            data-post-foldRcut-class="cornerFold_topRight"
+            data-post-fold-or-cut-class="cornerFold_topRight"
           >
             <div className="individual-type-inner">
-              <div class="post-type-cornerFold cornerFold cornerFold_topRight ">
+              <div className="post-type-cornerFold cornerFold cornerFold_topRight ">
                 <span className="post-description">
                   Lorem Ipsum is simply dummy text of the printing.
                 </span>
@@ -228,10 +228,10 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-fold-type"
-            data-post-foldRcut-class="cornerFold_bottomRight"
+            data-post-fold-or-cut-class="cornerFold_bottomRight"
           >
             <div className="individual-type-inner">
-              <div class="post-type-cornerFold cornerFold cornerFold_bottomRight ">
+              <div className="post-type-cornerFold cornerFold cornerFold_bottomRight ">
                 <span className="post-description">
                   Lorem Ipsum is simply dummy text of the printing.
                 </span>
@@ -242,10 +242,10 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-fold-type"
-            data-post-foldRcut-class="cornerFold_bottomLeft"
+            data-post-fold-or-cut-class="cornerFold_bottomLeft"
           >
             <div className="individual-type-inner">
-              <div class="post-type-cornerFold cornerFold cornerFold_bottomLeft ">
+              <div className="post-type-cornerFold cornerFold cornerFold_bottomLeft ">
                 <span className="post-description">
                   Lorem Ipsum is simply dummy text of the printing.
                 </span>
@@ -256,10 +256,10 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-fold-type"
-            data-post-foldRcut-class="cornerFold_topLeft"
+            data-post-fold-or-cut-class="cornerFold_topLeft"
           >
             <div className="individual-type-inner">
-              <div class="post-type-cornerFold cornerFold cornerFold_topLeft ">
+              <div className="post-type-cornerFold cornerFold cornerFold_topLeft ">
                 <span className="post-description">
                   Lorem Ipsum is simply dummy text of the printing.
                 </span>
@@ -272,10 +272,10 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-fold-type"
-            data-post-foldRcut-class="cornerFold_topRight_bottomLeft"
+            data-post-fold-or-cut-class="cornerFold_topRight_bottomLeft"
           >
             <div className="individual-type-inner">
-              <div class="post-type-cornerFold cornerFold cornerFold_topRight_bottomLeft ">
+              <div className="post-type-cornerFold cornerFold cornerFold_topRight_bottomLeft ">
                 <span className="post-description">
                   Lorem Ipsum is simply dummy text of the printing.
                 </span>
@@ -286,10 +286,10 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-fold-type"
-            data-post-foldRcut-class="cornerFold_topLeft_bottomRight"
+            data-post-fold-or-cut-class="cornerFold_topLeft_bottomRight"
           >
             <div className="individual-type-inner">
-              <div class="post-type-cornerFold cornerFold cornerFold_topLeft_bottomRight ">
+              <div className="post-type-cornerFold cornerFold cornerFold_topLeft_bottomRight ">
                 <span className="post-description">
                   Lorem Ipsum is simply dummy text of the printing.
                 </span>
@@ -306,10 +306,10 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-cut-type"
-            data-post-foldRcut-class="cornerFold_topRight"
+            data-post-fold-or-cut-class="cornerFold_topRight"
           >
             <div className="individual-type-inner">
-              <div class="post-type-cornerFold cornerFold cornerFold_topRight remove_cornerShadow">
+              <div className="post-type-cornerFold cornerFold cornerFold_topRight remove_cornerShadow">
                 <span className="post-description">
                   Lorem Ipsum is simply dummy text of the printing.
                 </span>
@@ -320,10 +320,10 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-cut-type"
-            data-post-foldRcut-class="cornerFold_bottomRight"
+            data-post-fold-or-cut-class="cornerFold_bottomRight"
           >
             <div className="individual-type-inner">
-              <div class="post-type-cornerFold cornerFold cornerFold_bottomRight remove_cornerShadow">
+              <div className="post-type-cornerFold cornerFold cornerFold_bottomRight remove_cornerShadow">
                 <span className="post-description">
                   Lorem Ipsum is simply dummy text of the printing.
                 </span>
@@ -334,10 +334,10 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-cut-type"
-            data-post-foldRcut-class="cornerFold_bottomLeft"
+            data-post-fold-or-cut-class="cornerFold_bottomLeft"
           >
             <div className="individual-type-inner">
-              <div class="post-type-cornerFold cornerFold cornerFold_bottomLeft remove_cornerShadow">
+              <div className="post-type-cornerFold cornerFold cornerFold_bottomLeft remove_cornerShadow">
                 <span className="post-description">
                   Lorem Ipsum is simply dummy text of the printing.
                 </span>
@@ -348,10 +348,10 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-cut-type"
-            data-post-foldRcut-class="cornerFold_topLeft"
+            data-post-fold-or-cut-class="cornerFold_topLeft"
           >
             <div className="individual-type-inner">
-              <div class="post-type-cornerFold cornerFold cornerFold_topLeft remove_cornerShadow">
+              <div className="post-type-cornerFold cornerFold cornerFold_topLeft remove_cornerShadow">
                 <span className="post-description">
                   Lorem Ipsum is simply dummy text of the printing.
                 </span>
@@ -364,10 +364,10 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-cut-type"
-            data-post-foldRcut-class="cornerFold_topRight_bottomLeft"
+            data-post-fold-or-cut-class="cornerFold_topRight_bottomLeft"
           >
             <div className="individual-type-inner">
-              <div class="post-type-cornerFold cornerFold cornerFold_topRight_bottomLeft remove_cornerShadow">
+              <div className="post-type-cornerFold cornerFold cornerFold_topRight_bottomLeft remove_cornerShadow">
                 <span className="post-description">
                   Lorem Ipsum is simply dummy text of the printing.
                 </span>
@@ -378,10 +378,10 @@ export default function PostTypes() {
           <div
             className="individual-type open-post-type-modal"
             id="border-cut-type"
-            data-post-foldRcut-class="cornerFold_topLeft_bottomRight"
+            data-post-fold-or-cut-class="cornerFold_topLeft_bottomRight"
           >
             <div className="individual-type-inner">
-              <div class="post-type-cornerFold cornerFold cornerFold_topLeft_bottomRight remove_cornerShadow">
+              <div className="post-type-cornerFold cornerFold cornerFold_topLeft_bottomRight remove_cornerShadow">
                 <span className="post-description">
                   Lorem Ipsum is simply dummy text of the printing.
                 </span>
@@ -412,7 +412,7 @@ export default function PostTypes() {
             </span>
             <div className="postContentDiv postContentDivStyle">
               <textarea
-                className="postContentTextarea"
+                className="postContentTextarea textarea-auto-height"
                 name="text"
                 placeholder="write something..."
                 spellCheck="false"
@@ -487,10 +487,11 @@ export default function PostTypes() {
           </span>
           <div className="brdrFoldNcutPostContentDiv">
             <div
-              class="cornerFold cornerFoldStyle-modal"
+              className="cornerFold cornerFoldStyle-modal"
               id="cornerFoldStyle-textareaDiv"
             >
               <textarea
+                className="textarea-auto-height"
                 id="brdrFoldNcutPostContentTextarea"
                 name="text"
                 placeholder="write something..."
@@ -579,7 +580,7 @@ export default function PostTypes() {
 
             <div className="brdrFoldNcutPostContentDiv">
               <div
-                class="cornerFold cornerFoldStyle-modal"
+                className="cornerFold cornerFoldStyle-modal"
                 id="brdrFoldNcutPostContentPreviewer"
               ></div>
             </div>

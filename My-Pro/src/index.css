@@ -39,9 +39,10 @@ textarea {
 }
 
 textarea {
+  min-height: 62px;
   border-radius: 3px;
   outline: 0px;
-  resize: vertical;
+  resize: none;
 }
 
 /* Common styles */
