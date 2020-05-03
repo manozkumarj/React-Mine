@@ -132,8 +132,33 @@
           event.stopPropagation();
         });
 
-        $("body").click(function () {
-          $(".dropdown-content").hide();
+        $(document).on("click", "#navbar-dp-n-name-container", function () {
+          // alert();
+          $("#navbar-rightside-dropdown-div").show();
+        });
+
+        // Search box focus event - starts
+        $(document).on("focus", "#navbar-searchInput", function () {
+          $("#search_results_div").show();
+        });
+        // Search box focus event - ends
+
+        // $("body").click(function () {
+        //   $(
+        //     ".dropdown-content, #navbar-rightside-dropdown-div,#search_results_div"
+        //   ).hide();
+        // });
+
+        $(document).click(function (evt) {
+          if (evt.target.id != "navbar-searchInput") {
+            $("#search_results_div").hide();
+          }
+
+          if (evt.target.id != "navbar-dp-n-name-container") {
+            $("#navbar-rightside-dropdown-div").hide();
+          } else {
+            $("#navbar-rightside-dropdown-div").show();
+          }
         });
 
         $(window).on("load", function () {

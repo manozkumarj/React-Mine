@@ -24,8 +24,7 @@ const Navbar = ({ open }) => {
             <div className="navbar-middle-items-container">
               <input
                 type="text"
-                class="searchInput"
-                id="search"
+                id="navbar-searchInput"
                 placeholder="Search for people"
                 spellcheck="false"
                 autoComplete="off"
@@ -76,7 +75,10 @@ const Navbar = ({ open }) => {
             </div>
           </div>
           <div className="navbar-right-items-container">
-            <div className="navbar-dp-n-name-container">
+            <div
+              className="navbar-dp-n-name-container"
+              id="navbar-dp-n-name-container"
+            >
               <img
                 className="navbar-right-item navbar-current-user-dp"
                 src={kohli}
@@ -86,16 +88,18 @@ const Navbar = ({ open }) => {
               </span>
               <span id="triangle-down"></span>
             </div>
-            {/* <div className="nav-items">
-              <ul>
-                <li>
-                  <Link to="/register">Register</Link>
-                </li>
-                <li>
-                  <Link to="/login">Login</Link>
-                </li>
-              </ul>
-            </div> */}
+            <div className="navbar-rightside-dropdown-container">
+              <div id="navbar-rightside-dropdown-div">
+                <ul id="navbar-rightside-dropdown-ul">
+                  <li>Profile</li>
+                  <li>Settings</li>
+                  <li>Advanced posts</li>
+                  <li>Photos</li>
+                  <li>Friends</li>
+                  <li>Logout</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
