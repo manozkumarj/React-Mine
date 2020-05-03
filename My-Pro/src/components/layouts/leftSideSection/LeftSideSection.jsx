@@ -47,6 +47,9 @@ const LeftSideSection = () => {
               <Link to="/settings">Settings</Link>
             </li>
             <li>
+              <Link to="/search">Search Friends</Link>
+            </li>
+            <li>
               <Link to="/post-types">Advanced Posts</Link>
             </li>
           </ul>

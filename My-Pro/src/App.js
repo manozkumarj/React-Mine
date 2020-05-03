@@ -46,7 +46,7 @@ class App extends Component {
                   <Route exact path="/friends" component={Friends} />
                   <Route exact path="/about" component={About} />
                   <Route exact path="/post-types" component={PostTypes} />
-                  <Route exact path="/search/:word" component={Search} />
+                  <Route exact path="/search/:word?" component={Search} />
                   <Route exact path="/login" component={Login} />
                   <Route exact path="*" component={NotFound} />
                 </Switch>

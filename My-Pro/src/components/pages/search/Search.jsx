@@ -4,10 +4,14 @@ import "./search.css";
 import RightSideSection from "./../../layouts/rightSideSection/RightSideSection";
 import LeftSideSection from "./../../layouts/leftSideSection/LeftSideSection";
 
-export default function Search() {
+const Search = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    console.log("props are below");
+    console.log(props);
+    let searchWord = props.match.params.word;
+    console.log(`Current searched word is -> ${searchWord}`);
+  }, [props]);
 
   return (
     <div className="three-divs-container" id="main">
@@ -61,4 +65,6 @@ export default function Search() {
       </div>
     </div>
   );
-}
+};
+
+export default Search;
