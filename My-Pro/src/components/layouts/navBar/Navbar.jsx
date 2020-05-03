@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import kohli from "../../../images/kohli.jpg";
+import zuck from "../../../images/zuck.jpg";
+import mark from "../../../images/mark.jpg";
 
 const Navbar = ({ open }) => {
   return (
@@ -32,8 +34,42 @@ const Navbar = ({ open }) => {
               <div id="search_results_container">
                 <div id="search_results_div">
                   <ul>
-                    <li>Manoj</li>
-                    <li>Manoj</li>
+                    <li>
+                      <img src={kohli} className="search_result_user_dp" />
+                      <span className="search_result_user_name">
+                        Manoj Kumar J
+                      </span>
+                    </li>
+                    <li>
+                      <img src={zuck} className="search_result_user_dp" />
+                      <span className="search_result_user_name">
+                        Mahesh Kumar J
+                      </span>
+                    </li>
+                    <li>
+                      <img src={mark} className="search_result_user_dp" />
+                      <span className="search_result_user_name">Kranthi</span>
+                    </li>
+                    <li>
+                      <img src={kohli} className="search_result_user_dp" />
+                      <span className="search_result_user_name">
+                        Manoj Kumar J
+                      </span>
+                    </li>
+                    <li>
+                      <img src={zuck} className="search_result_user_dp" />
+                      <span className="search_result_user_name">
+                        Mahesh Kumar J
+                      </span>
+                    </li>
+                  </ul>
+                  <ul className="search-more-container">
+                    <li>
+                      <span className="search_result_user_name">
+                        See more results for -{" "}
+                        <span className="search-word">Manoj Kumar J</span>
+                      </span>
+                    </li>
                   </ul>
                 </div>
               </div>

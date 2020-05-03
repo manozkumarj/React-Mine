@@ -26,7 +26,7 @@
   /* border: 1px solid red; */
 }
 .navbar-left-and-middle-divs-container {
-  width: 69%;
+  width: 70%;
   /* border: 1px solid yellow; */
   display: flex;
   align-items: center;
@@ -52,7 +52,7 @@
   border-radius: 2px;
   font-size: 16px;
   font-weight: 50;
-  padding: 5px 13px;
+  padding: 5px 8px;
   outline: 0px;
   border: 1px transparent;
   color: #000;
@@ -67,15 +67,50 @@
   position: absolute;
   top: 5px;
   background-color: #fff;
-  width: 100%;
-  height: 200px;
-  padding: 0px 3px;
+  width: 99%;
+  height: auto;
+  /* padding: 0px 3px; */
   border: 1px solid #e6e6e6;
   border-radius: 3px;
   -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
   /* display: none; */
   color: #000;
+}
+
+#search_results_div li {
+  height: 40px;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  padding: 0px 5px;
+  border-bottom: 1px solid #ccc;
+}
+
+#search_results_div li:hover {
+  background: var(--site-color);
+  color: #fff;
+  border-radius: 3px;
+}
+
+.search-more-container {
+  background: var(--site-color);
+  color: #fff;
+  margin-top: 15px;
+  border-radius: 3px;
+}
+
+.search_result_user_dp {
+  height: 35px;
+  border-radius: 3px;
+}
+
+.search_result_user_name {
+  padding: 0px 5px;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .navbar-right-items-container {
