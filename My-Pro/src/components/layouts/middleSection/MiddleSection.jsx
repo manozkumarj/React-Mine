@@ -74,7 +74,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFoldStyle cornerFold_topRight_bottomLeft remove_cornerShadow">
+            <div className="cornerFold cornerFoldStyle cornerFold_topRight_bottomLeft remove_cornerShadow">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -105,7 +105,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFoldStyle cornerFold_topLeft_bottomRight remove_cornerShadow">
+            <div className="cornerFold cornerFoldStyle cornerFold_topLeft_bottomRight remove_cornerShadow">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -136,7 +136,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFoldStyle cornerFold_topLeft remove_cornerShadow">
+            <div className="cornerFold cornerFoldStyle cornerFold_topLeft remove_cornerShadow">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -167,7 +167,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFoldStyle cornerFold_bottomLeft remove_cornerShadow">
+            <div className="cornerFold cornerFoldStyle cornerFold_bottomLeft remove_cornerShadow">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -198,7 +198,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFoldStyle cornerFold_bottomRight remove_cornerShadow">
+            <div className="cornerFold cornerFoldStyle cornerFold_bottomRight remove_cornerShadow">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -229,7 +229,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFoldStyle cornerFold_topRight remove_cornerShadow">
+            <div className="cornerFold cornerFoldStyle cornerFold_topRight remove_cornerShadow">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -260,7 +260,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFoldStyle cornerFold_topLeft_bottomRight">
+            <div className="cornerFold cornerFoldStyle cornerFold_topLeft_bottomRight">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -291,7 +291,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFoldStyle cornerFold_topRight_bottomLeft">
+            <div className="cornerFold cornerFoldStyle cornerFold_topRight_bottomLeft">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -322,7 +322,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFoldStyle cornerFold_topLeft">
+            <div className="cornerFold cornerFoldStyle cornerFold_topLeft">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -353,7 +353,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFoldStyle cornerFold_bottomLeft">
+            <div className="cornerFold cornerFoldStyle cornerFold_bottomLeft">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -384,7 +384,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFoldStyle cornerFold_bottomRight">
+            <div className="cornerFold cornerFoldStyle cornerFold_bottomRight">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
@@ -415,7 +415,7 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-description-div">
-            <div class="cornerFold cornerFoldStyle cornerFold_topRight">
+            <div className="cornerFold cornerFoldStyle cornerFold_topRight">
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just

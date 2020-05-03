@@ -134,12 +134,12 @@
 
         $(document).on("click", "#navbar-dp-n-name-container", function () {
           // alert();
-          $("#navbar-rightside-dropdown-div").show();
+          $("#navbar-rightside-dropdown-div").toggle();
         });
 
         // Search box focus event - starts
         $(document).on("focus", "#navbar-searchInput", function () {
-          $("#search_results_div").show();
+          $("#search_results_div").toggle();
         });
         // Search box focus event - ends
 
@@ -150,14 +150,13 @@
         // });
 
         $(document).click(function (evt) {
+          // alert(evt.target.id);
           if (evt.target.id != "navbar-searchInput") {
             $("#search_results_div").hide();
           }
 
           if (evt.target.id != "navbar-dp-n-name-container") {
             $("#navbar-rightside-dropdown-div").hide();
-          } else {
-            $("#navbar-rightside-dropdown-div").show();
           }
         });
 

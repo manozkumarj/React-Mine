@@ -26,7 +26,7 @@ const Navbar = ({ open }) => {
                 type="text"
                 id="navbar-searchInput"
                 placeholder="Search for people"
-                spellcheck="false"
+                spellCheck="false"
                 autoComplete="off"
               />
 
@@ -65,8 +65,8 @@ const Navbar = ({ open }) => {
                   <ul className="search-more-container">
                     <li>
                       <span className="search_result_user_name">
-                        See more results for -{" "}
-                        <span className="search-word">Manoj Kumar J</span>
+                        See more results for -
+                        <span className="search-word"> Manoj Kumar J</span>
                       </span>
                     </li>
                   </ul>
@@ -75,18 +75,22 @@ const Navbar = ({ open }) => {
             </div>
           </div>
           <div className="navbar-right-items-container">
-            <div
-              className="navbar-dp-n-name-container"
-              id="navbar-dp-n-name-container"
-            >
+            <div className="navbar-dp-n-name-container">
               <img
                 className="navbar-right-item navbar-current-user-dp"
                 src={kohli}
+                id="navbar-dp-n-name-container"
               />
-              <span className="navbar-right-item navbar-current-user-name">
+              <span
+                className="navbar-right-item navbar-current-user-name"
+                id="navbar-dp-n-name-container"
+              >
                 Manoj Kumar J
               </span>
-              <span id="triangle-down"></span>
+              <span
+                className="triangle-down"
+                id="navbar-dp-n-name-container"
+              ></span>
             </div>
             <div className="navbar-rightside-dropdown-container">
               <div id="navbar-rightside-dropdown-div">

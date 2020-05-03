@@ -139,7 +139,7 @@
   font-weight: bold;
 }
 
-#triangle-down {
+.triangle-down {
   width: 0;
   height: 0;
   border-left: 8px solid transparent;
