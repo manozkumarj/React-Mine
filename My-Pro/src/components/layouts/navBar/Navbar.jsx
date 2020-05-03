@@ -28,6 +28,15 @@ const Navbar = ({ open }) => {
                 spellcheck="false"
                 autoComplete="off"
               />
+
+              <div id="search_results_container">
+                <div id="search_results_div">
+                  <ul>
+                    <li>Manoj</li>
+                    <li>Manoj</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
           <div className="navbar-right-items-container">
@@ -37,9 +46,9 @@ const Navbar = ({ open }) => {
                 src={kohli}
               />
               <span className="navbar-right-item navbar-current-user-name">
-                {" "}
                 Manoj Kumar J
               </span>
+              <span id="triangle-down"></span>
             </div>
             {/* <div className="nav-items">
               <ul>
