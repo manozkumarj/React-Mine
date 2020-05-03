@@ -118,7 +118,131 @@ const MiddleSection = () => {
             </div>
           </div>
         </div>
-        {/* *******************  cornerFold_topLeft_bottomRight post section - starts ******************** */}
+        {/* ***************  cornerFold_topLeft remove_cornerShadow post section - starts ***************** */}
+        <div className="item">
+          <div className="post-n-user-details-container">
+            <div className="post-dp-div">
+              <Link to="/">
+                <img className="post-user-dp" src={kohli} alt="User name" />
+              </Link>
+            </div>
+            <div className="postInfo-n-user-details-div">
+              <div className="post-details-div">
+                <Link to="/">Manoj Kumar</Link>
+              </div>
+              <div className="post-timestamp-div openLayerOneModal">
+                5th Jan 2017 - 08:51:25 AM
+              </div>
+            </div>
+          </div>
+          <div className="post-description-div">
+            <div class="cornerFold cornerFoldStyle cornerFold_topLeft remove_cornerShadow">
+              <span className="post-description">
+                This is my first test for updates div. Just to check whether
+                it's working or not.This is my first test for updates div. Just
+                to check whether it's working or not. Lorem Ipsum is simply
+                dummy text of the printing and typesetting industry. Lorem Ipsum
+                has been the industry's standard dummy text ever since the
+                1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+              </span>
+            </div>
+          </div>
+        </div>
+        {/* ****************  cornerFold_bottomLeft remove_cornerShadow post section - starts **************** */}
+        <div className="item">
+          <div className="post-n-user-details-container">
+            <div className="post-dp-div">
+              <Link to="/">
+                <img className="post-user-dp" src={kohli} alt="User name" />
+              </Link>
+            </div>
+            <div className="postInfo-n-user-details-div">
+              <div className="post-details-div">
+                <Link to="/">Manoj Kumar</Link>
+              </div>
+              <div className="post-timestamp-div openLayerOneModal">
+                5th Jan 2017 - 08:51:25 AM
+              </div>
+            </div>
+          </div>
+          <div className="post-description-div">
+            <div class="cornerFold cornerFoldStyle cornerFold_bottomLeft remove_cornerShadow">
+              <span className="post-description">
+                This is my first test for updates div. Just to check whether
+                it's working or not.This is my first test for updates div. Just
+                to check whether it's working or not. Lorem Ipsum is simply
+                dummy text of the printing and typesetting industry. Lorem Ipsum
+                has been the industry's standard dummy text ever since the
+                1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+              </span>
+            </div>
+          </div>
+        </div>
+        {/* *************  cornerFold_bottomRight remove_cornerShadow post section - starts ************** */}
+        <div className="item">
+          <div className="post-n-user-details-container">
+            <div className="post-dp-div">
+              <Link to="/">
+                <img className="post-user-dp" src={kohli} alt="User name" />
+              </Link>
+            </div>
+            <div className="postInfo-n-user-details-div">
+              <div className="post-details-div">
+                <Link to="/">Manoj Kumar</Link>
+              </div>
+              <div className="post-timestamp-div openLayerOneModal">
+                5th Jan 2017 - 08:51:25 AM
+              </div>
+            </div>
+          </div>
+          <div className="post-description-div">
+            <div class="cornerFold cornerFoldStyle cornerFold_bottomRight remove_cornerShadow">
+              <span className="post-description">
+                This is my first test for updates div. Just to check whether
+                it's working or not.This is my first test for updates div. Just
+                to check whether it's working or not. Lorem Ipsum is simply
+                dummy text of the printing and typesetting industry. Lorem Ipsum
+                has been the industry's standard dummy text ever since the
+                1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+              </span>
+            </div>
+          </div>
+        </div>
+        {/* ********  cornerFold_topRight remove_cornerShadow post section - starts ************ */}
+        <div className="item">
+          <div className="post-n-user-details-container">
+            <div className="post-dp-div">
+              <Link to="/">
+                <img className="post-user-dp" src={kohli} alt="User name" />
+              </Link>
+            </div>
+            <div className="postInfo-n-user-details-div">
+              <div className="post-details-div">
+                <Link to="/">Manoj Kumar</Link>
+              </div>
+              <div className="post-timestamp-div openLayerOneModal">
+                5th Jan 2017 - 08:51:25 AM
+              </div>
+            </div>
+          </div>
+          <div className="post-description-div">
+            <div class="cornerFold cornerFoldStyle cornerFold_topRight remove_cornerShadow">
+              <span className="post-description">
+                This is my first test for updates div. Just to check whether
+                it's working or not.This is my first test for updates div. Just
+                to check whether it's working or not. Lorem Ipsum is simply
+                dummy text of the printing and typesetting industry. Lorem Ipsum
+                has been the industry's standard dummy text ever since the
+                1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+              </span>
+            </div>
+          </div>
+        </div>
+        {/* ******************  cornerFold_topLeft_bottomRight post section - starts ******************** */}
         <div className="item">
           <div className="post-n-user-details-container">
             <div className="post-dp-div">
