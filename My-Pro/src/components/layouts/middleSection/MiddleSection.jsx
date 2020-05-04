@@ -128,14 +128,7 @@ const MiddleSection = () => {
         <div className="greet-div">
           <div className="greet">Welcome</div>
           <div className="greet-name">
-            <span>
-              Manoj Kumar
-              <img
-                src={loveHeartsEyesEmoji}
-                alt="loveHeartsEyes"
-                width="30px"
-              />
-            </span>
+            <span>Manoj Kumar</span>
           </div>
         </div>
       </div>
@@ -153,6 +146,7 @@ const MiddleSection = () => {
             <div className="postInfo-n-user-details-div">
               <div className="post-details-div">
                 <Link to="/">Manoj Kumar</Link>
+                <span class="post-vr-dots"></span>
               </div>
               <div className="post-timestamp-div openLayerOneModal">
                 5th Jan 2017 - 08:51:25 AM
@@ -184,7 +178,7 @@ const MiddleSection = () => {
                   className="reaction-emoji"
                 />
               </div>
-              <div className="reactions-count"> 250 reacrions</div>
+              <div className="reactions-count"> 250 reactions</div>
             </div>
             <div className="cmnts-and-shares-counter couter-item">
               <span className="comments-counter hover-ul">50 comments</span>
@@ -195,6 +189,61 @@ const MiddleSection = () => {
             <span className="action-item hover-ul">Like</span>
             <span className="action-item hover-ul">Comment</span>
             <span className="action-item hover-ul">Share</span>
+          </div>
+          <div className="comment-input-container">
+            <input
+              type="text"
+              className="comment-box"
+              placeholder="Type and press enter to comment..."
+            />
+          </div>
+
+          <div className="post-comments-container">
+            <div className="post-individual-comment-container">
+              <div className="post-dp-div">
+                <Link to="/">
+                  <img
+                    className="post-comment-user-dp"
+                    src={mark}
+                    alt="User name"
+                  />
+                </Link>
+              </div>
+              <div className="post-comment-info-n-user-details-div">
+                <div className="post-comment-user-div">
+                  <Link to="/">Manoj Kumar</Link>
+                  <span class="comment-vr-dots"></span>
+                </div>
+                <div className="post-comment">
+                  This is my first test for updates div. Just to check whether
+                  it's working or not.This is my first test for updates div.
+                  Just to check whether it's working or not.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="post-individual-comment-container">
+            <div className="post-dp-div">
+              <Link to="/">
+                <img
+                  className="post-comment-user-dp"
+                  src={kohli}
+                  alt="User name"
+                />
+              </Link>
+            </div>
+            <div className="post-comment-info-n-user-details-div">
+              <div className="post-comment-user-div">
+                <Link to="/">Manoj Kumar</Link>
+                <span class="comment-vr-dots"></span>
+              </div>
+              <div className="post-comment">
+                This is my first test for updates div. Just to check whether
+                it's working or not.This is my first test for updates div. Just
+                to check whether it's working or not.
+              </div>
+            </div>
           </div>
         </div>
         {/* ********  cornerFold_topLeft_bottomRight remove_cornerShadow post section - starts *********** */}
