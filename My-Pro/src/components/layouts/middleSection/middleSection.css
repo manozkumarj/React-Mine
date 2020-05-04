@@ -287,3 +287,62 @@
 .remove_cornerShadow:after {
   box-shadow: none;
 }
+
+.post-actions-counter-container {
+  height: 30px;
+  border-top: 1px solid #ccc;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 10px;
+}
+
+.reactions-couter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.reactions-count {
+  margin: 0px 5px;
+}
+
+.reaction-emoji {
+  margin-top: 3px;
+}
+
+.couter-item {
+  flex: 1;
+}
+
+.cmnts-and-shares-counter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.cmnts-and-shares-counter span {
+  flex: 1;
+  text-align: end;
+}
+
+.post-actions-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #ccc;
+}
+.action-item {
+  flex: 1;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  border-right: 1px solid #ccc;
+  cursor: pointer;
+}
+.action-item:last-child {
+  border-right: 1px solid #ccc;
+}

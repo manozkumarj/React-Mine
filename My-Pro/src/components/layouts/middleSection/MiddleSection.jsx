@@ -11,7 +11,8 @@ import whitecam from "../../../icons/whitecam.png";
 
 import wow2 from "../../../images/wow_2.jpg";
 
-import loveHeartsEyesEmoji from "../../../emojis/love-hearts-eyes-emoji.png";
+import loveHeartsEyesEmoji from "../../../emojis/love-hearts-eyes-emoji-50.png";
+import likeThumbEmoji from "../../../emojis/like-thumb-emoji-50.png";
 
 const MiddleSection = () => {
   const $ = window.$;
@@ -163,13 +164,37 @@ const MiddleSection = () => {
               <span className="post-description">
                 This is my first test for updates div. Just to check whether
                 it's working or not.This is my first test for updates div. Just
-                to check whether it's working or not. Lorem Ipsum is simply
-                dummy text of the printing and typesetting industry. Lorem Ipsum
-                has been the industry's standard dummy text ever since the
-                1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book.
+                to check whether it's working or not.
               </span>
             </div>
+          </div>
+          <div className="post-actions-counter-container">
+            <div className="reactions-couter couter-item hover-ul">
+              <div className="reactions-couter-emojis">
+                <img
+                  src={loveHeartsEyesEmoji}
+                  alt="loveHeartsEyesEmoji"
+                  width="20px"
+                  className="reaction-emoji"
+                />
+                <img
+                  src={likeThumbEmoji}
+                  alt="likeThumbEmoji"
+                  width="20px"
+                  className="reaction-emoji"
+                />
+              </div>
+              <div className="reactions-count"> 250 reacrions</div>
+            </div>
+            <div className="cmnts-and-shares-counter couter-item">
+              <span className="comments-counter hover-ul">50 comments</span>
+              <span className="shares-counter hover-ul">20 shares</span>
+            </div>
+          </div>
+          <div className="post-actions-container">
+            <span className="action-item hover-ul">Like</span>
+            <span className="action-item hover-ul">Comment</span>
+            <span className="action-item hover-ul">Share</span>
           </div>
         </div>
         {/* ********  cornerFold_topLeft_bottomRight remove_cornerShadow post section - starts *********** */}

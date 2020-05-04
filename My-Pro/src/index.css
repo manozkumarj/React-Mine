@@ -64,6 +64,7 @@ textarea {
 }
 .hover-ul:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 .pointer {
   cursor: pointer;
