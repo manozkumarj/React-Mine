@@ -19,6 +19,33 @@
   outline: 0px;
 }
 
+#previewer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.thumbimage {
+  width: 93px;
+  height: 93px;
+  display: inline-block;
+  margin: 2px;
+  margin-bottom: 1px;
+  margin-top: 3px;
+  border: solid 1px var(--site-color);
+  border-radius: 2px;
+}
+.thumbin {
+  width: 100%;
+  height: 100%;
+}
+
+.imageThumb {
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
 .post-actions-div {
   background: var(--site-color);
   color: #fff;

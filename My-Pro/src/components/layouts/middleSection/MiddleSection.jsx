@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./middleSection.css";
 import { Link } from "react-router-dom";
-// import zuck from "../../../images/zuck.jpg";
-// import mark from "../../../images/mark.jpg";
+import zuck from "../../../images/zuck.jpg";
+import mark from "../../../images/mark.jpg";
 
 import kohli from "../../../images/kohli.jpg";
 import bikee from "../../../images/bikee.jpg";
@@ -14,10 +14,16 @@ import wow2 from "../../../images/wow_2.jpg";
 import loveHeartsEyesEmoji from "../../../emojis/love-hearts-eyes-emoji.png";
 
 const MiddleSection = () => {
+  const $ = window.$;
+
+  const maxFileSize = 1048576 * 5;
+  console.log("maxFileSize --> " + maxFileSize);
+
   const filesPickerRef = useRef();
 
   const pickImagesHandler = () => {
     filesPickerRef.current.click();
+    $("#previewer").html("");
   };
 
   const fileChangeHandler = (event) => {
@@ -26,17 +32,53 @@ const MiddleSection = () => {
     let selectedFiles = event.target.files;
     let selectedFilesLength = event.target.files.length;
 
-    // for (let key in selectedFiles) {
-    //   console.log(selectedFiles[key]["name"]);
-    // }
-
-    for (let i = 0; i < selectedFilesLength; i++) {
-      console.log(selectedFiles[i]["name"]);
+    if (selectedFilesLength > 10) {
+      alert("You can upload maximum of 10 images");
+      return false;
     }
 
-    // selectedFiles.forEach((file) => {
-    //   console.log(`File name is -> ${file.name}`);
-    // });
+    let isFileSizeExceededLimit = false;
+
+    for (let i = 0; i < selectedFilesLength; i++) {
+      // console.log(selectedFiles[i]["name"]);
+      let fileSize = selectedFiles[i]["size"];
+      console.log("fileSize --> " + fileSize);
+      if (fileSize > maxFileSize) {
+        isFileSizeExceededLimit = true;
+      }
+    }
+
+    if (isFileSizeExceededLimit) {
+      console.log("One of selected files size is more than 5 MB");
+      alert("One of selected files size is more than 5 MB");
+      return false;
+    }
+
+    var files = event.target.files,
+      filesLength = files.length;
+    if (filesLength < 11) {
+      var image_holder = $("#previewer");
+      image_holder.html("");
+      for (var i = 0; i < filesLength; i++) {
+        var f = files[i];
+        var fileReader = new FileReader();
+        fileReader.onload = function (e) {
+          var file = e.target;
+          $(
+            '<div class="thumbimage">' +
+              '<div class=\'thumbin\'><img class="imageThumb" src="' +
+              e.target.result +
+              '" /></div>' +
+              "<br/>" +
+              "</div>"
+          ).appendTo(image_holder);
+          $(".popPic1").hide();
+        };
+        fileReader.readAsDataURL(f);
+      }
+    } else {
+      alert("You can upload maximum of 10 images");
+    }
   };
 
   return (
@@ -50,9 +92,11 @@ const MiddleSection = () => {
             spellCheck="false"
           ></textarea>
         </div>
+        <div id="previewer"></div>
         <div className="post-actions-div">
           <input
             type="file"
+            id="imageupload"
             style={{ display: "none" }}
             accept=".png, .jpg, .jpeg"
             ref={filesPickerRef}
