@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import "./middleSection.css";
 import { Link } from "react-router-dom";
 // import zuck from "../../../images/zuck.jpg";
@@ -7,11 +7,38 @@ import { Link } from "react-router-dom";
 import kohli from "../../../images/kohli.jpg";
 import bikee from "../../../images/bikee.jpg";
 import wow1 from "../../../images/wow_1.jpg";
+import whitecam from "../../../icons/whitecam.png";
+
 import wow2 from "../../../images/wow_2.jpg";
 
 import loveHeartsEyesEmoji from "../../../emojis/love-hearts-eyes-emoji.png";
 
 const MiddleSection = () => {
+  const filesPickerRef = useRef();
+
+  const pickImagesHandler = () => {
+    filesPickerRef.current.click();
+  };
+
+  const fileChangeHandler = (event) => {
+    console.log(event.target.files);
+    console.log(event.target.files[0]);
+    let selectedFiles = event.target.files;
+    let selectedFilesLength = event.target.files.length;
+
+    // for (let key in selectedFiles) {
+    //   console.log(selectedFiles[key]["name"]);
+    // }
+
+    for (let i = 0; i < selectedFilesLength; i++) {
+      console.log(selectedFiles[i]["name"]);
+    }
+
+    // selectedFiles.forEach((file) => {
+    //   console.log(`File name is -> ${file.name}`);
+    // });
+  };
+
   return (
     <div id="middle-div">
       <div className="post-menu-section">
@@ -24,7 +51,21 @@ const MiddleSection = () => {
           ></textarea>
         </div>
         <div className="post-actions-div">
-          <div className="pic-uploader">Upload Images</div>
+          <input
+            type="file"
+            style={{ display: "none" }}
+            accept=".png, .jpg, .jpeg"
+            ref={filesPickerRef}
+            onChange={fileChangeHandler}
+            multiple
+          />
+          <img
+            src={whitecam}
+            onClick={pickImagesHandler}
+            className="pic-uploader-icon"
+            title="Upload Images"
+            alt="Upload Images"
+          />
           <div className="pic-uploader">
             <select className="post-privacy-selection">
               <option value="public">Public</option>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./rightSideSection.css";
 import { Link } from "react-router-dom";
 import zuck from "../../../images/zuck.jpg";
@@ -6,8 +6,15 @@ import mark from "../../../images/mark.jpg";
 import kohli from "../../../images/kohli.jpg";
 
 const RightSideSection = () => {
-  let showAdBanner = true;
-  let showFriendSuggessions = true;
+  const [showAdBanner, setShowAdBanner] = useState(true);
+  const [showFriendSuggessions, setShowFriendSuggessions] = useState(true);
+
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     console.log("Logging from setInterval func every minute...");
+  //   }, 10000);
+  //   // eslint-disable-next-line
+  // }, []);
 
   let showable = showAdBanner ? (
     <div className="ad-banner-container">
