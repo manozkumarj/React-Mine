@@ -240,36 +240,36 @@ const MiddleSection = () => {
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="post-individual-comment-container">
-            <div className="post-dp-div">
-              <Link to="/">
-                <img
-                  className="post-comment-user-dp"
-                  src={kohli}
-                  alt="User name"
-                />
-              </Link>
-            </div>
-            <div className="post-comment-info-n-user-details-div">
-              <div className="post-comment-user-div">
-                <Link to="/">Manoj Kumar</Link>
-                <span
-                  class="post-comment-vr-dots"
-                  data-post-comment-id="2"
-                  id="post-comment-more-options"
-                >
-                  <ul className="post-comment-more-options-ul post-comment-more-options-ul-2">
-                    <li>Hide</li>
-                    <li>Delete</li>
-                  </ul>
-                </span>
+            <div className="post-individual-comment-container">
+              <div className="post-dp-div">
+                <Link to="/">
+                  <img
+                    className="post-comment-user-dp"
+                    src={kohli}
+                    alt="User name"
+                  />
+                </Link>
               </div>
-              <div className="post-comment">
-                This is my first test for updates div. Just to check whether
-                it's working or not.This is my first test for updates div. Just
-                to check whether it's working or not.
+              <div className="post-comment-info-n-user-details-div">
+                <div className="post-comment-user-div">
+                  <Link to="/">Manoj Kumar</Link>
+                  <span
+                    class="post-comment-vr-dots"
+                    data-post-comment-id="2"
+                    id="post-comment-more-options"
+                  >
+                    <ul className="post-comment-more-options-ul post-comment-more-options-ul-2">
+                      <li>Hide</li>
+                      <li>Delete</li>
+                    </ul>
+                  </span>
+                </div>
+                <div className="post-comment">
+                  This is my first test for updates div. Just to check whether
+                  it's working or not.This is my first test for updates div.
+                  Just to check whether it's working or not.
+                </div>
               </div>
             </div>
           </div>
@@ -285,6 +285,17 @@ const MiddleSection = () => {
             <div className="postInfo-n-user-details-div">
               <div className="post-details-div">
                 <Link to="/">Manoj Kumar</Link>
+                <span
+                  className="post-vr-dots"
+                  data-post-id="2"
+                  id="post-more-options"
+                >
+                  <ul className="post-more-options-ul post-more-options-ul-2">
+                    <li>Hide</li>
+                    <li>Open in new tab</li>
+                    <li>Delete</li>
+                  </ul>
+                </span>
               </div>
               <div className="post-timestamp-div openLayerOneModal">
                 5th Jan 2017 - 08:51:25 AM
