@@ -158,22 +158,23 @@
 }
 
 .post-vr-dots,
-.comment-vr-dots {
+.post-comment-vr-dots {
   position: absolute;
   right: 0;
   cursor: pointer;
 }
 .post-vr-dots:before,
-.comment-vr-dots:before {
+.post-comment-vr-dots:before {
   content: "\2807";
   font-size: 25px;
   color: #999;
 }
-.comment-vr-dots:before {
+.post-comment-vr-dots:before {
   font-size: 20px;
 }
 
-.post-more-options-ul {
+.post-more-options-ul,
+.post-comment-more-options-ul {
   position: absolute;
   right: 0;
   width: 150px;
@@ -189,16 +190,19 @@
   display: none;
 }
 
-.post-more-options-ul li {
+.post-more-options-ul li,
+.post-comment-more-options-ul li {
   padding: 8px;
   border-bottom: 1px solid #ccc;
 }
 
-.post-more-options-ul li:last-child {
+.post-more-options-ul li:last-child,
+.post-comment-more-options-ul li:last-child {
   border-bottom: none;
 }
 
-.post-more-options-ul li:hover {
+.post-more-options-ul li:hover,
+.post-comment-more-options-ul li:hover {
   background: var(--site-color);
   color: #fff;
   cursor: pointer;

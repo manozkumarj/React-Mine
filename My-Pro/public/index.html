@@ -139,9 +139,17 @@
 
         // Toggling post's more options UL - starts
         $(document).on("click", ".post-vr-dots", function () {
-          // $("#search_results_div").toggle();
+          $(".post-more-options-ul").hide();
           $getId = $(this).attr("data-post-id");
           $(".post-more-options-ul-" + $getId).show();
+        });
+        // Toggling post's more options UL - ends
+
+        // Toggling post's more options UL - starts
+        $(document).on("click", ".post-comment-vr-dots", function () {
+          $(".post-comment-more-options-ul").hide();
+          $getId = $(this).attr("data-post-comment-id");
+          $(".post-comment-more-options-ul-" + $getId).show();
         });
         // Toggling post's more options UL - ends
 
@@ -167,6 +175,10 @@
 
           if (evt.target.id != "post-more-options") {
             $(".post-more-options-ul").hide();
+          }
+
+          if (evt.target.id != "post-comment-more-options") {
+            $(".post-comment-more-options-ul").hide();
           }
         });
 

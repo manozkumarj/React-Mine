@@ -222,7 +222,16 @@ const MiddleSection = () => {
               <div className="post-comment-info-n-user-details-div">
                 <div className="post-comment-user-div">
                   <Link to="/">Manoj Kumar</Link>
-                  <span class="comment-vr-dots"></span>
+                  <span
+                    class="post-comment-vr-dots"
+                    data-post-comment-id="1"
+                    id="post-comment-more-options"
+                  >
+                    <ul className="post-comment-more-options-ul post-comment-more-options-ul-1">
+                      <li>Hide</li>
+                      <li>Delete</li>
+                    </ul>
+                  </span>
                 </div>
                 <div className="post-comment">
                   This is my first test for updates div. Just to check whether
@@ -246,7 +255,16 @@ const MiddleSection = () => {
             <div className="post-comment-info-n-user-details-div">
               <div className="post-comment-user-div">
                 <Link to="/">Manoj Kumar</Link>
-                <span class="comment-vr-dots"></span>
+                <span
+                  class="post-comment-vr-dots"
+                  data-post-comment-id="2"
+                  id="post-comment-more-options"
+                >
+                  <ul className="post-comment-more-options-ul post-comment-more-options-ul-2">
+                    <li>Hide</li>
+                    <li>Delete</li>
+                  </ul>
+                </span>
               </div>
               <div className="post-comment">
                 This is my first test for updates div. Just to check whether
