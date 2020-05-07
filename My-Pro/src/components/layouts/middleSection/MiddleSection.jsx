@@ -196,7 +196,75 @@ const MiddleSection = () => {
             </div>
           </div>
           <div className="post-actions-container">
-            <span className="action-item hover-ul">Like</span>
+            <span className="action-item hover-ul like-button" data-post-id="1">
+              Like
+              {/* reactions-holder - starts */}
+              <span className="reactions-holder reactions-holder-1">
+                <span className="reactions-holder-inner">
+                  <img
+                    src={loveHeartsEyesEmoji}
+                    alt="loveHeartsEyesEmoji"
+                    width="38px"
+                    className="reaction-emoji"
+                  />
+                  <img
+                    src={likeThumbEmoji}
+                    alt="likeThumbEmoji"
+                    width="38px"
+                    className="reaction-emoji"
+                  />
+                  <img
+                    src={loveHeartsEyesEmoji}
+                    alt="loveHeartsEyesEmoji"
+                    width="38px"
+                    className="reaction-emoji"
+                  />
+                  <img
+                    src={likeThumbEmoji}
+                    alt="likeThumbEmoji"
+                    width="38px"
+                    className="reaction-emoji"
+                  />
+                  <img
+                    src={loveHeartsEyesEmoji}
+                    alt="loveHeartsEyesEmoji"
+                    width="38px"
+                    className="reaction-emoji"
+                  />
+                  <img
+                    src={likeThumbEmoji}
+                    alt="likeThumbEmoji"
+                    width="38px"
+                    className="reaction-emoji"
+                  />
+                  <img
+                    src={loveHeartsEyesEmoji}
+                    alt="loveHeartsEyesEmoji"
+                    width="38px"
+                    className="reaction-emoji"
+                  />
+                  <img
+                    src={likeThumbEmoji}
+                    alt="likeThumbEmoji"
+                    width="38px"
+                    className="reaction-emoji"
+                  />
+                  <img
+                    src={loveHeartsEyesEmoji}
+                    alt="loveHeartsEyesEmoji"
+                    width="38px"
+                    className="reaction-emoji"
+                  />
+                  <img
+                    src={likeThumbEmoji}
+                    alt="likeThumbEmoji"
+                    width="38px"
+                    className="reaction-emoji"
+                  />
+                </span>
+              </span>
+              {/* reactions-holder - ends */}
+            </span>
             <span className="action-item hover-ul">Comment</span>
             <span className="action-item hover-ul">Share</span>
           </div>

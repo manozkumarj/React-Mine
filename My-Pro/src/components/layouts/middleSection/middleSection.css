@@ -192,7 +192,7 @@
 
 .post-more-options-ul li,
 .post-comment-more-options-ul li {
-  padding: 8px;
+  padding: 3px 10px;
   border-bottom: 1px solid #ccc;
 }
 
@@ -439,4 +439,26 @@
 
 .post-individual-comment-container:last-child {
   border-bottom: none;
+}
+
+.like-button {
+  position: relative;
+  /* display: flex; */
+}
+
+.reactions-holder {
+  flex-direction: row;
+  position: absolute;
+  left: 0;
+  top: -60px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 40px;
+  border: 1px solid #ccc;
+  display: none;
+  z-index: 2;
+}
+
+.reactions-holder-inner {
+  display: flex;
 }

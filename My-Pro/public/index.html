@@ -145,6 +145,32 @@
         });
         // Toggling post's more options UL - ends
 
+        // Like button hover event - starts
+        $(document).on("mouseover", ".like-button", function () {
+          $getId = $(this).attr("data-post-id");
+          $(".reactions-holder-" + $getId).show();
+        });
+        $(document).on("mouseout", ".like-button", function () {
+          $getId = $(this).attr("data-post-id");
+          $(".reactions-holder").hide();
+        });
+        // Like button hover event - ends
+
+        // like-button click event - starts
+        $(document).on("click", ".like-button", function () {
+          $(".reactions-holder").hide();
+          console.log("clicked");
+        });
+        // like-button click event - ends
+
+        // like-button click event - starts
+        $(document).on("click", ".like-button img", function () {
+          $(".reactions-holder").hide();
+          console.log("clicked on img");
+          return false;
+        });
+        // like-button click event - ends
+
         // Toggling post's more options UL - starts
         $(document).on("click", ".post-comment-vr-dots", function () {
           $(".post-comment-more-options-ul").hide();
