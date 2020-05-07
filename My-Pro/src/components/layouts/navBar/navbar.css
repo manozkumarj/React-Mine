@@ -191,6 +191,10 @@
   border-bottom: 1px solid #ccc;
 }
 
+#navbar-rightside-dropdown-ul li:last-child {
+  border-bottom: none;
+}
+
 #navbar-rightside-dropdown-ul li:hover {
   background: var(--site-color);
   color: #fff;

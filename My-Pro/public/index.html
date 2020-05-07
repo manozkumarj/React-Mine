@@ -137,6 +137,14 @@
         });
         // Search box focus event - ends
 
+        // Toggling post's more options UL - starts
+        $(document).on("click", ".post-vr-dots", function () {
+          // $("#search_results_div").toggle();
+          $getId = $(this).attr("data-post-id");
+          $(".post-more-options-ul-" + $getId).show();
+        });
+        // Toggling post's more options UL - ends
+
         // $("body").click(function () {
         //   $(
         //     ".dropdown-content, #navbar-rightside-dropdown-div,#search_results_div"
@@ -155,6 +163,10 @@
 
           if (evt.target.id != "individual-friend-div") {
             $(".dropdown-content").hide();
+          }
+
+          if (evt.target.id != "post-more-options") {
+            $(".post-more-options-ul").hide();
           }
         });
 

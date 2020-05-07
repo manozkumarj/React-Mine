@@ -163,14 +163,45 @@
   right: 0;
   cursor: pointer;
 }
-.post-vr-dots:after,
-.comment-vr-dots:after {
+.post-vr-dots:before,
+.comment-vr-dots:before {
   content: "\2807";
   font-size: 25px;
   color: #999;
 }
-.comment-vr-dots:after {
+.comment-vr-dots:before {
   font-size: 20px;
+}
+
+.post-more-options-ul {
+  position: absolute;
+  right: 0;
+  width: 150px;
+  background: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: normal;
+  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  display: none;
+}
+
+.post-more-options-ul li {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.post-more-options-ul li:last-child {
+  border-bottom: none;
+}
+
+.post-more-options-ul li:hover {
+  background: var(--site-color);
+  color: #fff;
+  cursor: pointer;
 }
 
 .post-timestamp-div {

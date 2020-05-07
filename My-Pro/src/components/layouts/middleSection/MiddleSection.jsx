@@ -146,9 +146,19 @@ const MiddleSection = () => {
             <div className="postInfo-n-user-details-div">
               <div className="post-details-div">
                 <Link to="/">Manoj Kumar</Link>
-                <span class="post-vr-dots"></span>
+                <span
+                  className="post-vr-dots"
+                  data-post-id="1"
+                  id="post-more-options"
+                >
+                  <ul className="post-more-options-ul post-more-options-ul-1">
+                    <li>Hide</li>
+                    <li>Open in new tab</li>
+                    <li>Delete</li>
+                  </ul>
+                </span>
               </div>
-              <div className="post-timestamp-div openLayerOneModal">
+              <div className="post-timestamp-div">
                 5th Jan 2017 - 08:51:25 AM
               </div>
             </div>
