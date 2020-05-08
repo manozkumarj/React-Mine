@@ -10,6 +10,13 @@ export default function PostTypes() {
     window.scrollTo(0, 0);
   }, []);
 
+  // useEffect(() => {
+  //   const script = document.createElement("script");
+  //   script.src = "/js/jscolor.js";
+  //   script.async = true;
+  //   document.body.appendChild(script);
+  // }, []);
+
   return (
     <div className="three-divs-container">
       <div className="left-and-middle-divs-container advanced-posts-container">
@@ -420,13 +427,78 @@ export default function PostTypes() {
             </div>
             <hr className="dividable-hr" />
             <div className="colorpickers-titles-container picker-div-1">
-              <div>
-                <button
-                  className="jscolor {valueElement:'bgcolor'}"
-                  id="bgclrpkr"
-                >
+              <div className="clrpkr-relative">
+                <button className="bg-clrpkr-1" id="bgclrpkr">
                   Pick post background color
                 </button>
+                <div className="clrpkr-absolute">
+                  {/* row - 1 */}
+                  <span
+                    className="pick-clr clr-000000"
+                    data-color="000000"
+                  ></span>
+                  <span
+                    className="pick-clr clr-ff0000"
+                    data-color="ff0000"
+                  ></span>
+                  <span
+                    className="pick-clr clr-999999"
+                    data-color="999999"
+                  ></span>
+                  <span
+                    className="pick-clr clr-ff0066"
+                    data-color="ff0066"
+                  ></span>
+                  <span
+                    className="pick-clr clr-ffff00"
+                    data-color="ffff00"
+                  ></span>
+                  <span
+                    className="pick-clr clr-009900"
+                    data-color="009900"
+                  ></span>
+                  <span
+                    className="pick-clr clr-33cccc"
+                    data-color="33cccc"
+                  ></span>
+                  <span
+                    className="pick-clr clr-663300"
+                    data-color="663300"
+                  ></span>
+                  {/* row - 2 */}
+                  <span
+                    className="pick-clr clr-993300"
+                    data-color="993300"
+                  ></span>
+                  <span
+                    className="pick-clr clr-006699"
+                    data-color="006699"
+                  ></span>
+                  <span
+                    className="pick-clr clr-66ff33"
+                    data-color="66ff33"
+                  ></span>
+                  <span
+                    className="pick-clr clr-ffffff"
+                    data-color="ffffff"
+                  ></span>
+                  <span
+                    className="pick-clr clr-006666"
+                    data-color="006666"
+                  ></span>
+                  <span
+                    className="pick-clr clr-9900cc"
+                    data-color="9900cc"
+                  ></span>
+                  <span
+                    className="pick-clr clr-000099"
+                    data-color="000099"
+                  ></span>
+                  <span
+                    className="pick-clr clr-ff6600"
+                    data-color="ff6600"
+                  ></span>
+                </div>
               </div>
               <div>
                 <button

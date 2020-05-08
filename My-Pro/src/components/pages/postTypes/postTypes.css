@@ -237,6 +237,76 @@
   flex: 1;
   text-align: center;
 }
+.clrpkr-relative {
+  position: relative;
+}
+.clrpkr-absolute {
+  width: 80%;
+  position: absolute;
+  background: #fff;
+  left: 15px;
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: row;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.clrpkr-absolute span {
+  width: 20px;
+  height: 20px;
+  border: 1px solid transparent;
+}
+.clr-000000 {
+  background-color: #000000;
+}
+.clr-ff0000 {
+  background-color: #ff0000;
+}
+.clr-ff0066 {
+  background-color: #ff0066;
+}
+.clr-ffff00 {
+  background-color: #ffff00;
+}
+.clr-009900 {
+  background-color: #009900;
+}
+.clr-33cccc {
+  background-color: #33cccc;
+}
+.clr-663300 {
+  background-color: #663300;
+}
+.clr-000099 {
+  background-color: #000099;
+}
+.clr-993300 {
+  background-color: #993300;
+}
+.clr-006699 {
+  background-color: #006699;
+}
+.clr-66ff33 {
+  background-color: #66ff33;
+}
+.clr-ffffff {
+  background-color: #ffffff;
+}
+.clr-006666 {
+  background-color: #006666;
+}
+.clr-9900cc {
+  background-color: #9900cc;
+}
+.clr-999999 {
+  background-color: #999999;
+}
+.clr-ff6600 {
+  background-color: #ff6600;
+}
+
 #bgclrpkr,
 #textclrpkr,
 #borderclrpkr,

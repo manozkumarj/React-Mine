@@ -13,6 +13,18 @@ export default function Profile() {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "/js/croppie.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    const script_1 = document.createElement("script");
+    script_1.src = "/js/dp-change.js";
+    script_1.async = true;
+    document.body.appendChild(script_1);
+  }, []);
+
   return (
     <div className="three-divs-container" id="main">
       <div className="left-and-middle-divs-container">
@@ -61,11 +73,11 @@ export default function Profile() {
             </h2>
             <hr className="dividable-hr" />
 
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <div class="row">
-                    <div class="col-md-8 text-center">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-body">
+                  <div className="row">
+                    <div className="col-md-8 text-center">
                       <div id="image_cropper_view"></div>
                     </div>
                   </div>
