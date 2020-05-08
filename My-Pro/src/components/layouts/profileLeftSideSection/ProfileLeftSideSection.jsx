@@ -9,11 +9,15 @@ const ProfileLeftSideSection = () => {
     <div className="fixed-div" id="left-fixed-div">
       <div className="profileSection">
         <div className="profileDpsSection">
-          <div className="dp-div primary-dp">
+          <div className="dp-div primary-dp" id="change-dp" data-type="Primary">
             <span>change</span>
             <img src={zuck} alt="User name" width="120px" />
           </div>
-          <div className="dp-div secondary-dp">
+          <div
+            className="dp-div secondary-dp"
+            id="change-dp"
+            data-type="Secondary"
+          >
             <span>change</span>
             <img src={mark} alt="User name" width="120px" />
           </div>

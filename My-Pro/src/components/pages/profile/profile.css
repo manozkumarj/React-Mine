@@ -44,3 +44,38 @@
 .middle-section {
   margin-bottom: 30em;
 }
+
+/* DP change popup related */
+.dp_change_layerOneModalContainer {
+  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow-y: scroll;
+  z-index: 50;
+  min-height: 100%;
+  max-height: auto;
+  display: none;
+}
+
+.dp_change_main {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 26px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0 auto 40px;
+  position: relative;
+  width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  display: none;
+  z-index: 55;
+}
+
+#image_cropper_view {
+  width: 350px;
+  margin-top: 30px;
+}

@@ -5,6 +5,9 @@ import RightSideSection from "./../../layouts/rightSideSection/RightSideSection"
 import ProfileLeftSideSection from "./../../layouts/profileLeftSideSection/ProfileLeftSideSection";
 import wow2 from "../../../images/wow_2.jpg";
 
+import overlayClose from "../../../images/overlay-close.png";
+import fancyClose from "../../../images/fancy-close.png";
+
 export default function Profile() {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,6 +40,42 @@ export default function Profile() {
       <div className="right-section">
         <RightSideSection />
       </div>
+
+      {/* DPs change popups - starts */}
+      <div
+        id="dp_change_layerOneModalContainer"
+        tabIndex="1"
+        className="dp_change_layerOneModalContainer"
+      >
+        <span className="overlay_close layerOneCloser" title="close">
+          <img height="20" src={overlayClose} alt="closer" />
+        </span>
+
+        <div className="dp_change_layerOneModalInner">
+          <div className="dp_change_main">
+            <span className="fancyCloseIcon layerOneCloser" title="close">
+              <img height="30" src={fancyClose} alt="closer" />
+            </span>
+            <h2 className="global-style">
+              <span id="dp-change-type">Primary</span> profile change
+            </h2>
+            <hr className="dividable-hr" />
+
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-8 text-center">
+                      <div id="image_cropper_view"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* DPs change popups - ends */}
     </div>
   );
 }
