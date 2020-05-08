@@ -147,6 +147,7 @@
 
         // Like button hover event - starts
         $(document).on("mouseover", ".like-button", function () {
+          clozer();
           $getId = $(this).attr("data-post-id");
           $(".reactions-holder-" + $getId).show();
         });
@@ -208,10 +209,25 @@
           }
         });
 
+        // Escape button event - starts
+        $(document).keyup(function (e) {
+          if (e.key === "Escape") {
+            // alert("Escape button clicked");
+            clozer();
+          }
+        });
+        // Escape button event - ends
+
         $(document).on("input", ".textarea-auto-height", function () {
           this.style.height = "5px";
           this.style.height = this.scrollHeight + "px";
         });
+
+        function clozer() {
+          $(
+            "#search_results_div, #navbar-rightside-dropdown-div, .dropdown-content, .post-more-options-ul, .post-comment-more-options-ul, .reactions-holder"
+          ).hide();
+        }
       });
     </script>
   </body>

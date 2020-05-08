@@ -291,7 +291,7 @@ const MiddleSection = () => {
                 <div className="post-comment-user-div">
                   <Link to="/">Manoj Kumar</Link>
                   <span
-                    class="post-comment-vr-dots"
+                    className="post-comment-vr-dots"
                     data-post-comment-id="1"
                     id="post-comment-more-options"
                   >
@@ -323,7 +323,7 @@ const MiddleSection = () => {
                 <div className="post-comment-user-div">
                   <Link to="/">Manoj Kumar</Link>
                   <span
-                    class="post-comment-vr-dots"
+                    className="post-comment-vr-dots"
                     data-post-comment-id="2"
                     id="post-comment-more-options"
                   >

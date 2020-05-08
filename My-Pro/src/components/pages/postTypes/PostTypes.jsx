@@ -568,7 +568,14 @@ export default function PostTypes() {
               <button className="layerOne-close-btn layerTwoCloser">
                 Back
               </button>
-              <button className="post-button">Post</button>
+              <div>
+                <select className="layerTwo-one-post-privacy-selection">
+                  <option value="public">Public</option>
+                  <option value="friends">Friends</option>
+                  <option value="me">Only Me</option>
+                </select>
+                <button className="post-button">Post</button>
+              </div>
             </div>
           </div>
 
@@ -591,7 +598,14 @@ export default function PostTypes() {
               <button className="layerOne-close-btn layerTwoCloser">
                 Back
               </button>
-              <button className="post-button">Post</button>
+              <div>
+                <select className="layerTwo-two-post-privacy-selection">
+                  <option value="public">Public</option>
+                  <option value="friends">Friends</option>
+                  <option value="me">Only Me</option>
+                </select>
+                <button className="post-button">Post</button>
+              </div>
             </div>
           </div>
           {/* LayerTwo sample 2 - ends */}

@@ -260,6 +260,12 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.layerTwo-one-post-privacy-selection,
+.layerTwo-two-post-privacy-selection {
+  padding: 8px;
+  border: 2px solid #999;
+  border-radius: 5px;
+}
 .warning-div {
   /* display: flex; */
   height: 40px;
