@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./profile.css";
 import MiddleSection from "./../../layouts/middleSection/MiddleSection";
 import RightSideSection from "./../../layouts/rightSideSection/RightSideSection";
@@ -24,6 +24,13 @@ export default function Profile() {
     script_1.async = true;
     document.body.appendChild(script_1);
   }, []);
+
+  const filesPickerRef = useRef();
+
+  const pickImagesHandler = () => {
+    filesPickerRef.current.click();
+    console.log("Input file triggered");
+  };
 
   return (
     <div className="three-divs-container" id="main">
@@ -83,6 +90,30 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div className="upload-new-dp-container">
+              <input
+                type="file"
+                id="dp-upload"
+                style={{ display: "none" }}
+                accept=".png, .jpg, .jpeg"
+                ref={filesPickerRef}
+              />
+              <div id="upload-new-dp" onClick={pickImagesHandler}>
+                Upload an Image
+              </div>
+            </div>
+
+            <hr className="dividable-hr" />
+
+            <div className="layerOne-post-actions-div">
+              <button className="layerOne-close-btn layerOneCloser">
+                Cancel
+              </button>
+              <button id="update-dp" className="post-button">
+                Update DP
+              </button>
             </div>
           </div>
         </div>

@@ -77,5 +77,18 @@
 
 #image_cropper_view {
   width: 350px;
+  margin: auto;
   margin-top: 30px;
+}
+
+#upload-new-dp {
+  width: 300px;
+  margin: auto;
+  padding: 10px 0px;
+  font-size: 15px;
+  text-align: center;
+  background: var(--site-color);
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
 }
