@@ -1,4 +1,46 @@
 $(document).ready(function () {
+  // color-palette openers
+  $(document).on("click", ".color-palette", function () {
+    $(".clrpkr-absolute-container").hide();
+    $getId = $(this).attr("data-color-palette-id");
+    $(".color-palette-" + $getId).show();
+  });
+
+  // Choose color
+  $(document).on("click", ".pick-clr", function () {
+    $getStorePlace = $(this).attr("data-store-place");
+    $getColorCode = $(this).attr("data-color");
+    console.log($getStorePlace + " - " + $getColorCode);
+    $("#" + $getStorePlace).val($getColorCode);
+
+    if ($getStorePlace == "bgcolor") {
+      $(".postContentTextarea, .postContentDiv, #postContentPreviewDiv").css(
+        "background",
+        "#" + $getColorCode
+      );
+    } else if ($getStorePlace == "textcolor") {
+      $(".postContentTextarea, #postContentPreviewDiv").css(
+        "color",
+        "#" + $getColorCode
+      );
+    } else if ($getStorePlace == "bordercolor") {
+      $(".postContentTextarea, #postContentPreviewDiv").css(
+        "border-color",
+        "#" + $getColorCode
+      );
+    } else if ($getStorePlace == "brdrFoldNcutPost-bgclrpkr") {
+      $("#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer").css(
+        "background",
+        "#" + $getColorCode
+      );
+    } else if ($getStorePlace == "brdrFoldNcutPost-textclrpkr") {
+      $("#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer").css(
+        "color",
+        "#" + $getColorCode
+      );
+    }
+  });
+
   // Individual post type modal functionality - starts
   $(document).on("click", ".open-post-type-modal", function () {
     $("#bgcolor").val("006600");

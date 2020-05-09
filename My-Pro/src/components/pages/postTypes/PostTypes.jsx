@@ -4,6 +4,7 @@ import RightSideSection from "./../../layouts/rightSideSection/RightSideSection"
 
 import overlayClose from "../../../images/overlay-close.png";
 import fancyClose from "../../../images/fancy-close.png";
+import ColorPalette from "./../../layouts/colorPalette/ColorPalette";
 
 export default function PostTypes() {
   useEffect(() => {
@@ -428,96 +429,43 @@ export default function PostTypes() {
             <hr className="dividable-hr" />
             <div className="colorpickers-titles-container picker-div-1">
               <div className="clrpkr-relative">
-                <button className="bg-clrpkr-1" id="bgclrpkr">
+                <button
+                  className="color-palette"
+                  id="clrpkr-header"
+                  data-color-palette-id="1"
+                >
                   Pick post background color
                 </button>
-                <div className="clrpkr-absolute">
-                  {/* row - 1 */}
-                  <span
-                    className="pick-clr clr-000000"
-                    data-color="000000"
-                  ></span>
-                  <span
-                    className="pick-clr clr-ff0000"
-                    data-color="ff0000"
-                  ></span>
-                  <span
-                    className="pick-clr clr-999999"
-                    data-color="999999"
-                  ></span>
-                  <span
-                    className="pick-clr clr-ff0066"
-                    data-color="ff0066"
-                  ></span>
-                  <span
-                    className="pick-clr clr-ffff00"
-                    data-color="ffff00"
-                  ></span>
-                  <span
-                    className="pick-clr clr-009900"
-                    data-color="009900"
-                  ></span>
-                  <span
-                    className="pick-clr clr-33cccc"
-                    data-color="33cccc"
-                  ></span>
-                  <span
-                    className="pick-clr clr-663300"
-                    data-color="663300"
-                  ></span>
-                  {/* row - 2 */}
-                  <span
-                    className="pick-clr clr-993300"
-                    data-color="993300"
-                  ></span>
-                  <span
-                    className="pick-clr clr-006699"
-                    data-color="006699"
-                  ></span>
-                  <span
-                    className="pick-clr clr-66ff33"
-                    data-color="66ff33"
-                  ></span>
-                  <span
-                    className="pick-clr clr-ffffff"
-                    data-color="ffffff"
-                  ></span>
-                  <span
-                    className="pick-clr clr-006666"
-                    data-color="006666"
-                  ></span>
-                  <span
-                    className="pick-clr clr-9900cc"
-                    data-color="9900cc"
-                  ></span>
-                  <span
-                    className="pick-clr clr-000099"
-                    data-color="000099"
-                  ></span>
-                  <span
-                    className="pick-clr clr-ff6600"
-                    data-color="ff6600"
-                  ></span>
+                <div className="clrpkr-absolute-container color-palette-1">
+                  <ColorPalette storePlace="bgcolor" />
                 </div>
               </div>
               <div>
                 <button
-                  className="jscolor {valueElement:'textcolor'}"
-                  id="textclrpkr"
+                  className="color-palette"
+                  id="clrpkr-header"
+                  data-color-palette-id="2"
                 >
                   Pick post text color
                 </button>
+                <div className="clrpkr-absolute-container color-palette-2">
+                  <ColorPalette storePlace="textcolor" />
+                </div>
               </div>
             </div>
 
             <div className="colorpickers-titles-container picker-div-2">
               <div>
                 <button
-                  className="jscolor {valueElement:'bordercolor'}"
-                  id="borderclrpkr"
+                  className="color-palette"
+                  id="clrpkr-header"
+                  data-color-palette-id="3"
                 >
                   Pick post border color
                 </button>
+                <div className="clrpkr-absolute-container color-palette-3">
+                  <ColorPalette storePlace="bordercolor" />
+                </div>
               </div>
               <div>
                 <select
@@ -575,19 +523,27 @@ export default function PostTypes() {
           <div className="colorpickers-titles-container picker-div-1">
             <div>
               <button
-                className="jscolor {valueElement:'brdrFoldNcutPost-bgclrpkr'}"
-                id="brdrFoldNcut-bgclrpkr"
+                className="color-palette"
+                id="clrpkr-header"
+                data-color-palette-id="4"
               >
                 Pick post background color
               </button>
+              <div className="clrpkr-absolute-container color-palette-4">
+                <ColorPalette storePlace="brdrFoldNcutPost-bgclrpkr" />
+              </div>
             </div>
             <div>
               <button
-                className="jscolor {valueElement:'brdrFoldNcutPost-textclrpkr'}"
-                id="brdrFoldNcut-textclrpkr"
+                className="color-palette"
+                id="clrpkr-header"
+                data-color-palette-id="5"
               >
                 Pick post text color
               </button>
+              <div className="clrpkr-absolute-container color-palette-5">
+                <ColorPalette storePlace="brdrFoldNcutPost-textclrpkr" />
+              </div>
             </div>
           </div>
 

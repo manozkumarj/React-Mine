@@ -212,6 +212,10 @@
           if (evt.target.id != "post-comment-more-options") {
             $(".post-comment-more-options-ul").hide();
           }
+
+          if (evt.target.id != "clrpkr-header") {
+            $(".clrpkr-absolute-container").hide();
+          }
         });
 
         // Escape button event - starts
@@ -230,7 +234,7 @@
 
         function clozer() {
           $(
-            "#search_results_div, #navbar-rightside-dropdown-div, .dropdown-content, .post-more-options-ul, .post-comment-more-options-ul, .reactions-holder"
+            "#search_results_div, #navbar-rightside-dropdown-div, .dropdown-content, .post-more-options-ul, .post-comment-more-options-ul, .reactions-holder, .clrpkr-absolute-container"
           ).hide();
         }
       });
