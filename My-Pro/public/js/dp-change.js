@@ -15,8 +15,29 @@ $(document).ready(function () {
   // Individual post type preview N confirm modal functionality - starts
   $(document).on("click", "#change-dp", function () {
     $getData = $(this).attr("data-type");
-    // alert($getData);
+    console.log($getData);
     $("#dp-change-type").text($getData);
+
+    let $getImgSrc;
+
+    if ($getData.toString() == "primary")
+      $getImgSrc = $("#primary-dp-src").attr("src");
+    else if ($getData.toString() == "secondary")
+      $getImgSrc = $("#secondary-dp-src").attr("src");
+
+    console.log($getImgSrc);
+
+    var reader = new FileReader();
+    reader.onload = function (event) {
+      $image_crop
+        .croppie("bind", {
+          url: $getImgSrc,
+        })
+        .then(function () {
+          console.log("jQuery bind complete");
+        });
+    };
+
     open_dpChange_popup("dp_change_main");
   });
 
