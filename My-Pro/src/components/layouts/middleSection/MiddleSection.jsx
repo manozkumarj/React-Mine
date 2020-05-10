@@ -1372,16 +1372,26 @@ const MiddleSection = () => {
 
         <div className="middle_page_section_layerOneModalInner">
           {/* popup code which triggers image viewer - starts */}
-          <div class="image-viewer-overlay">
-            <span>
-              <img class="centerr_left" src={leftArrow} title="Previous" />
-            </span>
-            <span>
-              <img class="centerr_right" src={rightArrow} title="Next" />
-            </span>
+          <div className="image-viewer-holder">
+            <div className="image-viewer-overlay">
+              <span>
+                <img
+                  className="img_viewer_left"
+                  src={leftArrow}
+                  title="Previous"
+                />
+              </span>
+              <span>
+                <img
+                  className="img_viewer_right"
+                  src={rightArrow}
+                  title="Next"
+                />
+              </span>
 
-            <div class="imgv_lft_hldr_inside">
-              <img class="centerr" src={kohli} title="default" />
+              <div className="imgv_center_holder">
+                <img className="theatre_img" src={wow1} title="default" />
+              </div>
             </div>
           </div>
           {/* popup code which triggers image viewer - ends */}

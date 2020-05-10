@@ -85,7 +85,7 @@
             "#dp_change_layerOneModalContainer, .dp_change_layerOneModalInner, .dp_change_main"
           ).hide();
           $(
-            "#middle_page_section_layerOneModalContainer, .middle_page_section_layerOneModalInner, .image-viewer-overlay"
+            "#middle_page_section_layerOneModalContainer, .middle_page_section_layerOneModalInner, .image-viewer-holder"
           ).hide();
           $("body").css("margin-right", "");
           $("body").removeClass("toggleModal");
@@ -129,7 +129,7 @@
 
         // Image viewer popup - starts
         $(document).on("click", ".view-image", function () {
-          modalName = "image-viewer-overlay";
+          modalName = "image-viewer-holder";
           open_middle_page_section_popup(modalName);
         });
 
@@ -142,10 +142,6 @@
           ).show();
           $("#middle_page_section_layerOneModalContainer").scrollTop(0);
           $("#middle_page_section_layerOneModalContainer").focus();
-          $("#middle_page_section_layerOneModalContainer").css(
-            "overflow-y",
-            "scroll"
-          );
         }
         // Image viewer popup - starts
 
