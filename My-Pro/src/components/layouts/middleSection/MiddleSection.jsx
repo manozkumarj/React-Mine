@@ -8,8 +8,11 @@ import kohli from "../../../images/kohli.jpg";
 import bikee from "../../../images/bikee.jpg";
 import wow1 from "../../../images/wow_1.jpg";
 import whitecam from "../../../icons/whitecam.png";
+import overlayClose from "../../../images/overlay-close.png";
 
 import wow2 from "../../../images/wow_2.jpg";
+import leftArrow from "../../../images/left_arrow.png";
+import rightArrow from "../../../images/right_arrow.png";
 
 import loveHeartsEyesEmoji from "../../../emojis/love-hearts-eyes-emoji-50.png";
 import likeThumbEmoji from "../../../emojis/like-thumb-emoji-50.png";
@@ -719,7 +722,7 @@ const MiddleSection = () => {
             </span>
           </div>
           <div className="post-picture-div">
-            <img src={wow1} alt="Post info" />
+            <img src={wow1} alt="Post info" className="view-image" />
             <span className="absolute-bottom-right">1 of 5</span>
           </div>
         </div>
@@ -1291,7 +1294,7 @@ const MiddleSection = () => {
             </span>
           </div>
           <div className="post-picture-div">
-            <img src={wow1} alt="Post info" />
+            <img src={wow1} alt="Post info" className="view-image" />
           </div>
         </div>
         {/* *******************  Single picture posts section - ends ******************** */}
@@ -1321,7 +1324,7 @@ const MiddleSection = () => {
             </span>
           </div>
           <div className="post-picture-div">
-            <img src={wow2} alt="Post info" />
+            <img src={wow2} alt="Post info" className="view-image" />
           </div>
         </div>
         {/* *******************  Single picture posts section - ends ******************** */}
@@ -1351,11 +1354,40 @@ const MiddleSection = () => {
             </span>
           </div>
           <div className="post-picture-div">
-            <img src={bikee} alt="Post info" />
+            <img src={bikee} alt="Post info" className="view-image" />
           </div>
         </div>
         {/* *******************  Single picture posts section - ends ******************** */}
       </div>
+
+      {/* Image viewer popup - starts */}
+      <div
+        id="middle_page_section_layerOneModalContainer"
+        tabIndex="1"
+        className="middle_page_section_layerOneModalContainer"
+      >
+        <span className="overlay_close layerOneCloser" title="close">
+          <img height="20" src={overlayClose} alt="closer" />
+        </span>
+
+        <div className="middle_page_section_layerOneModalInner">
+          {/* popup code which triggers image viewer - starts */}
+          <div class="image-viewer-overlay">
+            <span>
+              <img class="centerr_left" src={leftArrow} title="Previous" />
+            </span>
+            <span>
+              <img class="centerr_right" src={rightArrow} title="Next" />
+            </span>
+
+            <div class="imgv_lft_hldr_inside">
+              <img class="centerr" src={kohli} title="default" />
+            </div>
+          </div>
+          {/* popup code which triggers image viewer - ends */}
+        </div>
+      </div>
+      {/* Image viewer popup - ends */}
     </div>
   );
 };
