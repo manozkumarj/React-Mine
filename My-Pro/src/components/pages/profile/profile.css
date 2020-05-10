@@ -75,8 +75,8 @@
   z-index: 55;
 }
 
-#image_cropper_view {
-  width: 350px;
+#dp_image_cropper_view {
+  width: auto;
   margin: auto;
   margin-top: 30px;
 }
@@ -90,5 +90,9 @@
   background: var(--site-color);
   color: #fff;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.absolute-bottom-right {
   cursor: pointer;
 }

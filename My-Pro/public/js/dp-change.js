@@ -1,7 +1,7 @@
 $(document).ready(function () {
   const maxFileSize = 1048576 * 5;
 
-  $image_crop = $("#image_cropper_view").croppie({
+  $dp_image_crop = $("#dp_image_cropper_view").croppie({
     enableExif: true,
     viewport: {
       width: 200,
@@ -14,33 +14,71 @@ $(document).ready(function () {
     },
   });
 
-  // Individual post type preview N confirm modal functionality - starts
-  $(document).on("click", "#change-dp", function () {
-    $getData = $(this).attr("data-type");
-    console.log($getData);
-    $("#dp-change-type").text($getData);
+  $timeline_image_crop = $("#timeline_image_cropper_view").croppie({
+    enableExif: true,
+    viewport: {
+      width: 400,
+      height: 200,
+      type: "square", //circle
+    },
+    boundary: {
+      width: 500,
+      height: 250,
+    },
+  });
 
-    let $getImgSrc;
+  // Opening DP changes popup - starts
+  $(document).on("click", "#change-dp, #change-timeline", function () {
+    $(
+      "#dp_img_change_croppie_modal, #timeline_img_change_croppie_modal"
+    ).hide();
+    $getDataFileType = $(this).attr("data-file-type");
+    console.log($getDataFileType);
 
-    if ($getData.toLowerCase() == "primary") {
-      $getImgSrc = $("#primary-dp-src").attr("src");
-      $getImgSrc = "https://i.picsum.photos/id/250/500/500.jpg";
-    } else if ($getData.toLowerCase() == "secondary") {
-      $getImgSrc = $("#secondary-dp-src").attr("src");
-      $getImgSrc = "https://i.picsum.photos/id/280/500/500.jpg";
+    if ($getDataFileType == "dp" || $getDataFileType == "timeline") {
+      let $getImgSrc;
+
+      if ($getDataFileType == "dp") {
+        $("#dp_img_change_croppie_modal").show();
+        $getData = $(this).attr("data-type");
+        console.log($getData);
+        $title = $getData + " Profile change";
+        $("#dp-and-timeline-change-title").text($title);
+
+        if ($getData.toLowerCase() == "primary") {
+          $getImgSrc = $("#primary-dp-src").attr("src");
+          $getImgSrc = "https://i.picsum.photos/id/250/500/500.jpg";
+        } else if ($getData.toLowerCase() == "secondary") {
+          $getImgSrc = $("#secondary-dp-src").attr("src");
+          $getImgSrc = "https://i.picsum.photos/id/280/500/500.jpg";
+        }
+
+        console.log($getImgSrc);
+
+        $dp_image_crop
+          .croppie("bind", {
+            url: $getImgSrc,
+          })
+          .then(function () {
+            console.log("jQuery bind complete");
+          });
+      } else if ($getDataFileType == "timeline") {
+        $("#dp-and-timeline-change-title").text("Cover pic change");
+        $("#timeline_img_change_croppie_modal").show();
+        $getImgSrc = "https://i.picsum.photos/id/400/200/500.jpg";
+        $timeline_image_crop
+          .croppie("bind", {
+            url: $getImgSrc,
+          })
+          .then(function () {
+            console.log("jQuery bind complete");
+          });
+      }
+
+      open_dpChange_popup("dp_change_main");
+    } else {
+      alert("Something went wrong");
     }
-
-    console.log($getImgSrc);
-
-    $image_crop
-      .croppie("bind", {
-        url: $getImgSrc,
-      })
-      .then(function () {
-        console.log("jQuery bind complete");
-      });
-
-    open_dpChange_popup("dp_change_main");
   });
 
   $("#dp-upload").on("change", function () {
@@ -58,7 +96,15 @@ $(document).ready(function () {
 
     var reader = new FileReader();
     reader.onload = function (event) {
-      $image_crop
+      $dp_image_crop
+        .croppie("bind", {
+          url: event.target.result,
+        })
+        .then(function () {
+          console.log("jQuery bind complete");
+        });
+
+      $timeline_image_crop
         .croppie("bind", {
           url: event.target.result,
         })

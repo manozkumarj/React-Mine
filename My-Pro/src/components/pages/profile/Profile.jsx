@@ -42,7 +42,13 @@ export default function Profile() {
         <div className="middle-section">
           <div className="timeline-pic-div">
             <img src={wow2} alt="timeline view" />
-            <span className="absolute-bottom-right">Change image</span>
+            <span
+              className="absolute-bottom-right"
+              id="change-timeline"
+              data-file-type="timeline"
+            >
+              Change image
+            </span>
           </div>
           <div className="left-right-holders">
             <div className="total-friends-count">Friends - 15</div>
@@ -76,16 +82,33 @@ export default function Profile() {
               <img height="30" src={fancyClose} alt="closer" />
             </span>
             <h2 className="global-style">
-              <span id="dp-change-type">Primary</span> profile change
+              <span id="dp-and-timeline-change-title">
+                Primary profile change
+              </span>
             </h2>
             <hr className="dividable-hr" />
 
-            <div className="modal-dialog">
+            <div className="modal-dialog" id="dp_img_change_croppie_modal">
               <div className="modal-content">
                 <div className="modal-body">
                   <div className="row">
                     <div className="col-md-8 text-center">
-                      <div id="image_cropper_view"></div>
+                      <div id="dp_image_cropper_view"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="modal-dialog"
+              id="timeline_img_change_croppie_modal"
+            >
+              <div className="modal-content">
+                <div className="modal-body">
+                  <div className="row">
+                    <div className="col-md-8 text-center">
+                      <div id="timeline_image_cropper_view"></div>
                     </div>
                   </div>
                 </div>
@@ -112,7 +135,7 @@ export default function Profile() {
                 Cancel
               </button>
               <button id="update-dp" className="post-button">
-                Update DP
+                Save
               </button>
             </div>
           </div>
