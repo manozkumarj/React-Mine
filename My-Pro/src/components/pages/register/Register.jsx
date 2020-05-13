@@ -36,7 +36,7 @@ const Register = () => {
             </div>
             <div className="reg-form-field-holder">
               <input
-                type="text"
+                type="password"
                 name="password"
                 className="reg-form-field"
                 placeholder="New password"
