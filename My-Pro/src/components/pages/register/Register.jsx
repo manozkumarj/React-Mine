@@ -53,6 +53,14 @@ const Register = () => {
           <hr className="dividable-hr" />
         </div>
         <div className="login-container">
+          <Link to="/find-account" className="global-aTag-style">
+            Forgotten account?
+          </Link>
+        </div>
+        <div className="width-75">
+          <hr className="dividable-hr" />
+        </div>
+        <div className="login-container">
           <Link to="/login" className="global-aTag-style">
             Log In to Existing Account
           </Link>

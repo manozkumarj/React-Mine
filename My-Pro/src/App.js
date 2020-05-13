@@ -22,6 +22,9 @@ import Friends from "./components/pages/friends/Friends";
 import About from "./components/pages/about/About";
 import PostTypes from "./components/pages/postTypes/PostTypes";
 import Search from "./components/pages/search/Search";
+import FindAccount from "./components/pages/findAccount/FindAccount";
+import AccountRecovery from "./components/pages/accountRecovery/AccountRecovery";
+import ResetPassword from "./components/pages/resetPassword/ResetPassword";
 
 class App extends Component {
   render() {
@@ -48,6 +51,17 @@ class App extends Component {
                   <Route exact path="/post-types" component={PostTypes} />
                   <Route exact path="/search/:word?" component={Search} />
                   <Route exact path="/login" component={Login} />
+                  <Route exact path="/find-account" component={FindAccount} />
+                  <Route
+                    exact
+                    path="/reset-password"
+                    component={ResetPassword}
+                  />
+                  <Route
+                    exact
+                    path="/account-recovery"
+                    component={AccountRecovery}
+                  />
                   <Route exact path="*" component={NotFound} />
                 </Switch>
               </div>

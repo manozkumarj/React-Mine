@@ -40,7 +40,7 @@ const Login = () => {
           </form>
           <hr className="dividable-hr" />
           <div className="login-container">
-            <Link to="/register" className="global-aTag-style">
+            <Link to="/find-account" className="global-aTag-style">
               Forgotten account?
             </Link>
           </div>
