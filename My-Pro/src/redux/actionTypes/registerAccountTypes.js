@@ -1,4 +1,3 @@
-// Action Types
-export const REGISTER_ACCOUNT = "REGISTER_ACCOUNT";
+// ActionCreator Types
 export const REGISTRATION_SUCCESS = "REGISTRATION_SUCCESS";
 export const REGISTRATION_FAILED = "REGISTRATION_FAILED";

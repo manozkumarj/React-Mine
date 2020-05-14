@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./rightSideSection.css";
 import { Link } from "react-router-dom";
 import zuck from "../../../images/zuck.jpg";

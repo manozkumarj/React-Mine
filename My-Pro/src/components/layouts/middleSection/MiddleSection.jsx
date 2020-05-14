@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import "./middleSection.css";
 import { Link } from "react-router-dom";
-import zuck from "../../../images/zuck.jpg";
+// import zuck from "../../../images/zuck.jpg";
 import mark from "../../../images/mark.jpg";
 
 import kohli from "../../../images/kohli.jpg";
@@ -21,7 +21,7 @@ const MiddleSection = () => {
   const $ = window.$;
 
   const maxFileSize = 1048576 * 5;
-  console.log("maxFileSize --> " + maxFileSize);
+  // console.log("maxFileSize --> " + maxFileSize);
 
   const filesPickerRef = useRef();
 
@@ -72,7 +72,7 @@ const MiddleSection = () => {
             '<div class="thumbimage">' +
               '<div class=\'thumbin\'><img class="imageThumb" src="' +
               e.target.result +
-              '" /></div>' +
+              '" alt="thumbnail" /></div>' +
               "<br/>" +
               "</div>"
           ).appendTo(image_holder);
@@ -722,7 +722,12 @@ const MiddleSection = () => {
             </span>
           </div>
           <div className="post-picture-div">
-            <img src={wow1} alt="Post info" className="view-image" />
+            <img
+              src={wow1}
+              alt="Post info"
+              className="view-image"
+              alt="uploaded"
+            />
             <span className="absolute-bottom-right">1 of 5</span>
           </div>
         </div>
@@ -1294,7 +1299,12 @@ const MiddleSection = () => {
             </span>
           </div>
           <div className="post-picture-div">
-            <img src={wow1} alt="Post info" className="view-image" />
+            <img
+              src={wow1}
+              alt="Post info"
+              className="view-image"
+              alt="uploaded"
+            />
           </div>
         </div>
         {/* *******************  Single picture posts section - ends ******************** */}
@@ -1324,7 +1334,12 @@ const MiddleSection = () => {
             </span>
           </div>
           <div className="post-picture-div">
-            <img src={wow2} alt="Post info" className="view-image" />
+            <img
+              src={wow2}
+              alt="Post info"
+              className="view-image"
+              alt="uploaded"
+            />
           </div>
         </div>
         {/* *******************  Single picture posts section - ends ******************** */}
@@ -1354,7 +1369,12 @@ const MiddleSection = () => {
             </span>
           </div>
           <div className="post-picture-div">
-            <img src={bikee} alt="Post info" className="view-image" />
+            <img
+              src={bikee}
+              alt="Post info"
+              className="view-image"
+              alt="uploaded"
+            />
           </div>
         </div>
         {/* *******************  Single picture posts section - ends ******************** */}
@@ -1390,7 +1410,12 @@ const MiddleSection = () => {
               </span>
 
               <div className="imgv_center_holder">
-                <img className="theatre_img" src={wow1} title="default" />
+                <img
+                  className="theatre_img"
+                  src={wow1}
+                  title="default"
+                  alt="uploaded"
+                />
               </div>
             </div>
           </div>

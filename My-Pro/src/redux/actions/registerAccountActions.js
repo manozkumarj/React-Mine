@@ -1,7 +1,8 @@
-import { REGISTER_ACCOUNT } from "./../actionTypes/registerAccountTypes";
+import { REGISTRATION_SUCCESS } from "./../actionTypes/registerAccountTypes";
 
 export const registerAccount = (accountDetails) => {
+  console.log(accountDetails);
   return (dispatch) => {
-    dispatch({ type: REGISTER_ACCOUNT });
+    dispatch({ type: REGISTRATION_SUCCESS, payload: accountDetails });
   };
 };
