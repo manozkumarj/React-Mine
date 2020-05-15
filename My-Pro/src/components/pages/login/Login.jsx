@@ -1,11 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./login.css";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import tinyLoader from "./../../../icons/tiny-loader.gif";
 
-const Login = () => {
+const Login = (props) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [disableButtons, setDisableButtons] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const history = useHistory();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setDisableButtons(true);
+    setShowLoader(true);
+    console.log("Form submitted");
+    let loginDetails = {
+      email,
+      password,
+    };
+    console.log(loginDetails);
+  };
+
+  const handleBtnClick = (redirectHref) => {
+    setDisableButtons(true);
+    console.log("redirectHref -> " + redirectHref);
+    history.push(`/${redirectHref}`);
+  };
 
   return (
     <div className="three-divs-container">
@@ -15,13 +41,17 @@ const Login = () => {
         <hr className="dividable-hr" />
 
         <div className="login-form-holder">
-          <form autoComplete="off">
+          <form autoComplete="off" onSubmit={handleSubmit}>
             <div className="login-form-field-holder">
               <input
                 type="text"
                 name="email"
                 className="login-form-field"
                 placeholder="Enter Email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                value={email}
               />
             </div>
             <div className="login-form-field-holder">
@@ -30,28 +60,55 @@ const Login = () => {
                 name="password"
                 className="login-form-field"
                 placeholder="Enter password"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                value={password}
               />
             </div>
             <div className="login-form-field-holder">
-              <button type="button" className="login-form-btn">
+              <button
+                type="submit"
+                className="login-form-btn"
+                style={{ background: disableButtons ? "#0066ff" : "#003d99" }}
+                disabled={disableButtons}
+              >
                 Log In
+                <img
+                  style={{ display: showLoader ? "inline" : "none" }}
+                  src={tinyLoader}
+                  alt="Loader"
+                  className="tinyLoader"
+                />
               </button>
             </div>
           </form>
           <hr className="dividable-hr" />
           <div className="login-container">
-            <Link to="/find-account" className="global-aTag-style">
-              Forgotten account?
-            </Link>
+            <button
+              type="button"
+              onClick={() => handleBtnClick("find-account")}
+              className="reg-form-btn"
+              style={{ background: disableButtons ? "#0066ff" : "#003d99" }}
+              disabled={disableButtons}
+            >
+              Forgotten Account?
+            </button>
           </div>
         </div>
         <div className="width-75">
           <hr className="dividable-hr" />
         </div>
-        <div className="login-container">
-          <Link to="/register" className="global-aTag-style">
+        <div className="login-form-holder">
+          <button
+            type="button"
+            onClick={() => handleBtnClick("register")}
+            className="reg-form-btn"
+            style={{ background: disableButtons ? "#0066ff" : "#003d99" }}
+            disabled={disableButtons}
+          >
             Register an Account
-          </Link>
+          </button>
         </div>
       </div>
     </div>

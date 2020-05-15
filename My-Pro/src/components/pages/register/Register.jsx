@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "./register.css";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { registerAccount } from "./../../../redux/actions/registerAccountActions";
 // import { Redirect } from "react-router-dom";
+
+import tinyLoader from "./../../../icons/tiny-loader.gif";
 
 const Register = (props) => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [disableButtons, setDisableButtons] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
   // const [fullNameErrorMsg, setFullNameErrorMsg] = useState(null);
   // const [emailErrorMsg, setEmailErrorMsg] = useState(null);
   // const [passwordErrorMsg, setPasswordErrorMsg] = useState(null);
+
+  const history = useHistory();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -23,6 +29,8 @@ const Register = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setDisableButtons(true);
+    setShowLoader(true);
     console.log("Form submitted");
     let registrationDetails = {
       fullName,
@@ -33,7 +41,11 @@ const Register = (props) => {
     props.registerAccount(registrationDetails);
   };
 
-  // let {} = props;
+  const handleBtnClick = (redirectHref) => {
+    setDisableButtons(true);
+    console.log("redirectHref -> " + redirectHref);
+    history.push(`/${redirectHref}`);
+  };
 
   return (
     <div className="three-divs-container">
@@ -83,8 +95,19 @@ const Register = (props) => {
               />
             </div>
             <div className="reg-form-field-holder">
-              <button type="submit" className="reg-form-btn">
+              <button
+                type="submit"
+                className="reg-form-btn"
+                style={{ background: disableButtons ? "#0066ff" : "#003d99" }}
+                disabled={disableButtons}
+              >
                 Register
+                <img
+                  style={{ display: showLoader ? "inline" : "none" }}
+                  src={tinyLoader}
+                  alt="Loader"
+                  className="tinyLoader"
+                />
               </button>
             </div>
           </form>
@@ -92,18 +115,30 @@ const Register = (props) => {
         <div className="width-75">
           <hr className="dividable-hr" />
         </div>
-        <div className="login-container">
-          <Link to="/find-account" className="global-aTag-style">
-            Forgotten account?
-          </Link>
+        <div className="reg-form-holder">
+          <button
+            type="button"
+            onClick={() => handleBtnClick("find-account")}
+            className="reg-form-btn"
+            style={{ background: disableButtons ? "#0066ff" : "#003d99" }}
+            disabled={disableButtons}
+          >
+            Forgotten Account?
+          </button>
         </div>
         <div className="width-75">
           <hr className="dividable-hr" />
         </div>
-        <div className="login-container">
-          <Link to="/login" className="global-aTag-style">
+        <div className="reg-form-holder">
+          <button
+            type="button"
+            onClick={() => handleBtnClick("login")}
+            className="reg-form-btn"
+            style={{ background: disableButtons ? "#0066ff" : "#003d99" }}
+            disabled={disableButtons}
+          >
             Log In to Existing Account
-          </Link>
+          </button>
         </div>
       </div>
     </div>
