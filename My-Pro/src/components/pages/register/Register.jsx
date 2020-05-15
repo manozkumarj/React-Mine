@@ -47,6 +47,8 @@ const Register = (props) => {
     history.push(`/${redirectHref}`);
   };
 
+  let btnClasses = disableButtons ? "reg-form-btn disableBtn" : "reg-form-btn";
+
   return (
     <div className="three-divs-container">
       <div id="register-main-container">
@@ -95,12 +97,7 @@ const Register = (props) => {
               />
             </div>
             <div className="reg-form-field-holder">
-              <button
-                type="submit"
-                className="reg-form-btn"
-                style={{ background: disableButtons ? "#0066ff" : "#003d99" }}
-                disabled={disableButtons}
-              >
+              <button type="submit" className={btnClasses}>
                 Register
                 <img
                   style={{ display: showLoader ? "inline" : "none" }}
@@ -119,8 +116,7 @@ const Register = (props) => {
           <button
             type="button"
             onClick={() => handleBtnClick("find-account")}
-            className="reg-form-btn"
-            style={{ background: disableButtons ? "#0066ff" : "#003d99" }}
+            className={btnClasses}
             disabled={disableButtons}
           >
             Forgotten Account?
@@ -133,8 +129,7 @@ const Register = (props) => {
           <button
             type="button"
             onClick={() => handleBtnClick("login")}
-            className="reg-form-btn"
-            style={{ background: disableButtons ? "#0066ff" : "#003d99" }}
+            className={btnClasses}
             disabled={disableButtons}
           >
             Log In to Existing Account

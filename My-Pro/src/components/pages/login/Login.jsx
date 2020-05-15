@@ -33,6 +33,8 @@ const Login = (props) => {
     history.push(`/${redirectHref}`);
   };
 
+  let btnClasses = disableButtons ? "reg-form-btn disableBtn" : "reg-form-btn";
+
   return (
     <div className="three-divs-container">
       <div id="login-main-container">
@@ -69,8 +71,7 @@ const Login = (props) => {
             <div className="login-form-field-holder">
               <button
                 type="submit"
-                className="login-form-btn"
-                style={{ background: disableButtons ? "#0066ff" : "#003d99" }}
+                className={btnClasses}
                 disabled={disableButtons}
               >
                 Log In
@@ -88,8 +89,7 @@ const Login = (props) => {
             <button
               type="button"
               onClick={() => handleBtnClick("find-account")}
-              className="reg-form-btn"
-              style={{ background: disableButtons ? "#0066ff" : "#003d99" }}
+              className={btnClasses}
               disabled={disableButtons}
             >
               Forgotten Account?
@@ -103,8 +103,7 @@ const Login = (props) => {
           <button
             type="button"
             onClick={() => handleBtnClick("register")}
-            className="reg-form-btn"
-            style={{ background: disableButtons ? "#0066ff" : "#003d99" }}
+            className={btnClasses}
             disabled={disableButtons}
           >
             Register an Account

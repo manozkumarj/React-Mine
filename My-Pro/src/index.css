@@ -88,6 +88,14 @@ textarea {
   color: var(--site-color);
 }
 
+.tinyLoader {
+  margin: 0px 5px;
+}
+.disableBtn {
+  background: #0066ff !important;
+  cursor: default !important;
+}
+
 /* Placed on the body while a modal is open to prevent scrolling. */
 .toggleModal {
   overflow: hidden;
