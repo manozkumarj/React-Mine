@@ -1,2 +1,5 @@
 * https://www.youtube.com/watch?v=SkyoBJwwvh4 -> React App: Creating a Responsive Navigation Bar from Scratch
 * https://www.freepngimg.com/  --> For free emojis
+* https://alligator.io/react/axios-react/
+* https://stackoverflow.com/questions/44617825/passing-headers-with-axios-post-request
+* 
