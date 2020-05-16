@@ -47,6 +47,8 @@ app.get("/sample", (req, res) => {
   });
 });
 
+app.use("/photo", express.static(__dirname + "/Picture/Images"));
+
 app.get("/api/", (req, res) => {
   res.status(200).json({ msg: "This is API home route" });
 });

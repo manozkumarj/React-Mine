@@ -20,20 +20,20 @@ router.get("/test/", (req, res) => {
 router.post(
   "/",
   [
-    check("name", "Please add name").not().isEmpty(),
+    check("fullName", "Please add full name").not().isEmpty(),
     check("email", "Please include valid email").isEmail(),
     check(
       "password",
-      "Please enter a password with 6 or more charactors"
+      "Please enter a password with 6 or more characters"
     ).isLength({ min: 6 }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ msg: errors.array() });
     }
 
-    const { name, email, password } = req.body;
+    const { fullName, email, password } = req.body;
     try {
       let user = await User.findOne({ email });
       if (user) {
@@ -41,7 +41,7 @@ router.post(
       }
 
       user = new User({
-        name,
+        fullName,
         email,
         password,
       });

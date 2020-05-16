@@ -1,7 +1,7 @@
 import {
-  REGISTER_ACCOUNT,
   REGISTRATION_SUCCESS,
   REGISTRATION_FAILED,
+  REGISTRATION_STATE,
 } from "./../actionTypes/registerAccountTypes";
 
 const initialState = {
@@ -28,6 +28,10 @@ const registrationReducer = (state = initialState, action) => {
         registrationError: action.payload,
         isRegistrationSuccess: false,
       };
+      break;
+
+    case REGISTRATION_STATE:
+      return state;
       break;
 
     default:

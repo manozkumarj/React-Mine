@@ -29,8 +29,8 @@ const Register = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setDisableButtons(true);
-    setShowLoader(true);
+    // setDisableButtons(true);
+    // setShowLoader(true);
     console.log("Form submitted");
     let registrationDetails = {
       fullName,
@@ -140,6 +140,12 @@ const Register = (props) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    registrationState: state.registration,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     registerAccount: (registrationDetails) =>
@@ -147,4 +153,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

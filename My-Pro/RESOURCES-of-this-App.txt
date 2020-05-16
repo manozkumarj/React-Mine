@@ -2,4 +2,5 @@
 * https://www.freepngimg.com/  --> For free emojis
 * https://alligator.io/react/axios-react/
 * https://stackoverflow.com/questions/44617825/passing-headers-with-axios-post-request
+* https://stackoverflow.com/questions/37486885/displaying-local-images-in-static-html-served-by-nodejs
 * 
