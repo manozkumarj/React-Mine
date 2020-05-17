@@ -223,8 +223,10 @@ router.post(
             token: randomChars + "-" + token,
             user: {
               id: user._id,
-              name: user.name,
+              fullName: user.fullName,
               email: user.email,
+              primaryDp: user.primaryDp,
+              secondaryDp: user.secondaryDp,
             },
           });
         } else {

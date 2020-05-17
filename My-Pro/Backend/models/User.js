@@ -24,6 +24,22 @@ const UserSchema = mongoose.Schema({
       createdAt: { type: Date, default: Date.now },
     },
   ],
+  genderId: {
+    type: Number,
+    default: null,
+  },
+  phoneNumber: {
+    type: Number,
+    default: null,
+  },
+  primaryDp: {
+    type: String,
+    default: null,
+  },
+  secondaryDp: {
+    type: String,
+    default: null,
+  },
   emailStatus: {
     type: String,
     default: "active",
