@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./login.css";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import tinyLoader from "./../../../icons/tiny-loader.gif";
+import { setToken, getAuthState } from "./../../../redux/actions/authActions";
+import { connect } from "react-redux";
+import { loginUser } from "./../../../redux/actions/loginActions";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
@@ -9,11 +12,24 @@ const Login = (props) => {
   const [disableButtons, setDisableButtons] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
 
+  const history = useHistory();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const history = useHistory();
+  useEffect(() => {
+    console.log(props);
+    let isLoginSuccess = props.loginState.isLoginSuccess;
+    if (isLoginSuccess) {
+      let loginSuccessToken = props.loginState.loginSuccessToken;
+      props.setToken(loginSuccessToken);
+    } else {
+      props.getAuthState();
+    }
+    setDisableButtons(false);
+    setShowLoader(false);
+  }, [props.loginState]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,6 +41,7 @@ const Login = (props) => {
       password,
     };
     console.log(loginDetails);
+    props.loginUser(loginDetails);
   };
 
   const handleBtnClick = (redirectHref) => {
@@ -34,6 +51,8 @@ const Login = (props) => {
   };
 
   let btnClasses = disableButtons ? "reg-form-btn disableBtn" : "reg-form-btn";
+
+  if (props.authState.authToken) return <Redirect to="/" />;
 
   return (
     <div className="three-divs-container">
@@ -113,4 +132,20 @@ const Login = (props) => {
     </div>
   );
 };
-export default Login;
+
+const mapStateToProps = (state) => {
+  return {
+    loginState: state.login,
+    authState: state.auth,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginUser: (loginDetails) => dispatch(loginUser(loginDetails)),
+    getAuthState: () => dispatch(getAuthState()),
+    setToken: (token) => dispatch(setToken(token)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

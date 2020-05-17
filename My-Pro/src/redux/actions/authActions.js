@@ -12,7 +12,7 @@ export const setToken = (token) => {
 };
 
 export const removeToken = () => {
-  localStorage.setItem("authToken", null);
+  localStorage.removeItem("authToken");
   return (dispatch) => {
     dispatch({ type: REMOVE_TOKEN });
   };

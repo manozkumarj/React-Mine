@@ -1,12 +1,27 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import "./navbar.css";
 import kohli from "../../../images/kohli.jpg";
 import zuck from "../../../images/zuck.jpg";
 import mark from "../../../images/mark.jpg";
+import { connect } from "react-redux";
+import { removeToken } from "./../../../redux/actions/authActions";
 
-const Navbar = ({ open }) => {
-  return (
+const Navbar = (props) => {
+  useEffect(() => {
+    console.log(props);
+  }, [props]);
+
+  const { open } = props;
+  const history = useHistory();
+
+  const handleLogout = () => {
+    console.log("handleLogout triggered");
+    props.logout();
+    history.push(`/login`);
+  };
+
+  const loggedInMenu = (
     <div className="navbar-container">
       <nav className="nav-bar" id="nav-bar">
         <div className="main-container">
@@ -123,7 +138,7 @@ const Navbar = ({ open }) => {
                   <li>Advanced posts</li>
                   <li>Photos</li>
                   <li>Friends</li>
-                  <li>Logout</li>
+                  <li onClick={handleLogout}>Logout</li>
                 </ul>
               </div>
             </div>
@@ -132,6 +147,41 @@ const Navbar = ({ open }) => {
       </nav>
     </div>
   );
+
+  const normalMenu = (
+    <div className="navbar-container">
+      <nav className="nav-bar" id="nav-bar">
+        <div className="main-container">
+          <div className="navbar-left-and-middle-divs-container">
+            <div className="navbar-left-items-container">
+              <div onClick={open} className="nav-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div className="nav-logo">
+                <Link to="/">Logo</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  );
+
+  return props.authState.authToken ? loggedInMenu : normalMenu;
 };
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    authState: state.auth,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(removeToken()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

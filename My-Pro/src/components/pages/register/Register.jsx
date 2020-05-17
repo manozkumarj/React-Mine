@@ -6,7 +6,6 @@ import {
   registerAccount,
   resetState,
 } from "./../../../redux/actions/registerAccountActions";
-import { setToken, getAuthState } from "./../../../redux/actions/authActions";
 
 import tinyLoader from "./../../../icons/tiny-loader.gif";
 
@@ -16,6 +15,7 @@ const Register = (props) => {
   const [password, setPassword] = useState("");
   const [disableButtons, setDisableButtons] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
+  const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false);
   // const [fullNameErrorMsg, setFullNameErrorMsg] = useState(null);
   // const [emailErrorMsg, setEmailErrorMsg] = useState(null);
   // const [passwordErrorMsg, setPasswordErrorMsg] = useState(null);
@@ -28,21 +28,18 @@ const Register = (props) => {
 
   useEffect(() => {
     console.log(props);
-    let isRegistrationSuccess = props.registrationState.isRegistrationSuccess;
-    if (isRegistrationSuccess) {
-      let registrationSuccessToken =
-        props.registrationState.registrationSuccessToken;
-      props.setToken(registrationSuccessToken);
+    if (props.registrationState.isRegistrationSuccess) {
+      setIsRegistrationSuccess(true);
       props.resetRegistrationState();
-    } else {
-      props.getAuthState();
     }
+    setDisableButtons(false);
+    setShowLoader(false);
   }, [props.registrationState]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setDisableButtons(true);
-    // setShowLoader(true);
+    setDisableButtons(true);
+    setShowLoader(true);
     console.log("Form submitted");
     let registrationDetails = {
       fullName,
@@ -61,7 +58,7 @@ const Register = (props) => {
 
   let btnClasses = disableButtons ? "reg-form-btn disableBtn" : "reg-form-btn";
 
-  if (props.authState.authToken) return <Redirect to="/login" />;
+  if (isRegistrationSuccess) return <Redirect to="/login" />;
 
   return (
     <div className="three-divs-container">
@@ -157,7 +154,6 @@ const Register = (props) => {
 const mapStateToProps = (state) => {
   return {
     registrationState: state.registration,
-    authState: state.auth,
   };
 };
 
@@ -165,9 +161,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     registerAccount: (registrationDetails) =>
       dispatch(registerAccount(registrationDetails)),
-    setToken: (token) => dispatch(setToken(token)),
     resetRegistrationState: () => dispatch(resetState()),
-    getAuthState: () => dispatch(getAuthState()),
   };
 };
 

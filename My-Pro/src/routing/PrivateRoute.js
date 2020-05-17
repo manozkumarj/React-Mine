@@ -9,6 +9,35 @@ const PrivateRoute = (props) => {
     console.log(props);
   }, [props]);
 
+  console.log(rest.path);
+  const getPath = rest.path;
+
+  if (
+    getPath == "/register" ||
+    getPath == "/login" ||
+    getPath == "/find-account" ||
+    getPath == "/reset-password" ||
+    getPath == "/account-recovery"
+  ) {
+    return (
+      <Route
+        {...rest}
+        render={(props) =>
+          getToken ? <Redirect to="/" /> : <Component {...props} />
+        }
+      />
+    );
+  } else {
+    return (
+      <Route
+        {...rest}
+        render={(props) =>
+          !getToken ? <Redirect to="/login" /> : <Component {...props} />
+        }
+      />
+    );
+  }
+
   return (
     <Route
       {...rest}
