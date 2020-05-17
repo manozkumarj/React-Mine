@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 const PrivateRoute = (props) => {
   const { component: Component, ...rest } = props;
-  const getToken = props.authState.authToken;
+  const getToken = props.centralState.authToken;
   useEffect(() => {
     console.log(props);
   }, [props]);
@@ -13,11 +13,11 @@ const PrivateRoute = (props) => {
   const getPath = rest.path;
 
   if (
-    getPath == "/register" ||
-    getPath == "/login" ||
-    getPath == "/find-account" ||
-    getPath == "/reset-password" ||
-    getPath == "/account-recovery"
+    getPath === "/register" ||
+    getPath === "/login" ||
+    getPath === "/find-account" ||
+    getPath === "/reset-password" ||
+    getPath === "/account-recovery"
   ) {
     return (
       <Route
@@ -37,20 +37,11 @@ const PrivateRoute = (props) => {
       />
     );
   }
-
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        !getToken ? <Redirect to="/login" /> : <Component {...props} />
-      }
-    />
-  );
 };
 
 const mapStateToProps = (state) => {
   return {
-    authState: state.auth,
+    centralState: state.central,
   };
 };
 

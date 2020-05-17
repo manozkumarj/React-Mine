@@ -169,12 +169,11 @@ const Navbar = (props) => {
     </div>
   );
 
-  return props.authState.authToken ? loggedInMenu : normalMenu;
+  return props.centralState.authToken ? loggedInMenu : normalMenu;
 };
 
 const mapStateToProps = (state) => {
   return {
-    authState: state.auth,
     centralState: state.central,
   };
 };

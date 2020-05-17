@@ -2,8 +2,6 @@ import API from "./../../api";
 import {
   REGISTRATION_SUCCESS,
   REGISTRATION_FAILED,
-  REGISTRATION_STATE,
-  RESET_STATE,
 } from "./../actionTypes/registerAccountTypes";
 
 export const registerAccount = (accountDetails) => {
@@ -29,17 +27,5 @@ export const registerAccount = (accountDetails) => {
         console.log(err.response.data.msg);
         dispatch({ type: REGISTRATION_FAILED, payload: err.response.data.msg });
       });
-  };
-};
-
-export const registrationState = () => {
-  return (dispatch) => {
-    dispatch({ type: REGISTRATION_STATE });
-  };
-};
-
-export const resetState = () => {
-  return (dispatch) => {
-    dispatch({ type: RESET_STATE });
   };
 };

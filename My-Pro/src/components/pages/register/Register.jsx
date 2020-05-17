@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./register.css";
 import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-  registerAccount,
-  resetState,
-} from "./../../../redux/actions/registerAccountActions";
+import { registerAccount } from "./../../../redux/actionCreators";
 
 import tinyLoader from "./../../../icons/tiny-loader.gif";
 
@@ -15,7 +12,7 @@ const Register = (props) => {
   const [password, setPassword] = useState("");
   const [disableButtons, setDisableButtons] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
-  const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false);
+  // const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false);
   // const [fullNameErrorMsg, setFullNameErrorMsg] = useState(null);
   // const [emailErrorMsg, setEmailErrorMsg] = useState(null);
   // const [passwordErrorMsg, setPasswordErrorMsg] = useState(null);
@@ -28,13 +25,9 @@ const Register = (props) => {
 
   useEffect(() => {
     console.log(props);
-    if (props.registrationState.isRegistrationSuccess) {
-      setIsRegistrationSuccess(true);
-      props.resetRegistrationState();
-    }
     setDisableButtons(false);
     setShowLoader(false);
-  }, [props.registrationState]);
+  }, [props]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,7 +51,7 @@ const Register = (props) => {
 
   let btnClasses = disableButtons ? "reg-form-btn disableBtn" : "reg-form-btn";
 
-  if (isRegistrationSuccess) return <Redirect to="/login" />;
+  if (props.centralState.authToken) return <Redirect to="/login" />;
 
   return (
     <div className="three-divs-container">
@@ -153,7 +146,7 @@ const Register = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    registrationState: state.registration,
+    centralState: state.central,
   };
 };
 
@@ -161,7 +154,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     registerAccount: (registrationDetails) =>
       dispatch(registerAccount(registrationDetails)),
-    resetRegistrationState: () => dispatch(resetState()),
   };
 };
 

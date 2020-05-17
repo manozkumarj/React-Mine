@@ -20,6 +20,8 @@ import {
   RESET_STATE,
 } from "./../actionTypes/centralTypes";
 
+const token = localStorage.getItem("authToken");
+
 //************************************* State ****************************************************/
 const initialState = {
   // Registration related
@@ -31,7 +33,7 @@ const initialState = {
   loginErrorData: null,
 
   // Auth related
-  authToken: userToken,
+  authToken: token,
 
   // Logged In user related
   loggedInUserDetails: null,
@@ -48,8 +50,8 @@ const centralReducer = (state = initialState, action) => {
         ...state,
         isRegistrationSuccess: true,
         registrationError: null,
+        authToken: action.payload,
       };
-      break;
 
     case REGISTRATION_FAILED:
       return {
@@ -57,18 +59,16 @@ const centralReducer = (state = initialState, action) => {
         registrationError: action.payload,
         isRegistrationSuccess: false,
       };
-      break;
 
     // Login related
     case LOGIN_SUCCESS:
       return {
         ...state,
-        loggedInUserDetails: action.payload,
+        loggedInUserDetails: action.payload.user,
         authToken: action.payload.token,
         isLoginSuccess: true,
         loginErrorData: null,
       };
-      break;
 
     case LOGIN_FAILED:
       return {
@@ -78,7 +78,6 @@ const centralReducer = (state = initialState, action) => {
         isLoginSuccess: false,
         authToken: null,
       };
-      break;
 
     // Auth related
     case SET_TOKEN:
@@ -86,7 +85,6 @@ const centralReducer = (state = initialState, action) => {
         ...state,
         authToken: action.payload,
       };
-      break;
 
     case REMOVE_TOKEN:
       return {
@@ -95,7 +93,6 @@ const centralReducer = (state = initialState, action) => {
         loggedInUserDetails: null,
         isLoginSuccess: false,
       };
-      break;
 
     // Logged In user related
     case STORE_LOGGED_IN_USER_DETAILS:
@@ -103,31 +100,26 @@ const centralReducer = (state = initialState, action) => {
         ...state,
         loggedInUserDetails: action.payload,
       };
-      break;
 
     case STORE_POSTS:
       return {
         ...state,
         allPosts: action.payload,
       };
-      break;
 
     case FILTER_POST:
       return {
         ...state,
         filteredPost: state.allPosts.filter(
-          (post) => post.postId == action.payload
+          (post) => post.postId === action.payload
         ),
       };
-      break;
 
     case RESET_STATE:
       return initialState;
-      break;
 
     case GET_STATE:
       return state;
-      break;
 
     default:
       return state;

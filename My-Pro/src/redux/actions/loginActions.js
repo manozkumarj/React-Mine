@@ -1,10 +1,5 @@
 import API from "./../../api";
-import {
-  LOGIN_SUCCESS,
-  LOGIN_FAILED,
-  LOGIN_STATE,
-  RESET_STATE,
-} from "./../actionTypes/loginTypes";
+import { LOGIN_SUCCESS, LOGIN_FAILED } from "./../actionTypes/loginTypes";
 
 export const loginUser = (loginDetails) => {
   console.log(loginDetails);
@@ -17,23 +12,12 @@ export const loginUser = (loginDetails) => {
     API.post(`users/authenticate`, loginDetails, { headers })
       .then((res) => {
         console.log(res.data);
-        dispatch({ type: LOGIN_SUCCESS, payload: res.data.user });
+        localStorage.setItem("authToken", res.data.token);
+        dispatch({ type: LOGIN_SUCCESS, payload: res.data });
       })
       .catch((err) => {
         console.log(err.response.data.msg);
         dispatch({ type: LOGIN_FAILED, payload: err.response.data.msg });
       });
-  };
-};
-
-export const loginState = () => {
-  return (dispatch) => {
-    dispatch({ type: LOGIN_STATE });
-  };
-};
-
-export const resetState = () => {
-  return (dispatch) => {
-    dispatch({ type: RESET_STATE });
   };
 };
