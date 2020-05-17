@@ -21,7 +21,7 @@ const Login = (props) => {
     console.log(props);
     setDisableButtons(false);
     setShowLoader(false);
-  }, [props.loginState]);
+  }, [props]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
