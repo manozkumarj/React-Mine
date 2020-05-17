@@ -26,6 +26,8 @@ import FindAccount from "./components/pages/findAccount/FindAccount";
 import AccountRecovery from "./components/pages/accountRecovery/AccountRecovery";
 import ResetPassword from "./components/pages/resetPassword/ResetPassword";
 
+import PrivateRoute from "./routing/PrivateRoute";
+
 class App extends Component {
   render() {
     return (
@@ -40,18 +42,30 @@ class App extends Component {
               </ScriptsContextProvider>
               <div className="common-container">
                 <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route exact path="/home" component={Home} />
-                  <Route exact path="/profile" component={Profile} />
-                  <Route exact path="/photos" component={Photos} />
+                  <PrivateRoute exact path="/" component={Home} />
+                  <PrivateRoute exact path="/home" component={Home} />
+                  <PrivateRoute exact path="/profile" component={Profile} />
+                  <PrivateRoute exact path="/photos" component={Photos} />
                   <Route exact path="/register" component={Register} />
-                  <Route exact path="/settings" component={Settings} />
-                  <Route exact path="/friends" component={Friends} />
-                  <Route exact path="/about" component={About} />
-                  <Route exact path="/post-types" component={PostTypes} />
-                  <Route exact path="/search/:word?" component={Search} />
+                  <PrivateRoute exact path="/settings" component={Settings} />
+                  <PrivateRoute exact path="/friends" component={Friends} />
+                  <PrivateRoute exact path="/about" component={About} />
+                  <PrivateRoute
+                    exact
+                    path="/post-types"
+                    component={PostTypes}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/search/:word?"
+                    component={Search}
+                  />
                   <Route exact path="/login" component={Login} />
-                  <Route exact path="/find-account" component={FindAccount} />
+                  <PrivateRoute
+                    exact
+                    path="/find-account"
+                    component={FindAccount}
+                  />
                   <Route
                     exact
                     path="/reset-password"

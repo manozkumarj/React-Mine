@@ -3,6 +3,7 @@ import {
   REGISTRATION_SUCCESS,
   REGISTRATION_FAILED,
   REGISTRATION_STATE,
+  RESET_STATE,
 } from "./../actionTypes/registerAccountTypes";
 
 export const registerAccount = (accountDetails) => {
@@ -22,7 +23,7 @@ export const registerAccount = (accountDetails) => {
     API.post(`users`, accountDetails, { headers })
       .then((res) => {
         console.log(res.data);
-        dispatch({ type: REGISTRATION_SUCCESS, payload: res.data });
+        dispatch({ type: REGISTRATION_SUCCESS, payload: res.data.token });
       })
       .catch((err) => {
         console.log(err.response.data.msg);
@@ -34,5 +35,11 @@ export const registerAccount = (accountDetails) => {
 export const registrationState = () => {
   return (dispatch) => {
     dispatch({ type: REGISTRATION_STATE });
+  };
+};
+
+export const resetState = () => {
+  return (dispatch) => {
+    dispatch({ type: RESET_STATE });
   };
 };

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./register.css";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { registerAccount } from "./../../../redux/actions/registerAccountActions";
-// import { Redirect } from "react-router-dom";
+import {
+  registerAccount,
+  resetState,
+} from "./../../../redux/actions/registerAccountActions";
+import { setToken, getAuthState } from "./../../../redux/actions/authActions";
 
 import tinyLoader from "./../../../icons/tiny-loader.gif";
 
@@ -25,7 +28,16 @@ const Register = (props) => {
 
   useEffect(() => {
     console.log(props);
-  }, [props]);
+    let isRegistrationSuccess = props.registrationState.isRegistrationSuccess;
+    if (isRegistrationSuccess) {
+      let registrationSuccessToken =
+        props.registrationState.registrationSuccessToken;
+      props.setToken(registrationSuccessToken);
+      props.resetRegistrationState();
+    } else {
+      props.getAuthState();
+    }
+  }, [props.registrationState]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,6 +60,8 @@ const Register = (props) => {
   };
 
   let btnClasses = disableButtons ? "reg-form-btn disableBtn" : "reg-form-btn";
+
+  if (props.authState.authToken) return <Redirect to="/login" />;
 
   return (
     <div className="three-divs-container">
@@ -143,6 +157,7 @@ const Register = (props) => {
 const mapStateToProps = (state) => {
   return {
     registrationState: state.registration,
+    authState: state.auth,
   };
 };
 
@@ -150,6 +165,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     registerAccount: (registrationDetails) =>
       dispatch(registerAccount(registrationDetails)),
+    setToken: (token) => dispatch(setToken(token)),
+    resetRegistrationState: () => dispatch(resetState()),
+    getAuthState: () => dispatch(getAuthState()),
   };
 };
 

@@ -2,11 +2,13 @@ import {
   REGISTRATION_SUCCESS,
   REGISTRATION_FAILED,
   REGISTRATION_STATE,
+  RESET_STATE,
 } from "./../actionTypes/registerAccountTypes";
 
 const initialState = {
-  registeredAccountDetails: [],
+  registrationAccountDetails: [],
   isRegistrationSuccess: false,
+  registrationSuccessToken: null,
   registrationError: "",
 };
 
@@ -15,7 +17,7 @@ const registrationReducer = (state = initialState, action) => {
     case REGISTRATION_SUCCESS:
       return {
         ...state,
-        registeredAccountDetails: action.payload,
+        registrationSuccessToken: action.payload,
         isRegistrationSuccess: true,
         registrationError: "",
       };
@@ -24,7 +26,7 @@ const registrationReducer = (state = initialState, action) => {
     case REGISTRATION_FAILED:
       return {
         ...state,
-        registeredAccountDetails: [],
+        registrationAccountDetails: [],
         registrationError: action.payload,
         isRegistrationSuccess: false,
       };
@@ -32,6 +34,10 @@ const registrationReducer = (state = initialState, action) => {
 
     case REGISTRATION_STATE:
       return state;
+      break;
+
+    case RESET_STATE:
+      return initialState;
       break;
 
     default:

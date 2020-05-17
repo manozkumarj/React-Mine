@@ -109,6 +109,20 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// @route     Delete api/users/
+// @desc      Delete all users
+// @access    Public
+router.delete("/", async (req, res) => {
+  let userId = req.params.id;
+  try {
+    const deletedUsers = await User.deleteMany();
+    res.json(deletedUsers);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 // @route     Delete api/users/:id
 // @desc      Delete specific user by ID
 // @access    Public
