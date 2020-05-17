@@ -4,7 +4,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import tinyLoader from "./../../../icons/tiny-loader.gif";
 import { setToken, getAuthState } from "./../../../redux/actions/authActions";
 import { connect } from "react-redux";
-import { loginUser } from "./../../../redux/actions/loginActions";
+import { loginUser, resetState } from "./../../../redux/actions/loginActions";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
@@ -24,6 +24,7 @@ const Login = (props) => {
     if (isLoginSuccess) {
       let loginSuccessToken = props.loginState.loginSuccessToken;
       props.setToken(loginSuccessToken);
+      props.resetLoginState();
     } else {
       props.getAuthState();
     }
@@ -145,6 +146,7 @@ const mapDispatchToProps = (dispatch) => {
     loginUser: (loginDetails) => dispatch(loginUser(loginDetails)),
     getAuthState: () => dispatch(getAuthState()),
     setToken: (token) => dispatch(setToken(token)),
+    resetLoginState: () => dispatch(resetState()),
   };
 };
 
