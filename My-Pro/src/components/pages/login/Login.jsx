@@ -5,6 +5,7 @@ import tinyLoader from "./../../../icons/tiny-loader.gif";
 import { setToken, getAuthState } from "./../../../redux/actions/authActions";
 import { connect } from "react-redux";
 import { loginUser, resetState } from "./../../../redux/actions/loginActions";
+import { storeLoggedInUserDetails } from "./../../../redux/actions/centralActions";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
@@ -23,6 +24,8 @@ const Login = (props) => {
     let isLoginSuccess = props.loginState.isLoginSuccess;
     if (isLoginSuccess) {
       let loginSuccessToken = props.loginState.loginSuccessToken;
+      let loginSuccessData = props.loginState.loginSuccessData;
+      props.storeLoggedInUserDetails(loginSuccessData);
       props.setToken(loginSuccessToken);
       props.resetLoginState();
     } else {
@@ -138,6 +141,7 @@ const mapStateToProps = (state) => {
   return {
     loginState: state.login,
     authState: state.auth,
+    centralState: state.central,
   };
 };
 
@@ -147,6 +151,8 @@ const mapDispatchToProps = (dispatch) => {
     getAuthState: () => dispatch(getAuthState()),
     setToken: (token) => dispatch(setToken(token)),
     resetLoginState: () => dispatch(resetState()),
+    storeLoggedInUserDetails: (details) =>
+      dispatch(storeLoggedInUserDetails(details)),
   };
 };
 

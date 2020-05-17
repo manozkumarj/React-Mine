@@ -6,10 +6,11 @@ import {
 } from "./../actionTypes/loginTypes";
 
 const initialState = {
-  loginDetails: [],
+  loginDetails: null,
+  loginSuccessData: null,
   isLoginSuccess: false,
   loginSuccessToken: null,
-  loginError: "",
+  loginErrorData: "",
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -17,18 +18,21 @@ const loginReducer = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        loginSuccessToken: action.payload,
+        loginSuccessData: action.payload,
+        loginSuccessToken: action.payload.token,
         isLoginSuccess: true,
-        loginError: "",
+        loginErrorData: "",
       };
       break;
 
     case LOGIN_FAILED:
       return {
         ...state,
-        loginDetails: [],
-        loginError: action.payload,
+        loginDetails: null,
+        loginSuccessData: null,
+        loginErrorData: action.payload,
         isLoginSuccess: false,
+        loginSuccessToken: null,
       };
       break;
 

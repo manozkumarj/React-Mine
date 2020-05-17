@@ -17,7 +17,7 @@ export const loginUser = (loginDetails) => {
     API.post(`users/authenticate`, loginDetails, { headers })
       .then((res) => {
         console.log(res.data);
-        dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
+        dispatch({ type: LOGIN_SUCCESS, payload: res.data.user });
       })
       .catch((err) => {
         console.log(err.response.data.msg);

@@ -175,6 +175,7 @@ const Navbar = (props) => {
 const mapStateToProps = (state) => {
   return {
     authState: state.auth,
+    centralState: state.central,
   };
 };
 
