@@ -157,9 +157,9 @@ const PostMenu = (props) => {
             onChange={(e) => setPostPrivacy(e.target.value)}
             className="post-privacy-selection"
           >
-            <option value="public">Public</option>
-            <option value="friends">Friends</option>
-            <option value="me">Only Me</option>
+            <option value="1">Public</option>
+            <option value="2">Friends</option>
+            <option value="3">Only Me</option>
           </select>
 
           <button type="button" onClick={handlePost} className="post-button">

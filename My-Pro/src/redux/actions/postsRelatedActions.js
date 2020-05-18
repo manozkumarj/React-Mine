@@ -59,7 +59,7 @@ export const createPost = (
           dispatch({ type: CREATE_POST });
         })
         .catch((err) => {
-          console.log(err.response.data.msg);
+          console.log(err.response.data);
           dispatch({ type: CREATE_POST_ERROR, payload: err.response.data.msg });
         });
     };

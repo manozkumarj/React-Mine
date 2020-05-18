@@ -42,7 +42,7 @@ router.post(
 
     let userId = req.user._id;
 
-    const { postContent, postedTo, postTypeId } = req.body;
+    const { postContent, postedTo, postTypeId, privacyId } = req.body;
     try {
       let user = await User.findById(postedTo);
       if (!user) {
