@@ -4,6 +4,8 @@ import "./postMenu.css";
 
 import whitecam from "../../../icons/whitecam.png";
 
+import { createPost } from "./../../../redux/actionCreators";
+
 const PostMenu = (props) => {
   const [postContent, setPostContent] = useState("");
   const [postImages, setPostImages] = useState("");
@@ -11,7 +13,11 @@ const PostMenu = (props) => {
 
   useEffect(() => {
     console.log(props);
-  }, []);
+    if (props.centralState.isNewPostCreated) {
+      // alert("New post added");
+      window.location.reload();
+    }
+  }, [props]);
 
   const $ = window.$;
 
@@ -88,6 +94,7 @@ const PostMenu = (props) => {
     console.log("PostPrivacy --> " + postPrivacy);
     console.log("postImages --> " + postImages);
     console.log(postImages);
+    props.createPost(postContent, postImages, postPrivacy);
   };
 
   return (
@@ -122,7 +129,7 @@ const PostMenu = (props) => {
         />
         <div className="pic-uploader">
           <select
-            value={setPostPrivacy}
+            value={postPrivacy}
             onChange={(e) => setPostPrivacy(e.target.value)}
             className="post-privacy-selection"
           >
@@ -146,4 +153,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(PostMenu);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createPost: (postContent, postImages, postPrivacy) =>
+      dispatch(createPost(postContent, postImages, postPrivacy)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostMenu);

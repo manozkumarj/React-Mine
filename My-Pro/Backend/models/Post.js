@@ -3,7 +3,11 @@ const bcrypt = require("bcryptjs");
 const { ObjectId } = mongoose.Schema;
 
 const PostSchema = mongoose.Schema({
-  body: {
+  uniqueId: {
+    type: Number,
+    required: true,
+  },
+  content: {
     type: String,
     required: true,
   },
@@ -33,6 +37,14 @@ const PostSchema = mongoose.Schema({
       postedBy: { type: ObjectId, ref: "User" },
     },
   ],
+  privacyId: {
+    type: Number,
+    required: true,
+  },
+  postTypeId: {
+    type: Number,
+    required: true,
+  },
   postStatus: {
     type: String,
     default: "active",
@@ -49,7 +61,12 @@ module.exports.getPostById = function (id, callback) {
   Post.findById(id, callback);
 };
 
-module.exports.getUserPosts = function (userId, callback) {
-  const query = { userId: userId };
+module.exports.getUserPosts = function (postedBy, callback) {
+  const query = { postedBy };
+  Post.findOne(query, callback);
+};
+
+module.exports.getUserTimelinePosts = function (postedTo, callback) {
+  const query = { postedTo };
   Post.findOne(query, callback);
 };

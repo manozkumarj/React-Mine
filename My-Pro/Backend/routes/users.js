@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middlewares/auth");
-const randomString = require("../helpers/helpers");
+const randomString, generateUniqueId = require("../helpers/helpers");
 
 const User = require("../models/User");
 
@@ -39,11 +39,14 @@ router.post(
       if (user) {
         res.status(400).json({ msg: "User already exists" });
       }
+      
+      let uniqueId = generateUniqueId();
 
       user = new User({
         fullName,
         email,
         password,
+        uniqueId,
       });
 
       const salt = await bcrypt.genSalt(10);

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const auth = require("../middlewares/auth");
+const randomString, generateUniqueId = require("../helpers/helpers");
 
 const User = require("../models/User");
 const Post = require("../models/Post");
@@ -26,8 +27,9 @@ router.post(
   "/",
   auth,
   [
-    check("body", "Please add post body").not().isEmpty(),
-    check("postedTo", "Please add postedTo ID").not().isEmpty(),
+    check("content", "Please include post content").not().isEmpty(),
+    check("postedTo", "Please include postedTo ID").not().isEmpty(),
+    check("privacyId", "Please include privacyId").not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -39,17 +41,24 @@ router.post(
 
     let userId = req.user._id;
 
-    const { body, postedTo } = req.body;
+    const { content, postedTo } = req.body;
     try {
       let user = await User.findById(postedTo);
       if (!user) {
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
 
+      let uniqueId = generateUniqueId();
+
+      let postTypeId = 1;
+
       let post = new Post({
-        body,
+        content,
         postedTo,
         postedBy: userId,
+        uniqueId,
+        privacyId,
+        postTypeId,
       });
 
       await post.save();
