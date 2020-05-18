@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const auth = require("../middlewares/auth");
-const randomString, generateUniqueId = require("../helpers/helpers");
+const helpers = require("../helpers/helpers");
 
 const User = require("../models/User");
 const Post = require("../models/Post");
@@ -49,7 +49,7 @@ router.post(
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
 
-      let uniqueId = generateUniqueId();
+      let uniqueId = helpers.generateUniqueId();
 
       let post = new Post({
         postContent,

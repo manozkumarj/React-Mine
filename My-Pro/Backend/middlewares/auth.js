@@ -13,7 +13,7 @@ module.exports = function (req, res, next) {
       .json({ msg: "No token found, Authorization denied" });
   }
 
-  let splitToken = tempToken.split("-");
+  let splitToken = tempToken.split("@@");
   const token = splitToken[1];
 
   try {

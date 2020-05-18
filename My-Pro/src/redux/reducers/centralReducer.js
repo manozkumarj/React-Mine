@@ -45,6 +45,7 @@ const initialState = {
   loggedInUserDetails: null,
   allPosts: null,
   filteredPost: null,
+  loggedInFelebId: null,
 
   // Posts related
   isNewPostCreated: false,
@@ -78,6 +79,7 @@ const centralReducer = (state = initialState, action) => {
         authToken: action.payload.token,
         isLoginSuccess: true,
         loginErrorData: null,
+        loggedInFelebId: action.payload.user.id,
       };
 
     case LOGIN_FAILED:
@@ -87,6 +89,7 @@ const centralReducer = (state = initialState, action) => {
         loginErrorData: action.payload,
         isLoginSuccess: false,
         authToken: null,
+        loggedInFelebId: null,
       };
 
     // Auth related
@@ -102,6 +105,7 @@ const centralReducer = (state = initialState, action) => {
         authToken: null,
         loggedInUserDetails: null,
         isLoginSuccess: false,
+        loggedInFelebId: null,
       };
 
     // Logged In user related

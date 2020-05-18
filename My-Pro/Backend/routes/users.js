@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middlewares/auth");
-const randomString, generateUniqueId = require("../helpers/helpers");
+const helpers = require("../helpers/helpers");
 
 const User = require("../models/User");
 
@@ -39,8 +39,8 @@ router.post(
       if (user) {
         res.status(400).json({ msg: "User already exists" });
       }
-      
-      let uniqueId = generateUniqueId();
+
+      let uniqueId = helpers.generateUniqueId();
 
       user = new User({
         fullName,
@@ -69,8 +69,8 @@ router.post(
         (err, token) => {
           if (err) throw err;
 
-          let randomChars = randomString();
-          token = randomChars + "-" + token;
+          let randomChars = helpers.randomString();
+          token = randomChars + "@@" + token;
           res.json({ token });
         }
       );
@@ -220,10 +220,10 @@ router.post(
           const token = jwt.sign({ data: user }, config.jwtSecret, {
             expiresIn: 604800, // 1 week
           });
-          let randomChars = randomString();
+          let randomChars = helpers.randomString();
           res.json({
             success: true,
-            token: randomChars + "-" + token,
+            token: randomChars + "@@" + token,
             user: {
               id: user._id,
               fullName: user.fullName,

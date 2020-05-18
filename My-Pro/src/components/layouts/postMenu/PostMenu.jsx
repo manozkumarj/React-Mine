@@ -10,13 +10,19 @@ const PostMenu = (props) => {
   const [postContent, setPostContent] = useState("");
   const [postImages, setPostImages] = useState("");
   const [postPrivacy, setPostPrivacy] = useState("");
+  const [authToken, setAuthToken] = useState("");
+  const [loggedInFelebId, setLoggedInFelebId] = useState("");
 
   useEffect(() => {
-    console.log(props);
+    setAuthToken(props.centralState.authToken);
+    setLoggedInFelebId(props.centralState.loggedInFelebId);
     if (props.centralState.isNewPostCreated) {
       // alert("New post added");
       window.location.reload();
+    } else if (props.centralState.newPostCreationError) {
+      alert("Something went wrong while creating New post");
     }
+    console.log(props);
   }, [props]);
 
   const $ = window.$;
@@ -92,7 +98,7 @@ const PostMenu = (props) => {
     let postContentProp = postContent.trim();
     let postPrivacyProp = postPrivacy;
     let postImagesProp = postImages;
-    let postedTo = 1;
+    let postedTo = loggedInFelebId;
     console.log("handlePost triggered");
     console.log("postContent --> " + postContent);
     console.log("PostPrivacy --> " + postPrivacy);
@@ -109,7 +115,7 @@ const PostMenu = (props) => {
       else if (postContentProp) postTypeId = 1;
       else if (postImagesProp) postTypeId = 2;
 
-      props.createPost(postedTo, postTypeId, postDetailsObject);
+      props.createPost(authToken, postedTo, postTypeId, postDetailsObject);
     } else {
       alert("PostContent || postImages || PostPrivacy is not selected");
     }
@@ -173,8 +179,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createPost: (postedTo, postTypeId, postDetailsObject) =>
-      dispatch(createPost(postedTo, postTypeId, postDetailsObject)),
+    createPost: (authToken, postedTo, postTypeId, postDetailsObject) =>
+      dispatch(createPost(authToken, postedTo, postTypeId, postDetailsObject)),
   };
 };
 

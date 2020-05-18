@@ -4,7 +4,16 @@ import {
   CREATE_POST_ERROR,
 } from "./../actionTypes/postsRelatedTypes";
 
-export const createPost = (postedTo, postTypeId, postDetailsObject) => {
+let headers = {
+  "Content-Type": "application/json",
+};
+
+export const createPost = (
+  authToken,
+  postedTo,
+  postTypeId,
+  postDetailsObject
+) => {
   console.log("postedTo --> " + postedTo);
   console.log("postTypeId --> " + postTypeId);
   console.log("PostPrivacy --> " + postDetailsObject.postPrivacyProp);
@@ -40,6 +49,8 @@ export const createPost = (postedTo, postTypeId, postDetailsObject) => {
         postedTo,
       };
     }
+
+    headers["x-auth-token"] = authToken;
 
     return (dispatch) => {
       API.post(`posts`, postDetailsObj, { headers })
