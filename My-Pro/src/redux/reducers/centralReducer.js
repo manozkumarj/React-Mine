@@ -26,7 +26,17 @@ import {
   CREATE_POST_ERROR,
 } from "./../actionTypes/postsRelatedTypes";
 
+import validateToken from "./../auth";
+
 const token = localStorage.getItem("authToken");
+const tokenUserDetails = validateToken();
+console.log(tokenUserDetails);
+let userId;
+if (tokenUserDetails) {
+  userId = tokenUserDetails._id;
+} else {
+  userId = null;
+}
 
 //************************************* State ****************************************************/
 const initialState = {
@@ -45,7 +55,7 @@ const initialState = {
   loggedInUserDetails: null,
   allPosts: null,
   filteredPost: null,
-  loggedInFelebId: null,
+  loggedInUserId: userId,
 
   // Posts related
   isNewPostCreated: false,
@@ -79,7 +89,7 @@ const centralReducer = (state = initialState, action) => {
         authToken: action.payload.token,
         isLoginSuccess: true,
         loginErrorData: null,
-        loggedInFelebId: action.payload.user.id,
+        loggedInUserId: action.payload.user.id,
       };
 
     case LOGIN_FAILED:
@@ -89,7 +99,7 @@ const centralReducer = (state = initialState, action) => {
         loginErrorData: action.payload,
         isLoginSuccess: false,
         authToken: null,
-        loggedInFelebId: null,
+        loggedInUserId: null,
       };
 
     // Auth related
@@ -105,7 +115,7 @@ const centralReducer = (state = initialState, action) => {
         authToken: null,
         loggedInUserDetails: null,
         isLoginSuccess: false,
-        loggedInFelebId: null,
+        loggedInUserId: null,
       };
 
     // Logged In user related

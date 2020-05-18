@@ -11,11 +11,11 @@ const PostMenu = (props) => {
   const [postImages, setPostImages] = useState("");
   const [postPrivacy, setPostPrivacy] = useState("");
   const [authToken, setAuthToken] = useState("");
-  const [loggedInFelebId, setLoggedInFelebId] = useState("");
+  const [loggedInUserId, setLoggedInUserId] = useState("");
 
   useEffect(() => {
     setAuthToken(props.centralState.authToken);
-    setLoggedInFelebId(props.centralState.loggedInFelebId);
+    setLoggedInUserId(props.centralState.loggedInUserId);
     if (props.centralState.isNewPostCreated) {
       // alert("New post added");
       window.location.reload();
@@ -98,7 +98,7 @@ const PostMenu = (props) => {
     let postContentProp = postContent.trim();
     let postPrivacyProp = postPrivacy;
     let postImagesProp = postImages;
-    let postedTo = loggedInFelebId;
+    let postedTo = loggedInUserId;
     console.log("handlePost triggered");
     console.log("postContent --> " + postContent);
     console.log("PostPrivacy --> " + postPrivacy);
