@@ -27,9 +27,10 @@ router.post(
   "/",
   auth,
   [
-    check("content", "Please include post content").not().isEmpty(),
+    check("postContent", "Please include post postContent").not().isEmpty(),
     check("postedTo", "Please include postedTo ID").not().isEmpty(),
     check("privacyId", "Please include privacyId").not().isEmpty(),
+    check("postTypeId", "Please include postTypeId").not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -41,7 +42,7 @@ router.post(
 
     let userId = req.user._id;
 
-    const { content, postedTo } = req.body;
+    const { postContent, postedTo, postTypeId } = req.body;
     try {
       let user = await User.findById(postedTo);
       if (!user) {
@@ -50,10 +51,8 @@ router.post(
 
       let uniqueId = generateUniqueId();
 
-      let postTypeId = 1;
-
       let post = new Post({
-        content,
+        postContent,
         postedTo,
         postedBy: userId,
         uniqueId,

@@ -31,8 +31,8 @@ Genders:
 PostTypes:
 -----------------------------------
   * 1 -> Normal post
-  * 2 -> Normal post with image
-  * 3 -> Only Image
+  * 2 -> Only Image
+  * 3 -> Normal post with image
   * 4 -> 
   
 

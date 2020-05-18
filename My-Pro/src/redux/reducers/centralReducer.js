@@ -21,7 +21,10 @@ import {
 } from "./../actionTypes/centralTypes";
 
 // Posts related
-import { CREATE_POST } from "./../actionTypes/postsRelatedTypes";
+import {
+  CREATE_POST,
+  CREATE_POST_ERROR,
+} from "./../actionTypes/postsRelatedTypes";
 
 const token = localStorage.getItem("authToken");
 
@@ -45,6 +48,7 @@ const initialState = {
 
   // Posts related
   isNewPostCreated: false,
+  newPostCreationError: null,
 };
 
 //************************************* Reducer ****************************************************/
@@ -126,6 +130,14 @@ const centralReducer = (state = initialState, action) => {
       return {
         ...state,
         isNewPostCreated: true,
+        newPostCreationError: null,
+      };
+
+    case CREATE_POST_ERROR:
+      return {
+        ...state,
+        isNewPostCreated: false,
+        newPostCreationError: action.payload,
       };
 
     case RESET_STATE:

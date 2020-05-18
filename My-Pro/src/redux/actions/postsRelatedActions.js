@@ -1,11 +1,56 @@
-import { CREATE_POST } from "./../actionTypes/postsRelatedTypes";
+import API from "./../../api";
+import {
+  CREATE_POST,
+  CREATE_POST_ERROR,
+} from "./../actionTypes/postsRelatedTypes";
 
-export const createPost = (postContent, postImages, postPrivacy) => {
-  console.log("postContent --> " + postContent);
-  console.log("PostPrivacy --> " + postPrivacy);
-  console.log("postImages is below");
-  console.log(postImages);
-  return (dispatch) => {
-    dispatch({ type: CREATE_POST });
-  };
+export const createPost = (postedTo, postTypeId, postDetailsObject) => {
+  console.log("postedTo --> " + postedTo);
+  console.log("postTypeId --> " + postTypeId);
+  console.log("PostPrivacy --> " + postDetailsObject.postPrivacyProp);
+
+  if (postTypeId === 1 || postTypeId === 2 || postTypeId === 3) {
+    let postDetailsObj;
+    if (postTypeId === 1) {
+      console.log("postContent --> " + postDetailsObject.postContentProp);
+      postDetailsObj = {
+        postContent: postDetailsObject.postContentProp,
+        privacyId: postDetailsObject.postPrivacyProp,
+        postTypeId,
+        postedTo,
+      };
+    } else if (postTypeId === 2) {
+      console.log("postImages is below");
+      console.log(postDetailsObject.postImagesProp);
+      postDetailsObj = {
+        postImages: postDetailsObject.postImagesProp,
+        privacyId: postDetailsObject.postPrivacyProp,
+        postTypeId,
+        postedTo,
+      };
+    } else if (postTypeId === 3) {
+      console.log("postContent --> " + postDetailsObject.postContentProp);
+      console.log("postImages is below");
+      console.log(postDetailsObject.postImagesProp);
+      postDetailsObj = {
+        postImages: postDetailsObject.postImagesProp,
+        postContent: postDetailsObject.postContentProp,
+        privacyId: postDetailsObject.postPrivacyProp,
+        postTypeId,
+        postedTo,
+      };
+    }
+
+    return (dispatch) => {
+      API.post(`posts`, postDetailsObj, { headers })
+        .then((res) => {
+          console.log(res.data);
+          dispatch({ type: CREATE_POST });
+        })
+        .catch((err) => {
+          console.log(err.response.data.msg);
+          dispatch({ type: CREATE_POST_ERROR, payload: err.response.data.msg });
+        });
+    };
+  }
 };

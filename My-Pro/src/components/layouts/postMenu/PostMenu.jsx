@@ -89,12 +89,30 @@ const PostMenu = (props) => {
 
   const handlePost = (e) => {
     e.preventDefault();
+    let postContentProp = postContent.trim();
+    let postPrivacyProp = postPrivacy;
+    let postImagesProp = postImages;
+    let postedTo = 1;
     console.log("handlePost triggered");
     console.log("postContent --> " + postContent);
     console.log("PostPrivacy --> " + postPrivacy);
     console.log("postImages --> " + postImages);
     console.log(postImages);
-    props.createPost(postContent, postImages, postPrivacy);
+    if (postPrivacyProp && (postContentProp || postImagesProp)) {
+      let postTypeId;
+      let postDetailsObject = {
+        postContentProp,
+        postPrivacyProp,
+        postImagesProp,
+      };
+      if (postContentProp && postImagesProp) postTypeId = 3;
+      else if (postContentProp) postTypeId = 1;
+      else if (postImagesProp) postTypeId = 2;
+
+      props.createPost(postedTo, postTypeId, postDetailsObject);
+    } else {
+      alert("PostContent || postImages || PostPrivacy is not selected");
+    }
   };
 
   return (
@@ -155,8 +173,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createPost: (postContent, postImages, postPrivacy) =>
-      dispatch(createPost(postContent, postImages, postPrivacy)),
+    createPost: (postedTo, postTypeId, postDetailsObject) =>
+      dispatch(createPost(postedTo, postTypeId, postDetailsObject)),
   };
 };
 
