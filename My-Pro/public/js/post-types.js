@@ -96,6 +96,9 @@ $(document).ready(function () {
       $(".postContentDiv").addClass("postContentDivStyle");
       $getDataAttrBorderStyle = $(this).attr("data-post-border-style");
       $getDataAttrBorderSides = $(this).attr("data-post-border-sides");
+
+      console.log("$getDataAttrBorderStyle --> " + $getDataAttrBorderStyle);
+
       $(".postContentTextarea, #postContentPreviewDiv, .postContentDiv").css({
         background: "#006600",
         color: "#fff",
@@ -279,7 +282,7 @@ $(document).ready(function () {
     $val = $(this).val();
     $getBorderStyle = $("#borderStyle").val();
     $getBorderColor = "#" + $("#bordercolor").val();
-    $borderWidth = "2px ";
+    $borderWidth = "2px";
 
     if ($getBorderStyle == "double") {
       $borderWidth = "4px ";
@@ -288,11 +291,35 @@ $(document).ready(function () {
     if ($val && $getBorderStyle) {
       $(".postContentTextarea, #postContentPreviewDiv").css(
         "border",
-        $borderWidth + $getBorderStyle + " " + $getBorderColor
+        $borderWidth + " " + $getBorderStyle + " " + $getBorderColor
       );
       console.log($val + " ** " + $getBorderStyle + " ** " + $getBorderColor);
       if ($val == "all") {
         console.log($val);
+      } else if ($val == "top") {
+        $(".postContentTextarea, #postContentPreviewDiv").css({
+          "border-right": "transparent",
+          "border-bottom": "transparent",
+          "border-left": "transparent",
+        });
+      } else if ($val == "right") {
+        $(".postContentTextarea, #postContentPreviewDiv").css({
+          "border-top": "transparent",
+          "border-bottom": "transparent",
+          "border-left": "transparent",
+        });
+      } else if ($val == "bottom") {
+        $(".postContentTextarea, #postContentPreviewDiv").css({
+          "border-right": "transparent",
+          "border-top": "transparent",
+          "border-left": "transparent",
+        });
+      } else if ($val == "left") {
+        $(".postContentTextarea, #postContentPreviewDiv").css({
+          "border-right": "transparent",
+          "border-bottom": "transparent",
+          "border-top": "transparent",
+        });
       } else if ($val == "lNr") {
         $(".postContentTextarea, #postContentPreviewDiv").css({
           "border-top": "transparent",

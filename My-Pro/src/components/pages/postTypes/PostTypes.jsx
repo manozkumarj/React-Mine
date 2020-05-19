@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { createPost } from "./../../../redux/actionCreators";
 import "./postTypes.css";
 import RightSideSection from "./../../layouts/rightSideSection/RightSideSection";
 
@@ -518,6 +520,10 @@ const PostTypes = (props) => {
                   onChange={(e) => setBorderStyleSides(e.target.value)}
                 >
                   <option value="all">Border - All sides</option>
+                  <option value="top">Border - Top</option>
+                  <option value="right">Border - Right</option>
+                  <option value="bottom">Border - Bottom</option>
+                  <option value="left">Border - Left</option>
                   <option value="lNr">Border - Left and Right</option>
                   <option value="tNb">Border - Top and Bottom</option>
                 </select>
@@ -528,27 +534,19 @@ const PostTypes = (props) => {
               <input
                 id="bgcolor"
                 value="006600"
-                readOnly
                 onChange={(e) => setBgColor(e.target.value)}
               />
               <input
                 id="textcolor"
                 value="ffffff"
-                readOnly
                 onChange={(e) => setTextColor(e.target.value)}
               />
               <input
                 id="bordercolor"
                 value="FFF711"
-                readOnly
                 onChange={(e) => setBorderColor(e.target.value)}
               />
-              <input
-                id="borderStyle"
-                value="solid"
-                readOnly
-                onChange={(e) => setBorderStyle(e.target.value)}
-              />
+              <input id="borderStyle" value="solid" />
             </div>
 
             <div className="warning-div">Post content can't be empty</div>
@@ -735,4 +733,17 @@ const PostTypes = (props) => {
   );
 };
 
-export default PostTypes;
+const mapStateToProps = (state) => {
+  return {
+    centralState: state.central,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createPost: (authToken, postedTo, postTypeId, postDetailsObject) =>
+      dispatch(createPost(authToken, postedTo, postTypeId, postDetailsObject)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostTypes);

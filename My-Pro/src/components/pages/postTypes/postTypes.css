@@ -197,6 +197,7 @@
   padding: 17px 16px;
   color: #fff;
   background: #53a3b4;
+  word-break: break-word;
   border: none;
 }
 
