@@ -7,10 +7,21 @@ const PostSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  postContent: {
-    type: String,
-    required: true,
-  },
+  postProperties: [
+    {
+      postContent: { type: String },
+      backgroundColor: { type: String },
+      textColor: { type: String },
+      borderTopColor: { type: String },
+      borderRightColor: { type: String },
+      borderBottomColor: { type: String },
+      borderLeftColor: { type: String },
+      borderStyle: { type: String },
+      borderStyleSides: { type: String },
+      cornerStyle: { type: String },
+      cornerStyleSides: { type: String },
+    },
+  ],
   postedTo: {
     type: ObjectId,
     ref: "User",

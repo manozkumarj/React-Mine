@@ -28,14 +28,16 @@ import {
 
 import validateToken from "./../validateToken";
 
-const token = localStorage.getItem("authToken");
+let token = localStorage.getItem("authToken");
 const tokenUserDetails = validateToken();
 console.log(tokenUserDetails);
 let userId;
 if (tokenUserDetails) {
   userId = tokenUserDetails._id;
 } else {
+  localStorage.removeItem("authToken");
   userId = null;
+  token = null;
 }
 
 //************************************* State ****************************************************/

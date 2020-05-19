@@ -6,7 +6,7 @@ import overlayClose from "../../../images/overlay-close.png";
 import fancyClose from "../../../images/fancy-close.png";
 import ColorPalette from "./../../layouts/colorPalette/ColorPalette";
 
-export default function PostTypes() {
+const PostTypes = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -733,4 +733,6 @@ export default function PostTypes() {
       </div>
     </div>
   );
-}
+};
+
+export default PostTypes;
