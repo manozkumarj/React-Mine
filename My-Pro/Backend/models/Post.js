@@ -20,6 +20,7 @@ const PostSchema = mongoose.Schema({
       borderStyleSides: { type: String },
       cornerStyle: { type: String },
       cornerStyleSides: { type: String },
+      photos: { type: Array },
     },
   ],
   postedTo: {

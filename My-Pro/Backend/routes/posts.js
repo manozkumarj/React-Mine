@@ -52,11 +52,13 @@ router.post(
       let uniqueId = helpers.generateUniqueId();
 
       let backgroundColor = "010203";
+      let photos = ["aaa.png", "bbb.png", "ccc.png"];
 
       let post = new Post({
         postProperties: {
           postContent,
           backgroundColor,
+          photos,
         },
         postedTo,
         postedBy: userId,
