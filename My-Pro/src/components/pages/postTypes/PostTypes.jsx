@@ -16,6 +16,14 @@ export default function PostTypes() {
   const [authToken, setAuthToken] = useState(null);
   const [loggedInUserId, setLoggedInUserId] = useState(null);
 
+  const [bgColor, setBgColor] = useState(null);
+  const [textColor, setTextColor] = useState(null);
+  const [borderColor, setBorderColor] = useState(null);
+  const [borderStyle, setBorderStyle] = useState(null);
+  const [borderStyleSides, setBorderStyleSides] = useState(null);
+  const [cornerStyle, setCornerStyle] = useState(null);
+  const [cornerStyleSides, setCornerStyleSides] = useState(null);
+
   useEffect(() => {
     setAuthToken(props.centralState.authToken);
     setLoggedInUserId(props.centralState.loggedInUserId);
@@ -507,6 +515,7 @@ export default function PostTypes() {
                 <select
                   id="post-borders-selecter"
                   placeholder="Select post border sides"
+                  onChange={(e) => setBorderStyleSides(e.target.value)}
                 >
                   <option value="all">Border - All sides</option>
                   <option value="lNr">Border - Left and Right</option>
@@ -516,10 +525,30 @@ export default function PostTypes() {
             </div>
 
             <div className="hidden-clrpkrs">
-              <input id="bgcolor" value="006600" readOnly />
-              <input id="textcolor" value="ffffff" readOnly />
-              <input id="bordercolor" value="FFF711" readOnly />
-              <input id="borderStyle" value="solid" readOnly />
+              <input
+                id="bgcolor"
+                value="006600"
+                readOnly
+                onChange={(e) => setBgColor(e.target.value)}
+              />
+              <input
+                id="textcolor"
+                value="ffffff"
+                readOnly
+                onChange={(e) => setTextColor(e.target.value)}
+              />
+              <input
+                id="bordercolor"
+                value="FFF711"
+                readOnly
+                onChange={(e) => setBorderColor(e.target.value)}
+              />
+              <input
+                id="borderStyle"
+                value="solid"
+                readOnly
+                onChange={(e) => setBorderStyle(e.target.value)}
+              />
             </div>
 
             <div className="warning-div">Post content can't be empty</div>

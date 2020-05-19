@@ -29,13 +29,37 @@ Genders:
   * 3 -> Other
 
 PostTypes:
------------------------------------
-  * 1 -> Normal post
-  * 2 -> Only Image
-  * 3 -> Normal post with image
-  * 4 -> Custom Background || Text color || both
-  * 5 -> Custom Background && Text color && Border colors
-  * 6 -> Custom Background && Text color with border (fold || cut)
+*************************************************************************************************
+* 1) Normal post:
+     Required fields:
+      -> postContent
+* 2) Only Image:
+     Required fields:
+      -> Image(s)
+* 3) Normal post with image:
+     Required fields:
+      -> postContent
+      -> Image(s)
+* 4) Custom Background || Text color || both
+     Required fields:
+      -> postContent
+      -> background color code in HEX format
+      -> Text color code in HEX format
+* 5) Custom Background && Text color && Border colors
+     Required fields:
+      -> postContent
+      -> background color code in HEX format
+      -> Text color code in HEX format
+      -> border color code in HEX format
+      -> borderStyle (solid, dashed, dotted, double)
+      -> borderStyleSides (leftNright, topNbottom, all)
+* 6) Custom Background && Text color with border (fold || cut)
+     Required fields:
+      -> postContent
+      -> background color code in HEX format
+      -> Text color code in HEX format
+      -> cornerStyle ('fold' || 'cut')
+      -> cornerStyleSides (topLeft, topRight, bottomLeft, bottomRight, topLeftNbottomRight, topRightNbottomLeft, all)
 */
 
 module.exports = { randomString, generateUniqueId };
