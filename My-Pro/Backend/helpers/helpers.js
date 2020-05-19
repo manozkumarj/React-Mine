@@ -33,9 +33,9 @@ PostTypes:
   * 1 -> Normal post
   * 2 -> Only Image
   * 3 -> Normal post with image
-  * 4 -> 
-  
-
+  * 4 -> Custom Background || Text color || both
+  * 5 -> Custom Background && Text color && Border colors
+  * 6 -> Custom Background && Text color with border (fold || cut)
 */
 
 module.exports = { randomString, generateUniqueId };

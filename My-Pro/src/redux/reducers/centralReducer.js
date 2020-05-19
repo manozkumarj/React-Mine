@@ -26,7 +26,7 @@ import {
   CREATE_POST_ERROR,
 } from "./../actionTypes/postsRelatedTypes";
 
-import validateToken from "./../auth";
+import validateToken from "./../validateToken";
 
 const token = localStorage.getItem("authToken");
 const tokenUserDetails = validateToken();

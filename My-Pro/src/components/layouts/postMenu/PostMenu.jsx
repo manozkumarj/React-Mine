@@ -93,13 +93,13 @@ const PostMenu = (props) => {
     }
   };
 
-  const handlePost = (e) => {
+  const handlePostSubmission = (e) => {
     e.preventDefault();
     let postContentProp = postContent.trim();
     let postPrivacyProp = postPrivacy;
     let postImagesProp = postImages;
     let postedTo = loggedInUserId;
-    console.log("handlePost triggered");
+    console.log("handlePostSubmission triggered");
     console.log("postContent --> " + postContent);
     console.log("PostPrivacy --> " + postPrivacy);
     console.log("postImages --> " + postImages);
@@ -162,7 +162,11 @@ const PostMenu = (props) => {
             <option value="3">Only Me</option>
           </select>
 
-          <button type="button" onClick={handlePost} className="post-button">
+          <button
+            type="button"
+            onClick={handlePostSubmission}
+            className="post-button"
+          >
             Post
           </button>
         </div>

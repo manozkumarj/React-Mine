@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./postTypes.css";
 import RightSideSection from "./../../layouts/rightSideSection/RightSideSection";
 
@@ -11,12 +11,39 @@ export default function PostTypes() {
     window.scrollTo(0, 0);
   }, []);
 
+  const [postContent, setPostContent] = useState(null);
+  const [postPrivacy, setPostPrivacy] = useState(null);
+  const [authToken, setAuthToken] = useState(null);
+  const [loggedInUserId, setLoggedInUserId] = useState(null);
+
+  useEffect(() => {
+    setAuthToken(props.centralState.authToken);
+    setLoggedInUserId(props.centralState.loggedInUserId);
+    if (props.centralState.isNewPostCreated) {
+      // alert("New post added");
+      window.location.reload();
+    } else if (props.centralState.newPostCreationError) {
+      alert("Something went wrong while creating New post");
+    }
+    console.log(props);
+  }, [props]);
+
+  const handleCloser = () => {
+    setPostContent(null);
+    setPostPrivacy(null);
+  };
+
   // useEffect(() => {
   //   const script = document.createElement("script");
   //   script.src = "/js/jscolor.js";
   //   script.async = true;
   //   document.body.appendChild(script);
   // }, []);
+
+  const handlePostSubmission = (e) => {
+    e.preventDefault();
+    console.log("handlePostSubmission triggered");
+  };
 
   return (
     <div className="three-divs-container">
@@ -409,13 +436,21 @@ export default function PostTypes() {
         tabIndex="1"
         className="postType-layerOneModalContainer"
       >
-        <span className="overlay_close layerOneCloser" title="close">
+        <span
+          className="overlay_close layerOneCloser"
+          onClick={handleCloser}
+          title="close"
+        >
           <img height="20" src={overlayClose} alt="closer" />
         </span>
 
         <div className="postType-layerOneModalInner">
           <div className="postType-sample-LayerOne">
-            <span className="fancyCloseIcon layerOneCloser" title="close">
+            <span
+              className="fancyCloseIcon layerOneCloser"
+              onClick={handleCloser}
+              title="close"
+            >
               <img height="30" src={fancyClose} alt="closer" />
             </span>
             <div className="postContentDiv postContentDivStyle">
@@ -424,6 +459,7 @@ export default function PostTypes() {
                 name="text"
                 placeholder="write something..."
                 spellCheck="false"
+                onChange={(e) => setPostContent(e.target.value)}
               ></textarea>
             </div>
             <hr className="dividable-hr" />
@@ -502,7 +538,11 @@ export default function PostTypes() {
         </div>
 
         <div className="postType-sample-two-LayerOne">
-          <span className="fancyCloseIcon layerOneCloser" title="close">
+          <span
+            className="fancyCloseIcon layerOneCloser"
+            onClick={handleCloser}
+            title="close"
+          >
             <img height="30" src={fancyClose} alt="closer" />
           </span>
           <div className="brdrFoldNcutPostContentDiv">
@@ -516,6 +556,7 @@ export default function PostTypes() {
                 name="text"
                 placeholder="write something..."
                 spellCheck="false"
+                onChange={(e) => setPostContent(e.target.value)}
               ></textarea>
             </div>
           </div>
@@ -576,13 +617,21 @@ export default function PostTypes() {
         tabIndex="1"
         className="postType-layerTwoModalContainer"
       >
-        <span className="overlay_close layerTwoCloser" title="close">
+        <span
+          className="overlay_close layerTwoCloser"
+          onClick={handleCloser}
+          title="close"
+        >
           <img height="20" src={overlayClose} alt="closer" />
         </span>
 
         <div className="postType-layerTwoModalInner">
           <div className="postType-sample-LayerTwo">
-            <span className="fancyCloseIcon layerTwoCloser" title="close">
+            <span
+              className="fancyCloseIcon layerTwoCloser"
+              onClick={handleCloser}
+              title="close"
+            >
               <img height="30" src={fancyClose} alt="closer" />
             </span>
 
@@ -597,19 +646,28 @@ export default function PostTypes() {
                 Back
               </button>
               <div>
-                <select className="layerTwo-one-post-privacy-selection">
+                <select
+                  className="layerTwo-one-post-privacy-selection"
+                  onChange={(e) => setPostPrivacy(e.target.value)}
+                >
                   <option value="public">Public</option>
                   <option value="friends">Friends</option>
                   <option value="me">Only Me</option>
                 </select>
-                <button className="post-button">Post</button>
+                <button className="post-button" onClick={handlePostSubmission}>
+                  Post
+                </button>
               </div>
             </div>
           </div>
 
           {/* LayerTwo sample 2 - starts */}
           <div className="postType-sample-two-LayerTwo">
-            <span className="fancyCloseIcon layerTwoCloser" title="close">
+            <span
+              className="fancyCloseIcon layerTwoCloser"
+              onClick={handleCloser}
+              title="close"
+            >
               <img height="30" src={fancyClose} alt="closer" />
             </span>
 
@@ -627,12 +685,17 @@ export default function PostTypes() {
                 Back
               </button>
               <div>
-                <select className="layerTwo-two-post-privacy-selection">
+                <select
+                  className="layerTwo-two-post-privacy-selection"
+                  onChange={(e) => setPostPrivacy(e.target.value)}
+                >
                   <option value="public">Public</option>
                   <option value="friends">Friends</option>
                   <option value="me">Only Me</option>
                 </select>
-                <button className="post-button">Post</button>
+                <button className="post-button" onClick={handlePostSubmission}>
+                  Post
+                </button>
               </div>
             </div>
           </div>
