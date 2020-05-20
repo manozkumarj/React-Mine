@@ -270,6 +270,7 @@
   padding: 8px;
   border: 2px solid #999;
   border-radius: 5px;
+  outline: none;
 }
 .warning-div {
   /* display: flex; */

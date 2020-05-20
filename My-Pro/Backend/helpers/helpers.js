@@ -59,7 +59,7 @@ PostTypes:
       -> background color code in HEX format
       -> Text color code in HEX format
       -> cornerStyle ('fold' || 'cut')
-      -> cornerStyleSides (topLeft, topRight, bottomLeft, bottomRight, topLeftNbottomRight, topRightNbottomLeft, all)
+      -> cornerStyleSides (topLeft, topRight, bottomLeft, bottomRight, topLeftAndBottomRight, topRightAndBottomLeft, all)
 */
 
 module.exports = { randomString, generateUniqueId };

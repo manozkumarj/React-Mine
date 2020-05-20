@@ -25,6 +25,7 @@ const PostTypes = (props) => {
   const [borderStyleSides, setBorderStyleSides] = useState(null);
   const [cornerStyle, setCornerStyle] = useState(null);
   const [cornerStyleSides, setCornerStyleSides] = useState(null);
+  const [postTypeId, setPostTypeId] = useState(null);
 
   useEffect(() => {
     setAuthToken(props.centralState.authToken);
@@ -41,6 +42,7 @@ const PostTypes = (props) => {
   const handleCloser = () => {
     setPostContent(null);
     setPostPrivacy(null);
+    setPostTypeId(null);
   };
 
   // useEffect(() => {
@@ -53,6 +55,44 @@ const PostTypes = (props) => {
   const handlePostSubmission = (e) => {
     e.preventDefault();
     console.log("handlePostSubmission triggered");
+    console.log("PostTypeId -> " + postTypeId);
+    console.log("postPrivacy -> " + postPrivacy);
+    let content;
+    if (postTypeId == 4 || postTypeId == 5) {
+      console.log("bgNtextNbrdrPostContentTextarea");
+      content = document.getElementById("bgNtextNbrdrPostContentTextarea")
+        .value;
+      setPostContent(content);
+      setBgColor(document.getElementById("bgcolor").value);
+      setTextColor(document.getElementById("textcolor").value);
+      setBorderColor(document.getElementById("bordercolor").value);
+      setBorderStyle(document.getElementById("borderStyle").value);
+      setBorderStyleSides(
+        document.getElementById("post-borders-selecter").value
+      );
+
+      console.log("Bgcolor -> " + bgColor);
+      console.log("Textcolor -> " + textColor);
+      console.log("BorderColor -> " + borderColor);
+      console.log("BorderStyle -> " + borderStyle);
+      console.log("BorderStyleSides -> " + borderStyleSides);
+    } else if (postTypeId == 6) {
+      console.log("brdrFoldNcutPostContentTextarea");
+      content = document.getElementById("brdrFoldNcutPostContentTextarea")
+        .value;
+      setPostContent(content);
+      setCornerStyle(
+        document.getElementById("brdrFoldNcutPost-cornerStyle").value
+      );
+      setCornerStyleSides(
+        document.getElementById("brdrFoldNcutPost-cornerStyleSides").value
+      );
+      console.log("CornerStyle -> " + cornerStyle);
+      console.log("CornerStyleSides -> " + cornerStyleSides);
+    } else {
+      alert("postTypeId is not 4 || 5|| 6");
+      return false;
+    }
   };
 
   return (
@@ -70,6 +110,7 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="bg-N-text-type"
             data-post-type="bg-N-text"
+            onClick={() => setPostTypeId(4)}
           >
             <div className="individual-type-inner type-bg-color">
               Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -80,6 +121,7 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="bg-N-text-type"
             data-post-type="text"
+            onClick={() => setPostTypeId(4)}
           >
             <div className="individual-type-inner type-text-color">
               Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -101,6 +143,7 @@ const PostTypes = (props) => {
             id="bg-N-text-N-border-type"
             data-post-border-style="solid"
             data-post-border-sides="all"
+            onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-solid-border">
@@ -114,6 +157,7 @@ const PostTypes = (props) => {
             id="bg-N-text-N-border-type"
             data-post-border-style="dashed"
             data-post-border-sides="all"
+            onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-dashed-border">
@@ -127,6 +171,7 @@ const PostTypes = (props) => {
             id="bg-N-text-N-border-type"
             data-post-border-style="dotted"
             data-post-border-sides="all"
+            onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-dotted-border">
@@ -140,6 +185,7 @@ const PostTypes = (props) => {
             id="bg-N-text-N-border-type"
             data-post-border-style="double"
             data-post-border-sides="all"
+            onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-double-border">
@@ -155,6 +201,7 @@ const PostTypes = (props) => {
             id="bg-N-text-N-border-type"
             data-post-border-style="solid"
             data-post-border-sides="lNr"
+            onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-solid-border border-lNr">
@@ -167,6 +214,7 @@ const PostTypes = (props) => {
             id="bg-N-text-N-border-type"
             data-post-border-style="solid"
             data-post-border-sides="tNb"
+            onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-solid-border border-tNb">
@@ -179,6 +227,7 @@ const PostTypes = (props) => {
             id="bg-N-text-N-border-type"
             data-post-border-style="dashed"
             data-post-border-sides="lNr"
+            onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-dashed-border border-lNr">
@@ -191,6 +240,7 @@ const PostTypes = (props) => {
             id="bg-N-text-N-border-type"
             data-post-border-style="dashed"
             data-post-border-sides="tNb"
+            onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-dashed-border border-tNb">
@@ -206,6 +256,7 @@ const PostTypes = (props) => {
             id="bg-N-text-N-border-type"
             data-post-border-style="dotted"
             data-post-border-sides="lNr"
+            onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-dotted-border border-lNr">
@@ -218,6 +269,7 @@ const PostTypes = (props) => {
             id="bg-N-text-N-border-type"
             data-post-border-style="dotted"
             data-post-border-sides="tNb"
+            onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-dotted-border border-tNb">
@@ -230,6 +282,7 @@ const PostTypes = (props) => {
             id="bg-N-text-N-border-type"
             data-post-border-style="double"
             data-post-border-sides="lNr"
+            onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-double-border border-lNr">
@@ -242,6 +295,7 @@ const PostTypes = (props) => {
             id="bg-N-text-N-border-type"
             data-post-border-style="double"
             data-post-border-sides="tNb"
+            onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
               <div className="inner-border inner-double-border border-tNb">
@@ -260,6 +314,8 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="border-fold-type"
             data-post-fold-or-cut-class="cornerFold_topRight"
+            data-corner-style-sides="topRight"
+            onClick={() => setPostTypeId(6)}
           >
             <div className="individual-type-inner">
               <div className="post-type-cornerFold cornerFold cornerFold_topRight ">
@@ -274,6 +330,8 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="border-fold-type"
             data-post-fold-or-cut-class="cornerFold_bottomRight"
+            onClick={() => setPostTypeId(6)}
+            data-corner-style-sides="bottomRight"
           >
             <div className="individual-type-inner">
               <div className="post-type-cornerFold cornerFold cornerFold_bottomRight ">
@@ -288,6 +346,8 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="border-fold-type"
             data-post-fold-or-cut-class="cornerFold_bottomLeft"
+            onClick={() => setPostTypeId(6)}
+            data-corner-style-sides="bottomLeft"
           >
             <div className="individual-type-inner">
               <div className="post-type-cornerFold cornerFold cornerFold_bottomLeft ">
@@ -302,6 +362,8 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="border-fold-type"
             data-post-fold-or-cut-class="cornerFold_topLeft"
+            onClick={() => setPostTypeId(6)}
+            data-corner-style-sides="topLeft"
           >
             <div className="individual-type-inner">
               <div className="post-type-cornerFold cornerFold cornerFold_topLeft ">
@@ -318,6 +380,8 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="border-fold-type"
             data-post-fold-or-cut-class="cornerFold_topRight_bottomLeft"
+            onClick={() => setPostTypeId(6)}
+            data-corner-style-sides="topRightAndBottomLeft"
           >
             <div className="individual-type-inner">
               <div className="post-type-cornerFold cornerFold cornerFold_topRight_bottomLeft ">
@@ -332,6 +396,8 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="border-fold-type"
             data-post-fold-or-cut-class="cornerFold_topLeft_bottomRight"
+            onClick={() => setPostTypeId(6)}
+            data-corner-style-sides="topLeftAndBottomRight"
           >
             <div className="individual-type-inner">
               <div className="post-type-cornerFold cornerFold cornerFold_topLeft_bottomRight ">
@@ -352,6 +418,8 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="border-cut-type"
             data-post-fold-or-cut-class="cornerFold_topRight"
+            onClick={() => setPostTypeId(6)}
+            data-corner-style-sides="topRight"
           >
             <div className="individual-type-inner">
               <div className="post-type-cornerFold cornerFold cornerFold_topRight remove_cornerShadow">
@@ -366,6 +434,8 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="border-cut-type"
             data-post-fold-or-cut-class="cornerFold_bottomRight"
+            onClick={() => setPostTypeId(6)}
+            data-corner-style-sides="bottomRight"
           >
             <div className="individual-type-inner">
               <div className="post-type-cornerFold cornerFold cornerFold_bottomRight remove_cornerShadow">
@@ -380,6 +450,8 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="border-cut-type"
             data-post-fold-or-cut-class="cornerFold_bottomLeft"
+            onClick={() => setPostTypeId(6)}
+            data-corner-style-sides="bottomLeft"
           >
             <div className="individual-type-inner">
               <div className="post-type-cornerFold cornerFold cornerFold_bottomLeft remove_cornerShadow">
@@ -394,6 +466,8 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="border-cut-type"
             data-post-fold-or-cut-class="cornerFold_topLeft"
+            onClick={() => setPostTypeId(6)}
+            data-corner-style-sides="topLeft"
           >
             <div className="individual-type-inner">
               <div className="post-type-cornerFold cornerFold cornerFold_topLeft remove_cornerShadow">
@@ -410,6 +484,8 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="border-cut-type"
             data-post-fold-or-cut-class="cornerFold_topRight_bottomLeft"
+            onClick={() => setPostTypeId(6)}
+            data-corner-style-sides="topRightAndBottomLeft"
           >
             <div className="individual-type-inner">
               <div className="post-type-cornerFold cornerFold cornerFold_topRight_bottomLeft remove_cornerShadow">
@@ -424,6 +500,8 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="border-cut-type"
             data-post-fold-or-cut-class="cornerFold_topLeft_bottomRight"
+            onClick={() => setPostTypeId(6)}
+            data-corner-style-sides="topLeftAndBottomRight"
           >
             <div className="individual-type-inner">
               <div className="post-type-cornerFold cornerFold cornerFold_topLeft_bottomRight remove_cornerShadow">
@@ -469,6 +547,7 @@ const PostTypes = (props) => {
                 name="text"
                 placeholder="write something..."
                 spellCheck="false"
+                id="bgNtextNbrdrPostContentTextarea"
               ></textarea>
             </div>
             <hr className="dividable-hr" />
@@ -617,8 +696,10 @@ const PostTypes = (props) => {
           </div>
 
           <div className="hidden-clrpkrs">
-            <input id="brdrFoldNcutPost-bgclrpkr" value="53a3b4" readOnly />
-            <input id="brdrFoldNcutPost-textclrpkr" value="ffffff" readOnly />
+            <input id="brdrFoldNcutPost-bgclrpkr" value="53a3b4" />
+            <input id="brdrFoldNcutPost-textclrpkr" value="ffffff" />
+            <input id="brdrFoldNcutPost-cornerStyle" value="" />
+            <input id="brdrFoldNcutPost-cornerStyleSides" value="" />
           </div>
 
           <div className="warning-div">Post content can't be empty</div>
@@ -676,8 +757,10 @@ const PostTypes = (props) => {
               <div>
                 <select
                   className="layerTwo-one-post-privacy-selection"
-                  // onChange={(e) => setPostPrivacy(e.target.value)}
+                  onChange={(e) => setPostPrivacy(e.target.value)}
+                  value={postPrivacy}
                 >
+                  <option value="">Select Post Privacy</option>
                   <option value="public">Public</option>
                   <option value="friends">Friends</option>
                   <option value="me">Only Me</option>
@@ -715,8 +798,10 @@ const PostTypes = (props) => {
               <div>
                 <select
                   className="layerTwo-two-post-privacy-selection"
-                  // onChange={(e) => setPostPrivacy(e.target.value)}
+                  onChange={(e) => setPostPrivacy(e.target.value)}
+                  value={postPrivacy}
                 >
+                  <option value="">Select Post Privacy</option>
                   <option value="public">Public</option>
                   <option value="friends">Friends</option>
                   <option value="me">Only Me</option>

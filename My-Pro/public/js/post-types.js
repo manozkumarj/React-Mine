@@ -165,6 +165,10 @@ $(document).ready(function () {
       open_postTypes_layerOne_popup("postType-sample-LayerOne");
     } else if ($getId == "border-fold-type" || $getId == "border-cut-type") {
       $getDataAttr = $(this).attr("data-post-fold-or-cut-class");
+      $getDataCornerStyleSides = $(this).attr("data-corner-style-sides");
+
+      $("#brdrFoldNcutPost-cornerStyleSides").val($getDataCornerStyleSides);
+
       $(
         "#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer"
       ).removeClass(
@@ -176,9 +180,12 @@ $(document).ready(function () {
       ).addClass($getDataAttr);
 
       if ($getId == "border-cut-type") {
+        $("#brdrFoldNcutPost-cornerStyle").val("cut");
         $(
           "#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer"
         ).addClass("remove_cornerShadow");
+      } else {
+        $("#brdrFoldNcutPost-cornerStyle").val("fold");
       }
 
       $("#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer").css({
