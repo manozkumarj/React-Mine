@@ -44,9 +44,9 @@ const ColorPalette = (props) => {
         data-color="006600"
       ></span>
       <span
-        className="pick-clr clr-33cccc"
+        className="pick-clr clr-53a3b4"
         data-store-place={storePlace}
-        data-color="33cccc"
+        data-color="53a3b4"
       ></span>
       <span
         className="pick-clr clr-663300"

@@ -44,12 +44,17 @@ $(document).ready(function () {
 
     $getbgcolorr = $("#bgcolor").val();
     $gettextcolorr = $("#textcolor").val();
-    if ($getbgcolorr == $gettextcolorr) {
+
+    $get_brdrFoldNcutPostbgcolorr = $("#brdrFoldNcutPost-bgclrpkr").val();
+    $get_brdrFoldNcutPosttextcolorr = $("#brdrFoldNcutPost-textclrpkr").val();
+    if (
+      $getbgcolorr == $gettextcolorr ||
+      $get_brdrFoldNcutPostbgcolorr == $get_brdrFoldNcutPosttextcolorr
+    ) {
       $(".warning-div").text(
         "Post background color & text color can't be same"
       );
       $(".warning-div").slideDown("slow");
-      return false;
     } else {
       $(".warning-div").slideUp("slow");
     }
@@ -122,6 +127,7 @@ $(document).ready(function () {
       });
 
       $("#borderStyle").val("solid");
+      $("#post-borders-selecter").val("all");
       // alert($getId + " *** " + $getDataAttr);
       if ($getDataAttrBorderStyle == "dashed") {
         $("#borderStyle").val("dashed");
@@ -143,11 +149,13 @@ $(document).ready(function () {
       }
 
       if ($getDataAttrBorderSides == "lNr") {
+        $("#post-borders-selecter").val("lNr");
         $(".postContentTextarea, #postContentPreviewDiv").css({
           "border-top": "transparent",
           "border-bottom": "transparent",
         });
       } else if ($getDataAttrBorderSides == "tNb") {
+        $("#post-borders-selecter").val("tNb");
         $(".postContentTextarea, #postContentPreviewDiv").css({
           "border-left": "transparent",
           "border-right": "transparent",
@@ -234,17 +242,31 @@ $(document).ready(function () {
     "click",
     "#brdrFoldNcut-postType-openLayerTwoModal",
     function () {
+      $(".warning-div").slideUp("slow");
       $postContent = $("#brdrFoldNcutPostContentTextarea").val();
       $postContent = $postContent.trim();
-      if ($postContent) {
-        $("#brdrFoldNcutPostContentPreviewer").text($postContent);
 
-        open_postTypes_layerTwo_popup("postType-sample-two-LayerTwo");
-      } else {
-        // alert("Enter some text");
+      if (!$postContent) {
+        $(".warning-div").text("Post content can't be empty");
         $(".warning-div").slideDown("slow");
         $("#brdrFoldNcutPostContentTextarea").val("");
+        return false;
       }
+
+      $get_brdrFoldNcutPostbgcolorr = $("#brdrFoldNcutPost-bgclrpkr").val();
+      $get_brdrFoldNcutPosttextcolorr = $("#brdrFoldNcutPost-textclrpkr").val();
+      if ($get_brdrFoldNcutPostbgcolorr == $get_brdrFoldNcutPosttextcolorr) {
+        $(".warning-div").text(
+          "Post background color & text color can't be same"
+        );
+        $(".warning-div").slideDown("slow");
+        return false;
+      }
+
+      $(".warning-div").slideUp("slow");
+      $("#brdrFoldNcutPostContentPreviewer").text($postContent);
+
+      open_postTypes_layerTwo_popup("postType-sample-two-LayerTwo");
     }
   );
   // Individual brdrFoldNcut-post type preview N confirm  modal functionality - ends

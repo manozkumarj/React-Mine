@@ -217,9 +217,9 @@
   right: 0;
   border-width: 0 16px 16px 0;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3),
-    -1px 1px 1px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
+    -2px 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -2px 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -2px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .cornerFold_bottomRight:before,
@@ -228,11 +228,11 @@
   bottom: 0;
   right: 0;
   border-width: 16px 16px 0 0;
-  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3),
+  -webkit-box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3),
     -2px -2px 1px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3),
+  -moz-box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3),
     -2px -2px 1px rgba(0, 0, 0, 0.2);
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), -2px -2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3), -2px -2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .cornerFold_bottomLeft:before,
@@ -241,11 +241,11 @@
   bottom: 0;
   left: 0;
   border-width: 16px 0 0 16px;
-  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3),
+  -webkit-box-shadow: 2px 0px 1px rgba(0, 0, 0, 0.3),
     1px -2px 1px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3),
+  -moz-box-shadow: 2px 0px 1px rgba(0, 0, 0, 0.3),
     1px -2px 1px rgba(0, 0, 0, 0.2);
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), 1px -2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 0px 1px rgba(0, 0, 0, 0.3), 1px -2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .cornerFold_topLeft:before,
@@ -255,10 +255,10 @@
   left: 0;
   border-width: 16px 16px 0 0;
   -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3),
-    -1px 1px 1px rgba(0, 0, 0, 0.2);
+    1px 1px 1px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3),
-    -1px 1px 1px rgba(0, 0, 0, 0.2);
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
+    1px 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .remove_cornerShadow:before,
