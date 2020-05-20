@@ -517,7 +517,7 @@ const PostTypes = (props) => {
                 <select
                   id="post-borders-selecter"
                   placeholder="Select post border sides"
-                  onChange={(e) => setBorderStyleSides(e.target.value)}
+                  // onChange={(e) => setBorderStyleSides(e.target.value)}
                 >
                   <option value="all">Border - All sides</option>
                   <option value="top">Border - Top</option>
@@ -532,21 +532,24 @@ const PostTypes = (props) => {
 
             <div className="hidden-clrpkrs">
               <input
+                type="text"
                 id="bgcolor"
                 value="006600"
-                onChange={(e) => setBgColor(e.target.value)}
+                // onChange={(e) => setBgColor(e.target.value)}
               />
               <input
+                type="text"
                 id="textcolor"
                 value="ffffff"
-                onChange={(e) => setTextColor(e.target.value)}
+                // onChange={(e) => setTextColor(e.target.value)}
               />
               <input
+                type="text"
                 id="bordercolor"
                 value="FFF711"
-                onChange={(e) => setBorderColor(e.target.value)}
+                // onChange={(e) => setBorderColor(e.target.value)}
               />
-              <input id="borderStyle" value="solid" />
+              <input type="text" id="borderStyle" value="solid" />
             </div>
 
             <div className="warning-div">Post content can't be empty</div>

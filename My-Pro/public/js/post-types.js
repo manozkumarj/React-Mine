@@ -186,16 +186,30 @@ $(document).ready(function () {
 
   // Individual post type preview N confirm modal functionality - starts
   $(document).on("click", "#postType-openLayerTwoModal", function () {
-    $postContent = $(".postContentTextarea").val();
-    $postContent = $postContent.trim();
-    if ($postContent) {
-      $("#postContentPreviewDiv").text($postContent);
+    $postContentt = $(".postContentTextarea").val();
+    $postContentt = $postContentt.trim();
 
-      open_postTypes_layerTwo_popup("postType-sample-LayerTwo");
-    } else {
-      // alert("Enter some text");
+    $getbgcolorr = $("#bgcolor").val();
+    $gettextcolorr = $("#textcolor").val();
+
+    alert($getbgcolorr + "***" + $gettextcolorr);
+
+    if (!$postContentt) {
+      $(".warning-div").text("Post content can't be empty");
       $(".warning-div").slideDown("slow");
       $(".postContentTextarea").val("");
+      return false;
+    }
+    if ($getbgcolorr == $gettextcolorr) {
+      $(".warning-div").text(
+        "Post background color & text color can't be same"
+      );
+      $(".warning-div").slideDown("slow");
+      return false;
+    } else {
+      // alert("Enter some text");
+      $("#postContentPreviewDiv").text($postContentt);
+      open_postTypes_layerTwo_popup("postType-sample-LayerTwo");
     }
   });
   // Individual post type preview N confirm  modal functionality - ends
@@ -280,20 +294,24 @@ $(document).ready(function () {
   // Post border selector change event - starts
   $(document).on("change", "#post-borders-selecter", function () {
     $val = $(this).val();
-    $getBorderStyle = $("#borderStyle").val();
+    $getBorderStylee = $("#borderStyle").val();
+    // $getBorderStylee = $("#borderStyle").attr("value");
+    // alert($getBorderStylee);
+    // return;
     $getBorderColor = "#" + $("#bordercolor").val();
     $borderWidth = "2px";
+    // alert($val + " ** " + $getBorderStylee + " ** " + $getBorderColor);
 
-    if ($getBorderStyle == "double") {
+    if ($getBorderStylee == "double") {
       $borderWidth = "4px ";
     }
 
-    if ($val && $getBorderStyle) {
+    if ($val && $getBorderStylee) {
       $(".postContentTextarea, #postContentPreviewDiv").css(
         "border",
-        $borderWidth + " " + $getBorderStyle + " " + $getBorderColor
+        $borderWidth + " " + $getBorderStylee + " " + $getBorderColor
       );
-      console.log($val + " ** " + $getBorderStyle + " ** " + $getBorderColor);
+      console.log($val + " ** " + $getBorderStylee + " ** " + $getBorderColor);
       if ($val == "all") {
         console.log($val);
       } else if ($val == "top") {
