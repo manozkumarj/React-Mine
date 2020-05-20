@@ -14,11 +14,13 @@ $(document).ready(function () {
     $("#" + $getStorePlace).val($getColorCode);
 
     if ($getStorePlace == "bgcolor") {
+      // $("#bgcolor").val($getColorCode);
       $(".postContentTextarea, .postContentDiv, #postContentPreviewDiv").css(
         "background",
         "#" + $getColorCode
       );
     } else if ($getStorePlace == "textcolor") {
+      // $("#textcolor").val($getColorCode);
       $(".postContentTextarea, #postContentPreviewDiv").css(
         "color",
         "#" + $getColorCode
@@ -38,6 +40,18 @@ $(document).ready(function () {
         "color",
         "#" + $getColorCode
       );
+    }
+
+    $getbgcolorr = $("#bgcolor").val();
+    $gettextcolorr = $("#textcolor").val();
+    if ($getbgcolorr == $gettextcolorr) {
+      $(".warning-div").text(
+        "Post background color & text color can't be same"
+      );
+      $(".warning-div").slideDown("slow");
+      return false;
+    } else {
+      $(".warning-div").slideUp("slow");
     }
   });
 
@@ -186,13 +200,14 @@ $(document).ready(function () {
 
   // Individual post type preview N confirm modal functionality - starts
   $(document).on("click", "#postType-openLayerTwoModal", function () {
+    $(".warning-div").slideUp("slow");
     $postContentt = $(".postContentTextarea").val();
     $postContentt = $postContentt.trim();
 
     $getbgcolorr = $("#bgcolor").val();
     $gettextcolorr = $("#textcolor").val();
 
-    alert($getbgcolorr + "***" + $gettextcolorr);
+    // alert($getbgcolorr + "***" + $gettextcolorr);
 
     if (!$postContentt) {
       $(".warning-div").text("Post content can't be empty");
@@ -206,11 +221,11 @@ $(document).ready(function () {
       );
       $(".warning-div").slideDown("slow");
       return false;
-    } else {
-      // alert("Enter some text");
-      $("#postContentPreviewDiv").text($postContentt);
-      open_postTypes_layerTwo_popup("postType-sample-LayerTwo");
     }
+
+    $(".warning-div").slideUp("slow");
+    $("#postContentPreviewDiv").text($postContentt);
+    open_postTypes_layerTwo_popup("postType-sample-LayerTwo");
   });
   // Individual post type preview N confirm  modal functionality - ends
 

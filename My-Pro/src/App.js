@@ -50,11 +50,7 @@ class App extends Component {
                   <PrivateRoute exact path="/settings" component={Settings} />
                   <PrivateRoute exact path="/friends" component={Friends} />
                   <PrivateRoute exact path="/about" component={About} />
-                  <PrivateRoute
-                    exact
-                    path="/post-types"
-                    component={PostTypes}
-                  />
+                  <Route exact path="/post-types" component={PostTypes} />
                   <PrivateRoute
                     exact
                     path="/search/:word?"

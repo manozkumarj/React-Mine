@@ -469,7 +469,6 @@ const PostTypes = (props) => {
                 name="text"
                 placeholder="write something..."
                 spellCheck="false"
-                onChange={(e) => setPostContent(e.target.value)}
               ></textarea>
             </div>
             <hr className="dividable-hr" />
@@ -586,7 +585,6 @@ const PostTypes = (props) => {
                 name="text"
                 placeholder="write something..."
                 spellCheck="false"
-                onChange={(e) => setPostContent(e.target.value)}
               ></textarea>
             </div>
           </div>
@@ -678,7 +676,7 @@ const PostTypes = (props) => {
               <div>
                 <select
                   className="layerTwo-one-post-privacy-selection"
-                  onChange={(e) => setPostPrivacy(e.target.value)}
+                  // onChange={(e) => setPostPrivacy(e.target.value)}
                 >
                   <option value="public">Public</option>
                   <option value="friends">Friends</option>
@@ -717,7 +715,7 @@ const PostTypes = (props) => {
               <div>
                 <select
                   className="layerTwo-two-post-privacy-selection"
-                  onChange={(e) => setPostPrivacy(e.target.value)}
+                  // onChange={(e) => setPostPrivacy(e.target.value)}
                 >
                   <option value="public">Public</option>
                   <option value="friends">Friends</option>
