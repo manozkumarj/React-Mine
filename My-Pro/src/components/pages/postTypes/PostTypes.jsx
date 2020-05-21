@@ -63,14 +63,16 @@ const PostTypes = (props) => {
       content = document.getElementById("bgNtextNbrdrPostContentTextarea")
         .value;
       setPostContent(content);
-      setBgColor(document.getElementById("bgcolor").value);
-      setTextColor(document.getElementById("textcolor").value);
-      setBorderColor(document.getElementById("bordercolor").value);
-      setBorderStyle(document.getElementById("borderStyle").value);
+      let getbgcolor = localStorage.getItem("_bgNtextNborderPostBgcolor");
+      setBgColor(getbgcolor);
+      setTextColor(localStorage.getItem("_bgNtextNborderPostTextcolor"));
+      setBorderColor(localStorage.getItem("_bgNtextNborderPostBordercolor"));
+      setBorderStyle(localStorage.getItem("_bgNtextNborderPostBorderStyle"));
       setBorderStyleSides(
-        document.getElementById("post-borders-selecter").value
+        localStorage.getItem("_bgNtextNborderPostBorderStyleSides")
       );
 
+      console.log("content -> " + content);
       console.log("Bgcolor -> " + bgColor);
       console.log("Textcolor -> " + textColor);
       console.log("BorderColor -> " + borderColor);
@@ -87,6 +89,7 @@ const PostTypes = (props) => {
       setCornerStyleSides(
         document.getElementById("brdrFoldNcutPost-cornerStyleSides").value
       );
+      console.log("content -> " + content);
       console.log("CornerStyle -> " + cornerStyle);
       console.log("CornerStyleSides -> " + cornerStyleSides);
     } else {
@@ -707,7 +710,10 @@ const PostTypes = (props) => {
           <hr className="dividable-hr" />
 
           <div className="layerOne-post-actions-div">
-            <button className="layerOne-close-btn layerOneCloser">
+            <button
+              className="layerOne-close-btn layerOneCloser"
+              onClick={handleCloser}
+            >
               Cancel
             </button>
             <button
@@ -726,21 +732,13 @@ const PostTypes = (props) => {
         tabIndex="1"
         className="postType-layerTwoModalContainer"
       >
-        <span
-          className="overlay_close layerTwoCloser"
-          onClick={handleCloser}
-          title="close"
-        >
+        <span className="overlay_close layerTwoCloser" title="close">
           <img height="20" src={overlayClose} alt="closer" />
         </span>
 
         <div className="postType-layerTwoModalInner">
           <div className="postType-sample-LayerTwo">
-            <span
-              className="fancyCloseIcon layerTwoCloser"
-              onClick={handleCloser}
-              title="close"
-            >
+            <span className="fancyCloseIcon layerTwoCloser" title="close">
               <img height="30" src={fancyClose} alt="closer" />
             </span>
 
@@ -774,11 +772,7 @@ const PostTypes = (props) => {
 
           {/* LayerTwo sample 2 - starts */}
           <div className="postType-sample-two-LayerTwo">
-            <span
-              className="fancyCloseIcon layerTwoCloser"
-              onClick={handleCloser}
-              title="close"
-            >
+            <span className="fancyCloseIcon layerTwoCloser" title="close">
               <img height="30" src={fancyClose} alt="closer" />
             </span>
 

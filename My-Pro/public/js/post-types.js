@@ -116,6 +116,11 @@ $(document).ready(function () {
       $getDataAttrBorderStyle = $(this).attr("data-post-border-style");
       $getDataAttrBorderSides = $(this).attr("data-post-border-sides");
 
+      localStorage.setItem(
+        "_bgNtextNborderPostBorderStyleSides",
+        $getDataAttrBorderSides
+      );
+
       console.log("$getDataAttrBorderStyle --> " + $getDataAttrBorderStyle);
 
       $(".postContentTextarea, #postContentPreviewDiv, .postContentDiv").css({
@@ -127,20 +132,24 @@ $(document).ready(function () {
       });
 
       $("#borderStyle").val("solid");
+      localStorage.setItem("_bgNtextNborderPostBorderStyle", "solid");
       $("#post-borders-selecter").val("all");
       // alert($getId + " *** " + $getDataAttr);
       if ($getDataAttrBorderStyle == "dashed") {
         $("#borderStyle").val("dashed");
+        localStorage.setItem("_bgNtextNborderPostBorderStyle", "dashed");
         $(".postContentTextarea, #postContentPreviewDiv").css({
           "border-style": "dashed",
         });
       } else if ($getDataAttrBorderStyle == "dotted") {
         $("#borderStyle").val("dotted");
+        localStorage.setItem("_bgNtextNborderPostBorderStyle", "dotted");
         $(".postContentTextarea, #postContentPreviewDiv").css({
           "border-style": "dotted",
         });
       } else if ($getDataAttrBorderStyle == "double") {
         $("#borderStyle").val("double");
+        localStorage.setItem("_bgNtextNborderPostBorderStyle", "double");
         $(".postContentTextarea, #postContentPreviewDiv").css({
           width: "94%",
           "border-style": "double",
@@ -166,6 +175,10 @@ $(document).ready(function () {
     } else if ($getId == "border-fold-type" || $getId == "border-cut-type") {
       $getDataAttr = $(this).attr("data-post-fold-or-cut-class");
       $getDataCornerStyleSides = $(this).attr("data-corner-style-sides");
+      localStorage.setItem(
+        "_brdrFoldNcutPostCornerStyleSides",
+        $getDataCornerStyleSides
+      );
 
       $("#brdrFoldNcutPost-cornerStyleSides").val($getDataCornerStyleSides);
 
@@ -181,11 +194,13 @@ $(document).ready(function () {
 
       if ($getId == "border-cut-type") {
         $("#brdrFoldNcutPost-cornerStyle").val("cut");
+        localStorage.setItem("_brdrFoldNcutPostCornerStyle", "cut");
         $(
           "#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer"
         ).addClass("remove_cornerShadow");
       } else {
         $("#brdrFoldNcutPost-cornerStyle").val("fold");
+        localStorage.setItem("_brdrFoldNcutPostCornerStyle", "fold");
       }
 
       $("#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer").css({
@@ -293,6 +308,7 @@ $(document).ready(function () {
   // Clrpkr change events - starts
   $(document).on("change", "#bgcolor", function () {
     $val = $(this).val();
+    localStorage.setItem("_bgNtextNborderPostBgcolor", $val);
     console.log($val);
     $(".postContentTextarea, .postContentDiv, #postContentPreviewDiv").css(
       "background",
@@ -302,12 +318,14 @@ $(document).ready(function () {
 
   $(document).on("change", "#textcolor", function () {
     $val = $(this).val();
+    localStorage.setItem("_bgNtextNborderPostTextcolor", $val);
     console.log($val);
     $(".postContentTextarea, #postContentPreviewDiv").css("color", "#" + $val);
   });
 
   $(document).on("change", "#bordercolor", function () {
     $val = $(this).val();
+    localStorage.setItem("_bgNtextNborderPostBordercolor", $val);
     console.log($val);
     $(".postContentTextarea, #postContentPreviewDiv").css(
       "border-color",
@@ -317,6 +335,7 @@ $(document).ready(function () {
 
   $(document).on("change", "#brdrFoldNcutPost-bgclrpkr", function () {
     $val = $(this).val();
+    localStorage.setItem("_brdrFoldNcutPostBgcolor", $val);
     console.log($val);
     $("#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer").css(
       "background",
@@ -326,6 +345,7 @@ $(document).ready(function () {
 
   $(document).on("change", "#brdrFoldNcutPost-textclrpkr", function () {
     $val = $(this).val();
+    localStorage.setItem("_brdrFoldNcutPostTextcolor", $val);
     console.log($val);
     $("#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer").css(
       "color",
@@ -338,7 +358,8 @@ $(document).ready(function () {
   // Post border selector change event - starts
   $(document).on("change", "#post-borders-selecter", function () {
     $val = $(this).val();
-    $getBorderStylee = $("#borderStyle").val();
+    localStorage.setItem("_bgNtextNborderPostBorderStyleSides", $val);
+    $getBorderStylee = localStorage.getItem("_bgNtextNborderPostBorderStyle");
     // $getBorderStylee = $("#borderStyle").attr("value");
     // alert($getBorderStylee);
     // return;
