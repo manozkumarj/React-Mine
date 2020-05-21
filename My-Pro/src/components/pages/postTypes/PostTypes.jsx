@@ -28,6 +28,15 @@ const PostTypes = (props) => {
   const [postTypeId, setPostTypeId] = useState(null);
 
   useEffect(() => {
+    localStorage.setItem("_bgNtextNborderPostBgcolor", "006600");
+    localStorage.setItem("_bgNtextNborderPostTextcolor", "ffffff");
+    localStorage.setItem("_bgNtextNborderPostBordercolor", "FFF711");
+    localStorage.setItem("_bgNtextNborderPostBorderStyle", "solid");
+    localStorage.setItem("_bgNtextNborderPostBorderStyleSides", "all");
+
+    localStorage.setItem("_brdrFoldNcutPostBgcolor", "53a3b4");
+    localStorage.setItem("_brdrFoldNcutPostTextcolor", "ffffff");
+
     setAuthToken(props.centralState.authToken);
     setLoggedInUserId(props.centralState.loggedInUserId);
     if (props.centralState.isNewPostCreated) {
@@ -64,32 +73,38 @@ const PostTypes = (props) => {
         .value;
       setPostContent(content);
       let getbgcolor = localStorage.getItem("_bgNtextNborderPostBgcolor");
-      setBgColor(getbgcolor);
-      setTextColor(localStorage.getItem("_bgNtextNborderPostTextcolor"));
-      setBorderColor(localStorage.getItem("_bgNtextNborderPostBordercolor"));
-      setBorderStyle(localStorage.getItem("_bgNtextNborderPostBorderStyle"));
-      setBorderStyleSides(
-        localStorage.getItem("_bgNtextNborderPostBorderStyleSides")
+      let getTextColor = localStorage.getItem("_bgNtextNborderPostTextcolor");
+      let getBorderColor = localStorage.getItem(
+        "_bgNtextNborderPostBordercolor"
+      );
+      let getBorderStyle = localStorage.getItem(
+        "_bgNtextNborderPostBorderStyle"
+      );
+      let getBorderStyleSides = localStorage.getItem(
+        "_bgNtextNborderPostBorderStyleSides"
       );
 
       console.log("content -> " + content);
-      console.log("Bgcolor -> " + bgColor);
-      console.log("Textcolor -> " + textColor);
-      console.log("BorderColor -> " + borderColor);
-      console.log("BorderStyle -> " + borderStyle);
-      console.log("BorderStyleSides -> " + borderStyleSides);
+      console.log("Bgcolor -> " + getbgcolor);
+      console.log("Textcolor -> " + getTextColor);
+      console.log("BorderColor -> " + getBorderColor);
+      console.log("BorderStyle -> " + getBorderStyle);
+      console.log("BorderStyleSides -> " + getBorderStyleSides);
     } else if (postTypeId == 6) {
       console.log("brdrFoldNcutPostContentTextarea");
       content = document.getElementById("brdrFoldNcutPostContentTextarea")
         .value;
-      setPostContent(content);
-      setCornerStyle(
-        document.getElementById("brdrFoldNcutPost-cornerStyle").value
+
+      let getbgcolor = localStorage.getItem("_brdrFoldNcutPostBgcolor");
+      let getTextColor = localStorage.getItem("_brdrFoldNcutPostTextcolor");
+      let cornerStyle = localStorage.getItem("_brdrFoldNcutPostCornerStyle");
+      let cornerStyleSides = localStorage.getItem(
+        "_brdrFoldNcutPostCornerStyleSides"
       );
-      setCornerStyleSides(
-        document.getElementById("brdrFoldNcutPost-cornerStyleSides").value
-      );
+
       console.log("content -> " + content);
+      console.log("Bgcolor -> " + getbgcolor);
+      console.log("Textcolor -> " + getTextColor);
       console.log("CornerStyle -> " + cornerStyle);
       console.log("CornerStyleSides -> " + cornerStyleSides);
     } else {

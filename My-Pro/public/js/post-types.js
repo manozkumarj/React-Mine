@@ -19,27 +19,32 @@ $(document).ready(function () {
         "background",
         "#" + $getColorCode
       );
+      localStorage.setItem("_bgNtextNborderPostBgcolor", $getColorCode);
     } else if ($getStorePlace == "textcolor") {
       // $("#textcolor").val($getColorCode);
       $(".postContentTextarea, #postContentPreviewDiv").css(
         "color",
         "#" + $getColorCode
       );
+      localStorage.setItem("_bgNtextNborderPostTextcolor", $getColorCode);
     } else if ($getStorePlace == "bordercolor") {
       $(".postContentTextarea, #postContentPreviewDiv").css(
         "border-color",
         "#" + $getColorCode
       );
+      localStorage.setItem("_bgNtextNborderPostBordercolor", $getColorCode);
     } else if ($getStorePlace == "brdrFoldNcutPost-bgclrpkr") {
       $("#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer").css(
         "background",
         "#" + $getColorCode
       );
+      localStorage.setItem("_brdrFoldNcutPostBgcolor", $getColorCode);
     } else if ($getStorePlace == "brdrFoldNcutPost-textclrpkr") {
       $("#cornerFoldStyle-textareaDiv, #brdrFoldNcutPostContentPreviewer").css(
         "color",
         "#" + $getColorCode
       );
+      localStorage.setItem("_brdrFoldNcutPostTextcolor", $getColorCode);
     }
 
     $getbgcolorr = $("#bgcolor").val();
@@ -62,6 +67,9 @@ $(document).ready(function () {
 
   // Individual post type modal functionality - starts
   $(document).on("click", ".open-post-type-modal", function () {
+    localStorage.setItem("_bgNtextNborderPostBgcolor", "006600");
+    localStorage.setItem("_bgNtextNborderPostTextcolor", "ffffff");
+    localStorage.setItem("_bgNtextNborderPostBordercolor", "FFF711");
     $("#bgcolor").val("006600");
     $("#textcolor").val("ffffff");
     $("#bordercolor").val("FFF711");
@@ -80,6 +88,8 @@ $(document).ready(function () {
       $getDataAttr = $(this).attr("data-post-type");
       // bg-N-text - starts below
       if ($getDataAttr == "bg-N-text") {
+        localStorage.setItem("_bgNtextNborderPostBgcolor", "ff0066");
+        localStorage.setItem("_bgNtextNborderPostTextcolor", "ffffff");
         $("#bgcolor").val("ff0066");
         $("#textcolor").val("ffffff");
 
@@ -95,6 +105,8 @@ $(document).ready(function () {
       } else if ($getDataAttr == "text") {
         $("#bgcolor").val("ffffff");
         $("#textcolor").val("ff0066");
+        localStorage.setItem("_bgNtextNborderPostBgcolor", "ffffff");
+        localStorage.setItem("_bgNtextNborderPostTextcolor", "ff0066");
 
         $("#bgclrpkr").css({ background: "#ffffff", color: "#000000" });
         $("#textclrpkr").css({ background: "#ff0066", color: "#000000" });
