@@ -175,8 +175,8 @@ $(document).ready(function () {
           "border-top": "transparent",
           "border-bottom": "transparent",
         });
-      } else if ($getDataAttrBorderSides == "tNb") {
-        $("#post-borders-selecter").val("tNb");
+      } else if ($getDataAttrBorderSides == "topAndBottom") {
+        $("#post-borders-selecter").val("topAndBottom");
         $(".postContentTextarea, #postContentPreviewDiv").css({
           "border-left": "transparent",
           "border-right": "transparent",
@@ -423,7 +423,7 @@ $(document).ready(function () {
           "border-top": "transparent",
           "border-bottom": "transparent",
         });
-      } else if ($val == "tNb") {
+      } else if ($val == "topAndBottom") {
         $(".postContentTextarea, #postContentPreviewDiv").css({
           "border-left": "transparent",
           "border-right": "transparent",

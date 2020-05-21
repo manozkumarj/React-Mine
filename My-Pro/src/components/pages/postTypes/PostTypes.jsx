@@ -13,18 +13,18 @@ const PostTypes = (props) => {
     window.scrollTo(0, 0);
   }, []);
 
-  const [postContent, setPostContent] = useState(null);
+  // const [postContent, setPostContent] = useState(null);
   const [postPrivacy, setPostPrivacy] = useState(null);
   const [authToken, setAuthToken] = useState(null);
   const [loggedInUserId, setLoggedInUserId] = useState(null);
 
-  const [bgColor, setBgColor] = useState(null);
-  const [textColor, setTextColor] = useState(null);
-  const [borderColor, setBorderColor] = useState(null);
-  const [borderStyle, setBorderStyle] = useState(null);
-  const [borderStyleSides, setBorderStyleSides] = useState(null);
-  const [cornerStyle, setCornerStyle] = useState(null);
-  const [cornerStyleSides, setCornerStyleSides] = useState(null);
+  // const [bgColor, setBgColor] = useState(null);
+  // const [textColor, setTextColor] = useState(null);
+  // const [borderColor, setBorderColor] = useState(null);
+  // const [borderStyle, setBorderStyle] = useState(null);
+  // const [borderStyleSides, setBorderStyleSides] = useState(null);
+  // const [cornerStyle, setCornerStyle] = useState(null);
+  // const [cornerStyleSides, setCornerStyleSides] = useState(null);
   const [postTypeId, setPostTypeId] = useState(null);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const PostTypes = (props) => {
   }, [props]);
 
   const handleCloser = () => {
-    setPostContent(null);
+    // setPostContent(null);
     setPostPrivacy(null);
     setPostTypeId(null);
     document.getElementsByClassName(
@@ -66,16 +66,19 @@ const PostTypes = (props) => {
 
   const handlePostSubmission = (e) => {
     e.preventDefault();
+    let postedTo = loggedInUserId;
+    let postDetailsObject;
+
     console.log("handlePostSubmission triggered");
     console.log("PostTypeId -> " + postTypeId);
     console.log("postPrivacy -> " + postPrivacy);
     if (postTypeId && postPrivacy) {
-      let content;
+      let postContent;
       if (postTypeId == 4 || postTypeId == 5) {
-        console.log("bgNtextNbrdrPostContentTextarea");
-        content = document.getElementById("bgNtextNbrdrPostContentTextarea")
+        // console.log("bgNtextNbrdrPostContentTextarea");
+        postContent = document.getElementById("bgNtextNbrdrPostContentTextarea")
           .value;
-        setPostContent(content);
+        // setPostContent(content);
         let getbgcolor = localStorage.getItem("_bgNtextNborderPostBgcolor");
         let getTextColor = localStorage.getItem("_bgNtextNborderPostTextcolor");
         let getBorderColor = localStorage.getItem(
@@ -88,15 +91,28 @@ const PostTypes = (props) => {
           "_bgNtextNborderPostBorderStyleSides"
         );
 
-        console.log("content -> " + content);
-        console.log("Bgcolor -> " + getbgcolor);
-        console.log("Textcolor -> " + getTextColor);
-        console.log("BorderColor -> " + getBorderColor);
-        console.log("BorderStyle -> " + getBorderStyle);
-        console.log("BorderStyleSides -> " + getBorderStyleSides);
+        // console.log("content -> " + content);
+        // console.log("Bgcolor -> " + getbgcolor);
+        // console.log("Textcolor -> " + getTextColor);
+        // console.log("BorderColor -> " + getBorderColor);
+        // console.log("BorderStyle -> " + getBorderStyle);
+        // console.log("BorderStyleSides -> " + getBorderStyleSides);
+
+        postDetailsObject = {
+          postContent,
+          backgroundColor: getbgcolor,
+          textColor: getTextColor,
+          postPrivacy,
+        };
+
+        if (postTypeId == 5) {
+          postDetailsObject.borderColor = getBorderColor;
+          postDetailsObject.borderStyle = getBorderStyle;
+          postDetailsObject.borderStyleSides = getBorderStyleSides;
+        }
       } else if (postTypeId == 6) {
-        console.log("brdrFoldNcutPostContentTextarea");
-        content = document.getElementById("brdrFoldNcutPostContentTextarea")
+        // console.log("brdrFoldNcutPostContentTextarea");
+        postContent = document.getElementById("brdrFoldNcutPostContentTextarea")
           .value;
 
         let getbgcolor = localStorage.getItem("_brdrFoldNcutPostBgcolor");
@@ -106,18 +122,32 @@ const PostTypes = (props) => {
           "_brdrFoldNcutPostCornerStyleSides"
         );
 
-        console.log("content -> " + content);
-        console.log("Bgcolor -> " + getbgcolor);
-        console.log("Textcolor -> " + getTextColor);
-        console.log("CornerStyle -> " + cornerStyle);
-        console.log("CornerStyleSides -> " + cornerStyleSides);
+        postDetailsObject = {
+          postContent,
+          backgroundColor: getbgcolor,
+          textColor: getTextColor,
+          cornerStyle,
+          cornerStyleSides,
+          postPrivacy,
+        };
+
+        // console.log("content -> " + content);
+        // console.log("Bgcolor -> " + getbgcolor);
+        // console.log("Textcolor -> " + getTextColor);
+        // console.log("CornerStyle -> " + cornerStyle);
+        // console.log("CornerStyleSides -> " + cornerStyleSides);
       } else {
         alert("postTypeId is not 4 || 5|| 6");
         return false;
       }
     } else {
       alert("either postTypeId || postType ID is not valid");
+      return false;
     }
+
+    // props.createPost(authToken, postedTo, postTypeId, postDetailsObject);
+    console.log("postDetailsObject are below");
+    console.log(postDetailsObject);
   };
 
   return (
@@ -238,7 +268,7 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
             data-post-border-style="solid"
-            data-post-border-sides="tNb"
+            data-post-border-sides="topAndBottom"
             onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
@@ -264,7 +294,7 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
             data-post-border-style="dashed"
-            data-post-border-sides="tNb"
+            data-post-border-sides="topAndBottom"
             onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
@@ -293,7 +323,7 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
             data-post-border-style="dotted"
-            data-post-border-sides="tNb"
+            data-post-border-sides="topAndBottom"
             onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
@@ -319,7 +349,7 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
             data-post-border-style="double"
-            data-post-border-sides="tNb"
+            data-post-border-sides="topAndBottom"
             onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
@@ -628,7 +658,7 @@ const PostTypes = (props) => {
                   <option value="bottom">Border - Bottom</option>
                   <option value="left">Border - Left</option>
                   <option value="leftAndRight">Border - Left and Right</option>
-                  <option value="tNb">Border - Top and Bottom</option>
+                  <option value="topAndBottom">Border - Top and Bottom</option>
                 </select>
               </div>
             </div>
@@ -781,9 +811,9 @@ const PostTypes = (props) => {
                   value={postPrivacy}
                 >
                   <option value="">Select Post Privacy</option>
-                  <option value="public">Public</option>
-                  <option value="friends">Friends</option>
-                  <option value="me">Only Me</option>
+                  <option value="1">Public</option>
+                  <option value="2">Friends</option>
+                  <option value="3">Only Me</option>
                 </select>
                 <button className="post-button" onClick={handlePostSubmission}>
                   Post
@@ -818,9 +848,9 @@ const PostTypes = (props) => {
                   value={postPrivacy}
                 >
                   <option value="">Select Post Privacy</option>
-                  <option value="public">Public</option>
-                  <option value="friends">Friends</option>
-                  <option value="me">Only Me</option>
+                  <option value="1">Public</option>
+                  <option value="2">Friends</option>
+                  <option value="3">Only Me</option>
                 </select>
                 <button className="post-button" onClick={handlePostSubmission}>
                   Post
