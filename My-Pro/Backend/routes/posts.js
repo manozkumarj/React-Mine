@@ -471,6 +471,16 @@ router.put("/deleteComment/:id", auth, async (req, res) => {
   }
 });
 
+router.delete("/", async (req, res) => {
+  try {
+    const posts = await Post.deleteMany();
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   let postId = req.params.id;
   try {

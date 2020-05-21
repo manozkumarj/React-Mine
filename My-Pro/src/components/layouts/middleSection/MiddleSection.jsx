@@ -52,6 +52,8 @@ const MiddleSection = (props) => {
         </div>
       </div>
 
+      {loadingPosts && "Loading..."}
+
       {posts &&
         posts.length > 0 &&
         posts.map((post) => post["postTypeId"] + "<br />")}

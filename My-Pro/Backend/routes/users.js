@@ -116,7 +116,6 @@ router.get("/:id", async (req, res) => {
 // @desc      Delete all users
 // @access    Public
 router.delete("/", async (req, res) => {
-  let userId = req.params.id;
   try {
     const deletedUsers = await User.deleteMany();
     res.json(deletedUsers);
