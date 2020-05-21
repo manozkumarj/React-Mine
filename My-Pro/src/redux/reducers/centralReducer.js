@@ -24,6 +24,8 @@ import {
 import {
   CREATE_POST,
   CREATE_POST_ERROR,
+  INDIVIDUAL_USER_POSTS,
+  INDIVIDUAL_USER_POSTS_ERROR,
 } from "./../actionTypes/postsRelatedTypes";
 
 import validateToken from "./../validateToken";
@@ -62,6 +64,8 @@ const initialState = {
   // Posts related
   isNewPostCreated: false,
   newPostCreationError: null,
+  individualUserPosts: null,
+  individualUserPostsError: null,
 };
 
 //************************************* Reducer ****************************************************/
@@ -154,6 +158,20 @@ const centralReducer = (state = initialState, action) => {
         ...state,
         isNewPostCreated: false,
         newPostCreationError: action.payload,
+      };
+
+    case INDIVIDUAL_USER_POSTS:
+      return {
+        ...state,
+        individualUserPostsError: null,
+        individualUserPosts: action.payload,
+      };
+
+    case INDIVIDUAL_USER_POSTS_ERROR:
+      return {
+        ...state,
+        individualUserPostsError: action.payload,
+        individualUserPosts: null,
       };
 
     case RESET_STATE:

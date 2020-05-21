@@ -287,6 +287,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Fetches all posts which are postedTo a user
 router.get("/postedTo/:id", async (req, res) => {
   let userId = req.params.id;
   try {
@@ -300,6 +301,7 @@ router.get("/postedTo/:id", async (req, res) => {
   }
 });
 
+// Fetches all posts which are postedBy a user
 router.get("/postedBy/:id", async (req, res) => {
   let userId = req.params.id;
   try {

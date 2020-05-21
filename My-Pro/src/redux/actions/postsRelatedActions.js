@@ -2,12 +2,16 @@ import API from "./../../api";
 import {
   CREATE_POST,
   CREATE_POST_ERROR,
+  INDIVIDUAL_USER_POSTS,
+  INDIVIDUAL_USER_POSTS_ERROR,
 } from "./../actionTypes/postsRelatedTypes";
 
 let headers = {
   "Content-Type": "application/json",
 };
 
+// All types of post creation handler -- Starts
+let apiEndPoint;
 export const createPost = (
   authToken,
   postedTo,
@@ -27,7 +31,6 @@ export const createPost = (
     postTypeId === 5 ||
     postTypeId === 6
   ) {
-    let apiEndPoint;
     let postDetailsObj;
     if (postTypeId === 1) {
       apiEndPoint = "posts/create-post/1";
@@ -97,3 +100,27 @@ export const createPost = (
     };
   }
 };
+// All types of post creation handler -- Ends
+
+// Fetching individual user's posts handler -- Starts
+export const getIndividualUserPosts = (authToken, userId) => {
+  console.log("userId --> " + userId);
+  apiEndPoint = `posts/${userId}`;
+  headers["x-auth-token"] = authToken;
+
+  return (dispatch) => {
+    API.get(apiEndPoint, { headers })
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: INDIVIDUAL_USER_POSTS });
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        dispatch({
+          type: INDIVIDUAL_USER_POSTS_ERROR,
+          payload: err.response.data.msg,
+        });
+      });
+  };
+};
+// Fetching individual user's posts handler -- Ends
