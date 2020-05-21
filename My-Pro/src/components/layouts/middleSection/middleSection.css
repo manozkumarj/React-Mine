@@ -376,6 +376,7 @@
   padding: 10px;
   border-radius: 40px;
   border: 1px solid #ccc;
+  box-shadow: 2px 2px 4px #888;
   display: none;
   z-index: 2;
 }

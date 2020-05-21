@@ -26,6 +26,7 @@ import {
   CREATE_POST_ERROR,
   INDIVIDUAL_USER_POSTS,
   INDIVIDUAL_USER_POSTS_ERROR,
+  IS_LOADING_POSTS,
 } from "./../actionTypes/postsRelatedTypes";
 
 import validateToken from "./../validateToken";
@@ -63,6 +64,7 @@ const initialState = {
 
   // Posts related
   isNewPostCreated: false,
+  isLoading: false,
   newPostCreationError: null,
   individualUserPosts: null,
   individualUserPostsError: null,
@@ -165,6 +167,7 @@ const centralReducer = (state = initialState, action) => {
         ...state,
         individualUserPostsError: null,
         individualUserPosts: action.payload,
+        isLoading: false,
       };
 
     case INDIVIDUAL_USER_POSTS_ERROR:
@@ -172,6 +175,15 @@ const centralReducer = (state = initialState, action) => {
         ...state,
         individualUserPostsError: action.payload,
         individualUserPosts: null,
+        isLoading: false,
+      };
+
+    case IS_LOADING_POSTS:
+      return {
+        ...state,
+        individualUserPostsError: null,
+        individualUserPosts: null,
+        isLoading: true,
       };
 
     case RESET_STATE:

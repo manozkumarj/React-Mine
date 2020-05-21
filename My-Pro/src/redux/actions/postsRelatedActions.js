@@ -4,6 +4,7 @@ import {
   CREATE_POST_ERROR,
   INDIVIDUAL_USER_POSTS,
   INDIVIDUAL_USER_POSTS_ERROR,
+  IS_LOADING_POSTS,
 } from "./../actionTypes/postsRelatedTypes";
 
 let headers = {
@@ -105,20 +106,21 @@ export const createPost = (
 // Fetching individual user's posts handler -- Starts
 export const getIndividualUserPosts = (authToken, userId) => {
   console.log("userId --> " + userId);
-  apiEndPoint = `posts/${userId}`;
+  apiEndPoint = `posts/postedTo/${userId}`;
   headers["x-auth-token"] = authToken;
 
   return (dispatch) => {
+    dispatch({ type: IS_LOADING_POSTS });
     API.get(apiEndPoint, { headers })
       .then((res) => {
         console.log(res.data);
-        dispatch({ type: INDIVIDUAL_USER_POSTS });
+        dispatch({ type: INDIVIDUAL_USER_POSTS, payload: res.data });
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.log(err.response);
         dispatch({
           type: INDIVIDUAL_USER_POSTS_ERROR,
-          payload: err.response.data.msg,
+          payload: err.response,
         });
       });
   };

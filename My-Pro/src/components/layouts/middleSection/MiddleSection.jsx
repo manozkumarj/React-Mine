@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./middleSection.css";
 import { Link } from "react-router-dom";
 // import zuck from "../../../images/zuck.jpg";
@@ -16,8 +16,26 @@ import rightArrow from "../../../images/right_arrow.png";
 import loveHeartsEyesEmoji from "../../../emojis/love-hearts-eyes-emoji-50.png";
 import likeThumbEmoji from "../../../emojis/like-thumb-emoji-50.png";
 import PostMenu from "../postMenu/PostMenu";
+import { connect } from "react-redux";
+import { getIndividualUserPosts } from "./../../../redux/actionCreators";
 
-const MiddleSection = () => {
+const MiddleSection = (props) => {
+  const [posts, setPosts] = useState([]);
+  const [loadingPosts, setLoadingPosts] = useState(true);
+
+  useEffect(() => {
+    props.getIndividualUserPosts(
+      props.centralState.authToken,
+      props.centralState.loggedInUserId
+    );
+  }, []);
+
+  useEffect(() => {
+    console.log(props);
+    setLoadingPosts(props.centralState.isLoading);
+    setPosts(props.centralState.individualUserPosts);
+  }, [props]);
+
   return (
     <div id="middle-div">
       <div className="post-menu-section">
@@ -33,6 +51,10 @@ const MiddleSection = () => {
           </div>
         </div>
       </div>
+
+      {posts &&
+        posts.length > 0 &&
+        posts.map((post) => post["postTypeId"] + "<br />")}
 
       {/* *******************  All posts section ******************** */}
       <div className="all-posts-container">
@@ -1325,4 +1347,17 @@ const MiddleSection = () => {
   );
 };
 
-export default MiddleSection;
+const mapStateToProps = (state) => {
+  return {
+    centralState: state.central,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getIndividualUserPosts: (token, userId) =>
+      dispatch(getIndividualUserPosts(token, userId)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MiddleSection);
