@@ -145,7 +145,7 @@ const PostTypes = (props) => {
       return false;
     }
 
-    // props.createPost(authToken, postedTo, postTypeId, postDetailsObject);
+    props.createPost(authToken, postedTo, postTypeId, postDetailsObject);
     console.log("postDetailsObject are below");
     console.log(postDetailsObject);
   };

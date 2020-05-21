@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post(
-  "/",
+  "/create-post/1",
   auth,
   [
     check("postContent", "Please include post postContent").not().isEmpty(),
@@ -37,11 +37,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
-    // console.log(req);
-
     let userId = req.user._id;
-
     const { postContent, postedTo, postTypeId, privacyId } = req.body;
     try {
       let user = await User.findById(postedTo);
@@ -51,14 +47,213 @@ router.post(
 
       let uniqueId = helpers.generateUniqueId();
 
-      let backgroundColor = "010203";
-      let photos = ["aaa.png", "bbb.png", "ccc.png"];
+      let post = new Post({
+        postProperties: {
+          postContent,
+        },
+        postedTo,
+        postedBy: userId,
+        uniqueId,
+        privacyId,
+        postTypeId,
+      });
+
+      await post.save();
+      console.log("Post object is below");
+      console.log(post);
+
+      res.json({ post });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
+);
+
+router.post(
+  "/create-post/4",
+  auth,
+  [
+    check("postContent", "Please include post postContent").not().isEmpty(),
+    check("postedTo", "Please include postedTo ID").not().isEmpty(),
+    check("privacyId", "Please include privacyId").not().isEmpty(),
+    check("postTypeId", "Please include postTypeId").not().isEmpty(),
+    check("backgroundColor", "Please include backgroundColor").not().isEmpty(),
+    check("textColor", "Please include textColor").not().isEmpty(),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    let userId = req.user._id;
+    const {
+      postContent,
+      postedTo,
+      postTypeId,
+      privacyId,
+      backgroundColor,
+      textColor,
+    } = req.body;
+    try {
+      let user = await User.findById(postedTo);
+      if (!user) {
+        res.status(400).json({ msg: "postedTo User Doesn't exist" });
+      }
+
+      let uniqueId = helpers.generateUniqueId();
 
       let post = new Post({
         postProperties: {
           postContent,
           backgroundColor,
-          photos,
+          textColor,
+        },
+        postedTo,
+        postedBy: userId,
+        uniqueId,
+        privacyId,
+        postTypeId,
+      });
+
+      await post.save();
+      console.log("Post object is below");
+      console.log(post);
+
+      res.json({ post });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
+);
+
+router.post(
+  "/create-post/5",
+  auth,
+  [
+    check("postContent", "Please include post postContent").not().isEmpty(),
+    check("postedTo", "Please include postedTo ID").not().isEmpty(),
+    check("privacyId", "Please include privacyId").not().isEmpty(),
+    check("postTypeId", "Please include postTypeId").not().isEmpty(),
+    check("backgroundColor", "Please include backgroundColor").not().isEmpty(),
+    check("textColor", "Please include textColor").not().isEmpty(),
+    check("borderColor", "Please include borderColor").not().isEmpty(),
+    check("borderStyle", "Please include borderStyle").not().isEmpty(),
+    check("borderStyleSides", "Please include borderStyleSides")
+      .not()
+      .isEmpty(),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    let userId = req.user._id;
+
+    const {
+      postContent,
+      postedTo,
+      postTypeId,
+      privacyId,
+      backgroundColor,
+      textColor,
+      borderColor,
+      borderStyle,
+      borderStyleSides,
+    } = req.body;
+    try {
+      let user = await User.findById(postedTo);
+      if (!user) {
+        res.status(400).json({ msg: "postedTo User Doesn't exist" });
+      }
+
+      let uniqueId = helpers.generateUniqueId();
+      let borderTopColor = borderColor;
+      let borderRightColor = borderColor;
+      let borderBottomColor = borderColor;
+      let borderLeftColor = borderColor;
+
+      let post = new Post({
+        postProperties: {
+          postContent,
+          backgroundColor,
+          textColor,
+          borderTopColor,
+          borderRightColor,
+          borderBottomColor,
+          borderLeftColor,
+          borderStyle,
+          borderStyleSides,
+        },
+        postedTo,
+        postedBy: userId,
+        uniqueId,
+        privacyId,
+        postTypeId,
+      });
+
+      await post.save();
+      console.log("Post object is below");
+      console.log(post);
+
+      res.json({ post });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
+);
+
+router.post(
+  "/create-post/6",
+  auth,
+  [
+    check("postContent", "Please include post postContent").not().isEmpty(),
+    check("postedTo", "Please include postedTo ID").not().isEmpty(),
+    check("privacyId", "Please include privacyId").not().isEmpty(),
+    check("postTypeId", "Please include postTypeId").not().isEmpty(),
+    check("backgroundColor", "Please include backgroundColor").not().isEmpty(),
+    check("textColor", "Please include textColor").not().isEmpty(),
+    check("cornerStyle", "Please include cornerStyle").not().isEmpty(),
+    check("cornerStyleSides", "Please include cornerStyleSides")
+      .not()
+      .isEmpty(),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    let userId = req.user._id;
+
+    const {
+      postContent,
+      postedTo,
+      postTypeId,
+      privacyId,
+      backgroundColor,
+      textColor,
+      cornerStyle,
+      cornerStyleSides,
+    } = req.body;
+    try {
+      let user = await User.findById(postedTo);
+      if (!user) {
+        res.status(400).json({ msg: "postedTo User Doesn't exist" });
+      }
+
+      let uniqueId = helpers.generateUniqueId();
+
+      let post = new Post({
+        postProperties: {
+          postContent,
+          backgroundColor,
+          textColor,
+          cornerStyle,
+          cornerStyleSides,
         },
         postedTo,
         postedBy: userId,
