@@ -52,6 +52,9 @@ const PostTypes = (props) => {
     setPostContent(null);
     setPostPrivacy(null);
     setPostTypeId(null);
+    document.getElementsByClassName(
+      "layerTwo-one-post-privacy-selection"
+    ).value = "";
   };
 
   // useEffect(() => {
@@ -66,50 +69,54 @@ const PostTypes = (props) => {
     console.log("handlePostSubmission triggered");
     console.log("PostTypeId -> " + postTypeId);
     console.log("postPrivacy -> " + postPrivacy);
-    let content;
-    if (postTypeId == 4 || postTypeId == 5) {
-      console.log("bgNtextNbrdrPostContentTextarea");
-      content = document.getElementById("bgNtextNbrdrPostContentTextarea")
-        .value;
-      setPostContent(content);
-      let getbgcolor = localStorage.getItem("_bgNtextNborderPostBgcolor");
-      let getTextColor = localStorage.getItem("_bgNtextNborderPostTextcolor");
-      let getBorderColor = localStorage.getItem(
-        "_bgNtextNborderPostBordercolor"
-      );
-      let getBorderStyle = localStorage.getItem(
-        "_bgNtextNborderPostBorderStyle"
-      );
-      let getBorderStyleSides = localStorage.getItem(
-        "_bgNtextNborderPostBorderStyleSides"
-      );
+    if (postTypeId && postPrivacy) {
+      let content;
+      if (postTypeId == 4 || postTypeId == 5) {
+        console.log("bgNtextNbrdrPostContentTextarea");
+        content = document.getElementById("bgNtextNbrdrPostContentTextarea")
+          .value;
+        setPostContent(content);
+        let getbgcolor = localStorage.getItem("_bgNtextNborderPostBgcolor");
+        let getTextColor = localStorage.getItem("_bgNtextNborderPostTextcolor");
+        let getBorderColor = localStorage.getItem(
+          "_bgNtextNborderPostBordercolor"
+        );
+        let getBorderStyle = localStorage.getItem(
+          "_bgNtextNborderPostBorderStyle"
+        );
+        let getBorderStyleSides = localStorage.getItem(
+          "_bgNtextNborderPostBorderStyleSides"
+        );
 
-      console.log("content -> " + content);
-      console.log("Bgcolor -> " + getbgcolor);
-      console.log("Textcolor -> " + getTextColor);
-      console.log("BorderColor -> " + getBorderColor);
-      console.log("BorderStyle -> " + getBorderStyle);
-      console.log("BorderStyleSides -> " + getBorderStyleSides);
-    } else if (postTypeId == 6) {
-      console.log("brdrFoldNcutPostContentTextarea");
-      content = document.getElementById("brdrFoldNcutPostContentTextarea")
-        .value;
+        console.log("content -> " + content);
+        console.log("Bgcolor -> " + getbgcolor);
+        console.log("Textcolor -> " + getTextColor);
+        console.log("BorderColor -> " + getBorderColor);
+        console.log("BorderStyle -> " + getBorderStyle);
+        console.log("BorderStyleSides -> " + getBorderStyleSides);
+      } else if (postTypeId == 6) {
+        console.log("brdrFoldNcutPostContentTextarea");
+        content = document.getElementById("brdrFoldNcutPostContentTextarea")
+          .value;
 
-      let getbgcolor = localStorage.getItem("_brdrFoldNcutPostBgcolor");
-      let getTextColor = localStorage.getItem("_brdrFoldNcutPostTextcolor");
-      let cornerStyle = localStorage.getItem("_brdrFoldNcutPostCornerStyle");
-      let cornerStyleSides = localStorage.getItem(
-        "_brdrFoldNcutPostCornerStyleSides"
-      );
+        let getbgcolor = localStorage.getItem("_brdrFoldNcutPostBgcolor");
+        let getTextColor = localStorage.getItem("_brdrFoldNcutPostTextcolor");
+        let cornerStyle = localStorage.getItem("_brdrFoldNcutPostCornerStyle");
+        let cornerStyleSides = localStorage.getItem(
+          "_brdrFoldNcutPostCornerStyleSides"
+        );
 
-      console.log("content -> " + content);
-      console.log("Bgcolor -> " + getbgcolor);
-      console.log("Textcolor -> " + getTextColor);
-      console.log("CornerStyle -> " + cornerStyle);
-      console.log("CornerStyleSides -> " + cornerStyleSides);
+        console.log("content -> " + content);
+        console.log("Bgcolor -> " + getbgcolor);
+        console.log("Textcolor -> " + getTextColor);
+        console.log("CornerStyle -> " + cornerStyle);
+        console.log("CornerStyleSides -> " + cornerStyleSides);
+      } else {
+        alert("postTypeId is not 4 || 5|| 6");
+        return false;
+      }
     } else {
-      alert("postTypeId is not 4 || 5|| 6");
-      return false;
+      alert("either postTypeId || postType ID is not valid");
     }
   };
 
@@ -218,7 +225,7 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
             data-post-border-style="solid"
-            data-post-border-sides="lNr"
+            data-post-border-sides="leftAndRight"
             onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
@@ -244,7 +251,7 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
             data-post-border-style="dashed"
-            data-post-border-sides="lNr"
+            data-post-border-sides="leftAndRight"
             onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
@@ -273,7 +280,7 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
             data-post-border-style="dotted"
-            data-post-border-sides="lNr"
+            data-post-border-sides="leftAndRight"
             onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
@@ -299,7 +306,7 @@ const PostTypes = (props) => {
             className="individual-type open-post-type-modal"
             id="bg-N-text-N-border-type"
             data-post-border-style="double"
-            data-post-border-sides="lNr"
+            data-post-border-sides="leftAndRight"
             onClick={() => setPostTypeId(5)}
           >
             <div className="individual-type-inner type-bg-color-1">
@@ -620,7 +627,7 @@ const PostTypes = (props) => {
                   <option value="right">Border - Right</option>
                   <option value="bottom">Border - Bottom</option>
                   <option value="left">Border - Left</option>
-                  <option value="lNr">Border - Left and Right</option>
+                  <option value="leftAndRight">Border - Left and Right</option>
                   <option value="tNb">Border - Top and Bottom</option>
                 </select>
               </div>

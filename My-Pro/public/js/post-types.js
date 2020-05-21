@@ -169,8 +169,8 @@ $(document).ready(function () {
         });
       }
 
-      if ($getDataAttrBorderSides == "lNr") {
-        $("#post-borders-selecter").val("lNr");
+      if ($getDataAttrBorderSides == "leftAndRight") {
+        $("#post-borders-selecter").val("leftAndRight");
         $(".postContentTextarea, #postContentPreviewDiv").css({
           "border-top": "transparent",
           "border-bottom": "transparent",
@@ -222,6 +222,9 @@ $(document).ready(function () {
 
       $("#brdrFoldNcutPost-bgclrpkr").val("53a3b4");
       $("#brdrFoldNcutPost-textclrpkr").val("ffffff");
+
+      localStorage.setItem("_brdrFoldNcutPostBgcolor", "53a3b4");
+      localStorage.setItem("_brdrFoldNcutPostTextcolor", "ffffff");
 
       $("#brdrFoldNcut-bgclrpkr").css({
         background: "#53a3b4",
@@ -415,7 +418,7 @@ $(document).ready(function () {
           "border-bottom": "transparent",
           "border-top": "transparent",
         });
-      } else if ($val == "lNr") {
+      } else if ($val == "leftAndRight") {
         $(".postContentTextarea, #postContentPreviewDiv").css({
           "border-top": "transparent",
           "border-bottom": "transparent",
