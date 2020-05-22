@@ -317,7 +317,9 @@
 
 .cornerFold:before,
 .cornerFold_topRight_bottomLeft:after,
-.cornerFold_topLeft_bottomRight:after {
+.cornerFold_topLeft_bottomRight:after,
+.cornerFoldAndCut_topRightAndBottomLeft:after,
+.cornerFoldAndCut_topLeftAndBottomRight:after {
   content: "";
   position: absolute;
   border-style: solid;
@@ -327,7 +329,9 @@
 
 /* Separaters - starts */
 .cornerFold_topRight:before,
-.cornerFold_topRight_bottomLeft:before {
+.cornerFoldAndCut_topRight:before,
+.cornerFold_topRight_bottomLeft:before,
+.cornerFoldAndCut_topRightAndBottomLeft:before {
   border-color: #fff #fff transparent transparent;
   top: 0;
   right: 0;
@@ -339,7 +343,9 @@
 }
 
 .cornerFold_bottomRight:before,
-.cornerFold_topLeft_bottomRight:before {
+.cornerFoldAndCut_bottomRight:before,
+.cornerFold_topLeft_bottomRight:before,
+.cornerFoldAndCut_topLeftAndBottomRight:before {
   border-color: transparent #fff transparent #fff;
   bottom: 0;
   right: 0;
@@ -352,7 +358,9 @@
 }
 
 .cornerFold_bottomLeft:before,
-.cornerFold_topRight_bottomLeft:after {
+.cornerFoldAndCut_bottomLeft:before,
+.cornerFold_topRight_bottomLeft:after,
+.cornerFoldAndCut_topRightAndBottomLeft:after {
   border-color: transparent #fff transparent #fff;
   bottom: 0;
   left: 0;
@@ -365,7 +373,9 @@
 }
 
 .cornerFold_topLeft:before,
-.cornerFold_topLeft_bottomRight:after {
+.cornerFoldAndCut_topLeft:before,
+.cornerFold_topLeft_bottomRight:after,
+.cornerFoldAndCut_topLeftAndBottomRight:after {
   border-color: #fff transparent #fff transparent;
   top: 0;
   left: 0;

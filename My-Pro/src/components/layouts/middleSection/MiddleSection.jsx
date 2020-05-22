@@ -62,13 +62,33 @@ const MiddleSection = (props) => {
           posts.map((post) => {
             let displayPage;
             if (post.postTypeId == 1 || post.postTypeId == 4)
-              displayPage = <DefaultAndCustomBgAndTextColorPost />;
+              displayPage = (
+                <DefaultAndCustomBgAndTextColorPost
+                  postData={post.postProperties}
+                  postTypeId={post.postTypeId}
+                />
+              );
             else if (post.postTypeId == 5)
-              displayPage = <CustomBgAndTextAndBorderColorPost />;
+              displayPage = (
+                <CustomBgAndTextAndBorderColorPost
+                  postData={post.postProperties}
+                  postTypeId={post.postTypeId}
+                />
+              );
             else if (post.postTypeId == 2 || post.postTypeId == 3)
-              displayPage = <PhotosPost />;
+              displayPage = (
+                <PhotosPost
+                  postData={post.postProperties}
+                  postTypeId={post.postTypeId}
+                />
+              );
             else if (post.postTypeId == 6)
-              displayPage = <CustomBgAndTextAndCornerPost />;
+              displayPage = (
+                <CustomBgAndTextAndCornerPost
+                  postData={post.postProperties}
+                  postTypeId={post.postTypeId}
+                />
+              );
 
             return (
               <div className="item">
