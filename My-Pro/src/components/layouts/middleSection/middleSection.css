@@ -7,6 +7,120 @@
   border-radius: 3px;
 }
 
+.animationLoading {
+  background: #fff;
+  border: 1px solid;
+  border-color: #e5e6e9;
+  border-radius: 3px;
+  display: block;
+  height: 250px;
+  padding: 10px;
+}
+@keyframes animate {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.animationLoadingContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.animationLoadingRightContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.animationLoadingUser,
+.animationLoadingUsername,
+.animationLoadingTimestamp,
+.animationLoadingDivider,
+.animationLoadingContent,
+.animationLoadingReactionsCounter,
+.animationLoadingReaction {
+  position: relative;
+  background-color: #ccc;
+  height: 6px;
+  animation-name: animate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(8%, #eeeeee),
+    color-stop(18%, #dddddd),
+    color-stop(33%, #eeeeee)
+  );
+  background: -webkit-linear-gradient(
+    left,
+    #eeeeee 8%,
+    #dddddd 18%,
+    #eeeeee 33%
+  );
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  -webkit-background-size: 800px 104px;
+  -moz-background-size: 800px 104px;
+  -ms-background-size: 800px 104px;
+  background-size: 800px 104px;
+}
+
+.animationLoadingUser {
+  height: 50px;
+  width: 50px;
+}
+
+.animationLoadingUsername,
+.animationLoadingTimestamp {
+  left: 10px;
+  height: 18px;
+}
+
+.animationLoadingUsername {
+  width: 50%;
+}
+
+.animationLoadingTimestamp {
+  width: 30%;
+}
+
+.animationLoadingDivider {
+  left: 0px;
+  top: 10px;
+  width: 100%;
+}
+
+.animationLoadingContent {
+  left: 0px;
+  top: 20px;
+  height: 100px;
+}
+
+.animationLoadingReactionsCounter {
+  left: 0px;
+  top: 30px;
+  height: 20px;
+}
+
+.animationLoadingReactionsDiv {
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+}
+
+.animationLoadingReaction {
+  flex: 1;
+  padding: 10px;
+  margin: 10px;
+}
+
 /* Greet div related - starts */
 .greet-div {
   height: 120px;

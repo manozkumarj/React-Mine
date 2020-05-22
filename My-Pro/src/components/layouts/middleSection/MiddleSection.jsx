@@ -60,6 +60,26 @@ const MiddleSection = (props) => {
 
       {/* *******************  All posts section ******************** */}
       <div className="all-posts-container">
+        {/* *******************  Context loader ******************** */}
+        <div className="item">
+          <div className="animationLoading">
+            <div className="animationLoadingContainer">
+              <div className="animationLoadingUser"></div>
+              <div className="animationLoadingRightContainer">
+                <div className="animationLoadingUsername"></div>
+                <div className="animationLoadingTimestamp"></div>
+              </div>
+            </div>
+            <div className="animationLoadingDivider"></div>
+            <div className="animationLoadingContent"></div>
+            <div className="animationLoadingReactionsCounter"></div>
+            <div className="animationLoadingReactionsDiv">
+              <div className="animationLoadingReaction"></div>
+              <div className="animationLoadingReaction"></div>
+              <div className="animationLoadingReaction"></div>
+            </div>
+          </div>
+        </div>
         {/* **********  cornerFold_topRight_bottomLeft remove_cornerShadow post section - starts *************** */}
         <div className="item">
           <div className="post-n-user-details-container">
