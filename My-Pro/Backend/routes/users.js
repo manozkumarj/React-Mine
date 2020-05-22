@@ -41,12 +41,14 @@ router.post(
       }
 
       let uniqueId = helpers.generateUniqueId();
+      let getMilliseconds = helpers.getMilliseconds();
 
       user = new User({
         fullName,
         email,
         password,
         uniqueId,
+        milliseconds: getMilliseconds,
       });
 
       const salt = await bcrypt.genSalt(10);

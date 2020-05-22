@@ -10,6 +10,7 @@ const CustomBgAndTextAndBorderColorPost = (props) => {
   const [borderLeftColor, setBorderLeftColor] = useState("red");
   const [borderStyle, setBorderStyle] = useState("solid");
   const [borderStyleSides, setBorderStyleSides] = useState("all");
+  const [classes, setClasses] = useState("pad-12-10 border-2px");
 
   const { postData, postTypeId } = props;
   useEffect(() => {
@@ -22,6 +23,9 @@ const CustomBgAndTextAndBorderColorPost = (props) => {
     setBorderLeftColor("#" + postData[0].borderLeftColor);
     setBorderStyle(postData[0].borderStyle);
     setBorderStyleSides(postData[0].borderStyleSides);
+    if (postData[0].borderStyle === "double") {
+      setClasses("pad-12-10 border-4px");
+    }
   }, []);
   return (
     <div
@@ -29,7 +33,7 @@ const CustomBgAndTextAndBorderColorPost = (props) => {
       style={{ backgroundColor, color: textColor }}
     >
       <div
-        className="pad-12-10 border-2px"
+        className={classes}
         style={{
           borderTopColor,
           borderRightColor,

@@ -1,0 +1,286 @@
+MongoDB:
+
+* https://www.youtube.com/watch?annotation_id=annotation_1642300429&feature=iv&list=PLC3y8-rFHvwiXX1maB5o-CZAIHy4I_ILv&src_vid=cTS6_bbCHlM&v=9gEPiIoAHo8
+
+* http://programmerblog.net/php-mongodb-tutorial/
+
+* https://learnedia.com/install-mongodb-configure-php-xampp-windows/
+
+* https://stackoverflow.com/questions/45705786/mongoclient-class-vs-mongodb-driver-manager-class
+
+* https://www.youtube.com/watch?v=J2qnq8WI6EU&list=PLM4pPs1mzl_NtBTpB7kaIyOlYOULTiQLw  --> Tutorial
+
+* https://www.youtube.com/watch?v=6EkKyqK4ET0&index=1&list=PLVApX3evDwJ1pgIn3ISbS9MRZXWBKeBki  --> Tutorial
+
+* https://www.youtube.com/watch?v=vb8xZ-bvxbg&list=PLLAZ4kZ9dFpOFJ9JcVW9u4PlSWO-VFoao  --> Tutorial
+
+* https://www.youtube.com/watch?v=1uFY60CESlM&list=PL6gx4Cwl9DGDQ5DrbIl20Zu9hx1IjeVhO --> Tutorial - thenewboston
+
+* https://www.youtube.com/watch?v=9gEPiIoAHo8&list=PLC3y8-rFHvwiXX1maB5o-CZAIHy4I_ILv --> Tutorial
+
+* https://www.youtube.com/watch?v=ID20OvxVltM&list=PLyROlY1vFlbdA45cHtcId5NLxPDHJ_lpb --> Tutorial - Marcel van den Bosch
+
+* https://www.youtube.com/watch?v=VSX4a3h4SmQ  -> MongoDB - Aggregation Pipeline (intro)
+
+
+
+* https://www.youtube.com/watch?v=mR-fQRIEmJs&list=PLOZGUoczEcRpJvynKLt91WZM1SuSryYTN --> php Tutorial
+
+* https://www.youtube.com/watch?v=pOJAW4jTjr0
+
+* https://www.youtube.com/watch?v=Kk6Er0c7srU
+
+
+--> Agreegate || Joins
+* https://www.youtube.com/watch?v=5ZZ5jWoqK6M  --> ***
+* https://www.youtube.com/watch?v=7cYT0Qbu9tU  
+
+* https://stackoverflow.com/questions/42091088/match-in-lookup-result ***
+
+
+
+* http://zetcode.com/db/mongodbphp/
+
+* http://www.codeandyou.com/2015/07/list-of-mongodb-gui-management-tools.html
+
+* https://www.youtube.com/watch?v=V9kJbTFnhg4
+
+* 
+
+
+
+
+* https://www.youtube.com/channel/UCtd2ZpbECVuiks1dyKz2IQg  --> Tutorial
+
+
+
+
+
+
+
+
+
+
+
+=======================================  PHP MongoDB functions  ============================================
+
+* To insert only one record :
+	$insertOneResult = $felebs_users->insertOne([
+		'unique_id' => 6285516242, 'first_name' => 'Manoj', 'last_name' => 'Kumar']);
+	echo "<br/>"; printf("Inserted %d documents", $insertOneResult->getInsertedCount());
+
+
+* To insert multiple records :
+$i = 1
+$insertManyResults = $felebs_users->insertMany([
+		['id' => $i++, 'unique_id' => 6285516242, 'first_name' => 'Manoj', 'last_name' => 'Kumar', 'mobile_number' => 9502803482],
+		['id' => $i++, 'unique_id' => 1374685124, 'first_name' => 'Nani', 'last_name' => 'Chinni'],
+		['id' => $i++, 'unique_id' => 6968377294, 'first_name' => 'Kumar', 'last_name' => 'Mahesh'],
+		['id' => $i++, 'unique_id' => 8760079755, 'first_name' => 'Ramesh', 'last_name' => 'Rammy'],
+		['id' => $i++, 'unique_id' => 3734698877, 'first_name' => 'Mahesh', 'last_name' => 'Myyy', 'mobile_number' => 9876543210],
+		['id' => $i++, 'unique_id' => 4965516489, 'first_name' => 'Anvesh', 'last_name' => 'Maddy', 'mobile_number' => 9012345678],
+		['id' => $i++, 'unique_id' => 5174685115, 'first_name' => 'Amar', 'last_name' => 'Jyothi'],
+		['id' => $i++, 'unique_id' => 9556837285, 'first_name' => 'Narender', 'last_name' => 'Mamidi'],
+		['id' => $i++, 'unique_id' => 6656079798, 'first_name' => 'Sree', 'last_name' => 'TP'],
+		['id' => $i++, 'unique_id' => 7584698700, 'first_name' => 'Abhishek', 'last_name' => 'Aarya'],
+	]);
+	echo "<br/>"; printf("Inserted %d documents", $insertManyResults->getInsertedCount());
+
+
+* To empty a collection :
+	$document = $felebs_users->drop();
+
+
+* To get all documents of a collection || Loop through a collection
+	$documents = $felebs_users->find();
+	foreach ($documents as $document) {
+		echo "<br/><pre>"; print_r($document); echo "</pre><br/>";
+	}
+
+
+* To get a specific document in a collection
+	$document = $felebs_users->findOne(array('unique_id'=>6968377294));
+	echo "<br/><pre>"; print_r($document); echo "</pre><br/>";
+
+
+
+* To update a specific document in a collection
+	$updateResult = $felebs_users->updateOne(
+		['unique_id' => 6968377294],
+		['$set' => ['first_name' => 'Kumarr']]
+	);
+	printf("<br/>Matched %d documents \n", $updateResult->getMatchedCount());
+	printf("<br/>Modified %d documents \n", $updateResult->getModifiedCount());
+
+
+* To add new keys and values into all documents of a collection
+	$updateResult = $felebs_users->updateOne(
+		['unique_id' => 6968377294],
+		['$set' => ['first_name' => 'Kumarr']]
+	);
+	printf("<br/>Matched %d documents \n", $updateResult->getMatchedCount());
+	printf("<br/>Modified %d documents \n", $updateResult->getModifiedCount());
+	
+	
+* To know maxBsonObjectSize, maxMessageSizeBytes, maxWriteBatchSize, milliseconds
+$pipeline = [
+     [ '$match' => ['first_name' => 'Manoj'] ],
+     [ '$project' => [ 'friends' => 1, "_id" => 0 ] ]
+];
+$users = $felebs_users->aggregate($pipeline);
+echo "<br/><pre>"; print_r($users); echo "</pre><br/>";
+
+
+
+* Delete Many documents
+	$deleResult = $felebs_users->deleteMany(
+		['first_namee' => 'Kumarr']
+	);
+	printf("<br/>Modified %d documents \n", $deleResult->getDeletedCount());
+
+
+* Delete a field from all documents
+	$updateResult = $felebs_users->updateMany(
+		[],[
+		'$unset' => [        
+			'first_namee' => true
+		]
+	]);
+	printf("<br/>Matched %d documents \n", $updateResult->getMatchedCount());
+
+
+* Delete a field in an array from all documents
+	$updateResult = $felebs_users->updateMany(
+	[],[
+    '$unset' => [        
+        'friends.name' => true
+    ]
+	]);
+	printf("<br/>Matched %d documents \n", $updateResult->getMatchedCount());
+
+
+* Add a field into an array for all documents
+	$updateResult = $felebs_users->updateMany(
+		[],[
+		'$set' => [        
+			'friends.name' => "here"
+		]
+	]);
+	printf("<br/>Matched %d documents \n", $updateResult->getMatchedCount());
+
+
+* Aggregate
+	$pipeline = [
+		 [ '$match' => ['first_name' => 'Manoj'] ],
+		 [ '$sort' => [ 'friends' => 1 ] ],
+		 [ '$project' => [ 'friends' => 1, "_id" => 0 ] ],
+		 [ '$limit' => 1 ],
+	];
+
+	$users = $felebs_users->aggregate($pipeline);
+	foreach ($users as $user) {
+		echo "<br/><pre>"; print_r($user); echo "</pre><br/>";
+	}
+	
+* 	$pipeline = [
+		 [ '$skip' => 20 ],
+		 [ '$limit' => 10 ],
+	];
+
+	$users = $felebs_users->aggregate($pipeline);
+	foreach ($users as $user) {
+		echo "<br/><pre>"; print_r($user); echo "</pre><br/>";
+		
+	}
+
+	
+* $exists 
+$documents = $felebs_users->find(['mobile_number' => ['$exists' => true]]);
+foreach ($documents as $document) {
+	echo "<br/><pre>"; print_r($document); echo "</pre><br/>";
+}
+
+
+* $gte
+$pipeline = [
+     [ '$match' => ['id' => ['$gte' => 5 ]] ]
+];
+
+$users = $felebs_users->aggregate($pipeline);
+foreach ($users as $user) {
+	echo "<br/><pre>"; print_r($user); echo "</pre><br/>";
+}
+
+
+
+* $in
+$pipeline = [
+     [ '$match' => ['id' => ['$in' => [1,2] ]] ]
+];
+$users = $felebs_users->aggregate($pipeline);
+foreach ($users as $user) {
+	echo "<br/><pre>"; print_r($user); echo "</pre><br/>";
+}
+
+
+* $push
+$updateResult = $felebs_users->updateOne( array( "id" => 1 ), array( '$push' => array("friends.user_id"=>123,"friends.user_name"=>"test@gmail.com") ) );
+printf("<br/>Matched %d documents \n", $updateResult->getMatchedCount());
+printf("<br/>Modified %d documents \n", $updateResult->getModifiedCount());
+
+* $insertManyResults = $felebs_users->insertOne([
+		['id' => $i++, 'unique_id' => new MongoDB\BSON\ObjectID(), 'first_name' => 'Manoz', 'last_name' => 'Kumar', 'email' => 'manoz@felebs.com', 'password' => "$encript_password", 'mobile_number' => 9502803482,'friends'=>[],'sent_requests'=>[],'pending_requests'=>[]]
+		]);
+echo "<br/>"; printf("Inserted %d documents", $insertManyResults->getInsertedCount()); echo "<br/><br/>";
+
+
+
+* $pull
+
+	$updateResult = $felebs_activities->updateOne(
+		['unique_id' => "$feleb_key"],
+		['$pull'=> ['shapes' => ['shape' => 'square1']]]
+	);
+	printf("<br/>Matched %d documents \n", $updateResult->getMatchedCount());
+	printf("<br/>Modified %d documents \n", $updateResult->getModifiedCount());
+	
+	
+	
+* 
+	$updateResult = $felebs_activities->updateOne(
+		['unique_id' => "$feleb_key",'shapes.shape' => 'circle'],
+		['$set'=> ['shapes.$.shape' => 'change']]
+	);
+	printf("<br/>Matched %d documents \n", $updateResult->getMatchedCount());
+	printf("<br/>Modified %d documents \n", $updateResult->getModifiedCount());
+
+	
+
+
+
+
+
+
+
+
+=============================================================================================================
+
+Very useful
+
+* https://stackoverflow.com/questions/11261521/mongodb-update-nested-array -> 10*
+* https://stackoverflow.com/questions/44528175/how-to-delete-fields-from-mongodb-mongo-php
+* https://stackoverflow.com/questions/27248556/mongodb-difference-between-push-addtoset
+* https://stackoverflow.com/questions/9506401/mongodb-is-it-possible-to-query-by-associative-array-key
+* https://stackoverflow.com/questions/8901977/mongodb-nested-array-search
+* https://stackoverflow.com/questions/5370925/mongodb-in-php-how-do-i-insert-items-into-an-array-in-a-collection
+* https://stackoverflow.com/questions/39121862/mongodb-php-count-the-number-of-field-in-a-set-of-documents
+* https://stackoverflow.com/questions/27979541/mongodb-trying-to-count-inside-embedded-documents
+* https://blog.programster.org/getting-started-with-mongodb-gridfs-and-php
+* 
+
+
+
+
+
+
+

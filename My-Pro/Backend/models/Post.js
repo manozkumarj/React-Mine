@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
 const { ObjectId } = mongoose.Schema;
 
 const PostSchema = mongoose.Schema({
   uniqueId: {
     type: Number,
+    index: true,
     required: true,
   },
   postProperties: [
@@ -24,12 +24,12 @@ const PostSchema = mongoose.Schema({
     },
   ],
   postedTo: {
-    type: ObjectId,
-    ref: "User",
+    type: String,
+    index: true,
   },
   postedBy: {
-    type: ObjectId,
-    ref: "User",
+    type: String,
+    index: true,
   },
   createdAt: {
     type: Date,
@@ -38,7 +38,7 @@ const PostSchema = mongoose.Schema({
   reactions: [
     {
       reactionTypeId: { type: Number },
-      reactedBy: { type: ObjectId, ref: "User" },
+      reactedBy: { type: String },
       createdAt: { type: Date, default: Date.now },
     },
   ],
@@ -46,7 +46,7 @@ const PostSchema = mongoose.Schema({
     {
       comment: String,
       createdAt: { type: Date, default: Date.now },
-      postedBy: { type: ObjectId, ref: "User" },
+      postedBy: { type: String },
     },
   ],
   privacyId: {
@@ -55,10 +55,12 @@ const PostSchema = mongoose.Schema({
   },
   postTypeId: {
     type: Number,
+    index: true,
     required: true,
   },
   postStatus: {
     type: String,
+    index: true,
     default: "active",
   },
   milliseconds: {

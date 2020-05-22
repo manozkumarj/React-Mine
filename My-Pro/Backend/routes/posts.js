@@ -299,7 +299,23 @@ router.get("/:id", async (req, res) => {
 router.get("/postedTo/:id", async (req, res) => {
   let userId = req.params.id;
   try {
-    const posts = await Post.find({ postedTo: userId }).sort({
+    const posts = await Post.aggregate([
+      { $match: { postedTo: userId.toString() } },
+    ]).sort({
+      date: -1,
+    });
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// Fetches all posts which are postedTo a user
+router.get("/postedToo/:id", async (req, res) => {
+  let userId = req.params.id;
+  try {
+    const posts = await Post.aggregate({ $match: { postedTo: userId } }).sort({
       date: -1,
     });
     res.json(posts);

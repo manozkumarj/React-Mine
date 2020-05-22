@@ -27,6 +27,8 @@ const MiddleSection = (props) => {
   const [posts, setPosts] = useState([]);
   const [loadingPosts, setLoadingPosts] = useState(true);
 
+  let loopId = 1;
+
   useEffect(() => {
     props.getIndividualUserPosts(
       props.centralState.authToken,
@@ -91,7 +93,7 @@ const MiddleSection = (props) => {
               );
 
             return (
-              <div className="item">
+              <div key={loopId++} className="item">
                 <div className="post-n-user-details-container">
                   <div className="post-dp-div">
                     <Link to="/">
@@ -327,7 +329,7 @@ const MiddleSection = (props) => {
           </div>
         )}
         {/* *******************  Context loader - ends ******************** */}
-        <hr class="dividable-hr" />
+        <hr className="dividable-hr" />
       </div>
 
       {/* Image viewer popup - starts */}
