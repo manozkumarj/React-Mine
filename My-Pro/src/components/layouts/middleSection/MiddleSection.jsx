@@ -52,34 +52,37 @@ const MiddleSection = (props) => {
         </div>
       </div>
 
-      {loadingPosts && "Loading..."}
-
       {posts &&
         posts.length > 0 &&
         posts.map((post) => post["postTypeId"] + "<br />")}
 
       {/* *******************  All posts section ******************** */}
       <div className="all-posts-container">
-        {/* *******************  Context loader ******************** */}
-        <div className="item">
-          <div className="animationLoading">
-            <div className="animationLoadingContainer">
-              <div className="animationLoadingUser"></div>
-              <div className="animationLoadingRightContainer">
-                <div className="animationLoadingUsername"></div>
-                <div className="animationLoadingTimestamp"></div>
+        {loadingPosts && (
+          <div id="contextPreloader">
+            <div className="item">
+              <div className="animationLoading">
+                <div className="animationLoadingContainer">
+                  <div className="animationLoadingUser"></div>
+                  <div className="animationLoadingRightContainer">
+                    <div className="animationLoadingUsername"></div>
+                    <div className="animationLoadingTimestamp"></div>
+                  </div>
+                </div>
+                <div className="animationLoadingDivider"></div>
+                <div className="animationLoadingContent"></div>
+                <div className="animationLoadingReactionsCounter"></div>
+                <div className="animationLoadingReactionsDiv">
+                  <div className="animationLoadingReaction"></div>
+                  <div className="animationLoadingReaction"></div>
+                  <div className="animationLoadingReaction"></div>
+                </div>
               </div>
             </div>
-            <div className="animationLoadingDivider"></div>
-            <div className="animationLoadingContent"></div>
-            <div className="animationLoadingReactionsCounter"></div>
-            <div className="animationLoadingReactionsDiv">
-              <div className="animationLoadingReaction"></div>
-              <div className="animationLoadingReaction"></div>
-              <div className="animationLoadingReaction"></div>
-            </div>
           </div>
-        </div>
+        )}
+        {/* *******************  Context loader - ends ******************** */}
+        <hr class="dividable-hr" />
         {/* **********  cornerFold_topRight_bottomLeft remove_cornerShadow post section - starts *************** */}
         <div className="item">
           <div className="post-n-user-details-container">

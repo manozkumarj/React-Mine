@@ -7,6 +7,7 @@
   border-radius: 3px;
 }
 
+/* Context preloader animation - starts */
 .animationLoading {
   background: #fff;
   border: 1px solid;
@@ -120,6 +121,7 @@
   padding: 10px;
   margin: 10px;
 }
+/* Context preloader animation - ends */
 
 /* Greet div related - starts */
 .greet-div {
