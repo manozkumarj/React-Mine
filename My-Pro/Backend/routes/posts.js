@@ -46,7 +46,7 @@ router.post(
       }
 
       let uniqueId = helpers.generateUniqueId();
-      let getMilliseconds = helpers.getMilliseconds;
+      let getMilliseconds = helpers.getMilliseconds();
 
       let post = new Post({
         postProperties: {
@@ -57,7 +57,7 @@ router.post(
         uniqueId,
         privacyId,
         postTypeId,
-        postMilliseconds: getMilliseconds,
+        milliseconds: getMilliseconds,
       });
 
       await post.save();
@@ -104,7 +104,7 @@ router.post(
       }
 
       let uniqueId = helpers.generateUniqueId();
-      let getMilliseconds = helpers.getMilliseconds;
+      let getMilliseconds = helpers.getMilliseconds();
 
       let post = new Post({
         postProperties: {
@@ -117,7 +117,7 @@ router.post(
         uniqueId,
         privacyId,
         postTypeId,
-        postMilliseconds: getMilliseconds,
+        milliseconds: getMilliseconds,
       });
 
       await post.save();
@@ -174,7 +174,7 @@ router.post(
       }
 
       let uniqueId = helpers.generateUniqueId();
-      let getMilliseconds = helpers.getMilliseconds;
+      let getMilliseconds = helpers.getMilliseconds();
       let borderTopColor = borderColor;
       let borderRightColor = borderColor;
       let borderBottomColor = borderColor;
@@ -197,7 +197,7 @@ router.post(
         uniqueId,
         privacyId,
         postTypeId,
-        postMilliseconds: getMilliseconds,
+        milliseconds: getMilliseconds,
       });
 
       await post.save();
@@ -252,7 +252,7 @@ router.post(
       }
 
       let uniqueId = helpers.generateUniqueId();
-      let getMilliseconds = helpers.getMilliseconds;
+      let getMilliseconds = helpers.getMilliseconds();
 
       let post = new Post({
         postProperties: {
@@ -267,7 +267,7 @@ router.post(
         uniqueId,
         privacyId,
         postTypeId,
-        postMilliseconds: getMilliseconds,
+        milliseconds: getMilliseconds,
       });
 
       await post.save();

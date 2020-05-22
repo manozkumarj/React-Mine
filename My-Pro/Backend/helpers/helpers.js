@@ -23,7 +23,7 @@ const generateUniqueId = () => {
 
 const getMilliseconds = () => {
   let d = new Date();
-  return d.getTime().toString;
+  return d.getTime().toString();
 };
 
 /*
