@@ -40,14 +40,14 @@ router.post(
         res.status(400).json({ msg: "User already exists" });
       }
 
-      let uniqueId = helpers.generateUniqueId();
+      let uniqueUserId = helpers.generateUniqueId();
       let getMilliseconds = helpers.getMilliseconds();
 
       user = new User({
         fullName,
         email,
         password,
-        uniqueId,
+        uniqueUserId,
         milliseconds: getMilliseconds,
       });
 

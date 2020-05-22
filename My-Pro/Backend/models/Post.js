@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
-const { ObjectId } = mongoose.Schema;
+// const { ObjectId } = mongoose.Schema;
 
 const PostSchema = mongoose.Schema({
-  uniqueId: {
+  uniquePostId: {
     type: Number,
     index: true,
     required: true,
+    unique: true,
   },
   postProperties: [
     {
@@ -24,11 +25,11 @@ const PostSchema = mongoose.Schema({
     },
   ],
   postedTo: {
-    type: String,
+    type: Number,
     index: true,
   },
   postedBy: {
-    type: String,
+    type: Number,
     index: true,
   },
   createdAt: {

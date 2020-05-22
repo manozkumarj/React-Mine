@@ -14,7 +14,7 @@ router.get("/test", (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const posts = await Post.find().sort({
-      date: -1,
+      milliseconds: -1,
     });
     res.json(posts);
   } catch (err) {
@@ -45,7 +45,7 @@ router.post(
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
 
-      let uniqueId = helpers.generateUniqueId();
+      let uniquePostId = helpers.generateUniqueId();
       let getMilliseconds = helpers.getMilliseconds();
 
       let post = new Post({
@@ -54,7 +54,7 @@ router.post(
         },
         postedTo,
         postedBy: userId,
-        uniqueId,
+        uniquePostId,
         privacyId,
         postTypeId,
         milliseconds: getMilliseconds,
@@ -103,7 +103,7 @@ router.post(
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
 
-      let uniqueId = helpers.generateUniqueId();
+      let uniquePostId = helpers.generateUniqueId();
       let getMilliseconds = helpers.getMilliseconds();
 
       let post = new Post({
@@ -114,7 +114,7 @@ router.post(
         },
         postedTo,
         postedBy: userId,
-        uniqueId,
+        uniquePostId,
         privacyId,
         postTypeId,
         milliseconds: getMilliseconds,
@@ -173,7 +173,7 @@ router.post(
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
 
-      let uniqueId = helpers.generateUniqueId();
+      let uniquePostId = helpers.generateUniqueId();
       let getMilliseconds = helpers.getMilliseconds();
       let borderTopColor = borderColor;
       let borderRightColor = borderColor;
@@ -194,7 +194,7 @@ router.post(
         },
         postedTo,
         postedBy: userId,
-        uniqueId,
+        uniquePostId,
         privacyId,
         postTypeId,
         milliseconds: getMilliseconds,
@@ -251,7 +251,7 @@ router.post(
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
 
-      let uniqueId = helpers.generateUniqueId();
+      let uniquePostId = helpers.generateUniqueId();
       let getMilliseconds = helpers.getMilliseconds();
 
       let post = new Post({
@@ -264,7 +264,7 @@ router.post(
         },
         postedTo,
         postedBy: userId,
-        uniqueId,
+        uniquePostId,
         privacyId,
         postTypeId,
         milliseconds: getMilliseconds,
@@ -286,7 +286,7 @@ router.get("/:id", async (req, res) => {
   let postId = req.params.id;
   try {
     const posts = await Post.findById(postId).sort({
-      date: -1,
+      milliseconds: -1,
     });
     res.json(posts);
   } catch (err) {
@@ -297,12 +297,20 @@ router.get("/:id", async (req, res) => {
 
 // Fetches all posts which are postedTo a user
 router.get("/postedTo/:id", async (req, res) => {
-  let userId = req.params.id;
+  let uniqueUserId = req.params.id;
   try {
     const posts = await Post.aggregate([
-      { $match: { postedTo: userId.toString() } },
+      { $match: { postedTo: uniqueUserId } },
+      {
+        $lookup: {
+          from: "users",
+          localField: "postedTo",
+          foreignField: "uniqueUserId",
+          as: "userDetails",
+        },
+      },
     ]).sort({
-      date: -1,
+      milliseconds: -1,
     });
     res.json(posts);
   } catch (err) {
@@ -313,10 +321,12 @@ router.get("/postedTo/:id", async (req, res) => {
 
 // Fetches all posts which are postedTo a user
 router.get("/postedToo/:id", async (req, res) => {
-  let userId = req.params.id;
+  let uniqueUserId = req.params.id;
   try {
-    const posts = await Post.aggregate({ $match: { postedTo: userId } }).sort({
-      date: -1,
+    const posts = await Post.aggregate({
+      $match: { postedTo: uniqueUserId },
+    }).sort({
+      milliseconds: -1,
     });
     res.json(posts);
   } catch (err) {
@@ -327,10 +337,10 @@ router.get("/postedToo/:id", async (req, res) => {
 
 // Fetches all posts which are postedBy a user
 router.get("/postedBy/:id", async (req, res) => {
-  let userId = req.params.id;
+  let uniqueUserId = req.params.id;
   try {
-    const posts = await Post.find({ postedBy: userId }).sort({
-      date: -1,
+    const posts = await Post.find({ postedBy: uniqueUserId }).sort({
+      milliseconds: -1,
     });
     res.json(posts);
   } catch (err) {
@@ -527,7 +537,7 @@ router.get("/comment/:commentId", async (req, res) => {
     const post = await Post.find({
       comments: { $elemMatch: { _id: commentId } },
     }).sort({
-      date: -1,
+      milliseconds: -1,
     });
     res.json(post);
   } catch (err) {
@@ -542,7 +552,7 @@ router.get("/reaction/:reactionId", async (req, res) => {
     const post = await Post.find({
       reactions: { $elemMatch: { _id: reactionId } },
     }).sort({
-      date: -1,
+      milliseconds: -1,
     });
     res.json(post);
   } catch (err) {

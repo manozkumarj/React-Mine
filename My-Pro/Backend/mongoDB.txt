@@ -1,3 +1,5 @@
+* If we use a column of type 'Mongo ObjectId' for comarision in query, then it won't work.
+
 MongoDB:
 
 * https://www.youtube.com/watch?annotation_id=annotation_1642300429&feature=iv&list=PLC3y8-rFHvwiXX1maB5o-CZAIHy4I_ILv&src_vid=cTS6_bbCHlM&v=9gEPiIoAHo8

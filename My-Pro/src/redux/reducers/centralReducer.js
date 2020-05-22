@@ -79,7 +79,6 @@ const centralReducer = (state = initialState, action) => {
         ...state,
         isRegistrationSuccess: true,
         registrationError: null,
-        authToken: action.payload,
       };
 
     case REGISTRATION_FAILED:
@@ -97,7 +96,7 @@ const centralReducer = (state = initialState, action) => {
         authToken: action.payload.token,
         isLoginSuccess: true,
         loginErrorData: null,
-        loggedInUserId: action.payload.user.id,
+        loggedInUserId: action.payload.user.uniqueUserId,
       };
 
     case LOGIN_FAILED:
