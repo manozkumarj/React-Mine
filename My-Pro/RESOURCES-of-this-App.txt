@@ -4,4 +4,5 @@
 * https://stackoverflow.com/questions/44617825/passing-headers-with-axios-post-request
 * https://stackoverflow.com/questions/37486885/displaying-local-images-in-static-html-served-by-nodejs
 * https://stackoverflow.com/questions/40947650/axios-get-in-url-works-but-with-second-parameter-as-object-it-doesnt
+* https://www.skptricks.com/2017/12/facebook-loading-animation-using-css3.html
 * 

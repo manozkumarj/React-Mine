@@ -21,6 +21,11 @@ const generateUniqueId = () => {
   return uniqueId;
 };
 
+const getMilliseconds = () => {
+  let d = new Date();
+  return d.getTime().toString;
+};
+
 /*
 Genders:
 -----------------------------------
@@ -68,4 +73,4 @@ PostTypes:
       -> cornerStyleSides (topLeft, topRight, bottomLeft, bottomRight, topLeftAndBottomRight, topRightAndBottomLeft, all)
 */
 
-module.exports = { randomString, generateUniqueId };
+module.exports = { randomString, generateUniqueId, getMilliseconds };

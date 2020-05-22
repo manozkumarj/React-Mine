@@ -61,9 +61,8 @@ const PostSchema = mongoose.Schema({
     type: String,
     default: "active",
   },
-  date: {
-    type: Date,
-    default: Date.now,
+  postMilliseconds: {
+    type: String,
   },
 });
 

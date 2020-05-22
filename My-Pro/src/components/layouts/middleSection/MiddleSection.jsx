@@ -18,6 +18,10 @@ import likeThumbEmoji from "../../../emojis/like-thumb-emoji-50.png";
 import PostMenu from "../postMenu/PostMenu";
 import { connect } from "react-redux";
 import { getIndividualUserPosts } from "./../../../redux/actionCreators";
+import DefaultAndCustomBgAndTextColorPost from "./../defaultAndCustomBgAndTextColorPost/DefaultAndCustomBgAndTextColorPost";
+import CustomBgAndTextAndBorderColorPost from "./../customBgAndTextAndBorderColorPost/CustomBgAndTextAndBorderColorPost";
+import CustomBgAndTextAndCornerPost from "./../customBgAndTextAndCornerPost/CustomBgAndTextAndCornerPost";
+import PhotosPost from "./../photosPost/PhotosPost";
 
 const MiddleSection = (props) => {
   const [posts, setPosts] = useState([]);
@@ -54,7 +58,16 @@ const MiddleSection = (props) => {
 
       {posts &&
         posts.length > 0 &&
-        posts.map((post) => post["postTypeId"] + "<br />")}
+        posts.map((post) => {
+          if (post.postTypeId == 1 || post.postTypeId == 4)
+            return <DefaultAndCustomBgAndTextColorPost />;
+          else if (post.postTypeId == 5)
+            return <CustomBgAndTextAndBorderColorPost />;
+          else if (post.postTypeId == 2 || post.postTypeId == 3)
+            return <PhotosPost />;
+          else if (post.postTypeId == 6)
+            return <CustomBgAndTextAndCornerPost />;
+        })}
 
       {/* *******************  All posts section ******************** */}
       <div className="all-posts-container">
