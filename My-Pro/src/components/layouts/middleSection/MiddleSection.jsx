@@ -15,6 +15,10 @@ import rightArrow from "../../../images/right_arrow.png";
 
 import loveHeartsEyesEmoji from "../../../emojis/love-hearts-eyes-emoji-50.png";
 import likeThumbEmoji from "../../../emojis/like-thumb-emoji-50.png";
+import dislikeThumbEmoji from "../../../emojis/dislike-thumb-emoji-50.png";
+import laugherEmoji from "../../../emojis/face-with-tears-of-joy-emoji-50.png";
+import angryEmoji from "../../../emojis/angry-emoji-50.png";
+import wowEmoji from "../../../emojis/wow-emoji-50.png";
 import PostMenu from "../postMenu/PostMenu";
 import { connect } from "react-redux";
 import { getIndividualUserPosts } from "./../../../redux/actionCreators";
@@ -167,12 +171,6 @@ const MiddleSection = (props) => {
                     >
                       <span className="reactions-holder-inner">
                         <img
-                          src={loveHeartsEyesEmoji}
-                          alt="loveHeartsEyesEmoji"
-                          width="38px"
-                          className="reaction-emoji"
-                        />
-                        <img
                           src={likeThumbEmoji}
                           alt="likeThumbEmoji"
                           width="38px"
@@ -185,44 +183,26 @@ const MiddleSection = (props) => {
                           className="reaction-emoji"
                         />
                         <img
-                          src={likeThumbEmoji}
-                          alt="likeThumbEmoji"
+                          src={laugherEmoji}
+                          alt="laugherEmoji"
                           width="38px"
                           className="reaction-emoji"
                         />
                         <img
-                          src={loveHeartsEyesEmoji}
-                          alt="loveHeartsEyesEmoji"
+                          src={angryEmoji}
+                          alt="angryEmoji"
                           width="38px"
                           className="reaction-emoji"
                         />
                         <img
-                          src={likeThumbEmoji}
-                          alt="likeThumbEmoji"
+                          src={wowEmoji}
+                          alt="wowEmoji"
                           width="38px"
                           className="reaction-emoji"
                         />
                         <img
-                          src={loveHeartsEyesEmoji}
-                          alt="loveHeartsEyesEmoji"
-                          width="38px"
-                          className="reaction-emoji"
-                        />
-                        <img
-                          src={likeThumbEmoji}
-                          alt="likeThumbEmoji"
-                          width="38px"
-                          className="reaction-emoji"
-                        />
-                        <img
-                          src={loveHeartsEyesEmoji}
-                          alt="loveHeartsEyesEmoji"
-                          width="38px"
-                          className="reaction-emoji"
-                        />
-                        <img
-                          src={likeThumbEmoji}
-                          alt="likeThumbEmoji"
+                          src={dislikeThumbEmoji}
+                          alt="dislikeThumbEmoji"
                           width="38px"
                           className="reaction-emoji"
                         />
