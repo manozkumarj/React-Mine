@@ -21,7 +21,7 @@ export const registerAccount = (accountDetails) => {
     API.post(`users`, accountDetails, { headers })
       .then((res) => {
         console.log(res.data);
-        dispatch({ type: REGISTRATION_SUCCESS, payload: res.data.token });
+        dispatch({ type: REGISTRATION_SUCCESS, payload: res.data });
       })
       .catch((err) => {
         console.log(err.response.data.msg);

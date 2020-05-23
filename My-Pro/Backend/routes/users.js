@@ -43,6 +43,8 @@ router.post(
       let uniqueUserId = helpers.generateUniqueId();
       let getMilliseconds = helpers.getMilliseconds();
 
+      console.log("uniqueUserId " + uniqueUserId);
+
       user = new User({
         fullName,
         email,
@@ -227,6 +229,7 @@ router.post(
             token: randomChars + "@@" + token,
             user: {
               id: user._id,
+              uniqueUserId: user.uniqueUserId,
               fullName: user.fullName,
               email: user.email,
               primaryDp: user.primaryDp,
@@ -372,6 +375,19 @@ router.put("/delete-friend-request/:userId/:friendId", async (req, res) => {
     );
 
     res.json(sentUserDetails);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route     GET api/users/drop
+// @desc      Drop users collection
+// @access    public
+router.get("/drop", async (req, res) => {
+  try {
+    const users = await User.drop();
+    res.json(users);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

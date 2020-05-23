@@ -37,10 +37,10 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    let userId = req.user._id;
+    let userId = req.user.uniqueUserId;
     const { postContent, postedTo, postTypeId, privacyId } = req.body;
     try {
-      let user = await User.findById(postedTo);
+      let user = await User.findOne({ uniqueUserId: postedTo });
       if (!user) {
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
@@ -300,7 +300,7 @@ router.get("/postedTo/:id", async (req, res) => {
   let uniqueUserId = req.params.id;
   try {
     const posts = await Post.aggregate([
-      { $match: { postedTo: uniqueUserId } },
+      { $match: { postedTo: +uniqueUserId } },
       {
         $lookup: {
           from: "users",

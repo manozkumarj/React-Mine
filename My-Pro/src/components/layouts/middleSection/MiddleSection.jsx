@@ -106,7 +106,7 @@ const MiddleSection = (props) => {
                   </div>
                   <div className="postInfo-n-user-details-div">
                     <div className="post-details-div">
-                      <Link to="/">Manoj Kumar</Link>
+                      <Link to="/">{post.userDetails[0].fullName}</Link>
                       <span
                         className="post-vr-dots"
                         data-post-id="1"
