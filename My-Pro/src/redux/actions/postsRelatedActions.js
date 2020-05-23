@@ -7,9 +7,12 @@ import {
   IS_LOADING_POSTS,
 } from "./../actionTypes/postsRelatedTypes";
 
-let headers = {
-  "Content-Type": "application/json",
-};
+let headers = new Headers();
+headers.append("Content-Type", "application/json");
+headers.append("Accept", "application/json");
+headers.append("Access-Control-Allow-Origin", "*");
+headers.append("Access-Control-Allow-Credentials", "true");
+headers.append("GET", "POST", "OPTIONS");
 
 // All types of post creation handler -- Starts
 let apiEndPoint;
@@ -86,19 +89,54 @@ export const createPost = (
       }
     }
 
-    headers["x-auth-token"] = authToken;
+    if (
+      postTypeId === 1 ||
+      postTypeId === 4 ||
+      postTypeId === 5 ||
+      postTypeId === 6
+    ) {
+      headers["x-auth-token"] = authToken;
 
-    return (dispatch) => {
-      API.post(apiEndPoint, postDetailsObj, { headers })
-        .then((res) => {
-          console.log(res.data);
-          dispatch({ type: CREATE_POST });
-        })
-        .catch((err) => {
-          console.log(err.response.data);
-          dispatch({ type: CREATE_POST_ERROR, payload: err.response.data.msg });
-        });
-    };
+      return (dispatch) => {
+        API.post(apiEndPoint, postDetailsObj, { headers })
+          .then((res) => {
+            console.log(res.data);
+            dispatch({ type: CREATE_POST });
+          })
+          .catch((err) => {
+            console.log(err.response.data);
+            dispatch({
+              type: CREATE_POST_ERROR,
+              payload: err.response.data.msg,
+            });
+          });
+      };
+    } else {
+      return (dispatch) => {
+        // dispatch({
+        //   type: CREATE_POST_ERROR,
+        //   payload: "This is photos post testing",
+        // });
+        headers["x-auth-token"] = authToken;
+
+        API.post(
+          "http://localhost/my-pro-crop-and-upload-photos/crop-and-upload.php",
+          postDetailsObj,
+          { headers }
+        )
+          .then((res) => {
+            console.log(res);
+            dispatch({ type: CREATE_POST });
+          })
+          .catch((err) => {
+            console.log(err);
+            dispatch({
+              type: CREATE_POST_ERROR,
+              payload: "Something went wrong",
+            });
+          });
+      };
+    }
   }
 };
 // All types of post creation handler -- Ends

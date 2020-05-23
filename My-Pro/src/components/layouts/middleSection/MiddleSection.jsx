@@ -19,6 +19,7 @@ import dislikeThumbEmoji from "../../../emojis/dislike-thumb-emoji-50.png";
 import laugherEmoji from "../../../emojis/face-with-tears-of-joy-emoji-50.png";
 import angryEmoji from "../../../emojis/angry-emoji-50.png";
 import wowEmoji from "../../../emojis/wow-emoji-50.png";
+import cryingEmoji from "../../../emojis/crying-emoji-50.png";
 import PostMenu from "../postMenu/PostMenu";
 import { connect } from "react-redux";
 import { getIndividualUserPosts } from "./../../../redux/actionCreators";
@@ -197,6 +198,12 @@ const MiddleSection = (props) => {
                         <img
                           src={wowEmoji}
                           alt="wowEmoji"
+                          width="38px"
+                          className="reaction-emoji"
+                        />
+                        <img
+                          src={cryingEmoji}
+                          alt="cryingEmoji"
                           width="38px"
                           className="reaction-emoji"
                         />

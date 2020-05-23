@@ -41,7 +41,9 @@ const PostMenu = (props) => {
     console.log(event.target.files);
     console.log(event.target.files[0]);
     let selectedFiles = event.target.files;
-    setPostImages(selectedFiles);
+
+    const filesData = new FormData();
+
     let selectedFilesLength = event.target.files.length;
 
     if (selectedFilesLength > 10) {
@@ -52,6 +54,7 @@ const PostMenu = (props) => {
     let isFileSizeExceededLimit = false;
 
     for (let i = 0; i < selectedFilesLength; i++) {
+      filesData.append("file[" + i + "]", selectedFilesLength[i]);
       // console.log(selectedFiles[i]["name"]);
       let fileSize = selectedFiles[i]["size"];
       console.log("fileSize --> " + fileSize);
@@ -65,6 +68,8 @@ const PostMenu = (props) => {
       alert("One of selected files size is more than 5 MB");
       return false;
     }
+
+    setPostImages(filesData);
 
     var files = event.target.files,
       filesLength = files.length;
@@ -89,6 +94,7 @@ const PostMenu = (props) => {
         fileReader.readAsDataURL(f);
       }
     } else {
+      setPostImages(null);
       alert("You can upload maximum of 10 images");
     }
   };
