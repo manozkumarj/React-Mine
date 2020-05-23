@@ -10,3 +10,15 @@
 * https://stackoverflow.com/questions/16310598/unable-to-use-match-operator-for-mongodb-mongoose-aggregation-with-objectid
 * https://stackoverflow.com/questions/37705517/mongodb-lookup-not-working-with-id
 * 
+
+*** https://fengyuanchen.github.io/compressorjs/ ***
+
+
+************************ Didn't use But useful **************************************
+* https://www.youtube.com/watch?v=MdjqacsMn8s
+* https://www.youtube.com/watch?v=mNDRQDoMjls
+* https://www.youtube.com/watch?v=0KFaqL6cbMY
+* https://www.npmjs.com/package/compress-images
+* https://www.youtube.com/watch?v=WeZFJe90ijg  ***
+*** https://awesomeopensource.com/project/alextanhongpin/compress.js?categoryPage=13  ***
+* 

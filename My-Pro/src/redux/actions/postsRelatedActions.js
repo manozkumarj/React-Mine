@@ -1,4 +1,6 @@
 import API from "./../../api";
+import axios from "axios";
+
 import {
   CREATE_POST,
   CREATE_POST_ERROR,
@@ -95,7 +97,7 @@ export const createPost = (
       postTypeId === 5 ||
       postTypeId === 6
     ) {
-      headers["x-auth-token"] = authToken;
+      headers.append("x-auth-token", authToken);
 
       return (dispatch) => {
         API.post(apiEndPoint, postDetailsObj, { headers })
@@ -117,13 +119,17 @@ export const createPost = (
         //   type: CREATE_POST_ERROR,
         //   payload: "This is photos post testing",
         // });
-        headers["x-auth-token"] = authToken;
+        // headers.append("x-auth-token", authToken);
+        headers.append("Content-type", "multipart/form-data");
 
-        API.post(
-          "http://localhost/my-pro-crop-and-upload-photos/crop-and-upload.php",
-          postDetailsObj,
-          { headers }
-        )
+        axios
+          .post(
+            "http://localhost/my-pro-crop-and-upload-photos/crop-and-upload.php",
+            postDetailsObj,
+            {
+              headers,
+            }
+          )
           .then((res) => {
             console.log(res);
             dispatch({ type: CREATE_POST });
