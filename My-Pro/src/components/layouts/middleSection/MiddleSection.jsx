@@ -109,10 +109,13 @@ const MiddleSection = (props) => {
                       <Link to="/">{post.userDetails[0].fullName}</Link>
                       <span
                         className="post-vr-dots"
-                        data-post-id="1"
+                        data-post-id={post.uniquePostId}
                         id="post-more-options"
                       >
-                        <ul className="post-more-options-ul post-more-options-ul-1">
+                        <ul
+                          className="post-more-options-ul"
+                          id={"post-more-options-ul-" + post.uniquePostId}
+                        >
                           <li>Hide</li>
                           <li>Open in new tab</li>
                           <li>Delete</li>
@@ -154,11 +157,14 @@ const MiddleSection = (props) => {
                 <div className="post-actions-container">
                   <span
                     className="action-item hover-ul like-button"
-                    data-post-id="1"
+                    data-post-id={post.uniquePostId}
                   >
                     Like
                     {/* reactions-holder - starts */}
-                    <span className="reactions-holder reactions-holder-1">
+                    <span
+                      className="reactions-holder"
+                      id={"reactions-holder-" + post.uniquePostId}
+                    >
                       <span className="reactions-holder-inner">
                         <img
                           src={loveHeartsEyesEmoji}
@@ -241,38 +247,6 @@ const MiddleSection = (props) => {
                       <Link to="/">
                         <img
                           className="post-comment-user-dp"
-                          src={mark}
-                          alt="User name"
-                        />
-                      </Link>
-                    </div>
-                    <div className="post-comment-info-n-user-details-div">
-                      <div className="post-comment-user-div">
-                        <Link to="/">Manoj Kumar</Link>
-                        <span
-                          className="post-comment-vr-dots"
-                          data-post-comment-id="1"
-                          id="post-comment-more-options"
-                        >
-                          <ul className="post-comment-more-options-ul post-comment-more-options-ul-1">
-                            <li>Hide</li>
-                            <li>Delete</li>
-                          </ul>
-                        </span>
-                      </div>
-                      <div className="post-comment">
-                        This is my first test for updates div. Just to check
-                        whether it's working or not.This is my first test for
-                        updates div. Just to check whether it's working or not.
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="post-individual-comment-container">
-                    <div className="post-dp-div">
-                      <Link to="/">
-                        <img
-                          className="post-comment-user-dp"
                           src={kohli}
                           alt="User name"
                         />
@@ -283,10 +257,16 @@ const MiddleSection = (props) => {
                         <Link to="/">Manoj Kumar</Link>
                         <span
                           className="post-comment-vr-dots"
-                          data-post-comment-id="2"
+                          data-post-comment-id={post.uniquePostId}
                           id="post-comment-more-options"
                         >
-                          <ul className="post-comment-more-options-ul post-comment-more-options-ul-2">
+                          <ul
+                            className="post-comment-more-options-ul"
+                            id={
+                              "post-comment-more-options-ul-" +
+                              post.uniquePostId
+                            }
+                          >
                             <li>Hide</li>
                             <li>Delete</li>
                           </ul>
