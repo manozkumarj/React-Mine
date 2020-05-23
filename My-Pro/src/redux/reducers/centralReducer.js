@@ -81,6 +81,8 @@ const centralReducer = (state = initialState, action) => {
         registrationError: null,
         authToken: action.payload.token,
         isLoginSuccess: true,
+        loggedInUserDetails: action.payload.user,
+        loggedInUserId: action.payload.user.uniqueUserId,
       };
 
     case REGISTRATION_FAILED:

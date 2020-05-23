@@ -59,13 +59,15 @@ router.post(
       // console.log("User object is below");
       // console.log(user);
       const payload = {
-        user: {
-          id: user.id,
-        },
+        uniqueUserId,
+        fullName,
+        email,
+        primaryDp: user.primaryDp,
+        secondaryDp: user.secondaryDp,
       };
 
       jwt.sign(
-        payload,
+        { data: payload },
         config.get("jwtSecret"),
         {
           expiresIn: 360000,
@@ -75,7 +77,11 @@ router.post(
 
           let randomChars = helpers.randomString();
           token = randomChars + "@@" + token;
-          res.json({ token });
+          res.json({
+            token,
+            user: payload,
+            success: true,
+          });
         }
       );
     } catch (err) {

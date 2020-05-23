@@ -21,6 +21,7 @@ export const registerAccount = (accountDetails) => {
     API.post(`users`, accountDetails, { headers })
       .then((res) => {
         console.log(res.data);
+        localStorage.setItem("authToken", res.data.token);
         dispatch({ type: REGISTRATION_SUCCESS, payload: res.data });
       })
       .catch((err) => {

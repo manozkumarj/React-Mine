@@ -88,7 +88,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    let userId = req.user._id;
+    let userId = req.user.uniqueUserId;
     const {
       postContent,
       postedTo,
@@ -98,7 +98,7 @@ router.post(
       textColor,
     } = req.body;
     try {
-      let user = await User.findById(postedTo);
+      let user = await User.findOne({ uniqueUserId: postedTo });
       if (!user) {
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
@@ -154,7 +154,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    let userId = req.user._id;
+    let userId = req.user.uniqueUserId;
 
     const {
       postContent,
@@ -168,7 +168,7 @@ router.post(
       borderStyleSides,
     } = req.body;
     try {
-      let user = await User.findById(postedTo);
+      let user = await User.findOne({ uniqueUserId: postedTo });
       if (!user) {
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
@@ -233,7 +233,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    let userId = req.user._id;
+    let userId = req.user.uniqueUserId;
 
     const {
       postContent,
@@ -246,7 +246,7 @@ router.post(
       cornerStyleSides,
     } = req.body;
     try {
-      let user = await User.findById(postedTo);
+      let user = await User.findOne({ uniqueUserId: postedTo });
       if (!user) {
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
@@ -319,27 +319,11 @@ router.get("/postedTo/:id", async (req, res) => {
   }
 });
 
-// Fetches all posts which are postedTo a user
-router.get("/postedToo/:id", async (req, res) => {
-  let uniqueUserId = req.params.id;
-  try {
-    const posts = await Post.aggregate({
-      $match: { postedTo: uniqueUserId },
-    }).sort({
-      milliseconds: -1,
-    });
-    res.json(posts);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
 // Fetches all posts which are postedBy a user
 router.get("/postedBy/:id", async (req, res) => {
   let uniqueUserId = req.params.id;
   try {
-    const posts = await Post.find({ postedBy: uniqueUserId }).sort({
+    const posts = await Post.find({ postedBy: +uniqueUserId }).sort({
       milliseconds: -1,
     });
     res.json(posts);
