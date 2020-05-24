@@ -1,0 +1,84 @@
+<input type="file" id="fileOpload"><br>
+
+<img src="" alt="Image preview..." id="image">
+<br /><br />
+<canvas id="canvas" width="1024" height="1024"></canvas>
+
+<script type="text/javascript">
+	function previewFile() {
+
+var preview = document.querySelector('img');
+
+var file = document.querySelector('input[type=file]').files[0];
+
+var reader = new FileReader();
+
+console.log("file details are below");
+console.log(file);
+
+var percentage = 1;
+var percentage03 = 0.3;
+var percentage07 = 0.7;
+var fileSize = file.size;
+var fileWidth;
+var fileHeight;
+
+reader.addEventListener("load", function () {
+
+preview.src = reader.result;
+fileHeight = preview.height;
+fileWidth = preview.width;
+console.log("fileHeight details are below");
+console.log(fileHeight);
+console.log("fileWidth details are below");
+console.log(fileWidth);
+console.log("fileSize details are below");
+console.log(fileSize);
+
+preview.onload = function () {
+
+var canvas = document.getElementById("canvas");
+
+var ctx = canvas.getContext("2d");
+
+if(preview.width > 840){
+canvas.height = canvas.width * (preview.height / preview.width);
+}else{
+canvas.height = canvas.height;
+}
+
+
+var oc = document.createElement('canvas'),octx = oc.getContext('2d');
+
+if(fileSize > 500000){
+	oc.width = preview.width * percentage03;
+	oc.height = preview.height * percentage03;
+}else{
+	oc.width = preview.width * percentage;
+	oc.height = preview.height * percentage;
+}
+
+canvas.width = oc.width;
+
+canvas.height = oc.height;
+
+octx.drawImage(preview, 0, 0, oc.width, oc.height);
+
+octx.drawImage(oc, 0, 0, oc.width, oc.height);
+
+ctx.drawImage(oc, 0, 0, oc.width, oc.height,0, 0, canvas.width, canvas.height);
+
+}
+
+}, false);
+
+if (file) {
+
+reader.readAsDataURL(file);
+
+}
+
+}
+
+document.getElementById('fileOpload').addEventListener('change', previewFile);
+</script>
