@@ -2,9 +2,10 @@
 
 <img src="" alt="Image preview..." id="image">
 <br /><br />
-<canvas id="canvas" width="1024" height="1024"></canvas>
+<canvas id="canvas" height=500 width=500></canvas>
 
 <script type="text/javascript">
+
 	function previewFile() {
 
 var preview = document.querySelector('img');
@@ -16,9 +17,7 @@ var reader = new FileReader();
 console.log("file details are below");
 console.log(file);
 
-var percentage = 1;
-var percentage03 = 0.3;
-var percentage07 = 0.7;
+var percentage = 0.2;
 var fileSize = file.size;
 var fileWidth;
 var fileHeight;
@@ -26,12 +25,12 @@ var fileHeight;
 reader.addEventListener("load", function () {
 
 preview.src = reader.result;
-fileHeight = preview.height;
-fileWidth = preview.width;
-console.log("fileHeight details are below");
-console.log(fileHeight);
-console.log("fileWidth details are below");
-console.log(fileWidth);
+
+console.log("preview.height details are below");
+console.log(preview.height);
+console.log("preview.width details are below");
+console.log(preview.width);
+
 console.log("fileSize details are below");
 console.log(fileSize);
 
@@ -42,21 +41,27 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
 if(preview.width > 840){
-canvas.height = canvas.width * (preview.height / preview.width);
+	console.log("Log condition - 1");
+	canvas.height = canvas.width * (preview.height / preview.width);
 }else{
-canvas.height = canvas.height;
+	console.log("Log condition - 2");
+	canvas.height = preview.width;
 }
-
 
 var oc = document.createElement('canvas'),octx = oc.getContext('2d');
 
-if(fileSize > 500000){
-	oc.width = preview.width * percentage03;
-	oc.height = preview.height * percentage03;
-}else{
+
+if(fileSize > 1000000){
+	console.log("1");
+	percentage = 0.1;
+}
+else if(fileSize < 1000000){
+	console.log("2");
+	percentage = 1;
+}
+
 	oc.width = preview.width * percentage;
 	oc.height = preview.height * percentage;
-}
 
 canvas.width = oc.width;
 

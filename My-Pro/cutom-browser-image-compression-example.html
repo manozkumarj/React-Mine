@@ -1,0 +1,36 @@
+<input type="file" accept="image/*" onchange="handleImageUpload(event);"><br>
+
+<br /><br />
+<img src="" alt="Image preview..." id="image">
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@latest/dist/browser-image-compression.js"></script>
+
+<script type="text/javascript">
+
+async function handleImageUpload(event) {
+var preview = document.querySelector('img');
+ 
+  const imageFile = event.target.files[0];
+  console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
+  console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+ 
+  const options = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1024,
+    useWebWorker: true,
+    fileType: 'png'
+  }
+  try {
+    const compressedFile = await imageCompression(imageFile, options);
+    console.log(compressedFile);
+    preview.src = URL.createObjectURL(compressedFile);
+    console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+    console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+ 
+    await uploadToServer(compressedFile); // write your own logic
+  } catch (error) {
+    console.log(error);
+  }
+ 
+}
+</script>
