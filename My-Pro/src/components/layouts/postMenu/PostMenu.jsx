@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
+import imageCompression from "browser-image-compression";
 import "./postMenu.css";
 
 import whitecam from "../../../icons/whitecam.png";
@@ -27,7 +28,7 @@ const PostMenu = (props) => {
 
   const $ = window.$;
 
-  const maxFileSize = 1048576 * 5;
+  const maxFileSize = 1048576 * 10;
   // console.log("maxFileSize --> " + maxFileSize);
 
   const filesPickerRef = useRef();
@@ -37,9 +38,17 @@ const PostMenu = (props) => {
     $("#previewer").html("");
   };
 
-  const fileChangeHandler = (event) => {
+  const fileChangeHandler = async (event) => {
     console.log(event.target.files);
     console.log(event.target.files[0]);
+
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1024,
+      useWebWorker: true,
+      fileType: "png",
+    };
+
     let selectedFiles = event.target.files;
 
     const filesData = new FormData();
@@ -54,45 +63,81 @@ const PostMenu = (props) => {
     let isFileSizeExceededLimit = false;
 
     for (let i = 0; i < selectedFilesLength; i++) {
-      filesData.append("file[" + i + "]", selectedFilesLength[i]);
-      // console.log(selectedFiles[i]["name"]);
+      filesData.append("file[" + i + "]", selectedFiles[i]);
+      console.log(selectedFiles[i]);
       let fileSize = selectedFiles[i]["size"];
+      let imgName = selectedFiles[i]["name"];
+
+      let splitImgExtension = imgName.split(".");
+      let imgExtension = splitImgExtension[splitImgExtension.length - 1];
+      console.log("imgExtension  --> " + imgExtension);
+
       console.log("fileSize --> " + fileSize);
-      if (fileSize > maxFileSize) {
+      console.log("imgName  --> " + imgName);
+      if (
+        fileSize > maxFileSize ||
+        (imgExtension !== "jpg" &&
+          imgExtension !== "jpeg" &&
+          imgExtension !== "png" &&
+          imgExtension !== "webp")
+      ) {
         isFileSizeExceededLimit = true;
       }
     }
 
     if (isFileSizeExceededLimit) {
-      console.log("One of selected files size is more than 5 MB");
-      alert("One of selected files size is more than 5 MB");
+      // console.log("One of selected files size is more than 5 MB");
+      alert("One of selected files size is not acceptable");
       return false;
     }
 
-    setPostImages(filesData);
+    console.log("filesData is below");
+    console.log(filesData);
 
-    var files = event.target.files,
-      filesLength = files.length;
+    // const entries = [...filesData.entries()];
+    // console.log(entries);
+    // setPostImages(filesData);
+
+    const compressedFilesData = new FormData();
+
+    var files = event.target.files;
+    let filesLength = files.length;
+    let imageSrc;
+    let compressedFile;
     if (filesLength < 11) {
       var image_holder = $("#previewer");
       image_holder.html("");
       for (var i = 0; i < filesLength; i++) {
-        var f = files[i];
+        var imageFile = files[i];
+
+        compressedFile = await imageCompression(imageFile, options);
+        imageSrc = URL.createObjectURL(compressedFile);
+        console.log(
+          `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+        );
+
+        compressedFilesData.append("file[" + i + "]", imageSrc);
+
         var fileReader = new FileReader();
         fileReader.onload = function (e) {
           var file = e.target;
           $(
             '<div class="thumbimage">' +
               '<div class=\'thumbin\'><img class="imageThumb" src="' +
-              e.target.result +
+              imageSrc +
               '" alt="thumbnail" /></div>' +
               "<br/>" +
               "</div>"
           ).appendTo(image_holder);
           $(".popPic1").hide();
         };
-        fileReader.readAsDataURL(f);
+        fileReader.readAsDataURL(imageFile);
       }
+
+      const compressedFilesDataEntries = [...compressedFilesData.entries()];
+      console.log(compressedFilesDataEntries);
+
+      setPostImages(compressedFilesData);
     } else {
       setPostImages(null);
       alert("You can upload maximum of 10 images");
@@ -145,7 +190,7 @@ const PostMenu = (props) => {
           type="file"
           id="imageupload"
           style={{ display: "none" }}
-          accept=".png, .jpg, .jpeg"
+          accept=".png, .jpg, .jpeg, .PNG, .JPG, .JPEG, .webp, .WEBP"
           ref={filesPickerRef}
           onChange={fileChangeHandler}
           multiple

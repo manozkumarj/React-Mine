@@ -93,6 +93,8 @@ export const createPost = (
 
     if (
       postTypeId === 1 ||
+      postTypeId === 2 ||
+      postTypeId === 3 ||
       postTypeId === 4 ||
       postTypeId === 5 ||
       postTypeId === 6
@@ -110,35 +112,6 @@ export const createPost = (
             dispatch({
               type: CREATE_POST_ERROR,
               payload: err.response.data.msg,
-            });
-          });
-      };
-    } else {
-      return (dispatch) => {
-        // dispatch({
-        //   type: CREATE_POST_ERROR,
-        //   payload: "This is photos post testing",
-        // });
-        // headers.append("x-auth-token", authToken);
-        headers.append("Content-type", "multipart/form-data");
-
-        axios
-          .post(
-            "http://localhost/my-pro-crop-and-upload-photos/crop-and-upload.php",
-            postDetailsObj,
-            {
-              headers,
-            }
-          )
-          .then((res) => {
-            console.log(res);
-            dispatch({ type: CREATE_POST });
-          })
-          .catch((err) => {
-            console.log(err);
-            dispatch({
-              type: CREATE_POST_ERROR,
-              payload: "Something went wrong",
             });
           });
       };

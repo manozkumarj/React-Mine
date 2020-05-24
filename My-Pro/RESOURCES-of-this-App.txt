@@ -7,6 +7,7 @@
 * https://www.skptricks.com/2017/12/facebook-loading-animation-using-css3.html
 * https://www.quora.com/How-can-I-compress-an-image-using-JavaScript
 * https://www.npmjs.com/package/browser-image-compression  ---> Using plugin for img compression
+* https://www.valentinog.com/blog/formdata/
 * 
 
 
