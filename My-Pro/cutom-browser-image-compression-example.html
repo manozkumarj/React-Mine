@@ -1,36 +1,113 @@
-<input type="file" accept="image/*" onchange="handleImageUpload(event);"><br>
+<input
+  type="file"
+  accept="image/*"
+  onchange="handleImageUpload(event);"
+  multiple
+/><br />
 
 <br /><br />
-<img src="" alt="Image preview..." id="image">
+<!-- <img src="" alt="Image preview..." id="image" /> -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@latest/dist/browser-image-compression.js"></script>
+<div id="previewer"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/browser-image-compression@latest/dist/browser-image-compression.js"
+></script>
 
 <script type="text/javascript">
+  async function handleImageUpload(event) {
+    $("#previewer").html("");
+    var preview = document.querySelector("img");
+    var image_holder = $("#previewer");
 
-async function handleImageUpload(event) {
-var preview = document.querySelector('img');
- 
-  const imageFile = event.target.files[0];
-  console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
-  console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
- 
-  const options = {
-    maxSizeMB: 1,
-    maxWidthOrHeight: 1024,
-    useWebWorker: true,
-    fileType: 'png'
+    var files = event.target.files;
+    let selectedFilesLength = files.length;
+
+    if (selectedFilesLength > 10) {
+      alert("You can upload maximum of 10 images");
+      return false;
+    }
+
+    for (var i = 0; i < selectedFilesLength; i++) {
+      const imageFile = files[i];
+      // console.log("originalFile instanceof Blob", imageFile instanceof Blob); // true
+      console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+
+      $imgName = imageFile.name;
+      console.log("imgName  --> " + $imgName);
+
+      $splitImgExtension = $imgName.split(".");
+      $imgExtension = $splitImgExtension[$splitImgExtension.length - 1];
+      console.log("imgExtension  --> " + $imgExtension);
+      let compressedFile;
+      let mainSrc;
+
+      const options = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1024,
+        useWebWorker: true,
+        fileType: "png",
+      };
+      try {
+        if (
+          $imgExtension === "jpg" ||
+          $imgExtension === "jpeg" ||
+          $imgExtension === "png" ||
+          $imgExtension === "webp"
+        ) {
+          compressedFile = await imageCompression(imageFile, options);
+          mainSrc = URL.createObjectURL(compressedFile);
+          console.log(
+            `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+          ); // smaller than maxSizeMB
+          console.log(compressedFile);
+        } else {
+          mainSrc = event.target.result;
+        }
+        // preview.src = URL.createObjectURL(compressedFile);
+        // console.log(
+        //   "compressedFile instanceof Blob",
+        //   compressedFile instanceof Blob
+        // ); // true
+
+        $(
+          '<div class="thumbimage">' +
+            '<div class=\'thumbin\'><img class="imageThumb" src="' +
+            mainSrc +
+            '" alt="thumbnail" /></div>' +
+            "<br/>" +
+            "</div> <hr />"
+        ).appendTo(image_holder);
+
+        // await uploadToServer(compressedFile); // write your own logic
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
-  try {
-    const compressedFile = await imageCompression(imageFile, options);
-    console.log(compressedFile);
-    preview.src = URL.createObjectURL(compressedFile);
-    console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
-    console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
- 
-    await uploadToServer(compressedFile); // write your own logic
-  } catch (error) {
-    console.log(error);
-  }
- 
-}
 </script>
+<style type="text/css">
+  #previewer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .thumbimage {
+    margin: 2px;
+    margin-bottom: 1px;
+    margin-top: 3px;
+    border: solid 1px var(--site-color);
+    border-radius: 2px;
+  }
+  .thumbin {
+    width: 100%;
+    height: 100%;
+  }
+
+  .imageThumb {
+    cursor: pointer;
+  }
+</style>
