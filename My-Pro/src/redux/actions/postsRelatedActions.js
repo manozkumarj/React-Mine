@@ -62,6 +62,7 @@ export const createPost = (
       photosPayload.append("privacyId", postDetailsObject.postPrivacyProp);
       photosPayload.append("postTypeId", postTypeId);
       photosPayload.append("postedTo", postedTo);
+
       postDetailsObject.postImagesProp.forEach((file) => {
         photosPayload.append("images", file);
       });
@@ -112,7 +113,8 @@ export const createPost = (
     } else if (postTypeId === 2) {
       console.log("photosPayload is below");
       console.log(photosPayload);
-      headers["Content-Type"] = "multipart/form-data";
+      // headers["Content-Type"] = "multipart/form-data";
+      headers["Content-Type"] = "application/json";
 
       return (dispatch) => {
         API.post(apiEndPoint, photosPayload, { headers })

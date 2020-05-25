@@ -28,4 +28,6 @@
 * https://www.youtube.com/watch?v=WeZFJe90ijg  ***
 *** https://awesomeopensource.com/project/alextanhongpin/compress.js?categoryPage=13  ***
 *** https://fengyuanchen.github.io/compressorjs/ ***
+* https://www.w3jar.com/express-js-validate-form-data-using-express-validator/
+* https://flaviocopes.com/express-validate-input/
 * 

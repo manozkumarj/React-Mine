@@ -76,17 +76,55 @@ router.post(
 router.post(
   "/create-post/2",
   auth,
+  [
+    check("postedTo", "Please include postedTo ID").not().isEmpty(),
+    check("privacyId", "Please include privacyId").not().isEmpty(),
+    check("postTypeId", "Please include postTypeId").not().isEmpty(),
+  ],
   uploadController.uploadImages,
   uploadController.resizeImages,
   uploadController.getResult,
   async (req, res) => {
-    console.log("req.body");
-    console.log(req.body);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    let userId = req.user.uniqueUserId;
+    const { postContent, postedTo, postTypeId, privacyId } = req.body;
+    try {
+      let user = await User.findOne({ uniqueUserId: postedTo });
+      if (!user) {
+        res.status(400).json({ msg: "postedTo User Doesn't exist" });
+      }
 
-    res.json({ msg: "success" });
+      console.log("req.body.images are below");
+      console.log(req.body.images);
 
-    // console.log("req.files");
-    // console.log(req.files);
+      let uniquePostId = helpers.generateUniqueId();
+      let getMilliseconds = helpers.getMilliseconds();
+
+      let post = new Post({
+        postProperties: {
+          postContent,
+          photos: req.body.images,
+        },
+        postedTo,
+        postedBy: userId,
+        uniquePostId,
+        privacyId,
+        postTypeId,
+        milliseconds: getMilliseconds,
+      });
+
+      await post.save();
+      console.log("Post object is below");
+      console.log(post);
+
+      res.json({ post });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
   }
 );
 
