@@ -9,9 +9,15 @@
 * https://kb.objectrocket.com/mongo-db/mongoose-count-726
 * https://stackoverflow.com/questions/16310598/unable-to-use-match-operator-for-mongodb-mongoose-aggregation-with-objectid
 * https://stackoverflow.com/questions/37705517/mongodb-lookup-not-working-with-id
+* https://bezkoder.com/node-js-upload-resize-multiple-images/
 * 
 
-*** https://fengyuanchen.github.io/compressorjs/ ***
+
+
+
+************************ Links helped to solve faced issues **************************************
+* https://stackoverflow.com/questions/31530200/node-multer-unexpected-field
+* https://stackoverflow.com/questions/39716569/nodejs-unhandledpromiserejectionwarning
 
 
 ************************ Didn't use But useful **************************************
@@ -21,4 +27,5 @@
 * https://www.npmjs.com/package/compress-images
 * https://www.youtube.com/watch?v=WeZFJe90ijg  ***
 *** https://awesomeopensource.com/project/alextanhongpin/compress.js?categoryPage=13  ***
+*** https://fengyuanchen.github.io/compressorjs/ ***
 * 

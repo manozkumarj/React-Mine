@@ -3,9 +3,48 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const auth = require("../middlewares/auth");
 const helpers = require("../helpers/helpers");
+const fs = require("fs");
+const path = require("path");
+const multer = require("multer");
+const uploadController = require("../middlewares/upload");
 
 const User = require("../models/User");
 const Post = require("../models/Post");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    let dir = "../pictures";
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+    }
+    cb(null, dir);
+  },
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({ storage: storage });
+
+// Check File Type
+const checkFileType = (file, cb) => {
+  console.log("inside of checkFileType func");
+  // Allowed ext
+  const filetypes = /jpeg|jpg|png|webp/;
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype);
+
+  if (mimetype && extname) {
+    return cb(null, true);
+  } else {
+    cb("Error: Images Only!");
+  }
+};
 
 router.get("/test", (req, res) => {
   res.status(200).json({ msg: "This is Posts home route" });
@@ -74,54 +113,15 @@ router.post(
 
 router.post(
   "/create-post/2",
-  auth,
-  [
-    check("postImages", "Please include post postImages").not().isEmpty(),
-    check("postedTo", "Please include postedTo ID").not().isEmpty(),
-    check("privacyId", "Please include privacyId").not().isEmpty(),
-    check("postTypeId", "Please include postTypeId").not().isEmpty(),
-  ],
+  uploadController.uploadImages,
+  uploadController.resizeImages,
+  uploadController.getResult,
   async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    let userId = req.user.uniqueUserId;
-    const { postImages, postedTo, postTypeId, privacyId } = req.body;
+    console.log("req.body");
+    console.log(req.body);
 
-    console.log("postImages is below");
-    console.log(postImages);
-
-    try {
-      let user = await User.findOne({ uniqueUserId: postedTo });
-      if (!user) {
-        res.status(400).json({ msg: "postedTo User Doesn't exist" });
-      }
-
-      // let uniquePostId = helpers.generateUniqueId();
-      // let getMilliseconds = helpers.getMilliseconds();
-
-      // let post = new Post({
-      //   postProperties: {
-      //     postContent,
-      //   },
-      //   postedTo,
-      //   postedBy: userId,
-      //   uniquePostId,
-      //   privacyId,
-      //   postTypeId,
-      //   milliseconds: getMilliseconds,
-      // });
-
-      // await post.save();
-      // console.log("Post object is below");
-      // console.log(post);
-
-      res.json({ msg: "success" });
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send("Server Error");
-    }
+    console.log("req.files");
+    console.log(req.files);
   }
 );
 

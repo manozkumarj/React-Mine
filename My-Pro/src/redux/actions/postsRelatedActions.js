@@ -10,7 +10,6 @@ import {
 } from "./../actionTypes/postsRelatedTypes";
 
 let headers = new Headers();
-headers.append("Content-Type", "application/json");
 headers.append("Accept", "application/json");
 headers.append("Access-Control-Allow-Origin", "*");
 headers.append("Access-Control-Allow-Credentials", "true");
@@ -18,6 +17,7 @@ headers.append("GET", "POST", "OPTIONS");
 
 // All types of post creation handler -- Starts
 let apiEndPoint;
+let photosPayload = new FormData();
 export const createPost = (
   authToken,
   postedTo,
@@ -57,6 +57,15 @@ export const createPost = (
         postTypeId,
         postedTo,
       };
+
+      // photosPayload.append("postImages", postDetailsObject.postImagesProp);
+      // photosPayload.append("privacyId", postDetailsObject.postPrivacyProp);
+      // photosPayload.append("postTypeId", postTypeId);
+      // photosPayload.append("postedTo", postedTo);
+
+      postDetailsObject.postImagesProp.forEach((file) => {
+        photosPayload.append("images", file);
+      });
     } else if (postTypeId === 3) {
       apiEndPoint = "posts/create-post/3";
       console.log("postContent --> " + postDetailsObject.postContentProp);
@@ -93,16 +102,38 @@ export const createPost = (
 
     if (
       postTypeId === 1 ||
-      postTypeId === 2 ||
       postTypeId === 3 ||
       postTypeId === 4 ||
       postTypeId === 5 ||
       postTypeId === 6
     ) {
       headers.append("x-auth-token", authToken);
+      headers.append("Content-Type", "application/json");
 
       return (dispatch) => {
         API.post(apiEndPoint, postDetailsObj, { headers })
+          .then((res) => {
+            console.log(res.data);
+            dispatch({ type: CREATE_POST });
+          })
+          .catch((err) => {
+            console.log(err.response.data);
+            dispatch({
+              type: CREATE_POST_ERROR,
+              payload: err.response.data.msg,
+            });
+          });
+      };
+    } else if (postTypeId === 2) {
+      headers.append("x-auth-token", authToken);
+
+      console.log("photosPayload is below");
+      console.log(photosPayload);
+
+      headers.append("Content-Type", "multipart/form-data");
+
+      return (dispatch) => {
+        API.post(apiEndPoint, photosPayload, { headers })
           .then((res) => {
             console.log(res.data);
             dispatch({ type: CREATE_POST });
