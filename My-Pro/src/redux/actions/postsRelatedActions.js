@@ -8,11 +8,9 @@ import {
   IS_LOADING_POSTS,
 } from "./../actionTypes/postsRelatedTypes";
 
-let headers = new Headers();
-headers.append("Accept", "application/json");
-headers.append("Access-Control-Allow-Origin", "*");
-headers.append("Access-Control-Allow-Credentials", "true");
-headers.append("GET", "POST", "OPTIONS");
+let headers = {
+  "Content-Type": "application/json",
+};
 
 // All types of post creation handler -- Starts
 let apiEndPoint;
@@ -28,6 +26,7 @@ export const createPost = (
   console.log("postTypeId --> " + postTypeId);
   console.log("postDetailsObject is below --> ");
   console.log(postDetailsObject);
+  headers["x-auth-token"] = authToken;
 
   if (
     postTypeId === 1 ||
@@ -94,8 +93,7 @@ export const createPost = (
       postTypeId === 4 ||
       postTypeId === 5
     ) {
-      headers.append("x-auth-token", authToken);
-      headers.append("Content-Type", "application/json");
+      headers["Content-Type"] = "application/json";
 
       return (dispatch) => {
         API.post(apiEndPoint, postDetailsObj, { headers })
@@ -112,12 +110,9 @@ export const createPost = (
           });
       };
     } else if (postTypeId === 2) {
-      headers.append("x-auth-token", authToken);
-
       console.log("photosPayload is below");
       console.log(photosPayload);
-
-      headers.append("Content-Type", "multipart/form-data");
+      headers["Content-Type"] = "multipart/form-data";
 
       return (dispatch) => {
         API.post(apiEndPoint, photosPayload, { headers })
