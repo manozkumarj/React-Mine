@@ -3,48 +3,10 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const auth = require("../middlewares/auth");
 const helpers = require("../helpers/helpers");
-const fs = require("fs");
-const path = require("path");
-const multer = require("multer");
 const uploadController = require("../middlewares/upload");
 
 const User = require("../models/User");
 const Post = require("../models/Post");
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    let dir = "../pictures";
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
-    }
-    cb(null, dir);
-  },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
-  },
-});
-
-const upload = multer({ storage: storage });
-
-// Check File Type
-const checkFileType = (file, cb) => {
-  console.log("inside of checkFileType func");
-  // Allowed ext
-  const filetypes = /jpeg|jpg|png|webp/;
-  // Check ext
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  // Check mime
-  const mimetype = filetypes.test(file.mimetype);
-
-  if (mimetype && extname) {
-    return cb(null, true);
-  } else {
-    cb("Error: Images Only!");
-  }
-};
 
 router.get("/test", (req, res) => {
   res.status(200).json({ msg: "This is Posts home route" });
@@ -113,6 +75,7 @@ router.post(
 
 router.post(
   "/create-post/2",
+  auth,
   uploadController.uploadImages,
   uploadController.resizeImages,
   uploadController.getResult,
@@ -120,13 +83,15 @@ router.post(
     console.log("req.body");
     console.log(req.body);
 
-    console.log("req.files");
-    console.log(req.files);
+    res.json({ msg: "success" });
+
+    // console.log("req.files");
+    // console.log(req.files);
   }
 );
 
 router.post(
-  "/create-post/4",
+  "/create-post/3",
   auth,
   [
     check("postContent", "Please include post postContent").not().isEmpty(),
@@ -186,7 +151,7 @@ router.post(
 );
 
 router.post(
-  "/create-post/5",
+  "/create-post/4",
   auth,
   [
     check("postContent", "Please include post postContent").not().isEmpty(),
@@ -266,7 +231,7 @@ router.post(
 );
 
 router.post(
-  "/create-post/6",
+  "/create-post/5",
   auth,
   [
     check("postContent", "Please include post postContent").not().isEmpty(),

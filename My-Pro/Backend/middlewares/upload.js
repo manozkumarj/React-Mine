@@ -1,5 +1,6 @@
 const multer = require("multer");
 const sharp = require("sharp");
+const helpers = require("../helpers/helpers");
 
 const multerStorage = multer.memoryStorage();
 
@@ -36,11 +37,15 @@ const uploadImages = (req, res, next) => {
 const resizeImages = async (req, res, next) => {
   if (!req.files) return next();
 
+  let userId = req.user.uniqueUserId;
+  let getMilliseconds = helpers.getMilliseconds();
+
   req.body.images = [];
+  let looper = 1;
   await Promise.all(
     req.files.map(async (file) => {
-      const filename = file.originalname.replace(/\..+$/, "");
-      const newFilename = `bezkoder-${filename}-${Date.now()}.jpeg`;
+      // const filename = file.originalname.replace(/\..+$/, "");
+      const newFilename = `${userId}-${getMilliseconds}-${looper++}${Date.now()}.jpeg`;
 
       await sharp(file.buffer)
         .toFormat("jpeg")
@@ -57,14 +62,15 @@ const resizeImages = async (req, res, next) => {
   next();
 };
 
-const getResult = async (req, res) => {
+const getResult = async (req, res, next) => {
   if (req.body.images.length <= 0) {
     return res.send(`You must select at least 1 image.`);
   }
 
   const images = req.body.images.map((image) => "" + image + "").join("");
 
-  return res.send(`Images were uploaded:${images}`);
+  // return res.send(`Images were uploaded:${images}`);
+  next();
 };
 
 module.exports = {

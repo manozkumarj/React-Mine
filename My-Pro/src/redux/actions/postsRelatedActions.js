@@ -1,5 +1,4 @@
 import API from "./../../api";
-import axios from "axios";
 
 import {
   CREATE_POST,
@@ -24,6 +23,7 @@ export const createPost = (
   postTypeId,
   postDetailsObject
 ) => {
+  console.log("authToken --> " + authToken);
   console.log("postedTo --> " + postedTo);
   console.log("postTypeId --> " + postTypeId);
   console.log("postDetailsObject is below --> ");
@@ -34,8 +34,7 @@ export const createPost = (
     postTypeId === 2 ||
     postTypeId === 3 ||
     postTypeId === 4 ||
-    postTypeId === 5 ||
-    postTypeId === 6
+    postTypeId === 5
   ) {
     let postDetailsObj;
     if (postTypeId === 1) {
@@ -54,31 +53,20 @@ export const createPost = (
       postDetailsObj = {
         postImages: postDetailsObject.postImagesProp,
         privacyId: postDetailsObject.postPrivacyProp,
+        postContent: postDetailsObject.postContentProp,
         postTypeId,
         postedTo,
       };
 
-      // photosPayload.append("postImages", postDetailsObject.postImagesProp);
-      // photosPayload.append("privacyId", postDetailsObject.postPrivacyProp);
-      // photosPayload.append("postTypeId", postTypeId);
-      // photosPayload.append("postedTo", postedTo);
-
+      photosPayload.append("postContent", postDetailsObject.postContentProp);
+      photosPayload.append("postImages", postDetailsObject.postImagesProp);
+      photosPayload.append("privacyId", postDetailsObject.postPrivacyProp);
+      photosPayload.append("postTypeId", postTypeId);
+      photosPayload.append("postedTo", postedTo);
       postDetailsObject.postImagesProp.forEach((file) => {
         photosPayload.append("images", file);
       });
-    } else if (postTypeId === 3) {
-      apiEndPoint = "posts/create-post/3";
-      console.log("postContent --> " + postDetailsObject.postContentProp);
-      console.log("postImages is below");
-      console.log(postDetailsObject.postImagesProp);
-      postDetailsObj = {
-        postImages: postDetailsObject.postImagesProp,
-        postContent: postDetailsObject.postContentProp,
-        privacyId: postDetailsObject.postPrivacyProp,
-        postTypeId,
-        postedTo,
-      };
-    } else if (postTypeId === 4 || postTypeId === 5 || postTypeId === 6) {
+    } else if (postTypeId === 3 || postTypeId === 4 || postTypeId === 5) {
       apiEndPoint = `posts/create-post/${postTypeId}`;
       console.log("postContent --> " + postDetailsObject.postContent);
       postDetailsObj = {
@@ -90,11 +78,11 @@ export const createPost = (
         textColor: postDetailsObject.textColor,
       };
 
-      if (postTypeId === 5) {
+      if (postTypeId === 4) {
         postDetailsObj.borderColor = postDetailsObject.borderColor;
         postDetailsObj.borderStyle = postDetailsObject.borderStyle;
         postDetailsObj.borderStyleSides = postDetailsObject.borderStyleSides;
-      } else if (postTypeId === 6) {
+      } else if (postTypeId === 5) {
         postDetailsObj.cornerStyle = postDetailsObject.cornerStyle;
         postDetailsObj.cornerStyleSides = postDetailsObject.cornerStyleSides;
       }
@@ -104,8 +92,7 @@ export const createPost = (
       postTypeId === 1 ||
       postTypeId === 3 ||
       postTypeId === 4 ||
-      postTypeId === 5 ||
-      postTypeId === 6
+      postTypeId === 5
     ) {
       headers.append("x-auth-token", authToken);
       headers.append("Content-Type", "application/json");

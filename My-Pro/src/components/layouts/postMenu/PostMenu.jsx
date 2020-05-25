@@ -18,7 +18,7 @@ const PostMenu = (props) => {
     setLoggedInUserId(props.centralState.loggedInUserId);
     if (props.centralState.isNewPostCreated) {
       // alert("New post added");
-      // window.location.reload();
+      window.location.reload();
     } else if (props.centralState.newPostCreationError) {
       alert("Something went wrong while creating New post");
     }
@@ -117,9 +117,8 @@ const PostMenu = (props) => {
         postPrivacyProp,
         postImagesProp,
       };
-      if (postContentProp && postImagesProp) postTypeId = 3;
+      if (postImagesProp || (postContentProp && postImagesProp)) postTypeId = 2;
       else if (postContentProp) postTypeId = 1;
-      else if (postImagesProp) postTypeId = 2;
 
       props.createPost(authToken, postedTo, postTypeId, postDetailsObject);
     } else {
