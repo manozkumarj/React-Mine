@@ -27,6 +27,8 @@ import {
   INDIVIDUAL_USER_POSTS,
   INDIVIDUAL_USER_POSTS_ERROR,
   IS_LOADING_POSTS,
+  IS_COMMENT_INSERTED,
+  COMMENT_INSERTION_ERROR,
 } from "./../actionTypes/postsRelatedTypes";
 
 import validateToken from "./../validateToken";
@@ -68,6 +70,8 @@ const initialState = {
   newPostCreationError: null,
   individualUserPosts: null,
   individualUserPostsError: null,
+  isCommentInserted: false,
+  commentInsertionError: null,
 };
 
 //************************************* Reducer ****************************************************/
@@ -187,6 +191,20 @@ const centralReducer = (state = initialState, action) => {
         individualUserPostsError: null,
         individualUserPosts: null,
         isLoading: true,
+      };
+
+    case IS_COMMENT_INSERTED:
+      return {
+        ...state,
+        commentInsertionError: null,
+        isCommentInserted: true,
+      };
+
+    case COMMENT_INSERTION_ERROR:
+      return {
+        ...state,
+        commentInsertionError: action.payload,
+        isCommentInserted: false,
       };
 
     case RESET_STATE:

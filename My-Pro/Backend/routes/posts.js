@@ -473,8 +473,9 @@ router.put("/deleteReaction/:id", auth, async (req, res) => {
 });
 
 router.put(
-  "/addComment/:id",
+  "/addComment",
   auth,
+  [check("postId", "Please include postId").not().isEmpty()],
   [check("comment", "Please include comment").not().isEmpty()],
   async (req, res) => {
     const errors = validationResult(req);
@@ -482,26 +483,32 @@ router.put(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    let postId = req.params.id;
+    let uniquePostId = +req.body.postId;
     try {
-      const post = await Post.findById(postId);
+      const post = await Post.findOne({ uniquePostId });
 
       if (!post) {
         res.status(400).json({ msg: "Post doesn't exist" });
       }
 
-      let userId = req.user._id;
-      console.log("postId -> " + postId);
-      console.log("userId -> " + userId);
+      let uniqueUserId = req.user.uniqueUserId;
+      console.log("uniquePostId -> " + uniquePostId);
+      console.log("uniqueUserId -> " + uniqueUserId);
       const { comment } = req.body;
 
-      let updatedPost = await Post.findByIdAndUpdate(
-        postId,
+      let getMilliseconds = helpers.getMilliseconds();
+      let uniqueCommentId =
+        uniqueUserId.toString() + getMilliseconds.toString();
+
+      let updatedPost = await Post.findOneAndUpdate(
+        uniquePostId,
         {
           $push: {
             comments: {
               comment: comment,
-              reactedBy: userId,
+              commentedBy: uniqueUserId,
+              commentedAt: getMilliseconds,
+              uniqueCommentId,
             },
           },
         },

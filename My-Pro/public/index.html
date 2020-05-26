@@ -130,6 +130,8 @@
         // Image viewer popup - starts
         $(document).on("click", ".view-image", function () {
           modalName = "image-viewer-holder";
+          $getSrc = $(this).attr("src");
+          $(".theatre_img").attr("src", $getSrc);
           open_middle_page_section_popup(modalName);
         });
 

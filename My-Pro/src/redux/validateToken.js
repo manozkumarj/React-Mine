@@ -28,6 +28,7 @@ const validateToken = () => {
     return userDetails;
   } catch (error) {
     console.log("Token is not valid, Authorization denied");
+    // window.location.reload();
     return false;
   }
 };

@@ -22,7 +22,10 @@ import wowEmoji from "../../../emojis/wow-emoji-50.png";
 import cryingEmoji from "../../../emojis/crying-emoji-50.png";
 import PostMenu from "../postMenu/PostMenu";
 import { connect } from "react-redux";
-import { getIndividualUserPosts } from "./../../../redux/actionCreators";
+import {
+  getIndividualUserPosts,
+  addComment,
+} from "./../../../redux/actionCreators";
 import DefaultAndCustomBgAndTextColorPost from "./../defaultAndCustomBgAndTextColorPost/DefaultAndCustomBgAndTextColorPost";
 import CustomBgAndTextAndBorderColorPost from "./../customBgAndTextAndBorderColorPost/CustomBgAndTextAndBorderColorPost";
 import CustomBgAndTextAndCornerPost from "./../customBgAndTextAndCornerPost/CustomBgAndTextAndCornerPost";
@@ -45,6 +48,9 @@ const MiddleSection = (props) => {
     console.log(props);
     setLoadingPosts(props.centralState.isLoading);
     setPosts(props.centralState.individualUserPosts);
+    if (props.centralState.isCommentInserted) {
+      window.location.reload();
+    }
   }, [props]);
 
   return (
@@ -67,6 +73,18 @@ const MiddleSection = (props) => {
         {posts &&
           posts.length > 0 &&
           posts.map((post) => {
+            const keyPress = (e) => {
+              // e.preventDefault();
+              if (e.keyCode == 13) {
+                console.log("value", e.target.value);
+                // put the login here
+                let commentText = e.target.value.trim();
+                if (commentText) {
+                  props.addComment(post.uniquePostId, commentText);
+                }
+              }
+            };
+
             let displayPage;
             if (post.postTypeId == 1 || post.postTypeId == 3)
               displayPage = (
@@ -225,6 +243,7 @@ const MiddleSection = (props) => {
                     type="text"
                     className="comment-box"
                     placeholder="Type and press enter to comment..."
+                    onKeyDown={keyPress}
                   />
                 </div>
 
@@ -356,6 +375,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getIndividualUserPosts: (token, userId) =>
       dispatch(getIndividualUserPosts(token, userId)),
+    addComment: (postId, commentText) =>
+      dispatch(addComment(postId, commentText)),
   };
 };
 

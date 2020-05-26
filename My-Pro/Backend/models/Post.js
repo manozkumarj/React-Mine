@@ -39,15 +39,16 @@ const PostSchema = mongoose.Schema({
   reactions: [
     {
       reactionTypeId: { type: Number },
-      reactedBy: { type: String },
+      reactedBy: { type: Number },
       createdAt: { type: Date, default: Date.now },
     },
   ],
   comments: [
     {
       comment: String,
-      createdAt: { type: Date, default: Date.now },
-      postedBy: { type: String },
+      commentedAt: { type: String },
+      commentedBy: { type: Number },
+      uniqueCommentId: { type: String, index: true },
     },
   ],
   privacyId: {
