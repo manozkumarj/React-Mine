@@ -1,0 +1,6 @@
+* https://stackoverflow.com/questions/3305561/how-to-query-mongodb-with-like
+* https://stackoverflow.com/questions/38224981/mongodb-join-on-multiple-fields
+* https://stackoverflow.com/questions/60633859/mongodb-sort-multiple-sub-document
+* https://stackoverflow.com/questions/50512127/mongodb-query-to-check-if-item-in-an-array-contains-a-particular-string
+* https://stackoverflow.com/questions/48793220/using-mongodb-for-querying-substring
+* 

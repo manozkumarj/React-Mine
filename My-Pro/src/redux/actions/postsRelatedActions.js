@@ -162,7 +162,7 @@ export const getIndividualUserPosts = (authToken, userId) => {
 };
 // Fetching individual user's posts handler -- Ends
 
-// Fetching individual user's posts handler -- Starts
+// Fetching individual post's comment insertion handler -- Starts
 export const addComment = (postId, commentText) => {
   let authToken = localStorage.getItem("authToken");
   const tokenUserDetails = validateToken();
@@ -193,4 +193,37 @@ export const addComment = (postId, commentText) => {
     };
   }
 };
-// Fetching individual user's posts handler -- Ends
+// Fetching individual post's comment insertion handler -- Ends
+
+// Fetching individual posts's reaction handler -- Starts
+export const upsertReaction = (postId, commentText) => {
+  let authToken = localStorage.getItem("authToken");
+  const tokenUserDetails = validateToken();
+  console.log(tokenUserDetails);
+  let userId;
+  if (tokenUserDetails) {
+    let obj = {
+      postId,
+      comment: commentText,
+    };
+    console.log("userId --> " + userId);
+    apiEndPoint = `posts/addComment`;
+    headers["x-auth-token"] = authToken;
+
+    return (dispatch) => {
+      API.put(apiEndPoint, obj, { headers })
+        .then((res) => {
+          console.log(res.data);
+          dispatch({ type: IS_COMMENT_INSERTED });
+        })
+        .catch((err) => {
+          console.log(err.response);
+          dispatch({
+            type: COMMENT_INSERTION_ERROR,
+            payload: err.response,
+          });
+        });
+    };
+  }
+};
+// Fetching individual posts's reaction handler -- Ends

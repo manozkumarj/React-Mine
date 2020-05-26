@@ -186,14 +186,16 @@
         // Like button hover event - ends
 
         // like-button click event - starts
-        $(document).on("click", ".like-button", function () {
+        $(document).on("click", ".like-button", function (e) {
+          e.preventDefault();
           $(".reactions-holder").hide();
           console.log("clicked");
         });
         // like-button click event - ends
 
         // like-button click event - starts
-        $(document).on("click", ".like-button img", function () {
+        $(document).on("click", ".like-button img", function (e) {
+          e.preventDefault();
           $(".reactions-holder").hide();
           console.log("clicked on img");
           return false;

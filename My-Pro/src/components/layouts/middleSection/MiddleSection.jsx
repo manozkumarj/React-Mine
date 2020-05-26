@@ -85,6 +85,41 @@ const MiddleSection = (props) => {
               }
             };
 
+            const handleLikeReaction = (e) => {
+              e.stopPropagation();
+              console.log("handleLikeReaction");
+            };
+
+            const handleLoveReaction = (e) => {
+              e.stopPropagation();
+              console.log("handleLoveReaction");
+            };
+
+            const handleLaughReaction = (e) => {
+              e.stopPropagation();
+              console.log("handleLaughReaction");
+            };
+
+            const handleAngerReaction = (e) => {
+              e.stopPropagation();
+              console.log("handleAngerReaction");
+            };
+
+            const handleWowReaction = (e) => {
+              e.stopPropagation();
+              console.log("handleWowReaction");
+            };
+
+            const handleCryReaction = (e) => {
+              e.stopPropagation();
+              console.log("handleCryReaction");
+            };
+
+            const handleDislikeReaction = (e) => {
+              e.stopPropagation();
+              console.log("handleDislikeReaction");
+            };
+
             let displayPage;
             if (post.postTypeId == 1 || post.postTypeId == 3)
               displayPage = (
@@ -181,6 +216,7 @@ const MiddleSection = (props) => {
                   <span
                     className="action-item hover-ul like-button"
                     data-post-id={post.uniquePostId}
+                    onClick={handleLikeReaction}
                   >
                     Like
                     {/* reactions-holder - starts */}
@@ -194,42 +230,49 @@ const MiddleSection = (props) => {
                           alt="likeThumbEmoji"
                           width="38px"
                           className="reaction-emoji"
+                          onClick={handleLikeReaction}
                         />
                         <img
                           src={loveHeartsEyesEmoji}
                           alt="loveHeartsEyesEmoji"
                           width="38px"
                           className="reaction-emoji"
+                          onClick={handleLoveReaction}
                         />
                         <img
                           src={laugherEmoji}
                           alt="laugherEmoji"
                           width="38px"
                           className="reaction-emoji"
+                          onClick={handleLaughReaction}
                         />
                         <img
                           src={angryEmoji}
                           alt="angryEmoji"
                           width="38px"
                           className="reaction-emoji"
+                          onClick={handleAngerReaction}
                         />
                         <img
                           src={wowEmoji}
                           alt="wowEmoji"
                           width="38px"
                           className="reaction-emoji"
+                          onClick={handleWowReaction}
                         />
                         <img
                           src={cryingEmoji}
                           alt="cryingEmoji"
                           width="38px"
                           className="reaction-emoji"
+                          onClick={handleCryReaction}
                         />
                         <img
                           src={dislikeThumbEmoji}
                           alt="dislikeThumbEmoji"
                           width="38px"
                           className="reaction-emoji"
+                          onClick={handleDislikeReaction}
                         />
                       </span>
                     </span>
