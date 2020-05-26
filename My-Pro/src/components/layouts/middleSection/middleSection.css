@@ -281,28 +281,6 @@
   font-weight: normal;
   zoom: 1;
 }
-.post-picture-div {
-  position: relative;
-  width: 100%;
-}
-
-.post-picture-div img {
-  max-width: 100%;
-  cursor: pointer;
-}
-
-.absolute-bottom-right {
-  position: absolute;
-  bottom: 10px;
-  right: 5px;
-  /* width: 50px; */
-  padding: 5px;
-  background: #fff;
-  color: #003d99;
-  text-align: center;
-  border-radius: 5px;
-  font-weight: bold;
-}
 
 .cornerFoldStyle {
   position: relative;
