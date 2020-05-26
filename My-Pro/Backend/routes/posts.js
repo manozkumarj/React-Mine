@@ -76,17 +76,22 @@ router.post(
 router.post(
   "/create-post/2",
   auth,
+  uploadController.uploadImages,
+  uploadController.resizeImages,
+  uploadController.getResult,
   [
     check("postedTo", "Please include postedTo ID").not().isEmpty(),
     check("privacyId", "Please include privacyId").not().isEmpty(),
     check("postTypeId", "Please include postTypeId").not().isEmpty(),
   ],
-  uploadController.uploadImages,
-  uploadController.resizeImages,
-  uploadController.getResult,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log("req.body are below");
+      console.log(req.body);
+
+      console.log("validationResult errors are below");
+      console.log(errors);
       return res.status(400).json({ errors: errors.array() });
     }
     let userId = req.user.uniqueUserId;
@@ -97,8 +102,8 @@ router.post(
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
 
-      console.log("req.body.images are below");
-      console.log(req.body.images);
+      console.log("req.body are below");
+      console.log(req.body);
 
       let uniquePostId = helpers.generateUniqueId();
       let getMilliseconds = helpers.getMilliseconds();
