@@ -3,12 +3,6 @@ const mongoose = require("mongoose");
 
 const PostSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  uniquePostId: {
-    type: Number,
-    index: true,
-    required: true,
-    unique: true,
-  },
   postProperties: [
     {
       postContent: { type: String },
@@ -26,12 +20,14 @@ const PostSchema = mongoose.Schema({
     },
   ],
   postedTo: {
-    type: Number,
-    index: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
   postedBy: {
-    type: Number,
-    index: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
   createdAt: {
     type: Date,
@@ -39,7 +35,7 @@ const PostSchema = mongoose.Schema({
   },
   reactions: [
     {
-      reactionTypeId: { type: Number },
+      reactionTypeId: { type: Number, required: true },
       reactedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -50,14 +46,13 @@ const PostSchema = mongoose.Schema({
   ],
   comments: [
     {
-      comment: String,
+      comment: { type: String, required: true },
       commentedAt: { type: String },
       commentedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
       },
-      uniqueCommentId: { type: String, index: true },
     },
   ],
   privacyId: {
@@ -76,6 +71,7 @@ const PostSchema = mongoose.Schema({
   },
   milliseconds: {
     type: String,
+    required: true,
   },
 });
 

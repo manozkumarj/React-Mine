@@ -41,17 +41,13 @@ router.post(
         res.status(400).json({ msg: "User already exists" });
       }
 
-      let uniqueUserId = helpers.generateUniqueId();
       let getMilliseconds = helpers.getMilliseconds();
-
-      console.log("uniqueUserId " + uniqueUserId);
 
       user = new User({
         _id: mongoose.Types.ObjectId(),
         fullName,
         email,
         password,
-        uniqueUserId,
         milliseconds: getMilliseconds,
       });
 
@@ -61,11 +57,11 @@ router.post(
       // console.log("User object is below");
       // console.log(user);
       const payload = {
-        uniqueUserId,
         fullName,
         email,
         primaryDp: user.primaryDp,
         secondaryDp: user.secondaryDp,
+        _id: user._id,
       };
 
       jwt.sign(
@@ -95,11 +91,11 @@ router.post(
 
 // @route     GET api/users
 // @desc      Get all users
-// @access    Private
+// @access    Public
 router.get("/", async (req, res) => {
   try {
     const users = await User.find().sort({
-      date: -1,
+      milliseconds: -1,
     });
     res.json(users);
   } catch (err) {
@@ -112,10 +108,10 @@ router.get("/", async (req, res) => {
 // @desc      Get specific user by ID
 // @access    Public
 router.get("/:id", async (req, res) => {
-  let userId = req.params.id;
+  let _id = req.params.id;
   try {
-    const user = await User.findById(userId).sort({
-      date: -1,
+    const user = await User.findById(_id).sort({
+      milliseconds: -1,
     });
     res.json(user);
   } catch (err) {
@@ -141,14 +137,14 @@ router.delete("/", async (req, res) => {
 // @desc      Delete specific user by ID
 // @access    Public
 router.delete("/:id", async (req, res) => {
-  let userId = req.params.id;
+  let _id = req.params.id;
   try {
-    let getUser = await User.findById(userId);
+    let getUser = await User.findById(_id);
     if (!getUser) {
       res.status(400).json({ msg: "User doesn't exist" });
     }
 
-    const user = await User.findByIdAndDelete(userId);
+    const user = await User.findByIdAndDelete(_id);
     res.json(user);
   } catch (err) {
     console.error(err.message);
@@ -170,10 +166,10 @@ router.put(
     }
 
     try {
-      let userId = req.params.id;
+      let _id = req.params.id;
       const { name } = req.body;
 
-      let user = await User.findById(userId);
+      let user = await User.findById(_id);
       if (!user) {
         res.status(400).json({ msg: "User doesn't exist" });
       }
@@ -183,7 +179,7 @@ router.put(
       if (name) userFields.name = name;
 
       let updatedUser = await User.findByIdAndUpdate(
-        userId,
+        _id,
         { $set: userFields },
         { new: true }
       );
@@ -236,8 +232,7 @@ router.post(
             success: true,
             token: randomChars + "@@" + token,
             user: {
-              id: user._id,
-              uniqueUserId: user.uniqueUserId,
+              _id: user._id,
               fullName: user.fullName,
               email: user.email,
               primaryDp: user.primaryDp,

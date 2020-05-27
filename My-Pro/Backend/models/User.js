@@ -4,12 +4,6 @@ const bcrypt = require("bcryptjs");
 
 const UserSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  uniqueUserId: {
-    type: Number,
-    index: true,
-    required: true,
-    unique: true,
-  },
   fullName: {
     type: String,
     required: true,
@@ -62,6 +56,7 @@ const UserSchema = mongoose.Schema({
   },
   milliseconds: {
     type: String,
+    required: true,
   },
 });
 

@@ -42,12 +42,11 @@ router.post(
     let userId = req.user.uniqueUserId;
     const { postContent, postedTo, postTypeId, privacyId } = req.body;
     try {
-      let user = await User.findOne({ uniqueUserId: postedTo });
+      let user = await User.findById(postedTo);
       if (!user) {
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
 
-      let uniquePostId = helpers.generateUniqueId();
       let getMilliseconds = helpers.getMilliseconds();
 
       let post = new Post({
@@ -57,7 +56,6 @@ router.post(
         },
         postedTo,
         postedBy: userId,
-        uniquePostId,
         privacyId,
         postTypeId,
         milliseconds: getMilliseconds,
@@ -364,19 +362,9 @@ router.get("/:id", async (req, res) => {
 router.get("/postedTo/:id", async (req, res) => {
   let uniqueUserId = req.params.id;
   try {
-    const posts = await Post.aggregate([
-      { $match: { postedTo: +uniqueUserId } },
-      {
-        $lookup: {
-          from: "users",
-          localField: "postedTo",
-          foreignField: "uniqueUserId",
-          as: "userDetails",
-        },
-      },
-    ]).sort({
-      milliseconds: -1,
-    });
+    const posts = await Post.find({ postedTo: +uniqueUserId })
+      .populate("User")
+      .sort({ milliseconds: -1 });
     res.json(posts);
   } catch (err) {
     console.error(err.message);
