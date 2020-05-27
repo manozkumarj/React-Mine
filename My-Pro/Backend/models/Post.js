@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 // const { ObjectId } = mongoose.Schema;
 
 const PostSchema = mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
   uniquePostId: {
     type: Number,
     index: true,
@@ -39,7 +40,11 @@ const PostSchema = mongoose.Schema({
   reactions: [
     {
       reactionTypeId: { type: Number },
-      reactedBy: { type: Number },
+      reactedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
       createdAt: { type: Date, default: Date.now },
     },
   ],
@@ -47,7 +52,11 @@ const PostSchema = mongoose.Schema({
     {
       comment: String,
       commentedAt: { type: String },
-      commentedBy: { type: Number },
+      commentedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
       uniqueCommentId: { type: String, index: true },
     },
   ],
@@ -70,7 +79,7 @@ const PostSchema = mongoose.Schema({
   },
 });
 
-const Post = (module.exports = mongoose.model("post", PostSchema));
+const Post = (module.exports = mongoose.model("Post", PostSchema));
 
 module.exports.getPostById = function (id, callback) {
   Post.findById(id, callback);

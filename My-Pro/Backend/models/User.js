@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 // const { ObjectId } = mongoose.Schema;
 
 const UserSchema = mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
   uniqueUserId: {
     type: Number,
     index: true,
@@ -25,7 +26,11 @@ const UserSchema = mongoose.Schema({
   },
   friends: [
     {
-      friendId: { type: String, index: true },
+      friendId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
       friendshipAction: { type: String },
       status: { type: String, index: true },
       createdAt: { type: Date, default: Date.now },
@@ -60,7 +65,7 @@ const UserSchema = mongoose.Schema({
   },
 });
 
-const User = (module.exports = mongoose.model("user", UserSchema));
+const User = (module.exports = mongoose.model("User", UserSchema));
 
 module.exports.getUserById = function (id, callback) {
   User.findOne({ uniqueUserId: id }, callback);

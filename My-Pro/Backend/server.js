@@ -14,8 +14,8 @@ const port = 8088;
 connectDB();
 
 // parsing the data
-app.use(bodyParser.json({ limit: "100mb" }));
 app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
+app.use(bodyParser.json({ limit: "100mb" }));
 
 app.use(cors());
 app.options("*", cors());
@@ -55,6 +55,21 @@ app.get("/api/", (req, res) => {
 
 app.use("/api/users", users);
 app.use("/api/posts", posts);
+
+app.use((req, res, next) => {
+  const error = new Error("Not Found");
+  error.status = 404;
+  next(error);
+});
+
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message,
+    },
+  });
+});
 
 app.listen(port, () => {
   console.log(`Server is listening on port -> ${port}`);

@@ -6,6 +6,7 @@ const config = require("config");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middlewares/auth");
 const helpers = require("../helpers/helpers");
+const mongoose = require("mongoose");
 
 const User = require("../models/User");
 
@@ -46,6 +47,7 @@ router.post(
       console.log("uniqueUserId " + uniqueUserId);
 
       user = new User({
+        _id: mongoose.Types.ObjectId(),
         fullName,
         email,
         password,

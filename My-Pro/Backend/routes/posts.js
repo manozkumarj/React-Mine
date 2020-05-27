@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middlewares/auth");
 const helpers = require("../helpers/helpers");
@@ -50,6 +51,7 @@ router.post(
       let getMilliseconds = helpers.getMilliseconds();
 
       let post = new Post({
+        _id: mongoose.Types.ObjectId(),
         postProperties: {
           postContent,
         },
@@ -109,6 +111,7 @@ router.post(
       let getMilliseconds = helpers.getMilliseconds();
 
       let post = new Post({
+        _id: mongoose.Types.ObjectId(),
         postProperties: {
           postContent,
           photos: req.body.images,
@@ -168,6 +171,7 @@ router.post(
       let getMilliseconds = helpers.getMilliseconds();
 
       let post = new Post({
+        _id: mongoose.Types.ObjectId(),
         postProperties: {
           postContent,
           backgroundColor,
@@ -242,6 +246,7 @@ router.post(
       let borderLeftColor = borderColor;
 
       let post = new Post({
+        _id: mongoose.Types.ObjectId(),
         postProperties: {
           postContent,
           backgroundColor,
@@ -316,6 +321,7 @@ router.post(
       let getMilliseconds = helpers.getMilliseconds();
 
       let post = new Post({
+        _id: mongoose.Types.ObjectId(),
         postProperties: {
           postContent,
           backgroundColor,
@@ -346,9 +352,7 @@ router.post(
 router.get("/:id", async (req, res) => {
   let postId = req.params.id;
   try {
-    const posts = await Post.findById(postId).sort({
-      milliseconds: -1,
-    });
+    const posts = await Post.findById(postId).populate("user");
     res.json(posts);
   } catch (err) {
     console.error(err.message);
