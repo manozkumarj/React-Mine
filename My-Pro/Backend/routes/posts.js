@@ -393,17 +393,20 @@ router.get("/postedBy/:id", async (req, res) => {
 });
 
 router.put(
-  "/addReaction/:id",
+  "/addReaction",
   auth,
-  [check("reactionTypeId", "Please include reactionTypeId").not().isEmpty()],
+  [
+    check("reactionTypeId", "Please include reactionTypeId").not().isEmpty(),
+    check("postId", "Please include postId").not().isEmpty(),
+  ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    let postId = req.params.id;
     try {
+      const { reactionTypeId, postId } = req.body;
       const post = await Post.findById(postId);
 
       if (!post) {
@@ -413,14 +416,14 @@ router.put(
       let userId = req.user._id;
       console.log("postId -> " + postId);
       console.log("userId -> " + userId);
-      const { reactionTypeId } = req.body;
+      console.log("reactionTypeId -> " + reactionTypeId);
 
       let updatedPost = await Post.findByIdAndUpdate(
         postId,
         {
           $push: {
             reactions: {
-              reactionTypeId: reactionTypeId,
+              reactionTypeId,
               reactedBy: userId,
             },
           },

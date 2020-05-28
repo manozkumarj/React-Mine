@@ -11,6 +11,8 @@ import {
   IS_LOADING_POSTS,
   IS_COMMENT_INSERTED,
   COMMENT_INSERTION_ERROR,
+  IS_REACTION_UPSERTED,
+  REACTION_UPSERTION_ERROR,
 } from "./../actionTypes/postsRelatedTypes";
 
 let headers = {
@@ -227,7 +229,7 @@ export const addComment = (postId, commentText) => {
 // Fetching individual post's comment insertion handler -- Ends
 
 // Fetching individual posts's reaction handler -- Starts
-export const upsertReaction = (postId, commentText) => {
+export const upsertReaction = (postId, reactionTypeId) => {
   let authToken = localStorage.getItem("authToken");
   const tokenUserDetails = validateToken();
   console.log(tokenUserDetails);
@@ -235,22 +237,22 @@ export const upsertReaction = (postId, commentText) => {
   if (tokenUserDetails) {
     let obj = {
       postId,
-      comment: commentText,
+      reactionTypeId,
     };
     console.log("userId --> " + userId);
-    apiEndPoint = `posts/addComment`;
+    apiEndPoint = `posts/addReaction`;
     headers["x-auth-token"] = authToken;
 
     return (dispatch) => {
       API.put(apiEndPoint, obj, { headers })
         .then((res) => {
           console.log(res.data);
-          dispatch({ type: IS_COMMENT_INSERTED });
+          dispatch({ type: IS_REACTION_UPSERTED });
         })
         .catch((err) => {
           console.log(err.response);
           dispatch({
-            type: COMMENT_INSERTION_ERROR,
+            type: REACTION_UPSERTION_ERROR,
             payload: err.response,
           });
         });

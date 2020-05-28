@@ -27,6 +27,7 @@ import {
   getAllUsersPosts,
   getIndividualUserPosts,
   addComment,
+  upsertReaction,
 } from "./../../../redux/actionCreators";
 import DefaultAndCustomBgAndTextColorPost from "./../defaultAndCustomBgAndTextColorPost/DefaultAndCustomBgAndTextColorPost";
 import CustomBgAndTextAndBorderColorPost from "./../customBgAndTextAndBorderColorPost/CustomBgAndTextAndBorderColorPost";
@@ -99,37 +100,48 @@ const MiddleSection = (props) => {
 
             const handleLikeReaction = (e) => {
               e.stopPropagation();
-              console.log("handleLikeReaction");
-            };
-
-            const handleLoveReaction = (e) => {
-              e.stopPropagation();
-              console.log("handleLoveReaction");
-            };
-
-            const handleLaughReaction = (e) => {
-              e.stopPropagation();
-              console.log("handleLaughReaction");
-            };
-
-            const handleAngerReaction = (e) => {
-              e.stopPropagation();
-              console.log("handleAngerReaction");
-            };
-
-            const handleWowReaction = (e) => {
-              e.stopPropagation();
-              console.log("handleWowReaction");
-            };
-
-            const handleCryReaction = (e) => {
-              e.stopPropagation();
-              console.log("handleCryReaction");
+              console.log("handleLikeReaction --> " + post._id);
+              upsertReaction(1);
             };
 
             const handleDislikeReaction = (e) => {
               e.stopPropagation();
-              console.log("handleDislikeReaction");
+              console.log("handleDislikeReaction --> " + post._id);
+              upsertReaction(2);
+            };
+
+            const handleLoveReaction = (e) => {
+              e.stopPropagation();
+              console.log("handleLoveReaction --> " + post._id);
+              upsertReaction(3);
+            };
+
+            const handleWowReaction = (e) => {
+              e.stopPropagation();
+              console.log("handleWowReaction --> " + post._id);
+              upsertReaction(4);
+            };
+
+            const handleLaughReaction = (e) => {
+              e.stopPropagation();
+              console.log("handleLaughReaction --> " + post._id);
+              upsertReaction(5);
+            };
+
+            const handleCryReaction = (e) => {
+              e.stopPropagation();
+              console.log("handleCryReaction --> " + post._id);
+              upsertReaction(6);
+            };
+
+            const handleAngerReaction = (e) => {
+              e.stopPropagation();
+              console.log("handleAngerReaction --> " + post._id);
+              upsertReaction(7);
+            };
+
+            const upsertReaction = (reactionTypeId) => {
+              props.upsertReaction(post._id, reactionTypeId);
             };
 
             let displayPage;
@@ -215,11 +227,13 @@ const MiddleSection = (props) => {
                         className="reaction-emoji"
                       />
                     </div>
-                    <div className="reactions-count"> 250 reactions</div>
+                    <div className="reactions-count">
+                      {post.reactions.length} reactions
+                    </div>
                   </div>
                   <div className="cmnts-and-shares-counter couter-item">
                     <span className="comments-counter hover-ul">
-                      50 comments
+                      {post.comments.length} comments
                     </span>
                     <span className="shares-counter hover-ul">20 shares</span>
                   </div>
@@ -310,7 +324,10 @@ const MiddleSection = (props) => {
                         : defaultAvatar;
                       let commentedUserFullname = comment.commentedBy.fullName;
                       return (
-                        <div className="post-individual-comment-container">
+                        <div
+                          className="post-individual-comment-container"
+                          key={comment._id}
+                        >
                           <div className="post-dp-div">
                             <Link to="/">
                               <img
@@ -444,6 +461,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getIndividualUserPosts(token, userId)),
     addComment: (postId, commentText) =>
       dispatch(addComment(postId, commentText)),
+    upsertReaction: (postId, reactionTypeId) =>
+      dispatch(upsertReaction(postId, reactionTypeId)),
     getAllUsersPosts: () => dispatch(getAllUsersPosts()),
   };
 };
