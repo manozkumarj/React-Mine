@@ -12,6 +12,7 @@ import overlayClose from "../../../images/overlay-close.png";
 import wow2 from "../../../images/wow_2.jpg";
 import leftArrow from "../../../images/left_arrow.png";
 import rightArrow from "../../../images/right_arrow.png";
+import defaultAvatar from "../../../images/avatar.png";
 
 import loveHeartsEyesEmoji from "../../../emojis/love-hearts-eyes-emoji-50.png";
 import likeThumbEmoji from "../../../emojis/like-thumb-emoji-50.png";
@@ -23,6 +24,7 @@ import cryingEmoji from "../../../emojis/crying-emoji-50.png";
 import PostMenu from "../postMenu/PostMenu";
 import { connect } from "react-redux";
 import {
+  getAllUsersPosts,
   getIndividualUserPosts,
   addComment,
 } from "./../../../redux/actionCreators";
@@ -34,20 +36,23 @@ import PhotosPost from "./../photosPost/PhotosPost";
 const MiddleSection = (props) => {
   const [posts, setPosts] = useState([]);
   const [loadingPosts, setLoadingPosts] = useState(true);
+  const [imagesUrl, setImagesUrl] = useState(null);
 
   let loopId = 1;
 
   useEffect(() => {
-    props.getIndividualUserPosts(
-      props.centralState.authToken,
-      props.centralState.loggedInUserId
-    );
+    setImagesUrl("http://localhost:8088/photo/");
+    // props.getIndividualUserPosts(
+    //   props.centralState.authToken,
+    //   props.centralState.loggedInUserId
+    // );
+    props.getAllUsersPosts();
   }, []);
 
   useEffect(() => {
     console.log(props);
     setLoadingPosts(props.centralState.isLoading);
-    setPosts(props.centralState.individualUserPosts);
+    setPosts(props.centralState.allUsersPosts);
     if (props.centralState.isCommentInserted) {
       window.location.reload();
     }
@@ -64,7 +69,7 @@ const MiddleSection = (props) => {
         <div className="greet-div">
           <div className="greet">Welcome</div>
           <div className="greet-name">
-            <span>Manoj Kumar</span>
+            <span>{props.centralState.loggedInUserDetails.fullName}</span>
           </div>
         </div>
       </div>
@@ -73,6 +78,13 @@ const MiddleSection = (props) => {
         {posts &&
           posts.length > 0 &&
           posts.map((post) => {
+            let userPrimaryDp = post.postedBy.primaryDp
+              ? imagesUrl + post.postedBy.primaryDp
+              : defaultAvatar;
+            let userSecondaryDp = post.postedBy.primaryDp
+              ? imagesUrl + post.postedBy.secondaryDp
+              : defaultAvatar;
+
             const keyPress = (e) => {
               // e.preventDefault();
               if (e.keyCode == 13) {
@@ -157,8 +169,8 @@ const MiddleSection = (props) => {
                     <Link to="/">
                       <img
                         className="post-user-dp"
-                        src={kohli}
-                        alt="User name"
+                        src={userPrimaryDp}
+                        alt={post.postedBy.fullName}
                       />
                     </Link>
                   </div>
@@ -290,45 +302,48 @@ const MiddleSection = (props) => {
                   />
                 </div>
 
-                <div className="post-comments-container">
-                  <div className="post-individual-comment-container">
-                    <div className="post-dp-div">
-                      <Link to="/">
-                        <img
-                          className="post-comment-user-dp"
-                          src={kohli}
-                          alt="User name"
-                        />
-                      </Link>
-                    </div>
-                    <div className="post-comment-info-n-user-details-div">
-                      <div className="post-comment-user-div">
-                        <Link to="/">Manoj Kumar</Link>
-                        <span
-                          className="post-comment-vr-dots"
-                          data-post-comment-id={post.uniquePostId}
-                          id="post-comment-more-options"
-                        >
-                          <ul
-                            className="post-comment-more-options-ul"
-                            id={
-                              "post-comment-more-options-ul-" +
-                              post.uniquePostId
-                            }
-                          >
-                            <li>Hide</li>
-                            <li>Delete</li>
-                          </ul>
-                        </span>
+                {post.comments && post.comments.length > 0 && (
+                  <div className="post-comments-container">
+                    <div className="post-individual-comment-container">
+                      <div className="post-dp-div">
+                        <Link to="/">
+                          <img
+                            className="post-comment-user-dp"
+                            src={kohli}
+                            alt="User name"
+                          />
+                        </Link>
                       </div>
-                      <div className="post-comment">
-                        This is my first test for updates div. Just to check
-                        whether it's working or not.This is my first test for
-                        updates div. Just to check whether it's working or not.
+                      <div className="post-comment-info-n-user-details-div">
+                        <div className="post-comment-user-div">
+                          <Link to="/">Manoj Kumar</Link>
+                          <span
+                            className="post-comment-vr-dots"
+                            data-post-comment-id={post.uniquePostId}
+                            id="post-comment-more-options"
+                          >
+                            <ul
+                              className="post-comment-more-options-ul"
+                              id={
+                                "post-comment-more-options-ul-" +
+                                post.uniquePostId
+                              }
+                            >
+                              <li>Hide</li>
+                              <li>Delete</li>
+                            </ul>
+                          </span>
+                        </div>
+                        <div className="post-comment">
+                          This is my first test for updates div. Just to check
+                          whether it's working or not.This is my first test for
+                          updates div. Just to check whether it's working or
+                          not.
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             );
           })}
@@ -420,6 +435,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getIndividualUserPosts(token, userId)),
     addComment: (postId, commentText) =>
       dispatch(addComment(postId, commentText)),
+    getAllUsersPosts: () => dispatch(getAllUsersPosts()),
   };
 };
 

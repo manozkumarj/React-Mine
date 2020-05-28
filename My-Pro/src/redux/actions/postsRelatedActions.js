@@ -4,6 +4,8 @@ import validateToken from "./../validateToken";
 import {
   CREATE_POST,
   CREATE_POST_ERROR,
+  ALL_USERS_POSTS,
+  ALL_USERS_POSTS_ERROR,
   INDIVIDUAL_USER_POSTS,
   INDIVIDUAL_USER_POSTS_ERROR,
   IS_LOADING_POSTS,
@@ -137,6 +139,35 @@ export const createPost = (
   }
 };
 // All types of post creation handler -- Ends
+
+// Fetching individual user's posts handler -- Starts
+export const getAllUsersPosts = () => {
+  let authToken = localStorage.getItem("authToken");
+  const tokenUserDetails = validateToken();
+  console.log(tokenUserDetails);
+  let userId;
+  if (tokenUserDetails) {
+    apiEndPoint = `posts`;
+    headers["x-auth-token"] = authToken;
+
+    return (dispatch) => {
+      dispatch({ type: IS_LOADING_POSTS });
+      API.get(apiEndPoint, { headers })
+        .then((res) => {
+          console.log(res.data);
+          dispatch({ type: ALL_USERS_POSTS, payload: res.data });
+        })
+        .catch((err) => {
+          console.log(err.response);
+          dispatch({
+            type: ALL_USERS_POSTS_ERROR,
+            payload: err.response,
+          });
+        });
+    };
+  }
+};
+// Fetching individual user's posts handler -- Ends
 
 // Fetching individual user's posts handler -- Starts
 export const getIndividualUserPosts = (authToken, userId) => {

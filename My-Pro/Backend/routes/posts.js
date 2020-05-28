@@ -9,16 +9,23 @@ const uploadController = require("../middlewares/upload");
 const User = require("../models/User");
 const Post = require("../models/Post");
 
-router.get("/test", (req, res) => {
+router.get("/test", auth, (req, res) => {
   res.status(200).json({ msg: "This is Posts home route" });
 });
 
 router.get("/", async (req, res) => {
   try {
-    const posts = await Post.find().sort({
-      milliseconds: -1,
-    });
-    res.json(posts);
+    const posts = await Post.find()
+      .sort({ milliseconds: -1 })
+      .populate("postedTo", "fullName primaryDp secondaryDp")
+      .populate("postedBy", "fullName primaryDp secondaryDp")
+      .populate("comments.commentedBy", "fullName primaryDp secondaryDp")
+      .exec()
+      .then((posts) => {
+        console.log("Populated results");
+        console.log(posts);
+        res.json(posts);
+      });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -355,6 +362,7 @@ router.get("/postedTo/:id", (req, res) => {
   let uniqueUserId = mongoose.Types.ObjectId(req.params.id);
   try {
     Post.find({ postedTo: uniqueUserId })
+      .sort({ milliseconds: -1 })
       .populate("postedTo", "fullName primaryDp")
       .populate("postedBy", "fullName primaryDp")
       .populate("comments.commentedBy", "fullName primaryDp")

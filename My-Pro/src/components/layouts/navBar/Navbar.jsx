@@ -1,14 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./navbar.css";
 import kohli from "../../../images/kohli.jpg";
 import zuck from "../../../images/zuck.jpg";
 import mark from "../../../images/mark.jpg";
+import defaultAvatar from "../../../images/avatar.png";
 import { connect } from "react-redux";
 import { removeToken } from "./../../../redux/actions/authActions";
 
 const Navbar = (props) => {
+  const [imagesUrl, setImagesUrl] = useState(null);
+  const [userPrimaryDp, setUserPrimaryDp] = useState(null);
   useEffect(() => {
+    setImagesUrl("http://localhost:8088/photo/");
+    if (props.centralState.authToken) {
+      setUserPrimaryDp(
+        props.centralState.loggedInUserDetails.primaryDp
+          ? imagesUrl + props.centralState.loggedInUserDetails.primaryDp
+          : defaultAvatar
+      );
+    }
     console.log(props);
   }, [props]);
 
@@ -21,7 +32,7 @@ const Navbar = (props) => {
     history.push(`/login`);
   };
 
-  const loggedInMenu = (
+  const loggedInMenu = props.centralState.authToken && (
     <div className="navbar-container">
       <nav className="nav-bar" id="nav-bar">
         <div className="main-container">
@@ -115,15 +126,15 @@ const Navbar = (props) => {
             <div className="navbar-dp-n-name-container">
               <img
                 className="navbar-right-item navbar-current-user-dp"
-                src={kohli}
+                src={userPrimaryDp}
                 id="navbar-dp-n-name-container"
-                alt="Username"
+                alt={props.centralState.loggedInUserDetails.fullName}
               />
               <span
                 className="navbar-right-item navbar-current-user-name"
                 id="navbar-dp-n-name-container"
               >
-                Manoj Kumar J
+                {props.centralState.loggedInUserDetails.fullName}
               </span>
               <span
                 className="triangle-down"

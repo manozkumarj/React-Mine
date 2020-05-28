@@ -24,6 +24,8 @@ import {
 import {
   CREATE_POST,
   CREATE_POST_ERROR,
+  ALL_USERS_POSTS,
+  ALL_USERS_POSTS_ERROR,
   INDIVIDUAL_USER_POSTS,
   INDIVIDUAL_USER_POSTS_ERROR,
   IS_LOADING_POSTS,
@@ -59,7 +61,7 @@ const initialState = {
   authToken: token,
 
   // Logged In user related
-  loggedInUserDetails: null,
+  loggedInUserDetails: tokenUserDetails,
   allPosts: null,
   filteredPost: null,
   loggedInUserId: userId,
@@ -68,6 +70,8 @@ const initialState = {
   isNewPostCreated: false,
   isLoading: false,
   newPostCreationError: null,
+  allUsersPosts: null,
+  allUsersPostsError: null,
   individualUserPosts: null,
   individualUserPostsError: null,
   isCommentInserted: false,
@@ -131,6 +135,8 @@ const centralReducer = (state = initialState, action) => {
         loggedInUserDetails: null,
         isLoginSuccess: false,
         loggedInUserId: null,
+        allUsersPosts: null,
+        individualUserPosts: null,
       };
 
     // Logged In user related
@@ -167,6 +173,22 @@ const centralReducer = (state = initialState, action) => {
         ...state,
         isNewPostCreated: false,
         newPostCreationError: action.payload,
+      };
+
+    case ALL_USERS_POSTS:
+      return {
+        ...state,
+        allUsersPostsError: null,
+        allUsersPosts: action.payload,
+        isLoading: false,
+      };
+
+    case ALL_USERS_POSTS_ERROR:
+      return {
+        ...state,
+        allUsersPostsError: action.payload,
+        allUsersPosts: null,
+        isLoading: false,
       };
 
     case INDIVIDUAL_USER_POSTS:
