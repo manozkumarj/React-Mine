@@ -5,4 +5,7 @@
 * https://stackoverflow.com/questions/48793220/using-mongodb-for-querying-substring
 * https://stackoverflow.com/questions/13350642/how-to-get-creation-date-from-object-id-in-mongoose
 * https://stackoverflow.com/questions/6578178/node-js-mongoose-js-string-to-objectid-function
+* https://stackoverflow.com/questions/26526779/mongoose-populate-not-working
+* https://icevanila.com/question/mongoose-populate-not-working-while-quering-data
+* https://stackoverflow.com/questions/12821596/multiple-populates-mongoosejs
 * 

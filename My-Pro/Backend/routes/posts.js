@@ -39,7 +39,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    let userId = req.user.uniqueUserId;
+    let userId = req.user._id;
     const { postContent, postedTo, postTypeId, privacyId } = req.body;
     try {
       let user = await User.findById(postedTo);
@@ -94,10 +94,10 @@ router.post(
       console.log(errors);
       return res.status(400).json({ errors: errors.array() });
     }
-    let userId = req.user.uniqueUserId;
+    let userId = req.user._id;
     const { postContent, postedTo, postTypeId, privacyId } = req.body;
     try {
-      let user = await User.findOne({ uniqueUserId: postedTo });
+      let user = await User.findById(postedTo);
       if (!user) {
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
@@ -105,7 +105,6 @@ router.post(
       console.log("req.body are below");
       console.log(req.body);
 
-      let uniquePostId = helpers.generateUniqueId();
       let getMilliseconds = helpers.getMilliseconds();
 
       let post = new Post({
@@ -116,7 +115,6 @@ router.post(
         },
         postedTo,
         postedBy: userId,
-        uniquePostId,
         privacyId,
         postTypeId,
         milliseconds: getMilliseconds,
@@ -150,7 +148,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    let userId = req.user.uniqueUserId;
+    let userId = req.user._id;
     const {
       postContent,
       postedTo,
@@ -160,12 +158,11 @@ router.post(
       textColor,
     } = req.body;
     try {
-      let user = await User.findOne({ uniqueUserId: postedTo });
+      let user = await User.findById(postedTo);
       if (!user) {
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
 
-      let uniquePostId = helpers.generateUniqueId();
       let getMilliseconds = helpers.getMilliseconds();
 
       let post = new Post({
@@ -177,7 +174,6 @@ router.post(
         },
         postedTo,
         postedBy: userId,
-        uniquePostId,
         privacyId,
         postTypeId,
         milliseconds: getMilliseconds,
@@ -217,7 +213,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    let userId = req.user.uniqueUserId;
+    let userId = req.user._id;
 
     const {
       postContent,
@@ -231,12 +227,11 @@ router.post(
       borderStyleSides,
     } = req.body;
     try {
-      let user = await User.findOne({ uniqueUserId: postedTo });
+      let user = await User.findById(postedTo);
       if (!user) {
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
 
-      let uniquePostId = helpers.generateUniqueId();
       let getMilliseconds = helpers.getMilliseconds();
       let borderTopColor = borderColor;
       let borderRightColor = borderColor;
@@ -258,7 +253,6 @@ router.post(
         },
         postedTo,
         postedBy: userId,
-        uniquePostId,
         privacyId,
         postTypeId,
         milliseconds: getMilliseconds,
@@ -297,7 +291,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    let userId = req.user.uniqueUserId;
+    let userId = req.user._id;
 
     const {
       postContent,
@@ -310,12 +304,11 @@ router.post(
       cornerStyleSides,
     } = req.body;
     try {
-      let user = await User.findOne({ uniqueUserId: postedTo });
+      let user = await User.findById(postedTo);
       if (!user) {
         res.status(400).json({ msg: "postedTo User Doesn't exist" });
       }
 
-      let uniquePostId = helpers.generateUniqueId();
       let getMilliseconds = helpers.getMilliseconds();
 
       let post = new Post({
@@ -329,7 +322,6 @@ router.post(
         },
         postedTo,
         postedBy: userId,
-        uniquePostId,
         privacyId,
         postTypeId,
         milliseconds: getMilliseconds,
@@ -359,13 +351,19 @@ router.get("/:id", async (req, res) => {
 });
 
 // Fetches all posts which are postedTo a user
-router.get("/postedTo/:id", async (req, res) => {
-  let uniqueUserId = req.params.id;
+router.get("/postedTo/:id", (req, res) => {
+  let uniqueUserId = mongoose.Types.ObjectId(req.params.id);
   try {
-    const posts = await Post.find({ postedTo: +uniqueUserId })
-      .populate("User")
-      .sort({ milliseconds: -1 });
-    res.json(posts);
+    Post.find({ postedTo: uniqueUserId })
+      .populate("postedTo", "fullName primaryDp")
+      .populate("postedBy", "fullName primaryDp")
+      .populate("comments.commentedBy", "fullName primaryDp")
+      .exec()
+      .then((posts) => {
+        console.log("Populated results");
+        console.log(posts);
+        res.json(posts);
+      });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -475,30 +473,29 @@ router.put(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    let uniquePostId = +req.body.postId;
+    let postId = req.body.postId;
     try {
-      const post = await Post.findOne({ uniquePostId });
+      const post = await Post.findById(postId);
 
       if (!post) {
         res.status(400).json({ msg: "Post doesn't exist" });
       }
 
-      let uniqueUserId = req.user.uniqueUserId;
-      console.log("uniquePostId -> " + uniquePostId);
-      console.log("uniqueUserId -> " + uniqueUserId);
+      let userId = req.user._id;
+      console.log("postId -> " + postId);
+      console.log("userId -> " + userId);
       const { comment } = req.body;
 
       let getMilliseconds = helpers.getMilliseconds();
-      let uniqueCommentId =
-        uniqueUserId.toString() + getMilliseconds.toString();
+      let uniqueCommentId = userId.toString() + getMilliseconds.toString();
 
       let updatedPost = await Post.findOneAndUpdate(
-        uniquePostId,
+        postId,
         {
           $push: {
             comments: {
               comment: comment,
-              commentedBy: uniqueUserId,
+              commentedBy: userId,
               commentedAt: getMilliseconds,
               uniqueCommentId,
             },

@@ -80,7 +80,7 @@ const MiddleSection = (props) => {
                 // put the login here
                 let commentText = e.target.value.trim();
                 if (commentText) {
-                  props.addComment(post.uniquePostId, commentText);
+                  props.addComment(post._id, commentText);
                 }
               }
             };
@@ -164,7 +164,7 @@ const MiddleSection = (props) => {
                   </div>
                   <div className="postInfo-n-user-details-div">
                     <div className="post-details-div">
-                      <Link to="/">{post.userDetails[0].fullName}</Link>
+                      <Link to="/">{post.postedTo.fullName}</Link>
                       <span
                         className="post-vr-dots"
                         data-post-id={post.uniquePostId}

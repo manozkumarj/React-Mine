@@ -38,7 +38,7 @@ const tokenUserDetails = validateToken();
 console.log(tokenUserDetails);
 let userId;
 if (tokenUserDetails) {
-  userId = tokenUserDetails.uniqueUserId;
+  userId = tokenUserDetails._id;
 } else {
   localStorage.removeItem("authToken");
   userId = null;
@@ -86,7 +86,7 @@ const centralReducer = (state = initialState, action) => {
         authToken: action.payload.token,
         isLoginSuccess: true,
         loggedInUserDetails: action.payload.user,
-        loggedInUserId: action.payload.user.uniqueUserId,
+        loggedInUserId: action.payload.user._id,
       };
 
     case REGISTRATION_FAILED:
@@ -104,7 +104,7 @@ const centralReducer = (state = initialState, action) => {
         authToken: action.payload.token,
         isLoginSuccess: true,
         loginErrorData: null,
-        loggedInUserId: action.payload.user.uniqueUserId,
+        loggedInUserId: action.payload.user._id,
       };
 
     case LOGIN_FAILED:
