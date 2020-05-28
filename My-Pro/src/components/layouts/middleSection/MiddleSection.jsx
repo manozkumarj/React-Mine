@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./middleSection.css";
 import { Link } from "react-router-dom";
 // import zuck from "../../../images/zuck.jpg";
-import mark from "../../../images/mark.jpg";
+// import mark from "../../../images/mark.jpg";
 
-import kohli from "../../../images/kohli.jpg";
-import bikee from "../../../images/bikee.jpg";
+// import kohli from "../../../images/kohli.jpg";
+// import bikee from "../../../images/bikee.jpg";
 import wow1 from "../../../images/wow_1.jpg";
 import overlayClose from "../../../images/overlay-close.png";
 
-import wow2 from "../../../images/wow_2.jpg";
+// import wow2 from "../../../images/wow_2.jpg";
 import leftArrow from "../../../images/left_arrow.png";
 import rightArrow from "../../../images/right_arrow.png";
 import defaultAvatar from "../../../images/avatar.png";
@@ -175,7 +175,11 @@ const MiddleSection = (props) => {
               );
 
             return (
-              <div key={loopId++} className="item">
+              <div
+                key={loopId++}
+                className="item"
+                id={"individual-post-" + post._id + loopId}
+              >
                 <div className="post-n-user-details-container">
                   <div className="post-dp-div">
                     <Link to="/">
@@ -198,7 +202,12 @@ const MiddleSection = (props) => {
                           className="post-more-options-ul"
                           id={"post-more-options-ul-" + post._id}
                         >
-                          <li>Hide</li>
+                          <li
+                            className="hide-post"
+                            data-post-id={post._id + loopId}
+                          >
+                            Hide
+                          </li>
                           <li>Open in new tab</li>
                           <li>Delete</li>
                         </ul>
@@ -214,7 +223,7 @@ const MiddleSection = (props) => {
                 <div className="post-actions-counter-container">
                   <div className="reactions-couter couter-item hover-ul">
                     <div className="reactions-couter-emojis">
-                      <img
+                      {/* <img
                         src={loveHeartsEyesEmoji}
                         alt="loveHeartsEyesEmoji"
                         width="20px"
@@ -225,10 +234,12 @@ const MiddleSection = (props) => {
                         alt="likeThumbEmoji"
                         width="20px"
                         className="reaction-emoji"
-                      />
+                      /> */}
                     </div>
                     <div className="reactions-count">
-                      {post.reactions.length} reactions
+                      {post.reactions.length
+                        ? post.reactions.length + " reactions"
+                        : "Be the first person to react"}
                     </div>
                   </div>
                   <div className="cmnts-and-shares-counter couter-item">
@@ -327,6 +338,12 @@ const MiddleSection = (props) => {
                         <div
                           className="post-individual-comment-container"
                           key={comment._id}
+                          id={
+                            "individual-comment-" +
+                            post._id +
+                            comment._id +
+                            comment.commentedAt
+                          }
                         >
                           <div className="post-dp-div">
                             <Link to="/">
@@ -356,7 +373,16 @@ const MiddleSection = (props) => {
                                     comment.commentedAt
                                   }
                                 >
-                                  <li>Hide</li>
+                                  <li
+                                    className="hide-comment"
+                                    data-post-comment-id={
+                                      post._id +
+                                      comment._id +
+                                      comment.commentedAt
+                                    }
+                                  >
+                                    Hide
+                                  </li>
                                   <li>Delete</li>
                                 </ul>
                               </span>

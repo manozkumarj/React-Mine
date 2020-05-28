@@ -1,22 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./leftSideSection.css";
-import zuck from "../../../images/zuck.jpg";
-import mark from "../../../images/mark.jpg";
+// import zuck from "../../../images/zuck.jpg";
+// import mark from "../../../images/mark.jpg";
+import defaultAvatar from "../../../images/avatar.png";
+import { connect } from "react-redux";
 
-const LeftSideSection = () => {
+const LeftSideSection = (props) => {
+  const [imagesUrl, setImagesUrl] = useState(null);
+  const [userPrimaryDp, setUserPrimaryDp] = useState(defaultAvatar);
+  const [userSecondaryDp, setUserSecondaryDp] = useState(defaultAvatar);
+
+  useEffect(() => {
+    setImagesUrl("http://localhost:8088/photo/");
+    if (props.centralState.authToken) {
+      setUserPrimaryDp(
+        props.centralState.loggedInUserDetails.primaryDp
+          ? imagesUrl + props.centralState.loggedInUserDetails.primaryDp
+          : defaultAvatar
+      );
+
+      setUserSecondaryDp(
+        props.centralState.loggedInUserDetails.secondaryDp
+          ? imagesUrl + props.centralState.loggedInUserDetails.secondaryDp
+          : defaultAvatar
+      );
+    }
+    console.log(props);
+  }, [props]);
+
   return (
     <div className="fixed-div" id="left-fixed-div">
       <div className="profileSection">
         <div className="profileDpsSection">
           <img
-            src={zuck}
+            src={userPrimaryDp}
             alt="User name"
             className="primary-dp"
             width="120px"
           />
           <img
-            src={mark}
+            src={userSecondaryDp}
             alt="User name"
             className="secondary-dp"
             width="120px"
@@ -25,7 +49,7 @@ const LeftSideSection = () => {
 
         <div className="userFullnameDiv">
           <Link to="/profile" className="hover-ul">
-            Manoj Kumar
+            {props.centralState.loggedInUserDetails.fullName}
           </Link>
         </div>
 
@@ -59,4 +83,10 @@ const LeftSideSection = () => {
   );
 };
 
-export default LeftSideSection;
+const mapStateToProps = (state) => {
+  return {
+    centralState: state.central,
+  };
+};
+
+export default connect(mapStateToProps, null)(LeftSideSection);

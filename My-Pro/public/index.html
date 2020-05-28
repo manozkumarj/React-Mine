@@ -216,6 +216,20 @@
         //   ).hide();
         // });
 
+        // Comment hider - starts
+        $(document).on("click", ".hide-comment", function () {
+          $getId = $(this).attr("data-post-comment-id");
+          $("#individual-comment-" + $getId).slideUp("slow");
+        });
+        // Comment hider - ends
+
+        // Post hider - starts
+        $(document).on("click", ".hide-post", function () {
+          $getId = $(this).attr("data-post-id");
+          $("#individual-post-" + $getId).slideUp("slow");
+        });
+        // Post hider - ends
+
         $(document).click(function (evt) {
           // alert(evt.target.id);
           if (evt.target.id != "navbar-searchInput") {
