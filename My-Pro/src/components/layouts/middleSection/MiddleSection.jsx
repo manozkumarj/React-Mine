@@ -179,12 +179,12 @@ const MiddleSection = (props) => {
                       <Link to="/">{post.postedTo.fullName}</Link>
                       <span
                         className="post-vr-dots"
-                        data-post-id={post.uniquePostId}
+                        data-post-id={post._id}
                         id="post-more-options"
                       >
                         <ul
                           className="post-more-options-ul"
-                          id={"post-more-options-ul-" + post.uniquePostId}
+                          id={"post-more-options-ul-" + post._id}
                         >
                           <li>Hide</li>
                           <li>Open in new tab</li>
@@ -227,14 +227,14 @@ const MiddleSection = (props) => {
                 <div className="post-actions-container">
                   <span
                     className="action-item hover-ul like-button"
-                    data-post-id={post.uniquePostId}
+                    data-post-id={post._id}
                     onClick={handleLikeReaction}
                   >
                     Like
                     {/* reactions-holder - starts */}
                     <span
                       className="reactions-holder"
-                      id={"reactions-holder-" + post.uniquePostId}
+                      id={"reactions-holder-" + post._id}
                     >
                       <span className="reactions-holder-inner">
                         <img
@@ -304,44 +304,53 @@ const MiddleSection = (props) => {
 
                 {post.comments && post.comments.length > 0 && (
                   <div className="post-comments-container">
-                    <div className="post-individual-comment-container">
-                      <div className="post-dp-div">
-                        <Link to="/">
-                          <img
-                            className="post-comment-user-dp"
-                            src={kohli}
-                            alt="User name"
-                          />
-                        </Link>
-                      </div>
-                      <div className="post-comment-info-n-user-details-div">
-                        <div className="post-comment-user-div">
-                          <Link to="/">Manoj Kumar</Link>
-                          <span
-                            className="post-comment-vr-dots"
-                            data-post-comment-id={post.uniquePostId}
-                            id="post-comment-more-options"
-                          >
-                            <ul
-                              className="post-comment-more-options-ul"
-                              id={
-                                "post-comment-more-options-ul-" +
-                                post.uniquePostId
-                              }
-                            >
-                              <li>Hide</li>
-                              <li>Delete</li>
-                            </ul>
-                          </span>
+                    {post.comments.map((comment) => {
+                      let commentedUserPrimaryDp = comment.commentedBy.primaryDp
+                        ? imagesUrl + comment.commentedBy.primaryDp
+                        : defaultAvatar;
+                      let commentedUserFullname = comment.commentedBy.fullName;
+                      return (
+                        <div className="post-individual-comment-container">
+                          <div className="post-dp-div">
+                            <Link to="/">
+                              <img
+                                className="post-comment-user-dp"
+                                src={commentedUserPrimaryDp}
+                                alt={commentedUserFullname}
+                              />
+                            </Link>
+                          </div>
+                          <div className="post-comment-info-n-user-details-div">
+                            <div className="post-comment-user-div">
+                              <Link to="/">{commentedUserFullname}</Link>
+                              <span
+                                className="post-comment-vr-dots"
+                                data-post-comment-id={
+                                  post._id + comment._id + comment.commentedAt
+                                }
+                                id="post-comment-more-options"
+                              >
+                                <ul
+                                  className="post-comment-more-options-ul"
+                                  id={
+                                    "post-comment-more-options-ul-" +
+                                    post._id +
+                                    comment._id +
+                                    comment.commentedAt
+                                  }
+                                >
+                                  <li>Hide</li>
+                                  <li>Delete</li>
+                                </ul>
+                              </span>
+                            </div>
+                            <div className="post-comment">
+                              {comment.comment}
+                            </div>
+                          </div>
                         </div>
-                        <div className="post-comment">
-                          This is my first test for updates div. Just to check
-                          whether it's working or not.This is my first test for
-                          updates div. Just to check whether it's working or
-                          not.
-                        </div>
-                      </div>
-                    </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>

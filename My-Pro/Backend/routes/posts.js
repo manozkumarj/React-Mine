@@ -22,8 +22,8 @@ router.get("/", async (req, res) => {
       .populate("comments.commentedBy", "fullName primaryDp secondaryDp")
       .exec()
       .then((posts) => {
-        console.log("Populated results");
-        console.log(posts);
+        // console.log("Populated results");
+        // console.log(posts);
         res.json(posts);
       });
   } catch (err) {
@@ -497,7 +497,7 @@ router.put(
       let getMilliseconds = helpers.getMilliseconds();
       let uniqueCommentId = userId.toString() + getMilliseconds.toString();
 
-      let updatedPost = await Post.findOneAndUpdate(
+      let updatedPost = await Post.findByIdAndUpdate(
         postId,
         {
           $push: {
