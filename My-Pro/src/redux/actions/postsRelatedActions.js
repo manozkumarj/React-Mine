@@ -147,7 +147,6 @@ export const getAllUsersPosts = () => {
   let authToken = localStorage.getItem("authToken");
   const tokenUserDetails = validateToken();
   console.log(tokenUserDetails);
-  let userId;
   if (tokenUserDetails) {
     apiEndPoint = `posts`;
     headers["x-auth-token"] = authToken;

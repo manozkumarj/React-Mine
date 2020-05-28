@@ -238,10 +238,18 @@
 }
 
 .post-more-options-ul li:hover,
-.post-comment-more-options-ul li:hover {
+.post-comment-more-options-ul li:hover,
+.post-more-options-ul a:hover {
   background: var(--site-color);
   color: #fff;
   cursor: pointer;
+  text-decoration: none;
+}
+
+.post-more-options-ul a {
+  display: block;
+  background: #fff;
+  color: #000000;
 }
 
 .post-timestamp-div {

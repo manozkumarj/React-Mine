@@ -208,7 +208,11 @@ const MiddleSection = (props) => {
                           >
                             Hide
                           </li>
-                          <li>Open in new tab</li>
+                          <li>
+                            <a href={"/post/" + post._id} target="_blank">
+                              Open in new tab
+                            </a>
+                          </li>
                           <li>Delete</li>
                         </ul>
                       </span>

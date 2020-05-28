@@ -9,10 +9,10 @@ const CustomBgAndTextAndBorderColorPost = (props) => {
   const [borderBottomColor, setBorderBottomColor] = useState("red");
   const [borderLeftColor, setBorderLeftColor] = useState("red");
   const [borderStyle, setBorderStyle] = useState("solid");
-  const [borderStyleSides, setBorderStyleSides] = useState("all");
+  // const [borderStyleSides, setBorderStyleSides] = useState("all");
   const [classes, setClasses] = useState("pad-12-10 border-2px");
 
-  const { postData, postTypeId } = props;
+  const { postData } = props;
   useEffect(() => {
     console.log(props);
     setBackgroundColor("#" + postData[0].backgroundColor);
@@ -22,11 +22,11 @@ const CustomBgAndTextAndBorderColorPost = (props) => {
     setBorderBottomColor("#" + postData[0].borderBottomColor);
     setBorderLeftColor("#" + postData[0].borderLeftColor);
     setBorderStyle(postData[0].borderStyle);
-    setBorderStyleSides(postData[0].borderStyleSides);
+    // setBorderStyleSides(postData[0].borderStyleSides);
     if (postData[0].borderStyle === "double") {
       setClasses("pad-12-10 border-4px");
     }
-  }, []);
+  }, [postData]);
   return (
     <div
       className="post-description-div"

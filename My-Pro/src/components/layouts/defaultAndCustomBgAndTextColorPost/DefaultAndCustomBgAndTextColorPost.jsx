@@ -12,7 +12,7 @@ const DefaultAndCustomBgAndTextColorPost = (props) => {
       setBackgroundColor("#" + postData[0].backgroundColor);
       setTextColor("#" + postData[0].textColor);
     }
-  }, []);
+  }, [postData]);
   return (
     <div
       className="post-description-div"

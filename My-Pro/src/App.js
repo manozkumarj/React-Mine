@@ -44,6 +44,7 @@ class App extends Component {
                 <Switch>
                   <PrivateRoute exact path="/" component={Home} />
                   <PrivateRoute exact path="/home" component={Home} />
+                  <PrivateRoute exact path="/post/:postId" component={Home} />
                   <PrivateRoute exact path="/profile" component={Profile} />
                   <PrivateRoute exact path="/photos" component={Photos} />
                   <PrivateRoute exact path="/register" component={Register} />
