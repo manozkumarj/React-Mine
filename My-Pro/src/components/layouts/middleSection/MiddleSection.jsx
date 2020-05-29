@@ -51,7 +51,7 @@ const MiddleSection = (props) => {
   }, []);
 
   useEffect(() => {
-    // console.log(props);
+    console.log(props);
     setLoadingPosts(props.centralState.isLoading);
     setPosts(props.centralState.fetchedPosts);
     if (props.centralState.isCommentInserted) {

@@ -346,11 +346,25 @@ router.post(
   }
 );
 
-router.get("/:id", async (req, res) => {
-  let postId = req.params.id;
+router.get("/:postId", async (req, res) => {
+  let postId = req.params.postId;
   try {
-    const posts = await Post.findById(postId).populate("user");
-    res.json(posts);
+    const posts = await Post.findById(postId)
+      .populate("postedTo", "fullName primaryDp")
+      .populate("postedBy", "fullName primaryDp")
+      .populate("comments.commentedBy", "fullName primaryDp")
+      .exec()
+      .then((result) => {
+        console.log("Populated results");
+        console.log(result);
+        let post = [];
+        post.push(result);
+        res.json(post);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+      });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -371,6 +385,10 @@ router.get("/postedTo/:id", (req, res) => {
         console.log("Populated results");
         console.log(posts);
         res.json(posts);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        res.status(500).send("Server Error");
       });
   } catch (err) {
     console.error(err.message);

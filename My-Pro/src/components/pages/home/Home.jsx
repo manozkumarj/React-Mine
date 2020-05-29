@@ -12,16 +12,19 @@ import {
 } from "./../../../redux/actionCreators";
 
 const Home = (props) => {
-  const [currentPath, setCurrentPath] = useState(null);
+  // const [currentPath, setCurrentPath] = useState(null);
   useEffect(() => {
     window.scrollTo(0, 0);
     console.log(props);
-    setCurrentPath(props.match.path);
-    console.log("Path is -> " + currentPath);
+    // setCurrentPath(props.match.path);
+    let postId = props.match.params.postId;
+    console.log("Path is -> " + props.match.path);
     if (props.match.path === "/") {
       props.getAllUsersPosts();
+    } else if (props.match.path === "/post/:postId") {
+      props.getSinglePost(postId);
     }
-  }, []);
+  }, [props.match]);
 
   return (
     <Fragment>
@@ -55,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
     getIndividualUserPosts: (token, userId) =>
       dispatch(getIndividualUserPosts(token, userId)),
     getAllUsersPosts: () => dispatch(getAllUsersPosts()),
-    getSinglePost: () => dispatch(getSinglePost()),
+    getSinglePost: (postId) => dispatch(getSinglePost(postId)),
   };
 };
 
