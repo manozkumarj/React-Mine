@@ -31,6 +31,8 @@ import {
   COMMENT_INSERTION_ERROR,
   IS_REACTION_UPSERTED,
   REACTION_UPSERTION_ERROR,
+  PROFILE_PAGE_USER_DETAILS_AND_POSTS,
+  PROFILE_PAGE_USER_DETAILS_AND_POSTS_ERROR,
 } from "./../actionTypes/postsRelatedTypes";
 
 import validateToken from "./../validateToken";
@@ -39,6 +41,7 @@ let token = localStorage.getItem("authToken");
 const tokenUserDetails = validateToken();
 // console.log(tokenUserDetails);
 let userId;
+let username;
 if (tokenUserDetails) {
   userId = tokenUserDetails._id;
   username = tokenUserDetails.username;
@@ -79,6 +82,8 @@ const initialState = {
   commentInsertionError: null,
   isReactionUpserted: false,
   reactionUpsertionError: null,
+  isProfileUserFound: null,
+  profilePageUserDetails: null,
 };
 
 //************************************* Reducer ****************************************************/
@@ -232,6 +237,24 @@ const centralReducer = (state = initialState, action) => {
         ...state,
         reactionUpsertionError: action.payload,
         isReactionUpserted: false,
+      };
+
+    case PROFILE_PAGE_USER_DETAILS_AND_POSTS:
+      return {
+        ...state,
+        profilePageUserDetails: action.payload.userProfileDetails,
+        isProfileUserFound: true,
+        fetchedPosts: action.payload.posts,
+        isLoading: false,
+      };
+
+    case PROFILE_PAGE_USER_DETAILS_AND_POSTS_ERROR:
+      return {
+        ...state,
+        profilePageUserDetails: null,
+        isProfileUserFound: false,
+        fetchedPosts: null,
+        isLoading: false,
       };
 
     case RESET_STATE:

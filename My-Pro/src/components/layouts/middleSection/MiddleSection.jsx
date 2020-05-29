@@ -38,6 +38,7 @@ const MiddleSection = (props) => {
   const [posts, setPosts] = useState([]);
   const [loadingPosts, setLoadingPosts] = useState(true);
   const [imagesUrl, setImagesUrl] = useState(null);
+  const [singlePost, setSinglePost] = useState(true);
 
   let loopId = 1;
 
@@ -51,6 +52,15 @@ const MiddleSection = (props) => {
   }, []);
 
   useEffect(() => {
+    console.log("Path is -> " + props.match.path);
+    if (props.match.path === "/" || props.match.path === "/:username") {
+      setSinglePost(false);
+    } else if (props.match.path === "/post/:postId") {
+      setSinglePost(true);
+    }
+  }, [props.match]);
+
+  useEffect(() => {
     console.log(props);
     setLoadingPosts(props.centralState.isLoading);
     setPosts(props.centralState.fetchedPosts);
@@ -61,19 +71,19 @@ const MiddleSection = (props) => {
 
   return (
     <div id="middle-div">
-      <div className="post-menu-section">
-        <PostMenu />
-      </div>
+      <div className="post-menu-section">{!singlePost && <PostMenu />}</div>
 
       {/* *******************  Welcome section ******************** */}
-      <div className="item">
-        <div className="greet-div">
-          <div className="greet">Welcome</div>
-          <div className="greet-name">
-            <span>{props.centralState.loggedInUserDetails.fullName}</span>
+      {!singlePost && (
+        <div className="item">
+          <div className="greet-div">
+            <div className="greet">Welcome</div>
+            <div className="greet-name">
+              <span>{props.centralState.loggedInUserDetails.fullName}</span>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       <div className="all-posts-container">
         {posts &&

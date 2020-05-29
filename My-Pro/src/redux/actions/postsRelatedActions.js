@@ -11,6 +11,8 @@ import {
   COMMENT_INSERTION_ERROR,
   IS_REACTION_UPSERTED,
   REACTION_UPSERTION_ERROR,
+  PROFILE_PAGE_USER_DETAILS_AND_POSTS,
+  PROFILE_PAGE_USER_DETAILS_AND_POSTS_ERROR,
 } from "./../actionTypes/postsRelatedTypes";
 
 let headers = {
@@ -169,30 +171,35 @@ export const getAllUsersPosts = () => {
 // Fetching individual user's posts handler -- Ends
 
 // Fetching individual user's posts handler -- Starts
-export const getIndividualUserPosts = (authToken, userId) => {
+export const getIndividualUserPosts = (userId) => {
   // console.log("userId --> " + userId);
+  let authToken = localStorage.getItem("authToken");
+  const tokenUserDetails = validateToken();
+
   apiEndPoint = `posts/postedTo/${userId}`;
   headers["x-auth-token"] = authToken;
 
-  return (dispatch) => {
-    dispatch({ type: IS_LOADING_POSTS });
-    API.get(apiEndPoint, { headers })
-      .then((res) => {
-        console.log(res.data);
-        dispatch({ type: FETCHED_POSTS, payload: res.data });
-      })
-      .catch((err) => {
-        console.log(err.response);
-        dispatch({
-          type: FETCHING_POSTS_ERROR,
-          payload: err.response,
+  if (tokenUserDetails) {
+    return (dispatch) => {
+      dispatch({ type: IS_LOADING_POSTS });
+      API.get(apiEndPoint, { headers })
+        .then((res) => {
+          console.log(res.data);
+          dispatch({ type: FETCHED_POSTS, payload: res.data });
+        })
+        .catch((err) => {
+          console.log(err.response);
+          dispatch({
+            type: FETCHING_POSTS_ERROR,
+            payload: err.response,
+          });
         });
-      });
-  };
+    };
+  }
 };
 // Fetching individual user's posts handler -- Ends
 
-// Fetching individual user's posts handler -- Starts
+// Fetching speciic post with postId handler -- Starts
 export const getSinglePost = (postId) => {
   // console.log("postId --> " + postId);
   let authToken = localStorage.getItem("authToken");
@@ -219,7 +226,39 @@ export const getSinglePost = (postId) => {
     };
   }
 };
-// Fetching individual user's posts handler -- Ends
+// Fetching speciic post with postId handler -- Ends
+
+// Fetching profilePageUserDetails & posts with username handler -- Starts
+export const getProfileUserDetailsAndPosts = (username) => {
+  // console.log("username --> " + username);
+  let authToken = localStorage.getItem("authToken");
+  const tokenUserDetails = validateToken();
+
+  apiEndPoint = `users/${username}`;
+  headers["x-auth-token"] = authToken;
+
+  if (tokenUserDetails) {
+    return (dispatch) => {
+      dispatch({ type: IS_LOADING_POSTS });
+      API.get(apiEndPoint, { headers })
+        .then((res) => {
+          console.log(res.data);
+          dispatch({
+            type: PROFILE_PAGE_USER_DETAILS_AND_POSTS,
+            payload: res.data,
+          });
+        })
+        .catch((err) => {
+          console.log(err.response);
+          dispatch({
+            type: PROFILE_PAGE_USER_DETAILS_AND_POSTS_ERROR,
+            payload: err.response,
+          });
+        });
+    };
+  }
+};
+// Fetching profilePageUserDetails & posts with username handler -- Ends
 
 // Fetching individual post's comment insertion handler -- Starts
 export const addComment = (postId, commentText) => {

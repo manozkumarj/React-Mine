@@ -48,7 +48,10 @@ const LeftSideSection = (props) => {
         </div>
 
         <div className="userFullnameDiv">
-          <Link to="/profile" className="hover-ul">
+          <Link
+            to={"/" + props.centralState.loggedInUserUsername}
+            className="hover-ul"
+          >
             {props.centralState.loggedInUserDetails.fullName}
           </Link>
         </div>

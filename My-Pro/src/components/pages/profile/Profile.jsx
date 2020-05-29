@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import {
   getAllUsersPosts,
   getIndividualUserPosts,
+  getProfileUserDetailsAndPosts,
 } from "./../../../redux/actionCreators";
 
 const Profile = (props) => {
@@ -31,6 +32,12 @@ const Profile = (props) => {
   useEffect(() => {
     let username = props.match.params.username;
     console.log("Path is -> " + props.match.path);
+
+    if (username == props.centralState.loggedInUserDetails.username) {
+      props.getIndividualUserPosts(props.centralState.loggedInUserDetails._id);
+    } else {
+      props.getProfileUserDetailsAndPosts(username);
+    }
   }, [props.match]);
 
   const filesPickerRef = useRef();
@@ -165,6 +172,8 @@ const mapDispatchToProps = (dispatch) => {
     getIndividualUserPosts: (token, userId) =>
       dispatch(getIndividualUserPosts(token, userId)),
     getAllUsersPosts: () => dispatch(getAllUsersPosts()),
+    getProfileUserDetailsAndPosts: (username) =>
+      dispatch(getProfileUserDetailsAndPosts(username)),
   };
 };
 
