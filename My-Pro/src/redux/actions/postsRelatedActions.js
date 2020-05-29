@@ -28,11 +28,11 @@ export const createPost = (
   postTypeId,
   postDetailsObject
 ) => {
-  console.log("authToken --> " + authToken);
-  console.log("postedTo --> " + postedTo);
-  console.log("postTypeId --> " + postTypeId);
-  console.log("postDetailsObject is below --> ");
-  console.log(postDetailsObject);
+  // console.log("authToken --> " + authToken);
+  // console.log("postedTo --> " + postedTo);
+  // console.log("postTypeId --> " + postTypeId);
+  // console.log("postDetailsObject is below --> ");
+  // console.log(postDetailsObject);
   headers["x-auth-token"] = authToken;
 
   if (
@@ -45,7 +45,7 @@ export const createPost = (
     let postDetailsObj;
     if (postTypeId === 1) {
       apiEndPoint = "posts/create-post/1";
-      console.log("postContent --> " + postDetailsObject.postContentProp);
+      // console.log("postContent --> " + postDetailsObject.postContentProp);
       postDetailsObj = {
         postContent: postDetailsObject.postContentProp,
         privacyId: postDetailsObject.postPrivacyProp,
@@ -54,8 +54,8 @@ export const createPost = (
       };
     } else if (postTypeId === 2) {
       apiEndPoint = "posts/create-post/2";
-      console.log("postImages is below");
-      console.log(postDetailsObject.postImagesProp);
+      // console.log("postImages is below");
+      // console.log(postDetailsObject.postImagesProp);
       postDetailsObj = {
         postImages: postDetailsObject.postImagesProp,
         privacyId: postDetailsObject.postPrivacyProp,
@@ -75,7 +75,7 @@ export const createPost = (
       });
     } else if (postTypeId === 3 || postTypeId === 4 || postTypeId === 5) {
       apiEndPoint = `posts/create-post/${postTypeId}`;
-      console.log("postContent --> " + postDetailsObject.postContent);
+      // console.log("postContent --> " + postDetailsObject.postContent);
       postDetailsObj = {
         postContent: postDetailsObject.postContent,
         privacyId: postDetailsObject.postPrivacy,
@@ -118,8 +118,8 @@ export const createPost = (
           });
       };
     } else if (postTypeId === 2) {
-      console.log("photosPayload is below");
-      console.log(photosPayload);
+      // console.log("photosPayload is below");
+      // console.log(photosPayload);
       // headers["Content-Type"] = "multipart/form-data";
       headers["Content-Type"] = "application/json";
 
@@ -146,7 +146,7 @@ export const createPost = (
 export const getAllUsersPosts = () => {
   let authToken = localStorage.getItem("authToken");
   const tokenUserDetails = validateToken();
-  console.log(tokenUserDetails);
+  // console.log(tokenUserDetails);
   if (tokenUserDetails) {
     apiEndPoint = `posts`;
     headers["x-auth-token"] = authToken;
@@ -172,7 +172,7 @@ export const getAllUsersPosts = () => {
 
 // Fetching individual user's posts handler -- Starts
 export const getIndividualUserPosts = (authToken, userId) => {
-  console.log("userId --> " + userId);
+  // console.log("userId --> " + userId);
   apiEndPoint = `posts/postedTo/${userId}`;
   headers["x-auth-token"] = authToken;
 
@@ -198,14 +198,14 @@ export const getIndividualUserPosts = (authToken, userId) => {
 export const addComment = (postId, commentText) => {
   let authToken = localStorage.getItem("authToken");
   const tokenUserDetails = validateToken();
-  console.log(tokenUserDetails);
-  let userId;
+  // console.log(tokenUserDetails);
+  // let userId;
   if (tokenUserDetails) {
     let obj = {
       postId,
       comment: commentText,
     };
-    console.log("userId --> " + userId);
+    // console.log("userId --> " + userId);
     apiEndPoint = `posts/addComment`;
     headers["x-auth-token"] = authToken;
 
@@ -231,14 +231,14 @@ export const addComment = (postId, commentText) => {
 export const upsertReaction = (postId, reactionTypeId) => {
   let authToken = localStorage.getItem("authToken");
   const tokenUserDetails = validateToken();
-  console.log(tokenUserDetails);
-  let userId;
+  // console.log(tokenUserDetails);
+  // let userId;
   if (tokenUserDetails) {
     let obj = {
       postId,
       reactionTypeId,
     };
-    console.log("userId --> " + userId);
+    // console.log("userId --> " + userId);
     apiEndPoint = `posts/addReaction`;
     headers["x-auth-token"] = authToken;
 

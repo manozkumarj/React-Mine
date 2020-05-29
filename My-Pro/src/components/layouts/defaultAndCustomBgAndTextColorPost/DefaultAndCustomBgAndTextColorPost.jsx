@@ -7,7 +7,7 @@ const DefaultAndCustomBgAndTextColorPost = (props) => {
 
   const { postData, postTypeId } = props;
   useEffect(() => {
-    console.log(props);
+    // console.log(props);
     if (postTypeId === 3) {
       setBackgroundColor("#" + postData[0].backgroundColor);
       setTextColor("#" + postData[0].textColor);

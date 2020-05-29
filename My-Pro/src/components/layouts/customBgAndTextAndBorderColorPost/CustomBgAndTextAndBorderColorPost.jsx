@@ -14,7 +14,7 @@ const CustomBgAndTextAndBorderColorPost = (props) => {
 
   const { postData } = props;
   useEffect(() => {
-    console.log(props);
+    // console.log(props);
     setBackgroundColor("#" + postData[0].backgroundColor);
     setTextColor("#" + postData[0].textColor);
     setBorderTopColor("#" + postData[0].borderTopColor);

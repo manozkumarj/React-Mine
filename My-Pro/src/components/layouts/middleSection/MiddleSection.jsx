@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./middleSection.css";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 // import zuck from "../../../images/zuck.jpg";
 // import mark from "../../../images/mark.jpg";
 
@@ -47,11 +47,11 @@ const MiddleSection = (props) => {
     //   props.centralState.authToken,
     //   props.centralState.loggedInUserId
     // );
-    props.getAllUsersPosts();
+    // props.getAllUsersPosts();
   }, []);
 
   useEffect(() => {
-    console.log(props);
+    // console.log(props);
     setLoadingPosts(props.centralState.isLoading);
     setPosts(props.centralState.allUsersPosts);
     if (props.centralState.isCommentInserted) {
@@ -89,7 +89,7 @@ const MiddleSection = (props) => {
             const keyPress = (e) => {
               // e.preventDefault();
               if (e.keyCode == 13) {
-                console.log("value", e.target.value);
+                // console.log("value", e.target.value);
                 // put the login here
                 let commentText = e.target.value.trim();
                 if (commentText) {
@@ -100,43 +100,43 @@ const MiddleSection = (props) => {
 
             const handleLikeReaction = (e) => {
               e.stopPropagation();
-              console.log("handleLikeReaction --> " + post._id);
+              // console.log("handleLikeReaction --> " + post._id);
               upsertReaction(1);
             };
 
             const handleDislikeReaction = (e) => {
               e.stopPropagation();
-              console.log("handleDislikeReaction --> " + post._id);
+              // console.log("handleDislikeReaction --> " + post._id);
               upsertReaction(2);
             };
 
             const handleLoveReaction = (e) => {
               e.stopPropagation();
-              console.log("handleLoveReaction --> " + post._id);
+              // console.log("handleLoveReaction --> " + post._id);
               upsertReaction(3);
             };
 
             const handleWowReaction = (e) => {
               e.stopPropagation();
-              console.log("handleWowReaction --> " + post._id);
+              // console.log("handleWowReaction --> " + post._id);
               upsertReaction(4);
             };
 
             const handleLaughReaction = (e) => {
               e.stopPropagation();
-              console.log("handleLaughReaction --> " + post._id);
+              // console.log("handleLaughReaction --> " + post._id);
               upsertReaction(5);
             };
 
             const handleCryReaction = (e) => {
               e.stopPropagation();
-              console.log("handleCryReaction --> " + post._id);
+              // console.log("handleCryReaction --> " + post._id);
               upsertReaction(6);
             };
 
             const handleAngerReaction = (e) => {
               e.stopPropagation();
-              console.log("handleAngerReaction --> " + post._id);
+              // console.log("handleAngerReaction --> " + post._id);
               upsertReaction(7);
             };
 
@@ -497,4 +497,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MiddleSection);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(MiddleSection)
+);

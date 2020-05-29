@@ -22,7 +22,7 @@ const PostMenu = (props) => {
     } else if (props.centralState.newPostCreationError) {
       alert("Something went wrong while creating New post");
     }
-    console.log(props);
+    // console.log(props);
   }, [props]);
 
   const $ = window.$;
@@ -38,8 +38,8 @@ const PostMenu = (props) => {
   };
 
   const fileChangeHandler = (event) => {
-    console.log(event.target.files);
-    console.log(event.target.files[0]);
+    // console.log(event.target.files);
+    // console.log(event.target.files[0]);
     let selectedFiles = event.target.files;
 
     const filesData = new FormData();
@@ -57,14 +57,14 @@ const PostMenu = (props) => {
       filesData.append("file[" + i + "]", selectedFiles[i]);
       // console.log(selectedFiles[i]["name"]);
       let fileSize = selectedFiles[i]["size"];
-      console.log("fileSize --> " + fileSize);
+      // console.log("fileSize --> " + fileSize);
       if (fileSize > maxFileSize) {
         isFileSizeExceededLimit = true;
       }
     }
 
     if (isFileSizeExceededLimit) {
-      console.log("One of selected files size is more than 5 MB");
+      // console.log("One of selected files size is more than 5 MB");
       alert("One of selected files size is more than 5 MB");
       return false;
     }
@@ -105,11 +105,11 @@ const PostMenu = (props) => {
     let postPrivacyProp = postPrivacy;
     let postImagesProp = postImages;
     let postedTo = loggedInUserId;
-    console.log("handlePostSubmission triggered");
-    console.log("postContent --> " + postContent);
-    console.log("PostPrivacy --> " + postPrivacy);
-    console.log("postImages --> " + postImages);
-    console.log(postImages);
+    // console.log("handlePostSubmission triggered");
+    // console.log("postContent --> " + postContent);
+    // console.log("PostPrivacy --> " + postPrivacy);
+    // console.log("postImages --> " + postImages);
+    // console.log(postImages);
     if (postPrivacyProp && (postContentProp || postImagesProp)) {
       let postTypeId;
       let postDetailsObject = {

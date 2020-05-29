@@ -8,7 +8,7 @@ const CustomBgAndTextAndCornerPost = (props) => {
 
   const { postData, postTypeId } = props;
   useEffect(() => {
-    console.log(props);
+    // console.log(props);
     setBackgroundColor("#" + postData[0].backgroundColor);
     setTextColor("#" + postData[0].textColor);
     if (postData[0].cornerStyle == "cut") {

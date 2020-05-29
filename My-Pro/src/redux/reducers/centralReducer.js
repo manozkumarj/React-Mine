@@ -39,7 +39,7 @@ import validateToken from "./../validateToken";
 
 let token = localStorage.getItem("authToken");
 const tokenUserDetails = validateToken();
-console.log(tokenUserDetails);
+// console.log(tokenUserDetails);
 let userId;
 if (tokenUserDetails) {
   userId = tokenUserDetails._id;

@@ -26,7 +26,7 @@ const ProfileLeftSideSection = (props) => {
           : defaultAvatar
       );
     }
-    console.log(props);
+    // console.log(props);
   }, [props]);
 
   return (

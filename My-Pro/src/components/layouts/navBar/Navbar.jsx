@@ -20,14 +20,14 @@ const Navbar = (props) => {
           : defaultAvatar
       );
     }
-    console.log(props);
+    // console.log(props);
   }, [props]);
 
   const { open } = props;
   const history = useHistory();
 
   const handleLogout = () => {
-    console.log("handleLogout triggered");
+    // console.log("handleLogout triggered");
     props.logout();
     history.push(`/login`);
   };
