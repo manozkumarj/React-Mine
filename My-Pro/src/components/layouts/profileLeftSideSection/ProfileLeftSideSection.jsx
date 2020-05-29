@@ -10,24 +10,32 @@ const ProfileLeftSideSection = (props) => {
   const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
   const [userPrimaryDp, setUserPrimaryDp] = useState(defaultAvatar);
   const [userSecondaryDp, setUserSecondaryDp] = useState(defaultAvatar);
+  const [username, setUsername] = useState(null);
+  const [fullname, setFullname] = useState("Loading...");
 
   useEffect(() => {
     setImagesUrl("http://localhost:8088/photo/");
-    if (props.centralState.authToken) {
+    if (
+      props.centralState.authToken &&
+      props.centralState.profilePageUserDetails
+    ) {
       setUserPrimaryDp(
-        props.centralState.loggedInUserDetails.primaryDp
-          ? imagesUrl + props.centralState.loggedInUserDetails.primaryDp
+        props.centralState.profilePageUserDetails.primaryDp
+          ? imagesUrl + props.centralState.profilePageUserDetails.primaryDp
           : defaultAvatar
       );
 
       setUserSecondaryDp(
-        props.centralState.loggedInUserDetails.secondaryDp
-          ? imagesUrl + props.centralState.loggedInUserDetails.secondaryDp
+        props.centralState.profilePageUserDetails.secondaryDp
+          ? imagesUrl + props.centralState.profilePageUserDetails.secondaryDp
           : defaultAvatar
       );
+
+      setUsername(props.centralState.profilePageUserDetails.username);
+      setFullname(props.centralState.profilePageUserDetails.fullName);
+      // console.log(props.centralState.profilePageUserDetails);
     }
-    console.log(props);
-  }, [props]);
+  }, [props.centralState]);
 
   return (
     <div className="fixed-div" id="left-fixed-div">
@@ -64,15 +72,15 @@ const ProfileLeftSideSection = (props) => {
         </div>
 
         <div className="userFullnameDiv">
-          <Link to="/profile" className="hover-ul">
-            {props.centralState.loggedInUserDetails.fullName}
+          <Link to={"/" + username} className="hover-ul">
+            {fullname}
           </Link>
         </div>
 
         <div className="animateLinksDiv">
           <ul className="profileRelatedLinks">
             <li>
-              <Link to="/profile">Timeline</Link>
+              <Link to={"/" + username}>Timeline</Link>
             </li>
             <li>
               <Link to="/photos">Photos</Link>
@@ -81,7 +89,7 @@ const ProfileLeftSideSection = (props) => {
               <Link to="/friends">Friends</Link>
             </li>
             <li>
-              <Link to="/profile">View Profile</Link>
+              <Link to={"/" + username}>View Profile</Link>
             </li>
             <li>
               <Link to="/settings">Settings</Link>

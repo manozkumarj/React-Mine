@@ -441,7 +441,7 @@ const MiddleSection = (props) => {
           </div>
         )}
         {/* *******************  Context loader - ends ******************** */}
-        <hr className="dividable-hr" />
+        {/* <hr className="dividable-hr" /> */}
       </div>
 
       {/* Image viewer popup - starts */}

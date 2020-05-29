@@ -30,10 +30,16 @@ const Profile = (props) => {
   }, []);
 
   useEffect(() => {
+    console.log(props);
+  }, [props]);
+
+  useEffect(() => {
     let username = props.match.params.username;
     console.log("Path is -> " + props.match.path);
 
     if (username == props.centralState.loggedInUserDetails.username) {
+      props.centralState.profilePageUserDetails =
+        props.centralState.loggedInUserDetails;
       props.getIndividualUserPosts(props.centralState.loggedInUserDetails._id);
     } else {
       props.getProfileUserDetailsAndPosts(username);

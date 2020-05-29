@@ -6,7 +6,7 @@ const PrivateRoute = (props) => {
   const { component: Component, ...rest } = props;
   const getToken = props.centralState.authToken;
   useEffect(() => {
-    console.log(props);
+    // console.log(props);
   }, [props]);
 
   // console.log(rest.path);
