@@ -24,10 +24,8 @@ import {
 import {
   CREATE_POST,
   CREATE_POST_ERROR,
-  ALL_USERS_POSTS,
-  ALL_USERS_POSTS_ERROR,
-  INDIVIDUAL_USER_POSTS,
-  INDIVIDUAL_USER_POSTS_ERROR,
+  FETCHED_POSTS,
+  FETCHING_POSTS_ERROR,
   IS_LOADING_POSTS,
   IS_COMMENT_INSERTED,
   COMMENT_INSERTION_ERROR,
@@ -72,10 +70,8 @@ const initialState = {
   isNewPostCreated: false,
   isLoading: false,
   newPostCreationError: null,
-  allUsersPosts: null,
-  allUsersPostsError: null,
-  individualUserPosts: null,
-  individualUserPostsError: null,
+  fetchedPosts: null,
+  postsFetchingError: null,
   isCommentInserted: false,
   commentInsertionError: null,
   isReactionUpserted: false,
@@ -139,8 +135,8 @@ const centralReducer = (state = initialState, action) => {
         loggedInUserDetails: null,
         isLoginSuccess: false,
         loggedInUserId: null,
-        allUsersPosts: null,
-        individualUserPosts: null,
+        fetchedPosts: null,
+        postsFetchingError: null,
       };
 
     // Logged In user related
@@ -179,43 +175,27 @@ const centralReducer = (state = initialState, action) => {
         newPostCreationError: action.payload,
       };
 
-    case ALL_USERS_POSTS:
+    case FETCHED_POSTS:
       return {
         ...state,
-        allUsersPostsError: null,
-        allUsersPosts: action.payload,
+        postsFetchingError: null,
+        fetchedPosts: action.payload,
         isLoading: false,
       };
 
-    case ALL_USERS_POSTS_ERROR:
+    case FETCHING_POSTS_ERROR:
       return {
         ...state,
-        allUsersPostsError: action.payload,
-        allUsersPosts: null,
-        isLoading: false,
-      };
-
-    case INDIVIDUAL_USER_POSTS:
-      return {
-        ...state,
-        individualUserPostsError: null,
-        individualUserPosts: action.payload,
-        isLoading: false,
-      };
-
-    case INDIVIDUAL_USER_POSTS_ERROR:
-      return {
-        ...state,
-        individualUserPostsError: action.payload,
-        individualUserPosts: null,
+        postsFetchingError: action.payload,
+        fetchedPosts: null,
         isLoading: false,
       };
 
     case IS_LOADING_POSTS:
       return {
         ...state,
-        individualUserPostsError: null,
-        individualUserPosts: null,
+        postsFetchingError: null,
+        fetchedPosts: null,
         isLoading: true,
       };
 

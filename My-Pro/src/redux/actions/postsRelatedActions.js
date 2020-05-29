@@ -4,10 +4,8 @@ import validateToken from "./../validateToken";
 import {
   CREATE_POST,
   CREATE_POST_ERROR,
-  ALL_USERS_POSTS,
-  ALL_USERS_POSTS_ERROR,
-  INDIVIDUAL_USER_POSTS,
-  INDIVIDUAL_USER_POSTS_ERROR,
+  FETCHED_POSTS,
+  FETCHING_POSTS_ERROR,
   IS_LOADING_POSTS,
   IS_COMMENT_INSERTED,
   COMMENT_INSERTION_ERROR,
@@ -156,12 +154,12 @@ export const getAllUsersPosts = () => {
       API.get(apiEndPoint, { headers })
         .then((res) => {
           console.log(res.data);
-          dispatch({ type: ALL_USERS_POSTS, payload: res.data });
+          dispatch({ type: FETCHED_POSTS, payload: res.data });
         })
         .catch((err) => {
           console.log(err.response);
           dispatch({
-            type: ALL_USERS_POSTS_ERROR,
+            type: FETCHING_POSTS_ERROR,
             payload: err.response,
           });
         });
@@ -181,16 +179,45 @@ export const getIndividualUserPosts = (authToken, userId) => {
     API.get(apiEndPoint, { headers })
       .then((res) => {
         console.log(res.data);
-        dispatch({ type: INDIVIDUAL_USER_POSTS, payload: res.data });
+        dispatch({ type: FETCHED_POSTS, payload: res.data });
       })
       .catch((err) => {
         console.log(err.response);
         dispatch({
-          type: INDIVIDUAL_USER_POSTS_ERROR,
+          type: FETCHING_POSTS_ERROR,
           payload: err.response,
         });
       });
   };
+};
+// Fetching individual user's posts handler -- Ends
+
+// Fetching individual user's posts handler -- Starts
+export const getSinglePost = (postId) => {
+  // console.log("postId --> " + postId);
+  let authToken = localStorage.getItem("authToken");
+  const tokenUserDetails = validateToken();
+
+  apiEndPoint = `posts/${postId}`;
+  headers["x-auth-token"] = authToken;
+
+  if (tokenUserDetails) {
+    return (dispatch) => {
+      dispatch({ type: IS_LOADING_POSTS });
+      API.get(apiEndPoint, { headers })
+        .then((res) => {
+          console.log(res.data);
+          dispatch({ type: FETCHED_POSTS, payload: res.data });
+        })
+        .catch((err) => {
+          console.log(err.response);
+          dispatch({
+            type: FETCHING_POSTS_ERROR,
+            payload: err.response,
+          });
+        });
+    };
+  }
 };
 // Fetching individual user's posts handler -- Ends
 

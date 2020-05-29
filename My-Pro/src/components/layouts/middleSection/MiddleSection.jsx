@@ -53,7 +53,7 @@ const MiddleSection = (props) => {
   useEffect(() => {
     // console.log(props);
     setLoadingPosts(props.centralState.isLoading);
-    setPosts(props.centralState.allUsersPosts);
+    setPosts(props.centralState.fetchedPosts);
     if (props.centralState.isCommentInserted) {
       window.location.reload();
     }

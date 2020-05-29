@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import {
   getAllUsersPosts,
   getIndividualUserPosts,
+  getSinglePost,
 } from "./../../../redux/actionCreators";
 
 const Home = (props) => {
@@ -15,11 +16,11 @@ const Home = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     console.log(props);
-    // setCurrentPath(props.match.path);
-    // console.log("Path is -> " + currentPath);
-    // if (props.match.path === "/") {
-    props.getAllUsersPosts();
-    // }
+    setCurrentPath(props.match.path);
+    console.log("Path is -> " + currentPath);
+    if (props.match.path === "/") {
+      props.getAllUsersPosts();
+    }
   }, []);
 
   return (
@@ -54,6 +55,7 @@ const mapDispatchToProps = (dispatch) => {
     getIndividualUserPosts: (token, userId) =>
       dispatch(getIndividualUserPosts(token, userId)),
     getAllUsersPosts: () => dispatch(getAllUsersPosts()),
+    getSinglePost: () => dispatch(getSinglePost()),
   };
 };
 
