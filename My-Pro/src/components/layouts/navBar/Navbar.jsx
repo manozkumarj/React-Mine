@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { removeToken } from "./../../../redux/actions/authActions";
 
 const Navbar = (props) => {
-  const [imagesUrl, setImagesUrl] = useState(null);
+  const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
   const [userPrimaryDp, setUserPrimaryDp] = useState(null);
   useEffect(() => {
     setImagesUrl("http://localhost:8088/photo/");

@@ -7,7 +7,7 @@ import defaultAvatar from "../../../images/avatar.png";
 import { connect } from "react-redux";
 
 const ProfileLeftSideSection = (props) => {
-  const [imagesUrl, setImagesUrl] = useState(null);
+  const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
   const [userPrimaryDp, setUserPrimaryDp] = useState(defaultAvatar);
   const [userSecondaryDp, setUserSecondaryDp] = useState(defaultAvatar);
 
@@ -26,7 +26,7 @@ const ProfileLeftSideSection = (props) => {
           : defaultAvatar
       );
     }
-    // console.log(props);
+    console.log(props);
   }, [props]);
 
   return (
