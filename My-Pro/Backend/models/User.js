@@ -4,6 +4,11 @@ const bcrypt = require("bcryptjs");
 
 const UserSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   fullName: {
     type: String,
     required: true,
@@ -62,8 +67,8 @@ const UserSchema = mongoose.Schema({
 
 const User = (module.exports = mongoose.model("User", UserSchema));
 
-module.exports.getUserById = function (id, callback) {
-  User.findOne({ uniqueUserId: id }, callback);
+module.exports.getUserByUsername = function (username, callback) {
+  User.findOne({ username }, callback);
 };
 
 module.exports.getUserByEmail = function (email, callback) {

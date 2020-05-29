@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import "./profile.css";
+import { withRouter } from "react-router-dom";
 import MiddleSection from "./../../layouts/middleSection/MiddleSection";
 import RightSideSection from "./../../layouts/rightSideSection/RightSideSection";
 import ProfileLeftSideSection from "./../../layouts/profileLeftSideSection/ProfileLeftSideSection";
@@ -7,13 +8,15 @@ import wow2 from "../../../images/wow_2.jpg";
 
 import overlayClose from "../../../images/overlay-close.png";
 import fancyClose from "../../../images/fancy-close.png";
+import { connect } from "react-redux";
+import {
+  getAllUsersPosts,
+  getIndividualUserPosts,
+} from "./../../../redux/actionCreators";
 
-export default function Profile() {
+const Profile = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
     const script = document.createElement("script");
     script.src = "/js/croppie.js";
     script.async = true;
@@ -24,6 +27,11 @@ export default function Profile() {
     script_1.async = true;
     document.body.appendChild(script_1);
   }, []);
+
+  useEffect(() => {
+    let username = props.match.params.username;
+    console.log("Path is -> " + props.match.path);
+  }, [props.match]);
 
   const filesPickerRef = useRef();
 
@@ -144,4 +152,22 @@ export default function Profile() {
       {/* DPs change popups - ends */}
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    centralState: state.central,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getIndividualUserPosts: (token, userId) =>
+      dispatch(getIndividualUserPosts(token, userId)),
+    getAllUsersPosts: () => dispatch(getAllUsersPosts()),
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Profile)
+);

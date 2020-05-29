@@ -17,8 +17,8 @@ router.get("/", async (req, res) => {
   try {
     const posts = await Post.find()
       .sort({ milliseconds: -1 })
-      .populate("postedTo", "fullName primaryDp secondaryDp")
-      .populate("postedBy", "fullName primaryDp secondaryDp")
+      .populate("postedTo", "fullName primaryDp secondaryDp username")
+      .populate("postedBy", "fullName primaryDp secondaryDp username")
       .populate("comments.commentedBy", "fullName primaryDp secondaryDp")
       .exec()
       .then((posts) => {
@@ -350,9 +350,9 @@ router.get("/:postId", async (req, res) => {
   let postId = req.params.postId;
   try {
     const posts = await Post.findById(postId)
-      .populate("postedTo", "fullName primaryDp")
-      .populate("postedBy", "fullName primaryDp")
-      .populate("comments.commentedBy", "fullName primaryDp")
+      .populate("postedTo", "fullName primaryDp username")
+      .populate("postedBy", "fullName primaryDp username")
+      .populate("comments.commentedBy", "fullName primaryDp username")
       .exec()
       .then((result) => {
         console.log("Populated results");
@@ -377,9 +377,9 @@ router.get("/postedTo/:id", (req, res) => {
   try {
     Post.find({ postedTo: uniqueUserId })
       .sort({ milliseconds: -1 })
-      .populate("postedTo", "fullName primaryDp")
-      .populate("postedBy", "fullName primaryDp")
-      .populate("comments.commentedBy", "fullName primaryDp")
+      .populate("postedTo", "fullName primaryDp username")
+      .populate("postedBy", "fullName primaryDp username")
+      .populate("comments.commentedBy", "fullName primaryDp username")
       .exec()
       .then((posts) => {
         console.log("Populated results");

@@ -41,10 +41,12 @@ const tokenUserDetails = validateToken();
 let userId;
 if (tokenUserDetails) {
   userId = tokenUserDetails._id;
+  username = tokenUserDetails.username;
 } else {
   localStorage.removeItem("authToken");
   userId = null;
   token = null;
+  username = null;
 }
 
 //************************************* State ****************************************************/
@@ -65,6 +67,7 @@ const initialState = {
   allPosts: null,
   filteredPost: null,
   loggedInUserId: userId,
+  loggedInUserUsername: username,
 
   // Posts related
   isNewPostCreated: false,
@@ -91,6 +94,7 @@ const centralReducer = (state = initialState, action) => {
         isLoginSuccess: true,
         loggedInUserDetails: action.payload.user,
         loggedInUserId: action.payload.user._id,
+        loggedInUserUsername: action.payload.user.username,
       };
 
     case REGISTRATION_FAILED:
@@ -109,6 +113,7 @@ const centralReducer = (state = initialState, action) => {
         isLoginSuccess: true,
         loginErrorData: null,
         loggedInUserId: action.payload.user._id,
+        loggedInUserUsername: action.payload.user.username,
       };
 
     case LOGIN_FAILED:
@@ -119,6 +124,7 @@ const centralReducer = (state = initialState, action) => {
         isLoginSuccess: false,
         authToken: null,
         loggedInUserId: null,
+        loggedInUserUsername: null,
       };
 
     // Auth related
@@ -135,6 +141,7 @@ const centralReducer = (state = initialState, action) => {
         loggedInUserDetails: null,
         isLoginSuccess: false,
         loggedInUserId: null,
+        loggedInUserUsername: null,
         fetchedPosts: null,
         postsFetchingError: null,
       };

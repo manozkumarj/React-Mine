@@ -192,7 +192,9 @@ const MiddleSection = (props) => {
                   </div>
                   <div className="postInfo-n-user-details-div">
                     <div className="post-details-div">
-                      <Link to="/">{post.postedTo.fullName}</Link>
+                      <Link to={"/" + post.postedTo.username}>
+                        {post.postedTo.fullName}
+                      </Link>
                       <span
                         className="post-vr-dots"
                         data-post-id={post._id}
@@ -350,7 +352,7 @@ const MiddleSection = (props) => {
                           }
                         >
                           <div className="post-dp-div">
-                            <Link to="/">
+                            <Link to={"/" + comment.commentedBy.username}>
                               <img
                                 className="post-comment-user-dp"
                                 src={commentedUserPrimaryDp}

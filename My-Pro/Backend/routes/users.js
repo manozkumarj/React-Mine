@@ -9,6 +9,7 @@ const helpers = require("../helpers/helpers");
 const mongoose = require("mongoose");
 
 const User = require("../models/User");
+const Post = require("../models/Post");
 
 // sample test route
 router.get("/test/", (req, res) => {
@@ -42,9 +43,11 @@ router.post(
       }
 
       let getMilliseconds = helpers.getMilliseconds();
+      let username = helpers.randomString();
 
       user = new User({
         _id: mongoose.Types.ObjectId(),
+        username,
         fullName,
         email,
         password,
@@ -57,6 +60,7 @@ router.post(
       // console.log("User object is below");
       // console.log(user);
       const payload = {
+        username,
         fullName,
         email,
         primaryDp: user.primaryDp,
@@ -107,13 +111,33 @@ router.get("/", async (req, res) => {
 // @route     GET api/users/:id
 // @desc      Get specific user by ID
 // @access    Public
-router.get("/:id", async (req, res) => {
-  let _id = req.params.id;
+router.get("/:username", async (req, res) => {
+  let username = req.params.username;
   try {
-    const user = await User.findById(_id).sort({
-      milliseconds: -1,
+    User.getUserByUsername(username, (err, user) => {
+      if (err) new Error(err);
+      if (!user) {
+        return res.json({ success: false, msg: "User not found" });
+      } else {
+        let userProfileDetails = user;
+        // return res.json({ msg: "User found", user });
+        Post.find({ postedTo: user._id })
+          .sort({ milliseconds: -1 })
+          .populate("postedTo", "fullName primaryDp username")
+          .populate("postedBy", "fullName primaryDp username")
+          .populate("comments.commentedBy", "fullName primaryDp username")
+          .exec()
+          .then((posts) => {
+            console.log("Populated results");
+            console.log(posts);
+            res.json({ success: true, userProfileDetails, posts });
+          })
+          .catch((err) => {
+            console.error(err.message);
+            res.status(500).send("Server Error");
+          });
+      }
     });
-    res.json(user);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -233,6 +257,7 @@ router.post(
             token: randomChars + "@@" + token,
             user: {
               _id: user._id,
+              username: user.username,
               fullName: user.fullName,
               email: user.email,
               primaryDp: user.primaryDp,
