@@ -12,6 +12,11 @@ const ProfileLeftSideSection = (props) => {
   const [userSecondaryDp, setUserSecondaryDp] = useState(defaultAvatar);
   const [username, setUsername] = useState(null);
   const [fullname, setFullname] = useState("Loading...");
+  const [id, setId] = useState("");
+  const [
+    isSessionAndProfileUserSame,
+    setIsSessionAndProfileUserSame,
+  ] = useState(false);
 
   useEffect(() => {
     setImagesUrl("http://localhost:8088/photo/");
@@ -33,9 +38,23 @@ const ProfileLeftSideSection = (props) => {
 
       setUsername(props.centralState.profilePageUserDetails.username);
       setFullname(props.centralState.profilePageUserDetails.fullName);
+
+      if (
+        props.centralState.profilePageUserDetails.username ==
+        props.centralState.loggedInUserDetails.username
+      ) {
+        setIsSessionAndProfileUserSame(true);
+      } else {
+        setIsSessionAndProfileUserSame(false);
+      }
       // console.log(props.centralState.profilePageUserDetails);
     }
   }, [props.centralState]);
+
+  useEffect(() => {
+    if (isSessionAndProfileUserSame) setId("change-dp");
+    else setId("");
+  }, [isSessionAndProfileUserSame]);
 
   return (
     <div className="fixed-div" id="left-fixed-div">
@@ -43,11 +62,11 @@ const ProfileLeftSideSection = (props) => {
         <div className="profileDpsSection">
           <div
             className="dp-div primary-dp"
-            id="change-dp"
+            id={id}
             data-type="Primary"
             data-file-type="dp"
           >
-            <span>change</span>
+            {id && <span>change</span>}
             <img
               id="primary-dp-src"
               className="dp-img"
@@ -58,11 +77,11 @@ const ProfileLeftSideSection = (props) => {
           </div>
           <div
             className="dp-div secondary-dp"
-            id="change-dp"
+            id={id}
             data-type="Secondary"
             data-file-type="dp"
           >
-            <span>change</span>
+            {id && <span>change</span>}
             <img
               id="secondary-dp-src"
               className="dp-img"

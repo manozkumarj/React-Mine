@@ -249,10 +249,14 @@ router.post(
       }
 
       let getMilliseconds = helpers.getMilliseconds();
-      let borderTopColor = borderColor;
-      let borderRightColor = borderColor;
-      let borderBottomColor = borderColor;
-      let borderLeftColor = borderColor;
+      let getBorderColors = helpers.setBorderColors(
+        borderColor,
+        borderStyleSides
+      );
+      let borderTopColor = getBorderColors.borderTopColor;
+      let borderRightColor = getBorderColors.borderRightColor;
+      let borderBottomColor = getBorderColors.borderBottomColor;
+      let borderLeftColor = getBorderColors.borderLeftColor;
 
       let post = new Post({
         _id: mongoose.Types.ObjectId(),

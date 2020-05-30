@@ -18,6 +18,10 @@ import {
 const Profile = (props) => {
   const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
   const [timelinePhoto, setTimelinePhoto] = useState(wow2);
+  const [
+    isSessionAndProfileUserSame,
+    setIsSessionAndProfileUserSame,
+  ] = useState(false);
   useEffect(() => {
     window.scrollTo(0, 0);
     const script = document.createElement("script");
@@ -44,6 +48,15 @@ const Profile = (props) => {
               props.centralState.profilePageUserDetails.profileCoverPhoto
           : wow2
       );
+
+      if (
+        props.centralState.profilePageUserDetails.username ==
+        props.centralState.loggedInUserDetails.username
+      ) {
+        setIsSessionAndProfileUserSame(true);
+      } else {
+        setIsSessionAndProfileUserSame(false);
+      }
     }
   }, [props]);
 
@@ -81,13 +94,15 @@ const Profile = (props) => {
               src={timelinePhoto}
               alt="timeline view"
             />
-            <span
-              className="absolute-bottom-right"
-              id="change-timeline"
-              data-file-type="timeline"
-            >
-              Change image
-            </span>
+            {isSessionAndProfileUserSame && (
+              <span
+                className="absolute-bottom-right"
+                id="change-timeline"
+                data-file-type="timeline"
+              >
+                Change image
+              </span>
+            )}
           </div>
           <div className="left-right-holders">
             <div className="total-friends-count">Friends - 15</div>

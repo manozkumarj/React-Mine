@@ -26,6 +26,62 @@ const getMilliseconds = () => {
   return d.getTime().toString();
 };
 
+const setBorderColors = (borderColor, sides) => {
+  let borderSidesObj = {};
+  if (sides === "all") {
+    borderSidesObj = {
+      borderTopColor: borderColor,
+      borderRightColor: borderColor,
+      borderBottomColor: borderColor,
+      borderLeftColor: borderColor,
+    };
+  } else if (sides === "top") {
+    borderSidesObj = {
+      borderTopColor: borderColor,
+      borderRightColor: "transparent",
+      borderBottomColor: "transparent",
+      borderLeftColor: "transparent",
+    };
+  } else if (sides === "right") {
+    borderSidesObj = {
+      borderTopColor: "transparent",
+      borderRightColor: borderColor,
+      borderBottomColor: "transparent",
+      borderLeftColor: "transparent",
+    };
+  } else if (sides === "bottom") {
+    borderSidesObj = {
+      borderTopColor: "transparent",
+      borderRightColor: "transparent",
+      borderBottomColor: borderColor,
+      borderLeftColor: "transparent",
+    };
+  } else if (sides === "left") {
+    borderSidesObj = {
+      borderTopColor: "transparent",
+      borderRightColor: "transparent",
+      borderBottomColor: "transparent",
+      borderLeftColor: borderColor,
+    };
+  } else if (sides === "leftAndRight") {
+    borderSidesObj = {
+      borderTopColor: "transparent",
+      borderRightColor: borderColor,
+      borderBottomColor: "transparent",
+      borderLeftColor: borderColor,
+    };
+  } else if (sides === "topAndBottom") {
+    borderSidesObj = {
+      borderTopColor: borderColor,
+      borderRightColor: "transparent",
+      borderBottomColor: borderColor,
+      borderLeftColor: "transparent",
+    };
+  }
+
+  return borderSidesObj;
+};
+
 /*
 Genders:
 -----------------------------------
@@ -83,4 +139,9 @@ PostTypes:
       -> cornerStyleSides (topLeft, topRight, bottomLeft, bottomRight, topLeftAndBottomRight, topRightAndBottomLeft, all)
 */
 
-module.exports = { randomString, generateUniqueId, getMilliseconds };
+module.exports = {
+  randomString,
+  generateUniqueId,
+  getMilliseconds,
+  setBorderColors,
+};
