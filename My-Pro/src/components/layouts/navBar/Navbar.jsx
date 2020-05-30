@@ -2,15 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./navbar.css";
 import kohli from "../../../images/kohli.jpg";
-import zuck from "../../../images/zuck.jpg";
-import mark from "../../../images/mark.jpg";
+// import zuck from "../../../images/zuck.jpg";
+// import mark from "../../../images/mark.jpg";
 import defaultAvatar from "../../../images/avatar.png";
 import { connect } from "react-redux";
 import { removeToken } from "./../../../redux/actions/authActions";
+import { searchUsers } from "./../../../redux/actionCreators";
 
 const Navbar = (props) => {
   const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
   const [userPrimaryDp, setUserPrimaryDp] = useState(null);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchResults, setSearchResults] = useState(null);
   useEffect(() => {
     setImagesUrl("http://localhost:8088/photo/");
     if (props.centralState.authToken) {
@@ -19,6 +22,11 @@ const Navbar = (props) => {
           ? imagesUrl + props.centralState.loggedInUserDetails.primaryDp
           : defaultAvatar
       );
+
+      if (props.centralState.searchResults) {
+        setSearchResults(props.centralState.searchResults);
+        setIsSearching(false);
+      }
     }
     // console.log(props);
   }, [props]);
@@ -30,6 +38,16 @@ const Navbar = (props) => {
     // console.log("handleLogout triggered");
     props.logout();
     history.push(`/login`);
+  };
+
+  const keyPress = (e) => {
+    let searchWord = e.target.value.trim();
+    if (searchWord) {
+      setIsSearching(true);
+      props.searchUsers(searchWord);
+    } else {
+      setIsSearching(false);
+    }
   };
 
   const loggedInMenu = props.centralState.authToken && (
@@ -54,70 +72,51 @@ const Navbar = (props) => {
                 placeholder="Search for people"
                 spellCheck="false"
                 autoComplete="off"
+                onKeyDown={keyPress}
               />
 
               <div id="search_results_container">
                 <div id="search_results_div">
-                  <ul>
-                    <li>
-                      <img
-                        src={kohli}
-                        className="search_result_user_dp"
-                        alt="Username"
-                      />
-                      <span className="search_result_user_name">
-                        Manoj Kumar J
-                      </span>
-                    </li>
-                    <li>
-                      <img
-                        src={zuck}
-                        className="search_result_user_dp"
-                        alt="Username"
-                      />
-                      <span className="search_result_user_name">
-                        Mahesh Kumar J
-                      </span>
-                    </li>
-                    <li>
-                      <img
-                        src={mark}
-                        className="search_result_user_dp"
-                        alt="Username"
-                      />
-                      <span className="search_result_user_name">Kranthi</span>
-                    </li>
-                    <li>
-                      <img
-                        src={kohli}
-                        className="search_result_user_dp"
-                        alt="Username"
-                      />
-                      <span className="search_result_user_name">
-                        Manoj Kumar J
-                      </span>
-                    </li>
-                    <li>
-                      <img
-                        src={zuck}
-                        className="search_result_user_dp"
-                        alt="Manoj Kumar"
-                      />
-                      <span className="search_result_user_name">
-                        Mahesh Kumar J
-                      </span>
-                    </li>
-                  </ul>
-                  <ul className="search-more-container">
-                    <li>
-                      <Link to="/search/word">
-                        <span className="search_result_user_name">
-                          See more results for -
-                          <span className="search-word"> Manoj Kumar J</span>
-                        </span>
-                      </Link>
-                    </li>
-                  </ul>
+                  {isSearching && (
+                    <div className="searchLoading">Searching...</div>
+                  )}
+
+                  {!isSearching && searchResults && (
+                    <div>
+                      <ul>
+                        {searchResults &&
+                          searchResults.map((user) => {
+                            let userPrimaryDp = user.primaryDp
+                              ? imagesUrl + user.primaryDp
+                              : defaultAvatar;
+                            return (
+                              // <li key={user._id}>
+                              <Link to={"/" + user.username} key={user._id}>
+                                <img
+                                  src={userPrimaryDp}
+                                  className="search_result_user_dp"
+                                  alt="Username"
+                                />
+                                <span className="search_result_user_name">
+                                  {user.fullName}
+                                </span>
+                              </Link>
+                              // </li>
+                            );
+                          })}
+                      </ul>
+                      <ul className="search-more-container">
+                        <li>
+                          <Link to="/search/word">
+                            <span className="search_result_user_name">
+                              See more results for -
+                              <span className="search-word">Manoj Kumar J</span>
+                            </span>
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -192,6 +191,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     logout: () => dispatch(removeToken()),
+    searchUsers: (searchWord) => dispatch(searchUsers(searchWord)),
   };
 };
 

@@ -110,6 +110,24 @@ router.get("/", async (req, res) => {
   }
 });
 
+// @route     GET api/users/search/:searchWord
+// @desc      Get specific users with regex
+// @access    Public
+router.get("/search/:searchWord", async (req, res) => {
+  let searchWord = req.params.searchWord;
+  try {
+    const users = await User.find({
+      fullName: { $regex: searchWord, $options: "i" },
+    }).sort({
+      milliseconds: -1,
+    });
+    res.json(users);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 // @route     GET api/users/:id
 // @desc      Get specific user by ID
 // @access    Public

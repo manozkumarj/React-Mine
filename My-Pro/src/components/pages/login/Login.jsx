@@ -27,13 +27,18 @@ const Login = (props) => {
     e.preventDefault();
     setDisableButtons(true);
     setShowLoader(true);
-    console.log("Form submitted");
-    let loginDetails = {
-      email,
-      password,
-    };
-    console.log(loginDetails);
-    props.loginUser(loginDetails);
+    if (email.trim()) {
+      console.log("Form submitted");
+      let loginDetails = {
+        email,
+        password,
+      };
+      console.log(loginDetails);
+      props.loginUser(loginDetails);
+    } else {
+      setDisableButtons(false);
+      setShowLoader(false);
+    }
   };
 
   const handleBtnClick = (redirectHref) => {

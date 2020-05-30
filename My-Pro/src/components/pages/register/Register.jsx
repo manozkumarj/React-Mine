@@ -34,13 +34,18 @@ const Register = (props) => {
     setDisableButtons(true);
     setShowLoader(true);
     console.log("Form submitted");
-    let registrationDetails = {
-      fullName,
-      email,
-      password,
-    };
-    console.log(registrationDetails);
-    props.registerAccount(registrationDetails);
+    if (email.trim() && fullName.trim()) {
+      let registrationDetails = {
+        fullName,
+        email,
+        password,
+      };
+      console.log(registrationDetails);
+      props.registerAccount(registrationDetails);
+    } else {
+      setDisableButtons(false);
+      setShowLoader(false);
+    }
   };
 
   const handleBtnClick = (redirectHref) => {

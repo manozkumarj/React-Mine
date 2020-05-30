@@ -18,6 +18,8 @@ import {
   FILTER_POST,
   GET_STATE,
   RESET_STATE,
+  SEARCH_RESULTS,
+  SEARCH_ERROR,
 } from "./../actionTypes/centralTypes";
 
 // Posts related
@@ -71,6 +73,8 @@ const initialState = {
   filteredPost: null,
   loggedInUserId: userId,
   loggedInUserUsername: username,
+  searchResults: null,
+  searchError: null,
 
   // Posts related
   isNewPostCreated: false,
@@ -255,6 +259,20 @@ const centralReducer = (state = initialState, action) => {
         isProfileUserFound: false,
         fetchedPosts: null,
         isLoading: false,
+      };
+
+    case SEARCH_RESULTS:
+      return {
+        ...state,
+        searchError: null,
+        searchResults: action.payload,
+      };
+
+    case SEARCH_ERROR:
+      return {
+        ...state,
+        searchError: action.payload,
+        searchResults: null,
       };
 
     case RESET_STATE:

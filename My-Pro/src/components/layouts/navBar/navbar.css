@@ -78,7 +78,17 @@
   color: #000;
 }
 
-#search_results_div li {
+.searchLoading {
+  text-align: center;
+  padding: 25px;
+  font-size: 16px;
+}
+
+#search_results_div a {
+  display: block;
+}
+
+#search_results_div a {
   height: 40px;
   /* border: 1px solid red; */
   display: flex;
@@ -89,7 +99,8 @@
   border-bottom: 1px solid #ccc;
 }
 
-#search_results_div li:hover {
+#search_results_div a:hover,
+#search_results_div a a:hover {
   background: var(--site-color);
   color: #fff;
   border-radius: 3px;
