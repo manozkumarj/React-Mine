@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./navbar.css";
-import kohli from "../../../images/kohli.jpg";
+// import kohli from "../../../images/kohli.jpg";
 // import zuck from "../../../images/zuck.jpg";
 // import mark from "../../../images/mark.jpg";
 import defaultAvatar from "../../../images/avatar.png";
@@ -14,6 +14,7 @@ const Navbar = (props) => {
   const [userPrimaryDp, setUserPrimaryDp] = useState(null);
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState(null);
+  const [searchWord, setSearchWord] = useState(null);
   useEffect(() => {
     setImagesUrl("http://localhost:8088/photo/");
     if (props.centralState.authToken) {
@@ -42,6 +43,7 @@ const Navbar = (props) => {
 
   const keyPress = (e) => {
     let searchWord = e.target.value.trim();
+    setSearchWord(searchWord);
     if (searchWord) {
       setIsSearching(true);
       props.searchUsers(searchWord);
@@ -107,7 +109,7 @@ const Navbar = (props) => {
                       </ul>
                       <ul className="search-more-container">
                         <li>
-                          <Link to="/search/word">
+                          <Link to={"/search/" + searchWord}>
                             <span className="search_result_user_name">
                               See more results for -
                               <span className="search-word">Manoj Kumar J</span>

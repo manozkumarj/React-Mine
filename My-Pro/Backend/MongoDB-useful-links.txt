@@ -8,4 +8,5 @@
 * https://stackoverflow.com/questions/26526779/mongoose-populate-not-working
 * https://icevanila.com/question/mongoose-populate-not-working-while-quering-data
 * https://stackoverflow.com/questions/12821596/multiple-populates-mongoosejs
+* https://stackoverflow.com/questions/26814456/how-to-get-all-the-values-that-contains-part-of-a-string-using-mongoose-find/26814550
 * 

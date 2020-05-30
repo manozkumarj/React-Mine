@@ -90,6 +90,7 @@
 
 #search_results_div a {
   height: 40px;
+  color: #000;
   /* border: 1px solid red; */
   display: flex;
   flex-direction: row;
@@ -114,7 +115,7 @@
 }
 
 .search-more-container a {
-  color: #fff;
+  color: #fff !important;
   display: block;
 }
 
