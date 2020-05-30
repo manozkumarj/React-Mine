@@ -355,8 +355,8 @@ router.get("/:postId", async (req, res) => {
       .populate("comments.commentedBy", "fullName primaryDp username")
       .exec()
       .then((result) => {
-        console.log("Populated results");
-        console.log(result);
+        // console.log("Populated results");
+        // console.log(result);
         let post = [];
         post.push(result);
         res.json(post);
@@ -382,8 +382,8 @@ router.get("/postedTo/:id", (req, res) => {
       .populate("comments.commentedBy", "fullName primaryDp username")
       .exec()
       .then((posts) => {
-        console.log("Populated results");
-        console.log(posts);
+        // console.log("Populated results");
+        // console.log(posts);
         res.json(posts);
       })
       .catch((err) => {

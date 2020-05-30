@@ -8,11 +8,21 @@
 * https://www.quora.com/How-can-I-compress-an-image-using-JavaScript
 * https://www.npmjs.com/package/browser-image-compression  ---> Using plugin for img compression
 * https://www.valentinog.com/blog/formdata/
-* 
+* https://stackoverflow.com/questions/35940290/how-to-convert-base64-string-to-javascript-file-object-like-as-from-file-input-f#:~:text=length%2C%20u8arr%20%3D%20new%20Uint8Array(,log(file)%3B
+
+
+
+
+
+
+
 
 
 
 
 **************************** Didn't use but useful **************************************************
 * https://www.npmjs.com/package/blueimp-file-upload#demo
+* https://html.developreference.com/article/16129464/Croppie%2C+base64+image%2C+transfer+to+node.js+via+%24http%2C+multipartyMiddleware
+* https://stackoverflow.com/questions/37696308/croppie-base64-image-transfer-to-node-js-via-http-multipartymiddleware
+* 
 * 

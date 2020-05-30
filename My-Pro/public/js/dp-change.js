@@ -121,10 +121,13 @@ $(document).ready(function () {
       .croppie("result", {
         type: "canvas",
         size: "viewport",
+        format: "png",
       })
       .then(function (response) {
         // console.log("cropped dp pic data is below");
         // console.log(response);
+
+        var imgData = response.replace(/^data:image\/(png|jpg);base64,/, "");
 
         // $("#hiddenFile").val(response);
         $("#primary-dp-src").attr("src", response);
@@ -133,9 +136,11 @@ $(document).ready(function () {
         console.log(image);
         // let values = [...image.entries()];
         // console.log(values);
+        var file = dataURLtoFile(response);
+        console.log(file);
 
         var formData = new FormData();
-        formData.append("images", image);
+        formData.append("images", file);
 
         $.ajax({
           url: "http://localhost:8088/api/users/update-primary-dp",
@@ -162,5 +167,19 @@ $(document).ready(function () {
     $("#dp_change_layerOneModalContainer").scrollTop(0);
     $("#dp_change_layerOneModalContainer").focus();
     $("#dp_change_layerOneModalContainer").css("overflow-y", "scroll");
+  }
+
+  function dataURLtoFile(dataurl, filename) {
+    var arr = dataurl.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
   }
 });
