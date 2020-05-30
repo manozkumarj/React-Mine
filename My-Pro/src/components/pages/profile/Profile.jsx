@@ -87,6 +87,8 @@ const Profile = (props) => {
         <RightSideSection />
       </div>
 
+      <input type="file" id="hiddenFile" />
+
       {/* DPs change popups - starts */}
       <div
         id="dp_change_layerOneModalContainer"
@@ -147,6 +149,8 @@ const Profile = (props) => {
               <div id="upload-new-dp" onClick={pickImagesHandler}>
                 Upload an Image
               </div>
+
+              <div id="crop-selected-part">Crop Image</div>
             </div>
 
             <hr className="dividable-hr" />

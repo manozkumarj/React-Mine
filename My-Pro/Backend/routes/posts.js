@@ -69,8 +69,8 @@ router.post(
       });
 
       await post.save();
-      console.log("Post object is below");
-      console.log(post);
+      // console.log("Post object is below");
+      // console.log(post);
 
       res.json({ post });
     } catch (err) {

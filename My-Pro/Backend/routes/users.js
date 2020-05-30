@@ -7,6 +7,7 @@ const { check, validationResult } = require("express-validator");
 const auth = require("../middlewares/auth");
 const helpers = require("../helpers/helpers");
 const mongoose = require("mongoose");
+const uploadController = require("../middlewares/upload");
 
 const User = require("../models/User");
 const Post = require("../models/Post");
@@ -128,8 +129,8 @@ router.get("/:username", async (req, res) => {
           .populate("comments.commentedBy", "fullName primaryDp username")
           .exec()
           .then((posts) => {
-            console.log("Populated results");
-            console.log(posts);
+            // console.log("Populated results");
+            // console.log(posts);
             res.json({ success: true, userProfileDetails, posts });
           })
           .catch((err) => {
@@ -143,6 +144,42 @@ router.get("/:username", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+// @route     Update api/users/
+// @desc      Update user's primary DP
+// @access    Private
+router.post(
+  "/update-primary-dp",
+  auth,
+  uploadController.uploadImages,
+  uploadController.resizeImages,
+  uploadController.getResult,
+  async (req, res) => {
+    let userId = req.user._id;
+    try {
+      console.log("req.body.images are below");
+      console.log(req.body.images);
+
+      let primaryDp = req.body.images[0];
+
+      await User.findByIdAndDelete(userId, { primaryDp })
+        .exec()
+        .then((result) => {
+          res.json({ success: true, user: result });
+        })
+        .catch((error) => {
+          res.json({ success: false, msg: "something went wrong" });
+        });
+      // console.log("Post object is below");
+      // console.log(post);
+
+      res.json({ post });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
+);
 
 // @route     Delete api/users/
 // @desc      Delete all users

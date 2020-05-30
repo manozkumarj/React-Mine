@@ -20,6 +20,10 @@ const upload = multer({
 const uploadFiles = upload.array("images", 10);
 
 const uploadImages = (req, res, next) => {
+  console.log("req.body is below");
+  console.log(req.body);
+  console.log("req.files is below");
+  console.log(req.files);
   uploadFiles(req, res, (err) => {
     if (err instanceof multer.MulterError) {
       if (err.code === "LIMIT_UNEXPECTED_FILE") {

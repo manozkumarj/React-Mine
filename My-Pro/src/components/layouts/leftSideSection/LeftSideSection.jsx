@@ -68,7 +68,9 @@ const LeftSideSection = (props) => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/profile">View Profile</Link>
+              <Link to={"/" + props.centralState.loggedInUserUsername}>
+                View Profile
+              </Link>
             </li>
             <li>
               <Link to="/settings">Settings</Link>

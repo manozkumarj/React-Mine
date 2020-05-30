@@ -115,6 +115,43 @@ $(document).ready(function () {
     reader.readAsDataURL(this.files[0]);
   });
 
+  $("#crop-selected-part").click(function (event) {
+    let authToken = localStorage.getItem("authToken");
+    $dp_image_crop
+      .croppie("result", {
+        type: "canvas",
+        size: "viewport",
+      })
+      .then(function (response) {
+        // console.log("cropped dp pic data is below");
+        // console.log(response);
+
+        // $("#hiddenFile").val(response);
+        $("#primary-dp-src").attr("src", response);
+        let image = $("#dp-upload")[0].files[0];
+
+        console.log(image);
+        // let values = [...image.entries()];
+        // console.log(values);
+
+        var formData = new FormData();
+        formData.append("images", image);
+
+        $.ajax({
+          url: "http://localhost:8088/api/users/update-primary-dp",
+          headers: { "x-auth-token": authToken },
+          type: "POST",
+          processData: false,
+          contentType: false,
+          data: formData,
+          success: function (data) {
+            console.log("DP uploaded & data is below");
+            console.log(data);
+          },
+        });
+      });
+  });
+
   function open_dpChange_popup(popup_name) {
     var scrollBarWidth = window.innerWidth - document.body.offsetWidth;
     $("body").css("margin-right", scrollBarWidth).addClass("toggleModal");
