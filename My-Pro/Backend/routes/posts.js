@@ -17,9 +17,18 @@ router.get("/", async (req, res) => {
   try {
     const posts = await Post.find()
       .sort({ milliseconds: -1 })
-      .populate("postedTo", "fullName primaryDp secondaryDp username")
-      .populate("postedBy", "fullName primaryDp secondaryDp username")
-      .populate("comments.commentedBy", "fullName primaryDp secondaryDp")
+      .populate(
+        "postedTo",
+        "fullName primaryDp secondaryDp username profileCoverPhoto"
+      )
+      .populate(
+        "postedBy",
+        "fullName primaryDp secondaryDp username profileCoverPhoto"
+      )
+      .populate(
+        "comments.commentedBy",
+        "fullName primaryDp secondaryDp username profileCoverPhoto"
+      )
       .exec()
       .then((posts) => {
         // console.log("Populated results");
@@ -350,9 +359,12 @@ router.get("/:postId", async (req, res) => {
   let postId = req.params.postId;
   try {
     const posts = await Post.findById(postId)
-      .populate("postedTo", "fullName primaryDp username")
-      .populate("postedBy", "fullName primaryDp username")
-      .populate("comments.commentedBy", "fullName primaryDp username")
+      .populate("postedTo", "fullName primaryDp username profileCoverPhoto")
+      .populate("postedBy", "fullName primaryDp username profileCoverPhoto")
+      .populate(
+        "comments.commentedBy",
+        "fullName primaryDp username profileCoverPhoto"
+      )
       .exec()
       .then((result) => {
         // console.log("Populated results");
@@ -377,9 +389,12 @@ router.get("/postedTo/:id", (req, res) => {
   try {
     Post.find({ postedTo: uniqueUserId })
       .sort({ milliseconds: -1 })
-      .populate("postedTo", "fullName primaryDp username")
-      .populate("postedBy", "fullName primaryDp username")
-      .populate("comments.commentedBy", "fullName primaryDp username")
+      .populate("postedTo", "fullName primaryDp username profileCoverPhoto")
+      .populate("postedBy", "fullName primaryDp username profileCoverPhoto")
+      .populate(
+        "comments.commentedBy",
+        "fullName primaryDp username profileCoverPhoto"
+      )
       .exec()
       .then((posts) => {
         // console.log("Populated results");

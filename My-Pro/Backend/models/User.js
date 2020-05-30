@@ -51,6 +51,10 @@ const UserSchema = mongoose.Schema({
     type: String,
     default: null,
   },
+  profileCoverPhoto: {
+    type: String,
+    default: null,
+  },
   emailStatus: {
     type: String,
     default: "active",

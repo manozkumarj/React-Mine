@@ -66,6 +66,7 @@ router.post(
         email,
         primaryDp: user.primaryDp,
         secondaryDp: user.secondaryDp,
+        profileCoverPhoto: user.profileCoverPhoto,
         _id: user._id,
       };
 
@@ -149,31 +150,61 @@ router.get("/:username", async (req, res) => {
 // @desc      Update user's primary DP
 // @access    Private
 router.post(
-  "/update-primary-dp",
+  "/update-user-photo",
   auth,
   uploadController.uploadImages,
   uploadController.resizeImages,
   uploadController.getResult,
+  [
+    check("photoType", "Please include photoType in request body")
+      .not()
+      .isEmpty(),
+  ],
   async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     let userId = req.user._id;
+    const { photoType } = req.body;
     try {
       console.log("req.body.images are below");
       console.log(req.body.images);
 
-      let primaryDp = req.body.images[0];
+      let photoName = req.body.images[0];
 
-      await User.findByIdAndUpdate(userId, { primaryDp })
-        .exec()
-        .then((result) => {
-          return res.json({ success: true, user: result });
-        })
-        .catch((error) => {
-          return res.json({ success: false, msg: "something went wrong" });
-        });
+      if (photoType === "primaryDp") {
+        await User.findByIdAndUpdate(userId, { primaryDp: photoName })
+          .exec()
+          .then((result) => {
+            return res.json({ success: true, user: result });
+          })
+          .catch((error) => {
+            return res.json({ success: false, msg: "something went wrong" });
+          });
+      } else if (photoType === "secondaryDp") {
+        await User.findByIdAndUpdate(userId, { secondaryDp: photoName })
+          .exec()
+          .then((result) => {
+            return res.json({ success: true, user: result });
+          })
+          .catch((error) => {
+            return res.json({ success: false, msg: "something went wrong" });
+          });
+      } else if (photoType === "profileCoverPhoto") {
+        await User.findByIdAndUpdate(userId, { profileCoverPhoto: photoName })
+          .exec()
+          .then((result) => {
+            return res.json({ success: true, user: result });
+          })
+          .catch((error) => {
+            return res.json({ success: false, msg: "something went wrong" });
+          });
+      }
+
       // console.log("Post object is below");
       // console.log(post);
-
-      return res.json({ post });
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
@@ -299,6 +330,7 @@ router.post(
               email: user.email,
               primaryDp: user.primaryDp,
               secondaryDp: user.secondaryDp,
+              profileCoverPhoto: user.profileCoverPhoto,
             },
           });
         } else {

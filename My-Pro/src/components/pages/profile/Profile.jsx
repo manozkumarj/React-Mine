@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./profile.css";
 import { withRouter } from "react-router-dom";
 import MiddleSection from "./../../layouts/middleSection/MiddleSection";
@@ -16,6 +16,8 @@ import {
 } from "./../../../redux/actionCreators";
 
 const Profile = (props) => {
+  const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
+  const [timelinePhoto, setTimelinePhoto] = useState(wow2);
   useEffect(() => {
     window.scrollTo(0, 0);
     const script = document.createElement("script");
@@ -31,6 +33,18 @@ const Profile = (props) => {
 
   useEffect(() => {
     console.log(props);
+    setImagesUrl("http://localhost:8088/photo/");
+    if (
+      props.centralState.authToken &&
+      props.centralState.profilePageUserDetails
+    ) {
+      setTimelinePhoto(
+        props.centralState.profilePageUserDetails.profileCoverPhoto
+          ? imagesUrl +
+              props.centralState.profilePageUserDetails.profileCoverPhoto
+          : wow2
+      );
+    }
   }, [props]);
 
   useEffect(() => {
@@ -62,7 +76,11 @@ const Profile = (props) => {
 
         <div className="middle-section">
           <div className="timeline-pic-div">
-            <img src={wow2} alt="timeline view" />
+            <img
+              id="profile-timeline-src"
+              src={timelinePhoto}
+              alt="timeline view"
+            />
             <span
               className="absolute-bottom-right"
               id="change-timeline"
@@ -87,7 +105,12 @@ const Profile = (props) => {
         <RightSideSection />
       </div>
 
-      {/* <input type="file" id="hiddenFile" /> */}
+      <input
+        style={{ display: "none" }}
+        type="text"
+        id="hidden-popup-type-holder"
+        value=""
+      />
 
       {/* DPs change popups - starts */}
       <div
@@ -149,8 +172,6 @@ const Profile = (props) => {
               <div id="upload-new-dp" onClick={pickImagesHandler}>
                 Upload an Image
               </div>
-
-              <div id="crop-selected-part">Crop Image</div>
             </div>
 
             <hr className="dividable-hr" />

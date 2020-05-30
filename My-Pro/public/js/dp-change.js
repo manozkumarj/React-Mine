@@ -46,9 +46,11 @@ $(document).ready(function () {
         $("#dp-and-timeline-change-title").text($title);
 
         if ($getData.toLowerCase() == "primary") {
+          $("#hidden-popup-type-holder").val("primaryDp");
           $getImgSrc = $("#primary-dp-src").attr("src");
           $getImgSrc = "https://i.picsum.photos/id/250/500/500.jpg";
         } else if ($getData.toLowerCase() == "secondary") {
+          $("#hidden-popup-type-holder").val("secondaryDp");
           $getImgSrc = $("#secondary-dp-src").attr("src");
           $getImgSrc = "https://i.picsum.photos/id/280/500/500.jpg";
         }
@@ -63,6 +65,7 @@ $(document).ready(function () {
             console.log("jQuery bind complete");
           });
       } else if ($getDataFileType == "timeline") {
+        $("#hidden-popup-type-holder").val("profileCoverPhoto");
         $("#dp-and-timeline-change-title").text("Cover pic change");
         $("#timeline_img_change_croppie_modal").show();
         $getImgSrc = "https://i.picsum.photos/id/400/200/500.jpg";
@@ -115,46 +118,82 @@ $(document).ready(function () {
     reader.readAsDataURL(this.files[0]);
   });
 
-  $("#crop-selected-part").click(function (event) {
+  $("#update-dp").click(function (event) {
+    let photoType = $("#hidden-popup-type-holder").val();
     let authToken = localStorage.getItem("authToken");
-    $dp_image_crop
-      .croppie("result", {
-        type: "canvas",
-        size: "viewport",
-        format: "png",
-      })
-      .then(function (response) {
-        // console.log("cropped dp pic data is below");
-        // console.log(response);
+    if (photoType === "primaryDp" || photoType === "secondaryDp") {
+      $dp_image_crop
+        .croppie("result", {
+          type: "canvas",
+          size: "viewport",
+          format: "png",
+        })
+        .then(function (response) {
+          // console.log("cropped dp pic data is below");
+          // console.log(response);
 
-        var imgData = response.replace(/^data:image\/(png|jpg);base64,/, "");
+          // $("#hiddenFile").val(response);
+          // let image = $("#dp-upload")[0].files[0];
+          // console.log(image);
+          // let values = [...image.entries()];
+          // console.log(values);
+          if (photoType === "primaryDp") {
+            $("#primary-dp-src").attr("src", response);
+          } else {
+            $("#secondary-dp-src").attr("src", response);
+          }
 
-        // $("#hiddenFile").val(response);
-        $("#primary-dp-src").attr("src", response);
-        let image = $("#dp-upload")[0].files[0];
+          var file = dataURLtoFile(response);
+          console.log(file);
 
-        console.log(image);
-        // let values = [...image.entries()];
-        // console.log(values);
-        var file = dataURLtoFile(response);
-        console.log(file);
+          var formData = new FormData();
+          formData.append("images", file);
+          formData.append("photoType", photoType);
 
-        var formData = new FormData();
-        formData.append("images", file);
-
-        $.ajax({
-          url: "http://localhost:8088/api/users/update-primary-dp",
-          headers: { "x-auth-token": authToken },
-          type: "POST",
-          processData: false,
-          contentType: false,
-          data: formData,
-          success: function (data) {
-            console.log("DP uploaded & data is below");
-            console.log(data);
-          },
+          $.ajax({
+            url: "http://localhost:8088/api/users/update-user-photo",
+            headers: { "x-auth-token": authToken },
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function (data) {
+              console.log("DP uploaded & data is below");
+              console.log(data);
+            },
+          });
         });
-      });
+    } else if (photoType === "profileCoverPhoto") {
+      $timeline_image_crop
+        .croppie("result", {
+          type: "canvas",
+          size: "viewport",
+          format: "png",
+        })
+        .then(function (response) {
+          $("#profile-timeline-src").attr("src", response);
+
+          var file = dataURLtoFile(response);
+          console.log(file);
+
+          var formData = new FormData();
+          formData.append("images", file);
+          formData.append("photoType", photoType);
+
+          $.ajax({
+            url: "http://localhost:8088/api/users/update-user-photo",
+            headers: { "x-auth-token": authToken },
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function (data) {
+              console.log("DP uploaded & data is below");
+              console.log(data);
+            },
+          });
+        });
+    }
   });
 
   function open_dpChange_popup(popup_name) {
