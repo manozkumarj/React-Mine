@@ -4,10 +4,10 @@ import "./customBgAndTextAndBorderColorPost.css";
 const CustomBgAndTextAndBorderColorPost = (props) => {
   const [backgroundColor, setBackgroundColor] = useState("#ffffff");
   const [textColor, setTextColor] = useState("#000000");
-  const [borderTopColor, setBorderTopColor] = useState("red");
-  const [borderRightColor, setBorderRightColor] = useState("red");
-  const [borderBottomColor, setBorderBottomColor] = useState("red");
-  const [borderLeftColor, setBorderLeftColor] = useState("red");
+  const [borderTopColor, setBorderTopColor] = useState("transparent");
+  const [borderRightColor, setBorderRightColor] = useState("transparent");
+  const [borderBottomColor, setBorderBottomColor] = useState("transparent");
+  const [borderLeftColor, setBorderLeftColor] = useState("transparent");
   const [borderStyle, setBorderStyle] = useState("solid");
   // const [borderStyleSides, setBorderStyleSides] = useState("all");
   const [classes, setClasses] = useState("pad-12-10 border-2px");

@@ -372,7 +372,9 @@ const MiddleSection = (props) => {
                           </div>
                           <div className="post-comment-info-n-user-details-div">
                             <div className="post-comment-user-div">
-                              <Link to="/">{commentedUserFullname}</Link>
+                              <Link to={"/" + comment.commentedBy.username}>
+                                {commentedUserFullname}
+                              </Link>
                               <span
                                 className="post-comment-vr-dots"
                                 data-post-comment-id={
