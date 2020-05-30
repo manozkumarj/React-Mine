@@ -41,7 +41,7 @@ const uploadImages = (req, res, next) => {
 const resizeImages = async (req, res, next) => {
   if (!req.files) return next();
 
-  let userId = req.user.uniqueUserId;
+  let userId = req.user._id;
   let getMilliseconds = helpers.getMilliseconds();
 
   req.body.images = [];

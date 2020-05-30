@@ -87,7 +87,7 @@ const Profile = (props) => {
         <RightSideSection />
       </div>
 
-      <input type="file" id="hiddenFile" />
+      {/* <input type="file" id="hiddenFile" /> */}
 
       {/* DPs change popups - starts */}
       <div

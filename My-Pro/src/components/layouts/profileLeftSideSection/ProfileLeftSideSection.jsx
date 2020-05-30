@@ -50,6 +50,7 @@ const ProfileLeftSideSection = (props) => {
             <span>change</span>
             <img
               id="primary-dp-src"
+              className="dp-img"
               src={userPrimaryDp}
               alt="User name"
               width="120px"
@@ -64,6 +65,7 @@ const ProfileLeftSideSection = (props) => {
             <span>change</span>
             <img
               id="secondary-dp-src"
+              className="dp-img"
               src={userSecondaryDp}
               alt="User name"
               width="120px"

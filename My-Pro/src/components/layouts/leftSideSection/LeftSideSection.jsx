@@ -36,14 +36,12 @@ const LeftSideSection = (props) => {
           <img
             src={userPrimaryDp}
             alt="User name"
-            className="primary-dp"
-            width="120px"
+            className="primary-dp dp-img"
           />
           <img
             src={userSecondaryDp}
             alt="User name"
-            className="secondary-dp"
-            width="120px"
+            className="secondary-dp dp-img"
           />
         </div>
 

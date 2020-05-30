@@ -52,7 +52,10 @@
   border-radius: 100px;
   z-index: 2;
 }
-
+.dp-img {
+  height: 120px;
+  width: 120px;
+}
 .dp-div span {
   position: absolute;
   /* width: 120px; */

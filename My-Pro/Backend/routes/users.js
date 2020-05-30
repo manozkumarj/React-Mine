@@ -162,18 +162,18 @@ router.post(
 
       let primaryDp = req.body.images[0];
 
-      await User.findByIdAndDelete(userId, { primaryDp })
+      await User.findByIdAndUpdate(userId, { primaryDp })
         .exec()
         .then((result) => {
-          res.json({ success: true, user: result });
+          return res.json({ success: true, user: result });
         })
         .catch((error) => {
-          res.json({ success: false, msg: "something went wrong" });
+          return res.json({ success: false, msg: "something went wrong" });
         });
       // console.log("Post object is below");
       // console.log(post);
 
-      res.json({ post });
+      return res.json({ post });
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
