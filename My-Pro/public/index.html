@@ -210,6 +210,15 @@
         });
         // Toggling post's more options UL - ends
 
+        // Toggling post's more options UL - starts
+        $(document).on("click", ".post-comment-item", function () {
+          $getId = $(this).attr("data-id");
+          // alert($getId);
+          $("." + $getId + "-comment-holder").toggle("slow");
+          // $(".comment-box-" + $getId).focus();
+        });
+        // Toggling post's more options UL - ends
+
         // $("body").click(function () {
         //   $(
         //     ".dropdown-content, #navbar-rightside-dropdown-div,#search_results_div"

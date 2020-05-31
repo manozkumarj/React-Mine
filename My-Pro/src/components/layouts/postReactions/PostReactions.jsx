@@ -307,21 +307,30 @@ const PostReactions = (props) => {
           </span>
           {/* reactions-holder - ends */}
         </span>
-        <span className="action-item hover-ul">Comment</span>
+        <span
+          className="action-item hover-ul post-comment-item"
+          data-id={post._id}
+        >
+          Comment
+        </span>
         <span className="action-item hover-ul">Share</span>
       </div>
 
-      <div className="comment-input-container">
+      <div
+        className={"comment-input-container " + post._id + "-comment-holder"}
+      >
         <input
           type="text"
-          className="comment-box"
+          className={"comment-box comment-box-" + post._id}
           placeholder="Type and press enter to comment..."
           onKeyDown={keyPress}
         />
       </div>
 
       {postComments && postComments.length > 0 && (
-        <div className="post-comments-container">
+        <div
+          className={"post-comments-container " + post._id + "-comment-holder"}
+        >
           {postComments.map((comment) => {
             let commentedUserPrimaryDp = comment.commentedBy.primaryDp
               ? imagesUrl + comment.commentedBy.primaryDp
