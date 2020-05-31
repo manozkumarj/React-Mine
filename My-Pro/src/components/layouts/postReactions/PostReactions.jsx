@@ -23,8 +23,11 @@ const PostReactions = (props) => {
     props.centralState.loggedInUserId
   );
   const [reactedTypeInText, setReactedTypeInText] = useState("Like");
+  const [showReactions, setShowReactions] = useState(false);
 
   let reactedTypeId = null;
+
+  const $ = window.$;
 
   useEffect(() => {
     setPost(props.postDetails);
@@ -60,13 +63,13 @@ const PostReactions = (props) => {
   }, [props.postDetails]);
 
   const handleReactionRemover = (e) => {
-    // e.stopPropagation();
+    e.stopPropagation();
     console.log("handleReactionRemover --> " + post._id);
-    upsertReaction("delete", null);
+    // upsertReaction("delete", null);
   };
 
   const handleLikeReaction = (e) => {
-    // e.stopPropagation();
+    e.stopPropagation();
     // console.log("handleLikeReaction --> " + post._id);
     upsertReaction("add", 1);
     setReactedTypeInText("Like");
@@ -183,7 +186,9 @@ const PostReactions = (props) => {
           data-post-id={post._id}
         >
           {!isReactedToThisPost && (
-            <span onClick={handleLikeReaction}>Like</span>
+            <span className="like-button" onClick={handleLikeReaction}>
+              Like
+            </span>
           )}
 
           {isReactedToThisPost && (
