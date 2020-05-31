@@ -198,13 +198,17 @@ const PostReactions = (props) => {
           </div>
           <div className="reactions-count">
             {postReactions.length && !isReactedToThisPost
-              ? postReactions.length + " persons reacted"
+              ? postReactions.length +
+                (postReactions.length > 1 ? " persons" : " person") +
+                "reacted"
               : null}
 
             {postReactions.length > 1 && isReactedToThisPost
               ? "You and " +
                 (postReactions.length - 1) +
-                " other persons reacted"
+                " other " +
+                (postReactions.length - 1 > 1 ? " persons" : " person") +
+                " reacted"
               : null}
 
             {postReactions.length == 1 && isReactedToThisPost
@@ -216,7 +220,10 @@ const PostReactions = (props) => {
         </div>
         <div className="cmnts-and-shares-counter couter-item">
           <span className="comments-counter hover-ul">
-            {postComments.length} comments
+            {postComments.length
+              ? postComments.length +
+                (postComments.length > 1 ? " - comments" : " - comment")
+              : "0 - comments"}
           </span>
           <span className="shares-counter hover-ul">20 shares</span>
         </div>
