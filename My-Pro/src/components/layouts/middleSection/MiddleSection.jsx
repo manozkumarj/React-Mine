@@ -60,9 +60,6 @@ const MiddleSection = (props) => {
     console.log(props);
     setLoadingPosts(props.centralState.isLoading);
     setPosts(props.centralState.fetchedPosts);
-    if (props.centralState.isCommentInserted) {
-      window.location.reload();
-    }
   }, [props]);
 
   return (
@@ -186,86 +183,6 @@ const MiddleSection = (props) => {
                 </div>
                 {displayPage}
                 <PostReactions postDetails={post} />
-                <div className="comment-input-container">
-                  <input
-                    type="text"
-                    className="comment-box"
-                    placeholder="Type and press enter to comment..."
-                    onKeyDown={keyPress}
-                  />
-                </div>
-
-                {post.comments && post.comments.length > 0 && (
-                  <div className="post-comments-container">
-                    {post.comments.map((comment) => {
-                      let commentedUserPrimaryDp = comment.commentedBy.primaryDp
-                        ? imagesUrl + comment.commentedBy.primaryDp
-                        : defaultAvatar;
-                      let commentedUserFullname = comment.commentedBy.fullName;
-                      return (
-                        <div
-                          className="post-individual-comment-container"
-                          key={comment._id}
-                          id={
-                            "individual-comment-" +
-                            post._id +
-                            comment._id +
-                            comment.commentedAt
-                          }
-                        >
-                          <div className="post-dp-div">
-                            <Link to={"/" + comment.commentedBy.username}>
-                              <img
-                                className="post-comment-user-dp"
-                                src={commentedUserPrimaryDp}
-                                alt={commentedUserFullname}
-                              />
-                            </Link>
-                          </div>
-                          <div className="post-comment-info-n-user-details-div">
-                            <div className="post-comment-user-div">
-                              <Link to={"/" + comment.commentedBy.username}>
-                                {commentedUserFullname}
-                              </Link>
-                              <span
-                                className="post-comment-vr-dots"
-                                data-post-comment-id={
-                                  post._id + comment._id + comment.commentedAt
-                                }
-                                id="post-comment-more-options"
-                              >
-                                <ul
-                                  className="post-comment-more-options-ul"
-                                  id={
-                                    "post-comment-more-options-ul-" +
-                                    post._id +
-                                    comment._id +
-                                    comment.commentedAt
-                                  }
-                                >
-                                  <li
-                                    className="hide-comment"
-                                    data-post-comment-id={
-                                      post._id +
-                                      comment._id +
-                                      comment.commentedAt
-                                    }
-                                  >
-                                    Hide
-                                  </li>
-                                  <li>Delete</li>
-                                </ul>
-                              </span>
-                            </div>
-                            <div className="post-comment">
-                              {comment.comment}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
               </div>
             );
           })}

@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import "./postReactions.css";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import loveHeartsEyesEmoji from "../../../emojis/love-hearts-eyes-emoji-50.png";
 import likeThumbEmoji from "../../../emojis/like-thumb-emoji-50.png";
@@ -9,15 +9,18 @@ import laugherEmoji from "../../../emojis/face-with-tears-of-joy-emoji-50.png";
 import angryEmoji from "../../../emojis/angry-emoji-50.png";
 import wowEmoji from "../../../emojis/wow-emoji-50.png";
 import cryingEmoji from "../../../emojis/crying-emoji-50.png";
+import defaultAvatar from "../../../images/avatar.png";
 
 import { connect } from "react-redux";
 import { addComment, upsertReaction } from "./../../../redux/actionCreators";
 
 const PostReactions = (props) => {
   const [post, setPost] = useState(props.postDetails);
+  const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
   const [postReactions, setPostReactions] = useState(
     props.postDetails.reactions
   );
+  const [postComments, setPostComments] = useState(props.postDetails.comments);
   const [isReactedToThisPost, setIsReactedToThisPost] = useState(false);
   const [loggedInUserId, setLoggedInUserId] = useState(
     props.centralState.loggedInUserId
@@ -26,18 +29,17 @@ const PostReactions = (props) => {
   const [showReactions, setShowReactions] = useState(false);
 
   let reactedTypeId = null;
-
-  const $ = window.$;
+  let loopId = 1;
 
   useEffect(() => {
     setPost(props.postDetails);
     setPostReactions(props.postDetails.reactions);
     setLoggedInUserId(props.centralState.loggedInUserId);
-    console.log(props);
+    // console.log(props);
 
     if (postReactions && postReactions.length > 0) {
       let getIndex = postReactions.findIndex(
-        (user) => user.reactedBy == loggedInUserId
+        (user) => user.reactedBy === loggedInUserId
       );
       console.log("loggedInUserId --> " + loggedInUserId);
       console.log("getIndex --> " + getIndex);
@@ -45,22 +47,30 @@ const PostReactions = (props) => {
       if (getIndex > -1) {
         setIsReactedToThisPost(true);
         reactedTypeId = postReactions[getIndex]["reactionTypeId"];
-        console.log("reactedTypeId --> " + reactedTypeId);
-        console.log(postReactions[getIndex]["reactionTypeId"]);
+        // console.log("reactedTypeId --> " + reactedTypeId);
+        // console.log(postReactions[getIndex]["reactionTypeId"]);
 
-        if (reactedTypeId == 1) setReactedTypeInText("Like");
-        else if (reactedTypeId == 2) setReactedTypeInText("Dislike");
-        else if (reactedTypeId == 3) setReactedTypeInText("Love");
-        else if (reactedTypeId == 4) setReactedTypeInText("Wow");
-        else if (reactedTypeId == 5) setReactedTypeInText("Laugh");
-        else if (reactedTypeId == 6) setReactedTypeInText("Cry");
-        else if (reactedTypeId == 7) setReactedTypeInText("Angry");
+        if (reactedTypeId === 1) setReactedTypeInText("Like");
+        else if (reactedTypeId === 2) setReactedTypeInText("Dislike");
+        else if (reactedTypeId === 3) setReactedTypeInText("Love");
+        else if (reactedTypeId === 4) setReactedTypeInText("Wow");
+        else if (reactedTypeId === 5) setReactedTypeInText("Laugh");
+        else if (reactedTypeId === 6) setReactedTypeInText("Cry");
+        else if (reactedTypeId === 7) setReactedTypeInText("Angry");
         else setReactedTypeInText("Like");
 
-        console.log("reactedTypeInText --> " + reactedTypeInText);
+        // console.log("reactedTypeInText --> " + reactedTypeInText);
       }
     }
   }, [props.postDetails]);
+
+  useEffect(() => {
+    // console.log(props);
+    if (props.centralState.isCommentInserted) {
+      // window.location.reload();
+      alert("Comment inserted");
+    }
+  }, [props.centralState.isCommentInserted]);
 
   const handleReactionRemover = (e) => {
     e.stopPropagation();
@@ -118,7 +128,7 @@ const PostReactions = (props) => {
   };
 
   const upsertReaction = (actionType, reactionTypeId) => {
-    if (actionType == "add") {
+    if (actionType === "add") {
       let filterPostReactions = postReactions.filter(
         (reaction) => reaction.reactedBy !== loggedInUserId
       );
@@ -133,7 +143,7 @@ const PostReactions = (props) => {
       // console.log(addd);
       setPostReactions([...filterPostReactions, addUserToReactions]);
       setIsReactedToThisPost(true);
-    } else if (actionType == "delete") {
+    } else if (actionType === "delete") {
       let filterPostReactions = postReactions.filter(
         (reaction) => reaction.reactedBy !== loggedInUserId
       );
@@ -141,6 +151,29 @@ const PostReactions = (props) => {
       setIsReactedToThisPost(false);
     }
     // props.upsertReaction(post._id, actionType, reactionTypeId);
+  };
+
+  const keyPress = (e) => {
+    // e.preventDefault();
+    if (e.keyCode === 13) {
+      // console.log("value", e.target.value);
+      // put the login here
+      let commentText = e.target.value.trim();
+      if (commentText) {
+        let newComment = {
+          comment: commentText,
+          commentedBy: {
+            fullName: props.centralState.loggedInUserDetails.fullName,
+            username: props.centralState.loggedInUserDetails.username,
+            primaryDp: props.centralState.loggedInUserDetails.primaryDp,
+          },
+          _id: ++loopId,
+        };
+        setPostComments([...postComments, newComment]);
+        e.target.value = "";
+        props.addComment(post._id, commentText);
+      }
+    }
   };
 
   return (
@@ -262,6 +295,83 @@ const PostReactions = (props) => {
         <span className="action-item hover-ul">Comment</span>
         <span className="action-item hover-ul">Share</span>
       </div>
+
+      <div className="comment-input-container">
+        <input
+          type="text"
+          className="comment-box"
+          placeholder="Type and press enter to comment..."
+          onKeyDown={keyPress}
+        />
+      </div>
+
+      {postComments && postComments.length > 0 && (
+        <div className="post-comments-container">
+          {postComments.map((comment) => {
+            let commentedUserPrimaryDp = comment.commentedBy.primaryDp
+              ? imagesUrl + comment.commentedBy.primaryDp
+              : defaultAvatar;
+            let commentedUserFullname = comment.commentedBy.fullName;
+            return (
+              <div
+                className="post-individual-comment-container"
+                key={comment._id}
+                id={
+                  "individual-comment-" +
+                  post._id +
+                  comment._id +
+                  comment.commentedAt
+                }
+              >
+                <div className="post-dp-div">
+                  <Link to={"/" + comment.commentedBy.username}>
+                    <img
+                      className="post-comment-user-dp"
+                      src={commentedUserPrimaryDp}
+                      alt={commentedUserFullname}
+                    />
+                  </Link>
+                </div>
+                <div className="post-comment-info-n-user-details-div">
+                  <div className="post-comment-user-div">
+                    <Link to={"/" + comment.commentedBy.username}>
+                      {commentedUserFullname}
+                    </Link>
+                    <span
+                      className="post-comment-vr-dots"
+                      data-post-comment-id={
+                        post._id + comment._id + comment.commentedAt
+                      }
+                      id="post-comment-more-options"
+                    >
+                      <ul
+                        className="post-comment-more-options-ul"
+                        id={
+                          "post-comment-more-options-ul-" +
+                          post._id +
+                          comment._id +
+                          comment.commentedAt
+                        }
+                      >
+                        <li
+                          className="hide-comment"
+                          data-post-comment-id={
+                            post._id + comment._id + comment.commentedAt
+                          }
+                        >
+                          Hide
+                        </li>
+                        <li>Delete</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div className="post-comment">{comment.comment}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </Fragment>
   );
 };
