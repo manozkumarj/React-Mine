@@ -479,6 +479,11 @@
   /* display: flex; */
 }
 
+.highlight-reaction {
+  color: var(--site-color);
+  font-size: 18px;
+}
+
 .reactions-holder {
   flex-direction: row;
   position: absolute;

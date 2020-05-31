@@ -141,50 +141,56 @@ const MiddleSection = (props) => {
               }
             };
 
+            const handleReactionRemover = (e) => {
+              e.stopPropagation();
+              console.log("handleReactionRemover --> " + post._id);
+              upsertReaction("delete", null);
+            };
+
             const handleLikeReaction = (e) => {
               e.stopPropagation();
               // console.log("handleLikeReaction --> " + post._id);
-              upsertReaction(1);
+              upsertReaction("add", 1);
             };
 
             const handleDislikeReaction = (e) => {
               e.stopPropagation();
               // console.log("handleDislikeReaction --> " + post._id);
-              upsertReaction(2);
+              upsertReaction("add", 2);
             };
 
             const handleLoveReaction = (e) => {
               e.stopPropagation();
               // console.log("handleLoveReaction --> " + post._id);
-              upsertReaction(3);
+              upsertReaction("add", 3);
             };
 
             const handleWowReaction = (e) => {
               e.stopPropagation();
               // console.log("handleWowReaction --> " + post._id);
-              upsertReaction(4);
+              upsertReaction("add", 4);
             };
 
             const handleLaughReaction = (e) => {
               e.stopPropagation();
               // console.log("handleLaughReaction --> " + post._id);
-              upsertReaction(5);
+              upsertReaction("add", 5);
             };
 
             const handleCryReaction = (e) => {
               e.stopPropagation();
               // console.log("handleCryReaction --> " + post._id);
-              upsertReaction(6);
+              upsertReaction("add", 6);
             };
 
             const handleAngerReaction = (e) => {
               e.stopPropagation();
               // console.log("handleAngerReaction --> " + post._id);
-              upsertReaction(7);
+              upsertReaction("add", 7);
             };
 
-            const upsertReaction = (reactionTypeId) => {
-              props.upsertReaction(post._id, reactionTypeId);
+            const upsertReaction = (actionType, reactionTypeId) => {
+              props.upsertReaction(post._id, actionType, reactionTypeId);
             };
 
             let displayPage;
@@ -302,9 +308,20 @@ const MiddleSection = (props) => {
                   <span
                     className="action-item hover-ul like-button"
                     data-post-id={post._id}
-                    onClick={handleLikeReaction}
                   >
-                    {reactedTypeInText}
+                    {!isReactedToThisPost && (
+                      <span onClick={handleLikeReaction}>Like</span>
+                    )}
+
+                    {isReactedToThisPost && (
+                      <span
+                        className="highlight-reaction"
+                        onClick={handleReactionRemover}
+                      >
+                        {reactedTypeInText}
+                      </span>
+                    )}
+
                     {/* reactions-holder - starts */}
                     <span
                       className="reactions-holder"
@@ -538,8 +555,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getIndividualUserPosts(token, userId)),
     addComment: (postId, commentText) =>
       dispatch(addComment(postId, commentText)),
-    upsertReaction: (postId, reactionTypeId) =>
-      dispatch(upsertReaction(postId, reactionTypeId)),
+    upsertReaction: (postId, actionType, reactionTypeId) =>
+      dispatch(upsertReaction(postId, actionType, reactionTypeId)),
     getAllUsersPosts: () => dispatch(getAllUsersPosts()),
   };
 };

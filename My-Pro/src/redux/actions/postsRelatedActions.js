@@ -294,7 +294,7 @@ export const addComment = (postId, commentText) => {
 // Fetching individual post's comment insertion handler -- Ends
 
 // Fetching individual posts's reaction handler -- Starts
-export const upsertReaction = (postId, reactionTypeId) => {
+export const upsertReaction = (postId, actionType, reactionTypeId) => {
   let authToken = localStorage.getItem("authToken");
   const tokenUserDetails = validateToken();
   // console.log(tokenUserDetails);
@@ -305,7 +305,11 @@ export const upsertReaction = (postId, reactionTypeId) => {
       reactionTypeId,
     };
     // console.log("userId --> " + userId);
-    apiEndPoint = `posts/addReaction`;
+    if (actionType == "add") {
+      apiEndPoint = `posts/addReaction`;
+    } else {
+      apiEndPoint = `posts/deleteReaction`;
+    }
     headers["x-auth-token"] = authToken;
 
     return (dispatch) => {

@@ -476,39 +476,46 @@ router.put(
   }
 );
 
-router.put("/deleteReaction/:id", auth, async (req, res) => {
-  let postId = req.params.id;
-  try {
-    const post = await Post.findById(postId);
-
-    if (!post) {
-      res.status(400).json({ msg: "Post doesn't exist" });
+router.put(
+  "/deleteReaction",
+  auth,
+  [check("postId", "Please include postId").not().isEmpty()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
+    try {
+      const { postId } = req.body;
+      const post = await Post.findById(postId);
 
-    let userId = req.user._id;
-    console.log("postId -> " + postId);
-    console.log("userId -> " + userId);
-    const { reactionTypeId } = req.body;
+      if (!post) {
+        res.status(400).json({ msg: "Post doesn't exist" });
+      }
 
-    let updatedPost = await Post.findByIdAndUpdate(
-      postId,
-      {
-        $pull: {
-          reactions: {
-            reactionTypeId: reactionTypeId,
-            reactedBy: userId,
+      let userId = req.user._id;
+      console.log("postId -> " + postId);
+      console.log("userId -> " + userId);
+
+      let updatedPost = await Post.findByIdAndUpdate(
+        postId,
+        {
+          $pull: {
+            reactions: {
+              reactedBy: userId,
+            },
           },
         },
-      },
-      { new: true }
-    );
+        { new: true }
+      );
 
-    res.json(updatedPost);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+      res.json(updatedPost);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
   }
-});
+);
 
 router.put(
   "/addComment",
