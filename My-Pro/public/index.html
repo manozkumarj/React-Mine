@@ -186,7 +186,9 @@
         // Like button hover event - ends
 
         // like-button click event - starts
-        $(document).on("click", ".like-button", function (e) {
+        $(document).on("click", ".like-button, .highlight-reaction", function (
+          e
+        ) {
           e.preventDefault();
           $(".reactions-holder").hide();
           console.log("clicked");

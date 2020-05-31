@@ -14,13 +14,6 @@ import leftArrow from "../../../images/left_arrow.png";
 import rightArrow from "../../../images/right_arrow.png";
 import defaultAvatar from "../../../images/avatar.png";
 
-import loveHeartsEyesEmoji from "../../../emojis/love-hearts-eyes-emoji-50.png";
-import likeThumbEmoji from "../../../emojis/like-thumb-emoji-50.png";
-import dislikeThumbEmoji from "../../../emojis/dislike-thumb-emoji-50.png";
-import laugherEmoji from "../../../emojis/face-with-tears-of-joy-emoji-50.png";
-import angryEmoji from "../../../emojis/angry-emoji-50.png";
-import wowEmoji from "../../../emojis/wow-emoji-50.png";
-import cryingEmoji from "../../../emojis/crying-emoji-50.png";
 import PostMenu from "../postMenu/PostMenu";
 import { connect } from "react-redux";
 import {
@@ -33,6 +26,7 @@ import DefaultAndCustomBgAndTextColorPost from "./../defaultAndCustomBgAndTextCo
 import CustomBgAndTextAndBorderColorPost from "./../customBgAndTextAndBorderColorPost/CustomBgAndTextAndBorderColorPost";
 import CustomBgAndTextAndCornerPost from "./../customBgAndTextAndCornerPost/CustomBgAndTextAndCornerPost";
 import PhotosPost from "./../photosPost/PhotosPost";
+import PostReactions from "./../postReactions/PostReactions";
 
 const MiddleSection = (props) => {
   const [posts, setPosts] = useState([]);
@@ -98,37 +92,6 @@ const MiddleSection = (props) => {
               ? imagesUrl + post.postedBy.secondaryDp
               : defaultAvatar;
 
-            let postReactions = post.reactions;
-            let isReactedToThisPost = false;
-            let reactedTypeId = null;
-            let reactedTypeInText = "Like";
-
-            if (postReactions && postReactions.length > 0) {
-              let getIndex = postReactions.findIndex(
-                (user) => user.reactedBy == loggedInUserId
-              );
-              console.log("loggedInUserId --> " + loggedInUserId);
-              console.log("getIndex --> " + getIndex);
-
-              if (getIndex > -1) {
-                isReactedToThisPost = true;
-                reactedTypeId = postReactions[getIndex]["reactionTypeId"];
-                console.log("reactedTypeId --> " + reactedTypeId);
-                console.log(postReactions[getIndex]["reactionTypeId"]);
-
-                if (reactedTypeId == 1) reactedTypeInText = "Like";
-                else if (reactedTypeId == 2) reactedTypeInText = "Dislike";
-                else if (reactedTypeId == 3) reactedTypeInText = "Love";
-                else if (reactedTypeId == 4) reactedTypeInText = "Wow";
-                else if (reactedTypeId == 5) reactedTypeInText = "Laugh";
-                else if (reactedTypeId == 6) reactedTypeInText = "Cry";
-                else if (reactedTypeId == 7) reactedTypeInText = "Angry";
-                else reactedTypeInText = "Like";
-
-                console.log("reactedTypeInText --> " + reactedTypeInText);
-              }
-            }
-
             const keyPress = (e) => {
               // e.preventDefault();
               if (e.keyCode == 13) {
@@ -139,58 +102,6 @@ const MiddleSection = (props) => {
                   props.addComment(post._id, commentText);
                 }
               }
-            };
-
-            const handleReactionRemover = (e) => {
-              e.stopPropagation();
-              console.log("handleReactionRemover --> " + post._id);
-              upsertReaction("delete", null);
-            };
-
-            const handleLikeReaction = (e) => {
-              e.stopPropagation();
-              // console.log("handleLikeReaction --> " + post._id);
-              upsertReaction("add", 1);
-            };
-
-            const handleDislikeReaction = (e) => {
-              e.stopPropagation();
-              // console.log("handleDislikeReaction --> " + post._id);
-              upsertReaction("add", 2);
-            };
-
-            const handleLoveReaction = (e) => {
-              e.stopPropagation();
-              // console.log("handleLoveReaction --> " + post._id);
-              upsertReaction("add", 3);
-            };
-
-            const handleWowReaction = (e) => {
-              e.stopPropagation();
-              // console.log("handleWowReaction --> " + post._id);
-              upsertReaction("add", 4);
-            };
-
-            const handleLaughReaction = (e) => {
-              e.stopPropagation();
-              // console.log("handleLaughReaction --> " + post._id);
-              upsertReaction("add", 5);
-            };
-
-            const handleCryReaction = (e) => {
-              e.stopPropagation();
-              // console.log("handleCryReaction --> " + post._id);
-              upsertReaction("add", 6);
-            };
-
-            const handleAngerReaction = (e) => {
-              e.stopPropagation();
-              // console.log("handleAngerReaction --> " + post._id);
-              upsertReaction("add", 7);
-            };
-
-            const upsertReaction = (actionType, reactionTypeId) => {
-              props.upsertReaction(post._id, actionType, reactionTypeId);
             };
 
             let displayPage;
@@ -274,116 +185,7 @@ const MiddleSection = (props) => {
                   </div>
                 </div>
                 {displayPage}
-
-                <div className="post-actions-counter-container">
-                  <div className="reactions-couter couter-item hover-ul">
-                    <div className="reactions-couter-emojis">
-                      {/* <img
-                        src={loveHeartsEyesEmoji}
-                        alt="loveHeartsEyesEmoji"
-                        width="20px"
-                        className="reaction-emoji"
-                      />
-                      <img
-                        src={likeThumbEmoji}
-                        alt="likeThumbEmoji"
-                        width="20px"
-                        className="reaction-emoji"
-                      /> */}
-                    </div>
-                    <div className="reactions-count">
-                      {post.reactions.length
-                        ? post.reactions.length + " reactions"
-                        : "Be the first person to react"}
-                    </div>
-                  </div>
-                  <div className="cmnts-and-shares-counter couter-item">
-                    <span className="comments-counter hover-ul">
-                      {post.comments.length} comments
-                    </span>
-                    <span className="shares-counter hover-ul">20 shares</span>
-                  </div>
-                </div>
-                <div className="post-actions-container">
-                  <span
-                    className="action-item hover-ul like-button"
-                    data-post-id={post._id}
-                  >
-                    {!isReactedToThisPost && (
-                      <span onClick={handleLikeReaction}>Like</span>
-                    )}
-
-                    {isReactedToThisPost && (
-                      <span
-                        className="highlight-reaction"
-                        onClick={handleReactionRemover}
-                      >
-                        {reactedTypeInText}
-                      </span>
-                    )}
-
-                    {/* reactions-holder - starts */}
-                    <span
-                      className="reactions-holder"
-                      id={"reactions-holder-" + post._id}
-                    >
-                      <span className="reactions-holder-inner">
-                        <img
-                          src={likeThumbEmoji}
-                          alt="likeThumbEmoji"
-                          width="38px"
-                          className="reaction-emoji"
-                          onClick={handleLikeReaction}
-                        />
-                        <img
-                          src={loveHeartsEyesEmoji}
-                          alt="loveHeartsEyesEmoji"
-                          width="38px"
-                          className="reaction-emoji"
-                          onClick={handleLoveReaction}
-                        />
-                        <img
-                          src={laugherEmoji}
-                          alt="laugherEmoji"
-                          width="38px"
-                          className="reaction-emoji"
-                          onClick={handleLaughReaction}
-                        />
-                        <img
-                          src={angryEmoji}
-                          alt="angryEmoji"
-                          width="38px"
-                          className="reaction-emoji"
-                          onClick={handleAngerReaction}
-                        />
-                        <img
-                          src={wowEmoji}
-                          alt="wowEmoji"
-                          width="38px"
-                          className="reaction-emoji"
-                          onClick={handleWowReaction}
-                        />
-                        <img
-                          src={cryingEmoji}
-                          alt="cryingEmoji"
-                          width="38px"
-                          className="reaction-emoji"
-                          onClick={handleCryReaction}
-                        />
-                        <img
-                          src={dislikeThumbEmoji}
-                          alt="dislikeThumbEmoji"
-                          width="38px"
-                          className="reaction-emoji"
-                          onClick={handleDislikeReaction}
-                        />
-                      </span>
-                    </span>
-                    {/* reactions-holder - ends */}
-                  </span>
-                  <span className="action-item hover-ul">Comment</span>
-                  <span className="action-item hover-ul">Share</span>
-                </div>
+                <PostReactions postDetails={post} />
                 <div className="comment-input-container">
                   <input
                     type="text"
