@@ -68,14 +68,15 @@ const PostReactions = (props) => {
     // console.log(props);
     if (props.centralState.isCommentInserted) {
       // window.location.reload();
-      alert("Comment inserted");
+      console.log("Comment inserted");
+      // alert("Comment inserted");
     }
   }, [props.centralState.isCommentInserted]);
 
   const handleReactionRemover = (e) => {
     e.stopPropagation();
     console.log("handleReactionRemover --> " + post._id);
-    // upsertReaction("delete", null);
+    upsertReaction("delete", null);
   };
 
   const handleLikeReaction = (e) => {
@@ -150,7 +151,7 @@ const PostReactions = (props) => {
       setPostReactions(filterPostReactions);
       setIsReactedToThisPost(false);
     }
-    // props.upsertReaction(post._id, actionType, reactionTypeId);
+    props.upsertReaction(post._id, actionType, reactionTypeId);
   };
 
   const keyPress = (e) => {
@@ -169,7 +170,7 @@ const PostReactions = (props) => {
           },
           _id: ++loopId,
         };
-        setPostComments([...postComments, newComment]);
+        setPostComments([newComment, ...postComments]);
         e.target.value = "";
         props.addComment(post._id, commentText);
       }
@@ -196,19 +197,26 @@ const PostReactions = (props) => {
             */}
           </div>
           <div className="reactions-count">
-            {postReactions.length &&
-              !isReactedToThisPost &&
-              postReactions.length + " persons reacted"}
-            {postReactions.length &&
-              isReactedToThisPost &&
-              "You and " +
+            {postReactions.length && !isReactedToThisPost
+              ? postReactions.length + " persons reacted"
+              : null}
+
+            {postReactions.length > 1 && isReactedToThisPost
+              ? "You and " +
                 (postReactions.length - 1) +
-                " other persons reacted"}
+                " other persons reacted"
+              : null}
+
+            {postReactions.length == 1 && isReactedToThisPost
+              ? "You reacted to this post"
+              : null}
+
+            {postReactions.length === 0 ? "Be the first person to react" : null}
           </div>
         </div>
         <div className="cmnts-and-shares-counter couter-item">
           <span className="comments-counter hover-ul">
-            {post.comments.length} comments
+            {postComments.length} comments
           </span>
           <span className="shares-counter hover-ul">20 shares</span>
         </div>
