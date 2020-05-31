@@ -66,7 +66,7 @@ const PostReactions = (props) => {
   };
 
   const handleLikeReaction = (e) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     // console.log("handleLikeReaction --> " + post._id);
     upsertReaction("add", 1);
     setReactedTypeInText("Like");
@@ -108,7 +108,7 @@ const PostReactions = (props) => {
   };
 
   const handleAngerReaction = (e) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     // console.log("handleAngerReaction --> " + post._id);
     upsertReaction("add", 7);
     setReactedTypeInText("Anger");
@@ -116,8 +116,25 @@ const PostReactions = (props) => {
 
   const upsertReaction = (actionType, reactionTypeId) => {
     if (actionType == "add") {
+      let filterPostReactions = postReactions.filter(
+        (reaction) => reaction.reactedBy !== loggedInUserId
+      );
+      // setPostReactions(filterPostReactions);
+
+      let addUserToReactions = {
+        reactedBy: loggedInUserId,
+        reactionTypeId,
+      };
+      // let addd = postReactions.push(addUserToReactions);
+      // console.log(postReactions);
+      // console.log(addd);
+      setPostReactions([...filterPostReactions, addUserToReactions]);
       setIsReactedToThisPost(true);
     } else if (actionType == "delete") {
+      let filterPostReactions = postReactions.filter(
+        (reaction) => reaction.reactedBy !== loggedInUserId
+      );
+      setPostReactions(filterPostReactions);
       setIsReactedToThisPost(false);
     }
     // props.upsertReaction(post._id, actionType, reactionTypeId);
@@ -143,9 +160,14 @@ const PostReactions = (props) => {
             */}
           </div>
           <div className="reactions-count">
-            {post.reactions.length
-              ? post.reactions.length + " reactions"
-              : "Be the first person to react"}
+            {postReactions.length &&
+              !isReactedToThisPost &&
+              postReactions.length + " persons reacted"}
+            {postReactions.length &&
+              isReactedToThisPost &&
+              "You and " +
+                (postReactions.length - 1) +
+                " other persons reacted"}
           </div>
         </div>
         <div className="cmnts-and-shares-counter couter-item">

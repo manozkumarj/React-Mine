@@ -455,6 +455,14 @@ router.put(
       console.log("userId -> " + userId);
       console.log("reactionTypeId -> " + reactionTypeId);
 
+      await Post.findByIdAndUpdate(postId, {
+        $pull: {
+          reactions: {
+            reactedBy: userId,
+          },
+        },
+      });
+
       let updatedPost = await Post.findByIdAndUpdate(
         postId,
         {
