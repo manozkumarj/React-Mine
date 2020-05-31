@@ -39,6 +39,7 @@ const MiddleSection = (props) => {
   const [loadingPosts, setLoadingPosts] = useState(true);
   const [imagesUrl, setImagesUrl] = useState(null);
   const [singlePost, setSinglePost] = useState(true);
+  const [loggedInUserId, setLoggedInUserId] = useState(null);
 
   let loopId = 1;
 
@@ -49,6 +50,7 @@ const MiddleSection = (props) => {
     //   props.centralState.loggedInUserId
     // );
     // props.getAllUsersPosts();
+    setLoggedInUserId(props.centralState.loggedInUserId);
   }, []);
 
   useEffect(() => {
@@ -95,6 +97,37 @@ const MiddleSection = (props) => {
             let userSecondaryDp = post.postedBy.primaryDp
               ? imagesUrl + post.postedBy.secondaryDp
               : defaultAvatar;
+
+            let postReactions = post.reactions;
+            let isReactedToThisPost = false;
+            let reactedTypeId = null;
+            let reactedTypeInText = "Like";
+
+            if (postReactions && postReactions.length > 0) {
+              let getIndex = postReactions.findIndex(
+                (user) => user.reactedBy == loggedInUserId
+              );
+              console.log("loggedInUserId --> " + loggedInUserId);
+              console.log("getIndex --> " + getIndex);
+
+              if (getIndex > -1) {
+                isReactedToThisPost = true;
+                reactedTypeId = postReactions[getIndex]["reactionTypeId"];
+                console.log("reactedTypeId --> " + reactedTypeId);
+                console.log(postReactions[getIndex]["reactionTypeId"]);
+
+                if (reactedTypeId == 1) reactedTypeInText = "Like";
+                else if (reactedTypeId == 2) reactedTypeInText = "Dislike";
+                else if (reactedTypeId == 3) reactedTypeInText = "Love";
+                else if (reactedTypeId == 4) reactedTypeInText = "Wow";
+                else if (reactedTypeId == 5) reactedTypeInText = "Laugh";
+                else if (reactedTypeId == 6) reactedTypeInText = "Cry";
+                else if (reactedTypeId == 7) reactedTypeInText = "Angry";
+                else reactedTypeInText = "Like";
+
+                console.log("reactedTypeInText --> " + reactedTypeInText);
+              }
+            }
 
             const keyPress = (e) => {
               // e.preventDefault();
@@ -271,7 +304,7 @@ const MiddleSection = (props) => {
                     data-post-id={post._id}
                     onClick={handleLikeReaction}
                   >
-                    Like
+                    {reactedTypeInText}
                     {/* reactions-holder - starts */}
                     <span
                       className="reactions-holder"
