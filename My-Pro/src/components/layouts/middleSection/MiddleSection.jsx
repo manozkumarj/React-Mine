@@ -19,8 +19,7 @@ import { connect } from "react-redux";
 import {
   getAllUsersPosts,
   getIndividualUserPosts,
-  addComment,
-  upsertReaction,
+  deletePost,
 } from "./../../../redux/actionCreators";
 import DefaultAndCustomBgAndTextColorPost from "./../defaultAndCustomBgAndTextColorPost/DefaultAndCustomBgAndTextColorPost";
 import CustomBgAndTextAndBorderColorPost from "./../customBgAndTextAndBorderColorPost/CustomBgAndTextAndBorderColorPost";
@@ -89,16 +88,10 @@ const MiddleSection = (props) => {
               ? imagesUrl + post.postedBy.secondaryDp
               : defaultAvatar;
 
-            const keyPress = (e) => {
-              // e.preventDefault();
-              if (e.keyCode == 13) {
-                // console.log("value", e.target.value);
-                // put the login here
-                let commentText = e.target.value.trim();
-                if (commentText) {
-                  props.addComment(post._id, commentText);
-                }
-              }
+            const handleDeletePost = () => {
+              console.log("handleDeletePost --> " + handleDeletePost);
+              console.log("post._id --> " + post._id);
+              // props.deletePost(post._id);
             };
 
             let displayPage;
@@ -172,7 +165,13 @@ const MiddleSection = (props) => {
                               Open in new tab
                             </a>
                           </li>
-                          <li>Delete</li>
+                          <li
+                            className="hide-post"
+                            data-post-id={post._id + loopId}
+                            onClick={handleDeletePost}
+                          >
+                            Delete
+                          </li>
                         </ul>
                       </span>
                     </div>
@@ -272,11 +271,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getIndividualUserPosts: (token, userId) =>
       dispatch(getIndividualUserPosts(token, userId)),
-    addComment: (postId, commentText) =>
-      dispatch(addComment(postId, commentText)),
-    upsertReaction: (postId, actionType, reactionTypeId) =>
-      dispatch(upsertReaction(postId, actionType, reactionTypeId)),
     getAllUsersPosts: () => dispatch(getAllUsersPosts()),
+    deletePost: (postId) => dispatch(deletePost(postId)),
   };
 };
 

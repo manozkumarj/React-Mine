@@ -53,6 +53,10 @@ const PostSchema = mongoose.Schema({
         ref: "User",
         required: true,
       },
+      uniqueCommentId: {
+        type: String,
+        required: true,
+      },
     },
   ],
   privacyId: {

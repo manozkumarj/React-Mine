@@ -530,14 +530,15 @@ router.put(
   auth,
   [check("postId", "Please include postId").not().isEmpty()],
   [check("comment", "Please include comment").not().isEmpty()],
+  [check("uniqueCommentId", "Please include uniqueCommentId").not().isEmpty()],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    let postId = req.body.postId;
     try {
+      const { postId, comment, uniqueCommentId } = req.body;
       const post = await Post.findById(postId);
 
       if (!post) {
@@ -547,10 +548,8 @@ router.put(
       let userId = req.user._id;
       console.log("postId -> " + postId);
       console.log("userId -> " + userId);
-      const { comment } = req.body;
 
       let getMilliseconds = helpers.getMilliseconds();
-      let uniqueCommentId = userId.toString() + getMilliseconds.toString();
 
       let updatedPost = await Post.findByIdAndUpdate(
         postId,
@@ -575,39 +574,44 @@ router.put(
   }
 );
 
-router.put("/deleteComment/:id", auth, async (req, res) => {
-  let postId = req.params.id;
-  try {
-    const post = await Post.findById(postId);
+router.put(
+  "/deleteComment",
+  auth,
+  [check("postId", "Please include postId").not().isEmpty()],
+  [check("uniqueCommentId", "Please include uniqueCommentId").not().isEmpty()],
+  async (req, res) => {
+    try {
+      const { postId, uniqueCommentId } = req.body;
+      const post = await Post.findById(postId);
 
-    if (!post) {
-      res.status(400).json({ msg: "Post doesn't exist" });
-    }
+      if (!post) {
+        res.status(400).json({ msg: "Post doesn't exist" });
+      }
 
-    let userId = req.user._id;
-    console.log("postId -> " + postId);
-    console.log("userId -> " + userId);
-    const { comment } = req.body;
+      let userId = req.user._id;
+      console.log("postId -> " + postId);
+      console.log("userId -> " + userId);
 
-    let updatedPost = await Post.findByIdAndUpdate(
-      postId,
-      {
-        $pull: {
-          comments: {
-            comment: comment,
-            reactedBy: userId,
+      let updatedPost = await Post.findByIdAndUpdate(
+        postId,
+        {
+          $pull: {
+            comments: {
+              uniqueCommentId: uniqueCommentId,
+              reactedBy: userId,
+            },
           },
         },
-      },
-      { new: true }
-    );
+        { new: true }
+      );
 
-    res.json(updatedPost);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+      res.json(updatedPost);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
   }
-});
+);
 
 router.delete("/", async (req, res) => {
   try {
@@ -619,7 +623,7 @@ router.delete("/", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   let postId = req.params.id;
   try {
     let getPost = await Post.findById(postId);

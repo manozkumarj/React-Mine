@@ -13,6 +13,7 @@ import defaultAvatar from "../../../images/avatar.png";
 
 import { connect } from "react-redux";
 import { addComment, upsertReaction } from "./../../../redux/actionCreators";
+import { getMilliseconds } from "./../../../helpers/helpers";
 
 const PostReactions = (props) => {
   const [post, setPost] = useState(props.postDetails);
@@ -161,6 +162,8 @@ const PostReactions = (props) => {
       // put the login here
       let commentText = e.target.value.trim();
       if (commentText) {
+        uniqueCommentId =
+          loggedInUserId + getMilliseconds().toString() + loopId.toString();
         let newComment = {
           comment: commentText,
           commentedBy: {
@@ -169,12 +172,19 @@ const PostReactions = (props) => {
             primaryDp: props.centralState.loggedInUserDetails.primaryDp,
           },
           _id: ++loopId,
+          uniqueCommentId,
         };
         setPostComments([newComment, ...postComments]);
         e.target.value = "";
-        props.addComment(post._id, commentText);
+        props.addComment(post._id, commentText, uniqueCommentId);
       }
     }
+  };
+
+  const handleDeleteComment = (uniqueCommentId) => {
+    console.log("handleDeleteComment --> " + handleDeleteComment);
+    console.log("uniqueCommentId --> " + uniqueCommentId);
+    // props.deleteComment(post._id, uniqueCommentId);
   };
 
   return (
@@ -340,12 +350,7 @@ const PostReactions = (props) => {
               <div
                 className="post-individual-comment-container"
                 key={comment._id}
-                id={
-                  "individual-comment-" +
-                  post._id +
-                  comment._id +
-                  comment.commentedAt
-                }
+                id={"individual-comment-" + post._id + comment.uniqueCommentId}
               >
                 <div className="post-dp-div">
                   <Link to={"/" + comment.commentedBy.username}>
@@ -363,9 +368,7 @@ const PostReactions = (props) => {
                     </Link>
                     <span
                       className="post-comment-vr-dots"
-                      data-post-comment-id={
-                        post._id + comment._id + comment.commentedAt
-                      }
+                      data-post-comment-id={post._id + comment.uniqueCommentId}
                       id="post-comment-more-options"
                     >
                       <ul
@@ -373,19 +376,24 @@ const PostReactions = (props) => {
                         id={
                           "post-comment-more-options-ul-" +
                           post._id +
-                          comment._id +
-                          comment.commentedAt
+                          comment.uniqueCommentId
                         }
                       >
                         <li
                           className="hide-comment"
                           data-post-comment-id={
-                            post._id + comment._id + comment.commentedAt
+                            post._id + comment.uniqueCommentId
                           }
                         >
                           Hide
                         </li>
-                        <li>Delete</li>
+                        <li
+                          onClick={() =>
+                            handleDeleteComment(comment.uniqueCommentId)
+                          }
+                        >
+                          Delete
+                        </li>
                       </ul>
                     </span>
                   </div>
@@ -412,6 +420,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(addComment(postId, commentText)),
     upsertReaction: (postId, actionType, reactionTypeId) =>
       dispatch(upsertReaction(postId, actionType, reactionTypeId)),
+    deleteComment: (postId, uniqueCommentId) =>
+      dispatch(deleteComment(postId, uniqueCommentId)),
   };
 };
 

@@ -260,8 +260,39 @@ export const getProfileUserDetailsAndPosts = (username) => {
 };
 // Fetching profilePageUserDetails & posts with username handler -- Ends
 
+// Deleting single post handler -- Starts
+export const deletePost = (postId) => {
+  let authToken = localStorage.getItem("authToken");
+  const tokenUserDetails = validateToken();
+  // console.log(tokenUserDetails);
+  // let userId;
+  if (tokenUserDetails && postId) {
+    // console.log("userId --> " + userId);
+    apiEndPoint = `posts/${postId}`;
+    headers["x-auth-token"] = authToken;
+
+    return (dispatch) => {
+      API.delete(apiEndPoint, { headers })
+        .then((res) => {
+          console.log(res.data);
+          dispatch({ type: IS_COMMENT_INSERTED });
+        })
+        .catch((err) => {
+          console.log(err.response);
+          dispatch({
+            type: COMMENT_INSERTION_ERROR,
+            payload: err.response,
+          });
+        });
+    };
+  } else {
+    alert("Either token OR postId is not valid");
+  }
+};
+// Deleting single post handler -- Ends
+
 // Fetching individual post's comment insertion handler -- Starts
-export const addComment = (postId, commentText) => {
+export const addComment = (postId, commentText, uniqueCommentId) => {
   let authToken = localStorage.getItem("authToken");
   const tokenUserDetails = validateToken();
   // console.log(tokenUserDetails);
@@ -270,6 +301,7 @@ export const addComment = (postId, commentText) => {
     let obj = {
       postId,
       comment: commentText,
+      uniqueCommentId,
     };
     // console.log("userId --> " + userId);
     apiEndPoint = `posts/addComment`;
@@ -292,6 +324,41 @@ export const addComment = (postId, commentText) => {
   }
 };
 // Fetching individual post's comment insertion handler -- Ends
+
+// Fetching individual post's comment deletion handler -- Starts
+export const deleteComment = (postId, uniqueCommentId) => {
+  let authToken = localStorage.getItem("authToken");
+  const tokenUserDetails = validateToken();
+  // console.log(tokenUserDetails);
+  // let userId;
+  if (tokenUserDetails && postId && uniqueCommentId) {
+    let obj = {
+      postId,
+      uniqueCommentId,
+    };
+    // console.log("userId --> " + userId);
+    apiEndPoint = `posts/deleteComment`;
+    headers["x-auth-token"] = authToken;
+
+    return (dispatch) => {
+      API.put(apiEndPoint, obj, { headers })
+        .then((res) => {
+          console.log(res.data);
+          dispatch({ type: IS_COMMENT_INSERTED });
+        })
+        .catch((err) => {
+          console.log(err.response);
+          dispatch({
+            type: COMMENT_INSERTION_ERROR,
+            payload: err.response,
+          });
+        });
+    };
+  } else {
+    alert("Either token OR postId OR uniqueCommentId is not valid");
+  }
+};
+// Fetching individual post's comment deletion handler -- Ends
 
 // Fetching individual posts's reaction handler -- Starts
 export const upsertReaction = (postId, actionType, reactionTypeId) => {
