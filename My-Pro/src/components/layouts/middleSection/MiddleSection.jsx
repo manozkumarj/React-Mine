@@ -32,7 +32,9 @@ const MiddleSection = (props) => {
   const [loadingPosts, setLoadingPosts] = useState(true);
   const [imagesUrl, setImagesUrl] = useState(null);
   const [singlePost, setSinglePost] = useState(true);
-  const [loggedInUserId, setLoggedInUserId] = useState(null);
+  const [loggedInUserId, setLoggedInUserId] = useState(
+    props.centralState.loggedInUserId
+  );
 
   let loopId = 1;
 
@@ -89,9 +91,8 @@ const MiddleSection = (props) => {
               : defaultAvatar;
 
             const handleDeletePost = () => {
-              console.log("handleDeletePost --> " + handleDeletePost);
               console.log("post._id --> " + post._id);
-              // props.deletePost(post._id);
+              props.deletePost(post._id);
             };
 
             let displayPage;
@@ -165,13 +166,15 @@ const MiddleSection = (props) => {
                               Open in new tab
                             </a>
                           </li>
-                          <li
-                            className="hide-post"
-                            data-post-id={post._id + loopId}
-                            onClick={handleDeletePost}
-                          >
-                            Delete
-                          </li>
+                          {loggedInUserId === post.postedBy._id && (
+                            <li
+                              className="hide-post"
+                              data-post-id={post._id + loopId}
+                              onClick={handleDeletePost}
+                            >
+                              Delete
+                            </li>
+                          )}
                         </ul>
                       </span>
                     </div>

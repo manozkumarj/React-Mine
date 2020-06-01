@@ -598,7 +598,7 @@ router.put(
           $pull: {
             comments: {
               uniqueCommentId: uniqueCommentId,
-              reactedBy: userId,
+              commentedBy: userId,
             },
           },
         },

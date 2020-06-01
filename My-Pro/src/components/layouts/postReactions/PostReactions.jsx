@@ -187,9 +187,8 @@ const PostReactions = (props) => {
   };
 
   const handleDeleteComment = (uniqueCommentId) => {
-    console.log("handleDeleteComment --> " + handleDeleteComment);
     console.log("uniqueCommentId --> " + uniqueCommentId);
-    // props.deleteComment(post._id, uniqueCommentId);
+    props.deleteComment(post._id, uniqueCommentId);
   };
 
   return (
@@ -392,13 +391,19 @@ const PostReactions = (props) => {
                         >
                           Hide
                         </li>
-                        <li
-                          onClick={() =>
-                            handleDeleteComment(comment.uniqueCommentId)
-                          }
-                        >
-                          Delete
-                        </li>
+                        {loggedInUserId === comment.commentedBy._id && (
+                          <li
+                            className="hide-comment"
+                            data-post-comment-id={
+                              post._id + comment.uniqueCommentId
+                            }
+                            onClick={() =>
+                              handleDeleteComment(comment.uniqueCommentId)
+                            }
+                          >
+                            Delete
+                          </li>
+                        )}
                       </ul>
                     </span>
                   </div>
