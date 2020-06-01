@@ -12,7 +12,11 @@ import cryingEmoji from "../../../emojis/crying-emoji-50.png";
 import defaultAvatar from "../../../images/avatar.png";
 
 import { connect } from "react-redux";
-import { addComment, upsertReaction } from "./../../../redux/actionCreators";
+import {
+  addComment,
+  upsertReaction,
+  deleteComment,
+} from "./../../../redux/actionCreators";
 import { getMilliseconds } from "./../../../helpers/helpers";
 
 const PostReactions = (props) => {
@@ -162,7 +166,7 @@ const PostReactions = (props) => {
       // put the login here
       let commentText = e.target.value.trim();
       if (commentText) {
-        uniqueCommentId =
+        let uniqueCommentId =
           loggedInUserId + getMilliseconds().toString() + loopId.toString();
         let newComment = {
           comment: commentText,
@@ -176,6 +180,7 @@ const PostReactions = (props) => {
         };
         setPostComments([newComment, ...postComments]);
         e.target.value = "";
+        console.log(post._id, commentText, uniqueCommentId);
         props.addComment(post._id, commentText, uniqueCommentId);
       }
     }
@@ -210,7 +215,7 @@ const PostReactions = (props) => {
             {postReactions.length && !isReactedToThisPost
               ? postReactions.length +
                 (postReactions.length > 1 ? " persons" : " person") +
-                "reacted"
+                " reacted"
               : null}
 
             {postReactions.length > 1 && isReactedToThisPost
@@ -416,8 +421,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addComment: (postId, commentText) =>
-      dispatch(addComment(postId, commentText)),
+    addComment: (postId, commentText, uniqueCommentId) =>
+      dispatch(addComment(postId, commentText, uniqueCommentId)),
     upsertReaction: (postId, actionType, reactionTypeId) =>
       dispatch(upsertReaction(postId, actionType, reactionTypeId)),
     deleteComment: (postId, uniqueCommentId) =>

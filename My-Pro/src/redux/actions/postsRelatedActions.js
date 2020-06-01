@@ -297,7 +297,11 @@ export const addComment = (postId, commentText, uniqueCommentId) => {
   const tokenUserDetails = validateToken();
   // console.log(tokenUserDetails);
   // let userId;
-  if (tokenUserDetails) {
+  console.log("tokenUserDetails -> " + tokenUserDetails);
+  console.log("postId -> " + postId);
+  console.log("commentText -> " + commentText);
+  console.log("uniqueCommentId -> " + uniqueCommentId);
+  if (tokenUserDetails && postId && commentText && uniqueCommentId) {
     let obj = {
       postId,
       comment: commentText,
@@ -321,6 +325,10 @@ export const addComment = (postId, commentText, uniqueCommentId) => {
           });
         });
     };
+  } else {
+    alert(
+      "Either token OR postId OR commentText OR uniqueCommentId is not valid"
+    );
   }
 };
 // Fetching individual post's comment insertion handler -- Ends
