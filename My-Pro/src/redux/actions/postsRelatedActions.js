@@ -380,7 +380,7 @@ export const upsertReaction = (postId, actionType, reactionTypeId) => {
       reactionTypeId,
     };
     // console.log("userId --> " + userId);
-    if (actionType == "add") {
+    if (actionType === "add") {
       apiEndPoint = `posts/addReaction`;
     } else {
       apiEndPoint = `posts/deleteReaction`;

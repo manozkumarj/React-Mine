@@ -6,12 +6,12 @@ const CustomBgAndTextAndCornerPost = (props) => {
   const [textColor, setTextColor] = useState("#000000");
   const [classes, setClasses] = useState("cornerFold cornerFoldStyle ");
 
-  const { postData, postTypeId } = props;
+  const { postData } = props;
   useEffect(() => {
     // console.log(props);
     setBackgroundColor("#" + postData[0].backgroundColor);
     setTextColor("#" + postData[0].textColor);
-    if (postData[0].cornerStyle == "cut") {
+    if (postData[0].cornerStyle === "cut") {
       setClasses(
         "cornerFold cornerFoldStyle cornerFoldAndCut_" +
           postData[0].cornerStyleSides +

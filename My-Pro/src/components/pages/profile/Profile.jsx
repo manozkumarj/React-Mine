@@ -50,7 +50,7 @@ const Profile = (props) => {
       );
 
       if (
-        props.centralState.profilePageUserDetails.username ==
+        props.centralState.profilePageUserDetails.username ===
         props.centralState.loggedInUserDetails.username
       ) {
         setIsSessionAndProfileUserSame(true);
@@ -64,7 +64,7 @@ const Profile = (props) => {
     let username = props.match.params.username;
     console.log("Path is -> " + props.match.path);
 
-    if (username == props.centralState.loggedInUserDetails.username) {
+    if (username === props.centralState.loggedInUserDetails.username) {
       props.centralState.profilePageUserDetails =
         props.centralState.loggedInUserDetails;
       props.getIndividualUserPosts(props.centralState.loggedInUserDetails._id);

@@ -74,7 +74,7 @@ const PostTypes = (props) => {
     console.log("postPrivacy -> " + postPrivacy);
     if (postTypeId && postPrivacy) {
       let postContent;
-      if (postTypeId == 3 || postTypeId == 4) {
+      if (postTypeId === 3 || postTypeId === 4) {
         // console.log("bgNtextNbrdrPostContentTextarea");
         postContent = document.getElementById("bgNtextNbrdrPostContentTextarea")
           .value;
@@ -105,12 +105,12 @@ const PostTypes = (props) => {
           postPrivacy,
         };
 
-        if (postTypeId == 4) {
+        if (postTypeId === 4) {
           postDetailsObject.borderColor = getBorderColor;
           postDetailsObject.borderStyle = getBorderStyle;
           postDetailsObject.borderStyleSides = getBorderStyleSides;
         }
-      } else if (postTypeId == 5) {
+      } else if (postTypeId === 5) {
         // console.log("brdrFoldNcutPostContentTextarea");
         postContent = document.getElementById("brdrFoldNcutPostContentTextarea")
           .value;

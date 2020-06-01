@@ -95,28 +95,28 @@ const MiddleSection = (props) => {
             };
 
             let displayPage;
-            if (post.postTypeId == 1 || post.postTypeId == 3)
+            if (post.postTypeId === 1 || post.postTypeId === 3)
               displayPage = (
                 <DefaultAndCustomBgAndTextColorPost
                   postData={post.postProperties}
                   postTypeId={post.postTypeId}
                 />
               );
-            else if (post.postTypeId == 4)
+            else if (post.postTypeId === 4)
               displayPage = (
                 <CustomBgAndTextAndBorderColorPost
                   postData={post.postProperties}
                   postTypeId={post.postTypeId}
                 />
               );
-            else if (post.postTypeId == 2)
+            else if (post.postTypeId === 2)
               displayPage = (
                 <PhotosPost
                   postData={post.postProperties}
                   postTypeId={post.postTypeId}
                 />
               );
-            else if (post.postTypeId == 5)
+            else if (post.postTypeId === 5)
               displayPage = (
                 <CustomBgAndTextAndCornerPost
                   postData={post.postProperties}
@@ -233,6 +233,7 @@ const MiddleSection = (props) => {
                   className="img_viewer_left"
                   src={leftArrow}
                   title="Previous"
+                  alt="Previous"
                 />
               </span>
               <span>
@@ -240,6 +241,7 @@ const MiddleSection = (props) => {
                   className="img_viewer_right"
                   src={rightArrow}
                   title="Next"
+                  alt="Next"
                 />
               </span>
 

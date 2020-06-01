@@ -40,7 +40,7 @@ const ProfileLeftSideSection = (props) => {
       setFullname(props.centralState.profilePageUserDetails.fullName);
 
       if (
-        props.centralState.profilePageUserDetails.username ==
+        props.centralState.profilePageUserDetails.username ===
         props.centralState.loggedInUserDetails.username
       ) {
         setIsSessionAndProfileUserSame(true);
