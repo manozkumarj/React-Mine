@@ -57,6 +57,10 @@ const Photos = (props) => {
         </div>
       )}
 
+      {!isLoading && posts.length === 0 && (
+        <div className="emptyRecords"> No photos to show </div>
+      )}
+
       {/* <div className="individual-pic-div">
         <img src={bikee} alt="individual" className="individual-pic" />
       </div>
