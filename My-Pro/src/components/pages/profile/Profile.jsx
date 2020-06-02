@@ -5,6 +5,9 @@ import MiddleSection from "./../../layouts/middleSection/MiddleSection";
 import RightSideSection from "./../../layouts/rightSideSection/RightSideSection";
 import ProfileLeftSideSection from "./../../layouts/profileLeftSideSection/ProfileLeftSideSection";
 import Photos from "./../photos/Photos";
+import Friends from "./../friends/Friends";
+import Settings from "./../settings/Settings";
+import About from "./../about/About";
 
 import wow2 from "../../../images/wow_2.jpg";
 
@@ -127,6 +130,9 @@ const Profile = (props) => {
           ) : null}
 
           {urlPath == "/:username/photos" ? <Photos /> : null}
+          {urlPath == "/:username/friends" ? <Friends /> : null}
+          {urlPath == "/:username/settings" ? <Settings /> : null}
+          {urlPath == "/:username/about" ? <About /> : null}
         </div>
       </div>
 
