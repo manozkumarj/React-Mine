@@ -46,7 +46,6 @@ class App extends Component {
                   <PrivateRoute exact path="/home" component={Home} />
                   <PrivateRoute exact path="/post/:postId" component={Home} />
                   <PrivateRoute exact path="/profile" component={Profile} />
-                  <PrivateRoute exact path="/photos" component={Photos} />
                   <PrivateRoute exact path="/register" component={Register} />
                   <PrivateRoute exact path="/settings" component={Settings} />
                   <PrivateRoute exact path="/friends" component={Friends} />
@@ -78,6 +77,11 @@ class App extends Component {
                     component={AccountRecovery}
                   />
                   <PrivateRoute exact path="/:username" component={Profile} />
+                  <PrivateRoute
+                    exact
+                    path="/:username/photos"
+                    component={Profile}
+                  />
                   <Route exact path="*" component={NotFound} />
                 </Switch>
               </div>

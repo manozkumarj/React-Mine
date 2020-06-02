@@ -104,7 +104,7 @@ const ProfileLeftSideSection = (props) => {
               <Link to={"/" + username}>Timeline</Link>
             </li>
             <li>
-              <Link to="/photos">Photos</Link>
+              <Link to={"/" + username + "/photos"}>Photos</Link>
             </li>
             <li>
               <Link to="/friends">Friends</Link>

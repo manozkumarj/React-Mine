@@ -4,6 +4,8 @@ import { withRouter } from "react-router-dom";
 import MiddleSection from "./../../layouts/middleSection/MiddleSection";
 import RightSideSection from "./../../layouts/rightSideSection/RightSideSection";
 import ProfileLeftSideSection from "./../../layouts/profileLeftSideSection/ProfileLeftSideSection";
+import Photos from "./../photos/Photos";
+
 import wow2 from "../../../images/wow_2.jpg";
 
 import overlayClose from "../../../images/overlay-close.png";
@@ -18,25 +20,44 @@ import {
 const Profile = (props) => {
   const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
   const [timelinePhoto, setTimelinePhoto] = useState(wow2);
+  const [urlPath, setUrlPath] = useState(props.match.path);
   const [
     isSessionAndProfileUserSame,
     setIsSessionAndProfileUserSame,
   ] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    const script = document.createElement("script");
-    script.src = "/js/croppie.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    const script_1 = document.createElement("script");
-    script_1.src = "/js/dp-change.js";
-    script_1.async = true;
-    document.body.appendChild(script_1);
   }, []);
 
   useEffect(() => {
-    console.log(props);
+    console.log("Path is -> " + props.match.path);
+    setUrlPath(props.match.path);
+    if (props.match.path === "/:username") {
+      const script = document.createElement("script");
+      script.src = "/js/croppie.js";
+      script.async = true;
+      document.body.appendChild(script);
+
+      const script_1 = document.createElement("script");
+      script_1.src = "/js/dp-change.js";
+      script_1.async = true;
+      document.body.appendChild(script_1);
+    }
+
+    let username = props.match.params.username;
+    console.log("Path is -> " + props.match.path);
+
+    if (username === props.centralState.loggedInUserDetails.username) {
+      props.centralState.profilePageUserDetails =
+        props.centralState.loggedInUserDetails;
+      props.getIndividualUserPosts(props.centralState.loggedInUserDetails._id);
+    } else {
+      props.getProfileUserDetailsAndPosts(username);
+    }
+  }, [props.match]);
+
+  useEffect(() => {
     setImagesUrl("http://localhost:8088/photo/");
     if (
       props.centralState.authToken &&
@@ -58,20 +79,8 @@ const Profile = (props) => {
         setIsSessionAndProfileUserSame(false);
       }
     }
+    console.log(props);
   }, [props]);
-
-  useEffect(() => {
-    let username = props.match.params.username;
-    console.log("Path is -> " + props.match.path);
-
-    if (username === props.centralState.loggedInUserDetails.username) {
-      props.centralState.profilePageUserDetails =
-        props.centralState.loggedInUserDetails;
-      props.getIndividualUserPosts(props.centralState.loggedInUserDetails._id);
-    } else {
-      props.getProfileUserDetailsAndPosts(username);
-    }
-  }, [props.match]);
 
   const filesPickerRef = useRef();
 
@@ -112,7 +121,12 @@ const Profile = (props) => {
               </button>
             </div>
           </div>
-          <MiddleSection />
+
+          {urlPath == "/:username" || urlPath == "/profile" ? (
+            <MiddleSection />
+          ) : null}
+
+          {urlPath == "/:username/photos" ? <Photos /> : null}
         </div>
       </div>
 
