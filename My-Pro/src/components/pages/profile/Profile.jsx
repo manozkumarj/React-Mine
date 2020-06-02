@@ -31,7 +31,7 @@ const Profile = (props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [props.match.path]);
 
   useEffect(() => {
     console.log("Path is -> " + props.match.path);
