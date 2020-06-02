@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import "./about.css";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
-export default function About() {
+const About = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -36,4 +38,12 @@ export default function About() {
       </div>
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    centralState: state.central,
+  };
+};
+
+export default withRouter(connect(mapStateToProps, null)(About));

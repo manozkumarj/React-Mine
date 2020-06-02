@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import "./friends.css";
 
-export default function Friends() {
+import { withRouter, Link } from "react-router-dom";
+import { connect } from "react-redux";
+
+const Friends = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -56,4 +58,12 @@ export default function Friends() {
       </div>
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    centralState: state.central,
+  };
+};
+
+export default withRouter(connect(mapStateToProps, null)(Friends));

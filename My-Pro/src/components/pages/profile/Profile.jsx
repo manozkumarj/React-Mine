@@ -125,14 +125,14 @@ const Profile = (props) => {
             </div>
           </div>
 
-          {urlPath == "/:username" || urlPath == "/profile" ? (
+          {urlPath === "/:username" || urlPath === "/profile" ? (
             <MiddleSection />
           ) : null}
 
-          {urlPath == "/:username/photos" ? <Photos /> : null}
-          {urlPath == "/:username/friends" ? <Friends /> : null}
-          {urlPath == "/:username/settings" ? <Settings /> : null}
-          {urlPath == "/:username/about" ? <About /> : null}
+          {urlPath === "/:username/photos" ? <Photos /> : null}
+          {urlPath === "/:username/friends" ? <Friends /> : null}
+          {urlPath === "/:username/settings" ? <Settings /> : null}
+          {urlPath === "/:username/about" ? <About /> : null}
         </div>
       </div>
 

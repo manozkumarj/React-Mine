@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import "./settings.css";
 
-export default function Settings() {
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+
+const Settings = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -38,4 +41,12 @@ export default function Settings() {
       </div>
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    centralState: state.central,
+  };
+};
+
+export default withRouter(connect(mapStateToProps, null)(Settings));
