@@ -57,24 +57,15 @@ const LeftSideSection = (props) => {
         <div className="animateLinksDiv">
           <ul className="nav">
             <li>
-              <Link to="/register">Register</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
               <Link to={"/" + props.centralState.loggedInUserUsername}>
-                View Profile
+                Profile
               </Link>
             </li>
             <li>
-              <Link to="/settings">Settings</Link>
+              <Link to="/search">Search Friends</Link>
             </li>
             <li>
-              <Link to="/search">Search Friends</Link>
+              <Link to="/settings">Settings</Link>
             </li>
             <li>
               <Link to="/post-types">Advanced Posts</Link>

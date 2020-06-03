@@ -110,14 +110,13 @@ const ProfileLeftSideSection = (props) => {
               <Link to={"/" + username + "/friends"}>Friends</Link>
             </li>
             <li>
-              <Link to={"/" + username}>View Profile</Link>
-            </li>
-            <li>
-              <Link to={"/" + username + "/settings"}>Settings</Link>
-            </li>
-            <li>
               <Link to={"/" + username + "/about"}>About</Link>
             </li>
+            {id && (
+              <li>
+                <Link to={"/" + username + "/settings"}>Settings</Link>
+              </li>
+            )}
             <li>
               <Link to="/post-types">Advanced Posts</Link>
             </li>

@@ -401,7 +401,7 @@ const PostReactions = (props) => {
                               handleDeleteComment(comment.uniqueCommentId)
                             }
                           >
-                            Delete
+                            Delete this comment
                           </li>
                         )}
                       </ul>

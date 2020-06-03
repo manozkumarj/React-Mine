@@ -1,3 +1,6 @@
+.timeline-pic-and-friendStatus-div {
+  margin-bottom: 30px;
+}
 .timeline-pic-div {
   position: relative;
   height: 250px;
@@ -20,7 +23,6 @@
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
   border-radius: 0px 0px 5px 5px;
   /* border: 1px solid #cccccc; */
-  margin-bottom: 30px;
   padding: 0px 15px;
   justify-content: space-between;
 }

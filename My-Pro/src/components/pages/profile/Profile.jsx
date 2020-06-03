@@ -24,6 +24,9 @@ const Profile = (props) => {
   const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
   const [timelinePhoto, setTimelinePhoto] = useState(wow2);
   const [urlPath, setUrlPath] = useState(props.match.path);
+  const [profilePageUserDetails, setProfilePageUserDetails] = useState(
+    props.centralState.profilePageUserDetails
+  );
   const [
     isSessionAndProfileUserSame,
     setIsSessionAndProfileUserSame,
@@ -85,11 +88,20 @@ const Profile = (props) => {
     console.log(props);
   }, [props]);
 
+  useEffect(() => {
+    // console.log(props);
+    setProfilePageUserDetails(props.centralState.profilePageUserDetails);
+  }, [props.centralState.profilePageUserDetails]);
+
   const filesPickerRef = useRef();
 
   const pickImagesHandler = () => {
     filesPickerRef.current.click();
     console.log("Input file triggered");
+  };
+
+  const handleFriendAction = (actionType) => {
+    console.log("actionType --> " + actionType);
   };
 
   return (
@@ -100,28 +112,40 @@ const Profile = (props) => {
         </div>
 
         <div className="middle-section">
-          <div className="timeline-pic-div">
-            <img
-              id="profile-timeline-src"
-              src={timelinePhoto}
-              alt="timeline view"
-            />
-            {isSessionAndProfileUserSame && (
-              <span
-                className="absolute-bottom-right"
-                id="change-timeline"
-                data-file-type="timeline"
-              >
-                Change image
-              </span>
-            )}
-          </div>
-          <div className="left-right-holders">
-            <div className="total-friends-count">Friends - 15</div>
-            <div className="interact-with-current-user">
-              <button className="request-friendshp-btn">
-                Request Friendship
-              </button>
+          <div className="timeline-pic-and-friendStatus-div">
+            <div className="timeline-pic-div">
+              <img
+                id="profile-timeline-src"
+                src={timelinePhoto}
+                alt="timeline view"
+              />
+              {isSessionAndProfileUserSame && (
+                <span
+                  className="absolute-bottom-right"
+                  id="change-timeline"
+                  data-file-type="timeline"
+                >
+                  Change image
+                </span>
+              )}
+            </div>
+            <div className="left-right-holders">
+              <div className="total-friends-count">
+                Friends -{" "}
+                {profilePageUserDetails &&
+                  profilePageUserDetails.friends.length}
+              </div>
+              {!isSessionAndProfileUserSame && (
+                <div className="interact-with-current-user">
+                  <button
+                    type="button"
+                    className="request-friendshp-btn"
+                    onClick={() => handleFriendAction("request")}
+                  >
+                    Request Friendship
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 

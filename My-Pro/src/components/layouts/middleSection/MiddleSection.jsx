@@ -172,7 +172,7 @@ const MiddleSection = (props) => {
                               data-post-id={post._id + loopId}
                               onClick={handleDeletePost}
                             >
-                              Delete
+                              Delete this post
                             </li>
                           )}
                         </ul>
