@@ -97,7 +97,7 @@ const Profile = (props) => {
         let profileUserId = props.centralState.profilePageUserDetails._id;
         let getProfileUserIdFromSessionFriendsList = loggedInUserFriends.filter(
           (friend) => {
-            return friend.friendId == profileUserId;
+            return friend.friendId === profileUserId;
           }
         );
 
@@ -137,7 +137,7 @@ const Profile = (props) => {
       props.centralState.profilePageUserDetails._id;
     console.log("actionType --> " + actionType);
     console.log("profilePageUserDetailsId --> " + profilePageUserDetailsId);
-    // props.friendshipAction(profilePageUserDetailsId, "sendRequest");
+    props.friendshipAction(profilePageUserDetailsId, "sendRequest");
   };
 
   return (

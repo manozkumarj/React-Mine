@@ -80,6 +80,12 @@ const MiddleSection = (props) => {
       )}
 
       <div className="all-posts-container">
+        {posts && posts.length === 0 && (
+          <div className="item">
+            <div className="emptyRecords"> No posts to show </div>
+          </div>
+        )}
+
         {posts &&
           posts.length > 0 &&
           posts.map((post) => {

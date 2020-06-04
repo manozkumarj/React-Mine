@@ -55,13 +55,13 @@ export const friendshipAction = (friendId, actionType) => {
   const tokenUserDetails = validateToken();
   // console.log(tokenUserDetails);
   if (tokenUserDetails) {
-    if (actionType == "sendRequest") {
+    if (actionType === "sendRequest") {
       apiEndPoint = `users/send-friend-request`;
-    } else if (actionType == "cancelRequest") {
+    } else if (actionType === "cancelRequest") {
       apiEndPoint = `users/send-friend-request`;
-    } else if (actionType == "deleteRequest") {
+    } else if (actionType === "deleteRequest") {
       apiEndPoint = `users/send-friend-request`;
-    } else if (actionType == "acceptRequest") {
+    } else if (actionType === "acceptRequest") {
       apiEndPoint = `users/send-friend-request`;
     }
     apiEndPoint = `users/send-friend-request`;
