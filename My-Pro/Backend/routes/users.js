@@ -262,48 +262,6 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// @route       PUT api/users
-// @desc        Update a user
-// @access      Public
-router.put(
-  "/:id",
-  auth,
-  [check("name", "Please add name").not().isEmpty()],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
-    try {
-      let _id = req.params.id;
-      const { name } = req.body;
-
-      let user = await User.findById(_id);
-      if (!user) {
-        res.status(400).json({ msg: "User doesn't exist" });
-      }
-
-      // Build user object
-      let userFields = {};
-      if (name) userFields.name = name;
-
-      let updatedUser = await User.findByIdAndUpdate(
-        _id,
-        { $set: userFields },
-        { new: true }
-      );
-
-      res.json(updatedUser);
-    } catch (err) {
-      console.error(err.message);
-      res
-        .status(500)
-        .json({ msg: "User doesn't exist", error: "Server Error" });
-    }
-  }
-);
-
 // @route       PUT api/users/authenticate
 // @desc        authenticate a user
 // @access      Private
@@ -360,53 +318,64 @@ router.post(
 );
 
 // Send Friend Request route
-router.put("/send-friend-request/:userId/:friendId", async (req, res) => {
-  try {
-    let friendId = req.params.friendId;
-    const getUser = await User.findById(friendId);
-
-    if (!getUser) {
-      res.status(400).json({ msg: "User doesn't exist" });
+router.put(
+  "/send-friend-request",
+  auth,
+  [check("friendId", "Please add friendId").not().isEmpty()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
 
-    let userId = req.params.userId;
-    console.log("friendId -> " + friendId);
-    console.log("userId -> " + userId);
+    try {
+      let friendId = mongoose.Types.ObjectId(req.body.friendId);
+      console.log("friendId --> " + friendId);
+      const getUser = await User.findById(friendId);
 
-    let sentUserDetails = await User.findByIdAndUpdate(
-      userId,
-      {
-        $push: {
-          friends: {
-            friendId: friendId,
-            friendshipAction: "sent",
-            status: "sent",
+      if (!getUser) {
+        return res.status(400).json({ msg: "User doesn't exist" });
+      }
+
+      let userId = req.user._id;
+      console.log("friendId -> " + friendId);
+      console.log("userId -> " + userId);
+
+      let sentUserDetails = await User.findByIdAndUpdate(
+        userId,
+        {
+          $push: {
+            friends: {
+              friendId: friendId,
+              friendshipAction: "sent",
+              status: "sent",
+            },
           },
         },
-      },
-      { new: true }
-    );
+        { new: true }
+      );
 
-    let receivedUserDetails = await User.findByIdAndUpdate(
-      friendId,
-      {
-        $push: {
-          friends: {
-            friendId: userId,
-            friendshipAction: "received",
-            status: "pending",
+      let receivedUserDetails = await User.findByIdAndUpdate(
+        friendId,
+        {
+          $push: {
+            friends: {
+              friendId: userId,
+              friendshipAction: "received",
+              status: "pending",
+            },
           },
         },
-      },
-      { new: true }
-    );
+        { new: true }
+      );
 
-    res.json(sentUserDetails);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+      return res.json(sentUserDetails);
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).send("Server Error");
+    }
   }
-});
+);
 
 // Accept Friend Request route
 router.put("/accept-friend-request/:userId/:friendId", async (req, res) => {
@@ -508,5 +477,47 @@ router.get("/drop", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+// @route       PUT api/users
+// @desc        Update a user
+// @access      Public
+router.put(
+  "/:id",
+  auth,
+  [check("name", "Please add name").not().isEmpty()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      let _id = req.params.id;
+      const { name } = req.body;
+
+      let user = await User.findById(_id);
+      if (!user) {
+        res.status(400).json({ msg: "User doesn't exist" });
+      }
+
+      // Build user object
+      let userFields = {};
+      if (name) userFields.name = name;
+
+      let updatedUser = await User.findByIdAndUpdate(
+        _id,
+        { $set: userFields },
+        { new: true }
+      );
+
+      res.json(updatedUser);
+    } catch (err) {
+      console.error(err.message);
+      res
+        .status(500)
+        .json({ msg: "User doesn't exist", error: "Server Error" });
+    }
+  }
+);
 
 module.exports = router;

@@ -20,6 +20,8 @@ import {
   RESET_STATE,
   SEARCH_RESULTS,
   SEARCH_ERROR,
+  FRIENDSHIP_ACTION_SUCCESS,
+  FRIENDSHIP_ACTION_ERROR,
 } from "./../actionTypes/centralTypes";
 
 // Posts related
@@ -75,6 +77,8 @@ const initialState = {
   loggedInUserUsername: username,
   searchResults: null,
   searchError: null,
+  isRequestSucceeded: null,
+  hasRequestError: null,
 
   // Posts related
   isNewPostCreated: false,
@@ -273,6 +277,20 @@ const centralReducer = (state = initialState, action) => {
         ...state,
         searchError: action.payload,
         searchResults: null,
+      };
+
+    case FRIENDSHIP_ACTION_SUCCESS:
+      return {
+        ...state,
+        isRequestSucceeded: true,
+        hasRequestError: null,
+      };
+
+    case FRIENDSHIP_ACTION_ERROR:
+      return {
+        ...state,
+        isRequestSucceeded: false,
+        hasRequestError: action.payload,
       };
 
     case RESET_STATE:

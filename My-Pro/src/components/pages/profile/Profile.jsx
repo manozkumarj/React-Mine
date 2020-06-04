@@ -18,12 +18,14 @@ import {
   getAllUsersPosts,
   getIndividualUserPosts,
   getProfileUserDetailsAndPosts,
+  friendshipAction,
 } from "./../../../redux/actionCreators";
 
 const Profile = (props) => {
   const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
   const [timelinePhoto, setTimelinePhoto] = useState(wow2);
   const [urlPath, setUrlPath] = useState(props.match.path);
+  const [friendshipStatus, setFriendshipStatus] = useState(null);
   const [profilePageUserDetails, setProfilePageUserDetails] = useState(
     props.centralState.profilePageUserDetails
   );
@@ -84,6 +86,30 @@ const Profile = (props) => {
       } else {
         setIsSessionAndProfileUserSame(false);
       }
+
+      let loggedInUserFriends =
+        props.centralState.profilePageUserDetails.friends;
+
+      if (loggedInUserFriends.length === 0) {
+        setFriendshipStatus("sendRequest");
+      } else {
+        let profileUserId = props.centralState.profilePageUserDetails._id;
+        let getProfileUserIdFromSessionFriendsList = loggedInUserFriends.filter(
+          (friend) => {
+            return friend.friendId === profileUserId;
+          }
+        );
+
+        if (getProfileUserIdFromSessionFriendsList) {
+          setFriendshipStatus("sendRequest");
+        } else {
+          let getStatus = getProfileUserIdFromSessionFriendsList.status;
+          if (getStatus === "sent") setFriendshipStatus("cancelRequest");
+          else if (getStatus === "received")
+            setFriendshipStatus("acceptRequest");
+          else alert("Friendship status is invalid");
+        }
+      }
     }
     console.log(props);
   }, [props]);
@@ -101,7 +127,11 @@ const Profile = (props) => {
   };
 
   const handleFriendAction = (actionType) => {
+    let profilePageUserDetailsId =
+      props.centralState.profilePageUserDetails._id;
     console.log("actionType --> " + actionType);
+    console.log("profilePageUserDetailsId --> " + profilePageUserDetailsId);
+    props.friendshipAction(profilePageUserDetailsId, "sendRequest");
   };
 
   return (
@@ -135,17 +165,19 @@ const Profile = (props) => {
                 {profilePageUserDetails &&
                   profilePageUserDetails.friends.length}
               </div>
-              {!isSessionAndProfileUserSame && (
-                <div className="interact-with-current-user">
-                  <button
-                    type="button"
-                    className="request-friendshp-btn"
-                    onClick={() => handleFriendAction("request")}
-                  >
-                    Request Friendship
-                  </button>
-                </div>
-              )}
+              {!isSessionAndProfileUserSame &&
+                profilePageUserDetails &&
+                friendshipStatus === "sendRequest" && (
+                  <div className="interact-with-current-user">
+                    <button
+                      type="button"
+                      className="request-friendshp-btn"
+                      onClick={() => handleFriendAction("sendRequest")}
+                    >
+                      {friendshipStatus}
+                    </button>
+                  </div>
+                )}
             </div>
           </div>
 
@@ -169,6 +201,7 @@ const Profile = (props) => {
         type="text"
         id="hidden-popup-type-holder"
         value=""
+        readOnly
       />
 
       {/* DPs change popups - starts */}
@@ -264,6 +297,8 @@ const mapDispatchToProps = (dispatch) => {
     getAllUsersPosts: () => dispatch(getAllUsersPosts()),
     getProfileUserDetailsAndPosts: (username) =>
       dispatch(getProfileUserDetailsAndPosts(username)),
+    friendshipAction: (friendId, actionType) =>
+      dispatch(friendshipAction(friendId, actionType)),
   };
 };
 
