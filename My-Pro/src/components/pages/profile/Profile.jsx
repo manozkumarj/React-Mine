@@ -87,25 +87,31 @@ const Profile = (props) => {
         setIsSessionAndProfileUserSame(false);
       }
 
-      let loggedInUserFriends =
-        props.centralState.profilePageUserDetails.friends;
+      let loggedInUserFriends = props.centralState.loggedInUserDetails.friends;
+      console.log(loggedInUserFriends);
 
       if (loggedInUserFriends.length === 0) {
         setFriendshipStatus("sendRequest");
       } else {
+        console.log(props.centralState.profilePageUserDetails);
         let profileUserId = props.centralState.profilePageUserDetails._id;
         let getProfileUserIdFromSessionFriendsList = loggedInUserFriends.filter(
           (friend) => {
-            return friend.friendId === profileUserId;
+            return friend.friendId == profileUserId;
           }
         );
 
-        if (getProfileUserIdFromSessionFriendsList) {
+        getProfileUserIdFromSessionFriendsList =
+          getProfileUserIdFromSessionFriendsList[0];
+
+        console.log(getProfileUserIdFromSessionFriendsList);
+
+        if (!getProfileUserIdFromSessionFriendsList) {
           setFriendshipStatus("sendRequest");
         } else {
           let getStatus = getProfileUserIdFromSessionFriendsList.status;
           if (getStatus === "sent") setFriendshipStatus("cancelRequest");
-          else if (getStatus === "received")
+          else if (getStatus === "pending")
             setFriendshipStatus("acceptRequest");
           else alert("Friendship status is invalid");
         }
@@ -131,7 +137,7 @@ const Profile = (props) => {
       props.centralState.profilePageUserDetails._id;
     console.log("actionType --> " + actionType);
     console.log("profilePageUserDetailsId --> " + profilePageUserDetailsId);
-    props.friendshipAction(profilePageUserDetailsId, "sendRequest");
+    // props.friendshipAction(profilePageUserDetailsId, "sendRequest");
   };
 
   return (
@@ -165,6 +171,7 @@ const Profile = (props) => {
                 {profilePageUserDetails &&
                   profilePageUserDetails.friends.length}
               </div>
+
               {!isSessionAndProfileUserSame &&
                 profilePageUserDetails &&
                 friendshipStatus === "sendRequest" && (
@@ -174,7 +181,35 @@ const Profile = (props) => {
                       className="request-friendshp-btn"
                       onClick={() => handleFriendAction("sendRequest")}
                     >
-                      {friendshipStatus}
+                      + Add Friend
+                    </button>
+                  </div>
+                )}
+
+              {!isSessionAndProfileUserSame &&
+                profilePageUserDetails &&
+                friendshipStatus === "cancelRequest" && (
+                  <div className="interact-with-current-user">
+                    <button
+                      type="button"
+                      className="request-friendshp-btn"
+                      onClick={() => handleFriendAction("cancelRequest")}
+                    >
+                      Cancel Request
+                    </button>
+                  </div>
+                )}
+
+              {!isSessionAndProfileUserSame &&
+                profilePageUserDetails &&
+                friendshipStatus === "acceptRequest" && (
+                  <div className="interact-with-current-user">
+                    <button
+                      type="button"
+                      className="request-friendshp-btn"
+                      onClick={() => handleFriendAction("acceptRequest")}
+                    >
+                      Accept Request
                     </button>
                   </div>
                 )}
