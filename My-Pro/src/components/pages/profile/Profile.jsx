@@ -26,12 +26,16 @@ const Profile = (props) => {
   const [timelinePhoto, setTimelinePhoto] = useState(wow2);
   const [urlPath, setUrlPath] = useState(props.match.path);
   const [friendshipStatus, setFriendshipStatus] = useState(null);
+  const [profileUserFriendsCount, setProfileUserFriendsCount] = useState(
+    "Loading..."
+  );
   const [profilePageUserDetails, setProfilePageUserDetails] = useState(
     props.centralState.profilePageUserDetails
   );
   const [loggedInUserFriends, setLoggedInUserFriends] = useState(
     props.centralState.loggedInUserDetails.friends
   );
+  const [profileUserFriends, setProfileUserFriends] = useState(null);
   const [
     isSessionAndProfileUserSame,
     setIsSessionAndProfileUserSame,
@@ -126,7 +130,14 @@ const Profile = (props) => {
 
   useEffect(() => {
     // console.log(props);
-    setProfilePageUserDetails(props.centralState.profilePageUserDetails);
+    if (props.centralState.profilePageUserDetails) {
+      setProfilePageUserDetails(props.centralState.profilePageUserDetails);
+      setProfileUserFriends(props.centralState.profilePageUserDetails.friends);
+      let getCount = props.centralState.profilePageUserDetails.friends.filter(
+        (friend) => friend.status === "friends"
+      );
+      setProfileUserFriendsCount(getCount.length);
+    }
   }, [props.centralState.profilePageUserDetails]);
 
   const filesPickerRef = useRef();
@@ -226,9 +237,7 @@ const Profile = (props) => {
             </div>
             <div className="left-right-holders">
               <div className="total-friends-count">
-                Friends -{" "}
-                {profilePageUserDetails &&
-                  profilePageUserDetails.friends.length}
+                Friends - {profileUserFriendsCount}
               </div>
 
               {!isSessionAndProfileUserSame &&
