@@ -29,6 +29,9 @@ const Profile = (props) => {
   const [profilePageUserDetails, setProfilePageUserDetails] = useState(
     props.centralState.profilePageUserDetails
   );
+  const [loggedInUserFriends, setLoggedInUserFriends] = useState(
+    props.centralState.loggedInUserDetails.friends
+  );
   const [
     isSessionAndProfileUserSame,
     setIsSessionAndProfileUserSame,
@@ -89,6 +92,7 @@ const Profile = (props) => {
 
       let loggedInUserFriends = props.centralState.loggedInUserDetails.friends;
       console.log(loggedInUserFriends);
+      setLoggedInUserFriends(loggedInUserFriends);
 
       if (loggedInUserFriends.length === 0) {
         setFriendshipStatus("sendRequest");
@@ -133,11 +137,66 @@ const Profile = (props) => {
   };
 
   const handleFriendAction = (actionType) => {
-    let profilePageUserDetailsId =
-      props.centralState.profilePageUserDetails._id;
+    let loggedInUserId = props.centralState.loggedInUserId;
+    let profileUserId = props.centralState.profilePageUserDetails._id;
+
+    console.log("loggedInUserId --> " + loggedInUserId);
+    console.log("profileUserId --> " + profileUserId);
+
+    let loggedInUserFriends = props.centralState.loggedInUserDetails.friends;
+    let profileUserFriends = props.centralState.profilePageUserDetails.friends;
+
+    console.log("loggedInUserFriends are below - before");
+    console.log(loggedInUserFriends);
+
+    if (actionType === "sendRequest") {
+      let loggedInUserStatus = "sent";
+      let profileUserStatus = "pending";
+
+      loggedInUserFriends = [
+        ...loggedInUserFriends,
+        { friendId: profileUserId, status: loggedInUserStatus },
+      ];
+      profileUserFriends = [
+        ...profileUserFriends,
+        { friendId: loggedInUserId, status: profileUserStatus },
+      ];
+      setLoggedInUserFriends(loggedInUserFriends);
+    } else if (
+      actionType === "cancelRequest" ||
+      actionType === "deleteRequest"
+    ) {
+      let removedSentRequestFromLoggedInUserFriends = loggedInUserFriends.filter(
+        (friend) => {
+          console.log("friend.friendId --> " + friend.friendId);
+          return friend.friendId != profileUserId;
+        }
+      );
+      // console.log(removedSentRequestFromLoggedInUserFriends);
+      loggedInUserFriends = [...removedSentRequestFromLoggedInUserFriends];
+      setLoggedInUserFriends(loggedInUserFriends);
+    } else if (actionType === "acceptRequest") {
+      let status = "friends";
+
+      loggedInUserFriends = [
+        ...loggedInUserFriends,
+        { friendId: profileUserId, status },
+      ];
+      profileUserFriends = [
+        ...profileUserFriends,
+        { friendId: loggedInUserId, status },
+      ];
+      setLoggedInUserFriends(loggedInUserFriends);
+    } else {
+      alert("Invalid actionType to handle friendshipAction");
+    }
+
+    console.log("loggedInUserFriends are below - after");
+    console.log(loggedInUserFriends);
+
     console.log("actionType --> " + actionType);
-    console.log("profilePageUserDetailsId --> " + profilePageUserDetailsId);
-    props.friendshipAction(profilePageUserDetailsId, "sendRequest");
+    console.log("profileUserId --> " + profileUserId);
+    // props.friendshipAction(profileUserId, "sendRequest");
   };
 
   return (
@@ -210,6 +269,14 @@ const Profile = (props) => {
                       onClick={() => handleFriendAction("acceptRequest")}
                     >
                       Accept Request
+                    </button>
+
+                    <button
+                      type="button"
+                      className="request-friendshp-btn"
+                      onClick={() => handleFriendAction("deleteRequest")}
+                    >
+                      Delete Request
                     </button>
                   </div>
                 )}
