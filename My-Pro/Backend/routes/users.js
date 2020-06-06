@@ -380,92 +380,169 @@ router.put(
 );
 
 // Accept Friend Request route
-router.put("/accept-friend-request/:userId/:friendId", async (req, res) => {
-  try {
-    let friendId = req.params.friendId;
-    const getUser = await User.findById(friendId);
-
-    if (!getUser) {
-      res.status(400).json({ msg: "User doesn't exist" });
+router.put(
+  "/accept-friend-request",
+  auth,
+  [check("friendId", "Please add friendId").not().isEmpty()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
 
-    let userId = req.params.userId;
-    console.log("friendId -> " + friendId);
-    console.log("userId -> " + userId);
+    try {
+      let friendId = req.body.friendId;
+      const getUser = await User.findById(friendId);
 
-    let sentUserDetails = await User.findOneAndUpdate(
-      { _id: userId, "friends.friendId": friendId },
-      {
-        $set: {
-          "friends.$.status": "friend",
+      if (!getUser) {
+        return res.status(400).json({ msg: "User doesn't exist" });
+      }
+
+      let userId = req.user._id;
+      console.log("friendId -> " + friendId);
+      console.log("userId -> " + userId);
+
+      let sentUserDetails = await User.findOneAndUpdate(
+        { _id: userId, "friends.friendId": friendId },
+        {
+          $set: {
+            "friends.$.status": "friend",
+          },
         },
-      },
-      { new: true }
-    );
+        { new: true }
+      );
 
-    let receivedUserDetails = await User.findOneAndUpdate(
-      { _id: friendId, "friends.friendId": userId },
-      {
-        $set: {
-          "friends.$.status": "friend",
+      let receivedUserDetails = await User.findOneAndUpdate(
+        { _id: friendId, "friends.friendId": userId },
+        {
+          $set: {
+            "friends.$.status": "friend",
+          },
         },
-      },
-      { new: true }
-    );
+        { new: true }
+      );
 
-    res.json(sentUserDetails);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+      return res.json(sentUserDetails);
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).send("Server Error");
+    }
   }
-});
+);
+
+// cancel Friend Request route
+router.put(
+  "/cancel-friend-request",
+  auth,
+  [check("friendId", "Please add friendId").not().isEmpty()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      let friendId = req.body.friendId;
+      const getUser = await User.findById(friendId);
+
+      if (!getUser) {
+        return res.status(400).json({ msg: "User doesn't exist" });
+      }
+
+      let userId = req.user._id;
+      console.log("friendId -> " + friendId);
+      console.log("userId -> " + userId);
+
+      let sentUserDetails = await User.findByIdAndUpdate(
+        userId,
+        {
+          $pull: {
+            friends: {
+              friendId: friendId,
+              status: "sent",
+            },
+          },
+        },
+        { new: true }
+      );
+
+      let receivedUserDetails = await User.findByIdAndUpdate(
+        friendId,
+        {
+          $pull: {
+            friends: {
+              friendId: userId,
+              status: "pending",
+            },
+          },
+        },
+        { new: true }
+      );
+
+      return res.json(sentUserDetails);
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).send("Server Error");
+    }
+  }
+);
 
 // Delete Friend Request route
-router.put("/delete-friend-request/:userId/:friendId", async (req, res) => {
-  try {
-    let friendId = req.params.friendId;
-    const getUser = await User.findById(friendId);
-
-    if (!getUser) {
-      res.status(400).json({ msg: "User doesn't exist" });
+router.put(
+  "/delete-friend-request",
+  auth,
+  [check("friendId", "Please add friendId").not().isEmpty()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
 
-    let userId = req.params.userId;
-    console.log("friendId -> " + friendId);
-    console.log("userId -> " + userId);
+    try {
+      let friendId = req.body.friendId;
+      const getUser = await User.findById(friendId);
 
-    let sentUserDetails = await User.findByIdAndUpdate(
-      userId,
-      {
-        $pull: {
-          friends: {
-            friendId: friendId,
-            status: "sent",
+      if (!getUser) {
+        return res.status(400).json({ msg: "User doesn't exist" });
+      }
+
+      let userId = req.user._id;
+      console.log("friendId -> " + friendId);
+      console.log("userId -> " + userId);
+
+      let sentUserDetails = await User.findByIdAndUpdate(
+        userId,
+        {
+          $pull: {
+            friends: {
+              friendId: friendId,
+              status: "pending",
+            },
           },
         },
-      },
-      { new: true }
-    );
+        { new: true }
+      );
 
-    let receivedUserDetails = await User.findByIdAndUpdate(
-      friendId,
-      {
-        $pull: {
-          friends: {
-            friendId: userId,
-            status: "pending",
+      let receivedUserDetails = await User.findByIdAndUpdate(
+        friendId,
+        {
+          $pull: {
+            friends: {
+              friendId: userId,
+              status: "sent",
+            },
           },
         },
-      },
-      { new: true }
-    );
+        { new: true }
+      );
 
-    res.json(sentUserDetails);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+      return res.json(sentUserDetails);
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).send("Server Error");
+    }
   }
-});
+);
 
 // @route     GET api/users/drop
 // @desc      Drop users collection

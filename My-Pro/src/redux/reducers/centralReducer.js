@@ -157,6 +157,8 @@ const centralReducer = (state = initialState, action) => {
         loggedInUserUsername: null,
         fetchedPosts: null,
         postsFetchingError: null,
+        isRequestSucceeded: null,
+        hasRequestError: null,
       };
 
     // Logged In user related

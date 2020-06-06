@@ -58,13 +58,12 @@ export const friendshipAction = (friendId, actionType) => {
     if (actionType === "sendRequest") {
       apiEndPoint = `users/send-friend-request`;
     } else if (actionType === "cancelRequest") {
-      apiEndPoint = `users/send-friend-request`;
+      apiEndPoint = `users/cancel-friend-request`;
     } else if (actionType === "deleteRequest") {
-      apiEndPoint = `users/send-friend-request`;
+      apiEndPoint = `users/delete-friend-request`;
     } else if (actionType === "acceptRequest") {
-      apiEndPoint = `users/send-friend-request`;
+      apiEndPoint = `users/accept-friend-request`;
     }
-    apiEndPoint = `users/send-friend-request`;
     headers["x-auth-token"] = authToken;
 
     let obj = {

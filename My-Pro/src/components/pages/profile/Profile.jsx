@@ -109,6 +109,8 @@ const Profile = (props) => {
           }
         );
 
+        console.log(getProfileUserIdFromSessionFriendsList);
+
         getProfileUserIdFromSessionFriendsList =
           getProfileUserIdFromSessionFriendsList[0];
 
@@ -121,10 +123,19 @@ const Profile = (props) => {
           if (getStatus === "sent") setFriendshipStatus("cancelRequest");
           else if (getStatus === "pending")
             setFriendshipStatus("acceptRequest");
+          else if (getStatus === "friend") setFriendshipStatus("friend");
           else alert("Friendship status is invalid");
         }
       }
     }
+
+    if (props.centralState.isRequestSucceeded) {
+      alert("Friend request action success");
+    }
+    if (props.centralState.hasRequestError) {
+      alert("Friend request action failed");
+    }
+
     console.log(props);
   }, [props]);
 
@@ -134,7 +145,7 @@ const Profile = (props) => {
       setProfilePageUserDetails(props.centralState.profilePageUserDetails);
       setProfileUserFriends(props.centralState.profilePageUserDetails.friends);
       let getCount = props.centralState.profilePageUserDetails.friends.filter(
-        (friend) => friend.status === "friends"
+        (friend) => friend.status === "friend"
       );
       setProfileUserFriendsCount(getCount.length);
     }
@@ -207,7 +218,7 @@ const Profile = (props) => {
 
     console.log("actionType --> " + actionType);
     console.log("profileUserId --> " + profileUserId);
-    // props.friendshipAction(profileUserId, "sendRequest");
+    props.friendshipAction(profileUserId, actionType);
   };
 
   return (
@@ -286,6 +297,16 @@ const Profile = (props) => {
                       onClick={() => handleFriendAction("deleteRequest")}
                     >
                       Delete Request
+                    </button>
+                  </div>
+                )}
+
+              {!isSessionAndProfileUserSame &&
+                profilePageUserDetails &&
+                friendshipStatus === "friend" && (
+                  <div className="interact-with-current-user">
+                    <button type="button" className="request-friendshp-btn">
+                      Friend
                     </button>
                   </div>
                 )}
