@@ -94,16 +94,21 @@ const Profile = (props) => {
         setIsSessionAndProfileUserSame(false);
       }
 
-      let loggedInUserFriends = props.centralState.loggedInUserDetails.friends;
-      console.log(loggedInUserFriends);
-      setLoggedInUserFriends(loggedInUserFriends);
+      let getLoggedInUserFriends;
+      if (loggedInUserFriends) {
+        getLoggedInUserFriends = loggedInUserFriends;
+      } else {
+        getLoggedInUserFriends = props.centralState.loggedInUserDetails.friends;
+        setLoggedInUserFriends(getLoggedInUserFriends);
+      }
+      console.log(getLoggedInUserFriends);
 
-      if (loggedInUserFriends.length === 0) {
+      if (getLoggedInUserFriends.length === 0) {
         setFriendshipStatus("sendRequest");
       } else {
         console.log(props.centralState.profilePageUserDetails);
         let profileUserId = props.centralState.profilePageUserDetails._id;
-        let getProfileUserIdFromSessionFriendsList = loggedInUserFriends.filter(
+        let getProfileUserIdFromSessionFriendsList = getLoggedInUserFriends.filter(
           (friend) => {
             return friend.friendId === profileUserId;
           }
@@ -137,7 +142,8 @@ const Profile = (props) => {
     }
 
     console.log(props);
-  }, [props]);
+    console.log(loggedInUserFriends);
+  }, [props, loggedInUserFriends]);
 
   useEffect(() => {
     // console.log(props);
@@ -218,7 +224,7 @@ const Profile = (props) => {
 
     console.log("actionType --> " + actionType);
     console.log("profileUserId --> " + profileUserId);
-    props.friendshipAction(profileUserId, actionType);
+    // props.friendshipAction(profileUserId, actionType);
   };
 
   return (

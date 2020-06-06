@@ -132,9 +132,13 @@ router.get("/search/:searchWord", async (req, res) => {
 // @route     GET api/users/:id
 // @desc      Get specific user by ID
 // @access    Public
-router.get("/:username", async (req, res) => {
+router.get("/:username", auth, async (req, res) => {
   let username = req.params.username;
   try {
+    let userId = req.user._id;
+    let authUserdetails = await User.findById(userId);
+    // console.log(authUserdetails);
+
     User.getUserByUsername(username, (err, user) => {
       if (err) new Error(err);
       if (!user) {
@@ -151,11 +155,16 @@ router.get("/:username", async (req, res) => {
           .then((posts) => {
             // console.log("Populated results");
             // console.log(posts);
-            res.json({ success: true, userProfileDetails, posts });
+            return res.json({
+              success: true,
+              userProfileDetails,
+              posts,
+              authUserdetails,
+            });
           })
           .catch((err) => {
             console.error(err.message);
-            res.status(500).send("Server Error");
+            return res.status(500).send("Server Error");
           });
       }
     });
