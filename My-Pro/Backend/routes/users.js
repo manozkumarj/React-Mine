@@ -135,7 +135,10 @@ router.get("/by-username/:username", auth, async (req, res) => {
   let username = req.params.username;
   try {
     let userId = req.user._id;
-    let authUserdetails = await User.findById(userId);
+    let authUserdetails = await User.findById(userId).populate(
+      "friends.friendId",
+      "fullName primaryDp username"
+    );
     // console.log(authUserdetails);
 
     User.getUserByUsername(username, (err, user) => {

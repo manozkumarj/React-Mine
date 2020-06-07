@@ -12,7 +12,10 @@ const Friends = (props) => {
 
   useEffect(() => {
     // console.log(props);
-    if (props.centralState.profilePageUserDetails) {
+    if (
+      props.centralState.profilePageUserDetails &&
+      props.centralState.loggedInUserDetails.friends
+    ) {
       let filterFriends = props.centralState.profilePageUserDetails.friends.filter(
         (friend) => friend.status === "friend"
       );
@@ -33,30 +36,33 @@ const Friends = (props) => {
         {profileUserFriends &&
           profileUserFriends.length > 0 &&
           profileUserFriends.map((friend) => {
+            console.log(friend);
             const handleUnfriend = (e) => {
               e.preventDefault();
-              console.log("Unfriend " + friend.friendId);
+              console.log("Unfriend " + friend._id);
             };
             return (
-              <div className="individual-friend-div">
+              <div className="individual-friend-div" key={friend._id}>
                 <div className="friend-name">
-                  <Link to="/profile" className="global-aTag-style">
-                    {friend.friendId}
+                  <Link
+                    to={"/" + friend.friendId.username}
+                    className="global-aTag-style"
+                  >
+                    {friend.friendId.fullName}
                   </Link>
                 </div>
                 <div className="friendship-status-div">
                   <div
                     className="friends-list-individual request-friendshp-btn"
                     id="individual-friend-div"
-                    data-id={friend.friendId}
+                    data-id={friend._id}
                   >
                     Friends <span> &#8595;</span>
                   </div>
-                  <div
-                    className="dropdown-content"
-                    id={"dropd-" + friend.friendId}
-                  >
-                    <Link to={"/" + friend.friendId}>View Profile</Link>
+                  <div className="dropdown-content" id={"dropd-" + friend._id}>
+                    <Link to={"/" + friend.friendId.username}>
+                      View Profile
+                    </Link>
                     <a href="#" onClick={handleUnfriend}>
                       Unfriend
                     </a>

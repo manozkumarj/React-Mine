@@ -71,8 +71,13 @@ const UserSchema = mongoose.Schema({
 
 const User = (module.exports = mongoose.model("User", UserSchema));
 
-module.exports.getUserByUsername = function (username, callback) {
-  User.findOne({ username }, callback);
+module.exports.getUserByUsername = async (username, callback) => {
+  // User.findOne({ username }, callback);
+  let userDetails = await User.findOne({ username }).populate(
+    "friends.friendId",
+    "fullName primaryDp username"
+  );
+  callback(null, userDetails);
 };
 
 module.exports.getUserByEmail = function (email, callback) {
