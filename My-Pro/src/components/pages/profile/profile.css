@@ -40,9 +40,11 @@
   background: var(--site-color);
   color: #fff;
   padding: 8px 15px;
-  margin-left: 20px;
   border-radius: 3px;
   cursor: pointer;
+}
+.m-left {
+  margin-left: 20px;
 }
 .middle-section {
   margin-bottom: 30em;

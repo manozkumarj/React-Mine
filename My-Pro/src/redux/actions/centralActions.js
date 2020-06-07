@@ -63,6 +63,8 @@ export const friendshipAction = (friendId, actionType) => {
       apiEndPoint = `users/delete-friend-request`;
     } else if (actionType === "acceptRequest") {
       apiEndPoint = `users/accept-friend-request`;
+    } else if (actionType === "unfriend") {
+      apiEndPoint = `users/unfriend`;
     }
     headers["x-auth-token"] = authToken;
 

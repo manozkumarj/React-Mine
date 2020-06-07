@@ -556,6 +556,63 @@ router.put(
   }
 );
 
+// Unfriend route
+router.put(
+  "/unfriend",
+  auth,
+  [check("friendId", "Please add friendId").not().isEmpty()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      let friendId = req.body.friendId;
+      const getUser = await User.findById(friendId);
+
+      if (!getUser) {
+        return res.status(400).json({ msg: "User doesn't exist" });
+      }
+
+      let userId = req.user._id;
+      console.log("friendId -> " + friendId);
+      console.log("userId -> " + userId);
+
+      let sentUserDetails = await User.findByIdAndUpdate(
+        userId,
+        {
+          $pull: {
+            friends: {
+              friendId: friendId,
+              status: "friend",
+            },
+          },
+        },
+        { new: true }
+      );
+
+      let receivedUserDetails = await User.findByIdAndUpdate(
+        friendId,
+        {
+          $pull: {
+            friends: {
+              friendId: userId,
+              status: "friend",
+            },
+          },
+        },
+        { new: true }
+      );
+
+      return res.json(sentUserDetails);
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).send("Server Error");
+    }
+  }
+);
+
 // @route     GET api/users/drop
 // @desc      Drop users collection
 // @access    public

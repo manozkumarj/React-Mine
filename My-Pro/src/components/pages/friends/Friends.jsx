@@ -57,7 +57,7 @@ const Friends = (props) => {
                     id="individual-friend-div"
                     data-id={friend._id}
                   >
-                    Friends <span> &#8595;</span>
+                    Friend <span> &#8595;</span>
                   </div>
                   <div className="dropdown-content" id={"dropd-" + friend._id}>
                     <Link to={"/" + friend.friendId.username}>
