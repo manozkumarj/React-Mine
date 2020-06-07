@@ -64,7 +64,6 @@ router.post(
         username,
         fullName,
         email,
-        friends: user.friends,
         primaryDp: user.primaryDp,
         secondaryDp: user.secondaryDp,
         profileCoverPhoto: user.profileCoverPhoto,
@@ -129,10 +128,10 @@ router.get("/search/:searchWord", async (req, res) => {
   }
 });
 
-// @route     GET api/users/:id
-// @desc      Get specific user by ID
+// @route     GET api/users/by-username/:username
+// @desc      Get specific user by username
 // @access    Public
-router.get("/:username", auth, async (req, res) => {
+router.get("/by-username/:username", auth, async (req, res) => {
   let username = req.params.username;
   try {
     let userId = req.user._id;
@@ -302,23 +301,24 @@ router.post(
       User.comparePassword(password, user.password, (err, isMatch) => {
         if (err) new Error(err);
         if (isMatch) {
-          const token = jwt.sign({ data: user }, config.jwtSecret, {
+          let userPayload = {
+            _id: user._id,
+            username: user.username,
+            fullName: user.fullName,
+            email: user.email,
+            primaryDp: user.primaryDp,
+            secondaryDp: user.secondaryDp,
+            profileCoverPhoto: user.profileCoverPhoto,
+          };
+
+          const token = jwt.sign({ data: userPayload }, config.jwtSecret, {
             expiresIn: 604800, // 1 week
           });
           let randomChars = helpers.randomString();
           res.json({
             success: true,
             token: randomChars + "@@" + token,
-            user: {
-              _id: user._id,
-              username: user.username,
-              fullName: user.fullName,
-              email: user.email,
-              friends: user.friends,
-              primaryDp: user.primaryDp,
-              secondaryDp: user.secondaryDp,
-              profileCoverPhoto: user.profileCoverPhoto,
-            },
+            user: userPayload,
           });
         } else {
           return res.json({ success: false, msg: "Wrong password" });
@@ -560,6 +560,30 @@ router.get("/drop", async (req, res) => {
   try {
     const users = await User.drop();
     res.json(users);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route     GET api/users/:id
+// @desc      Get specific user by ID
+// @access    Public
+router.get("/by-id/:id", async (req, res) => {
+  let userId = req.params.id;
+  try {
+    User.findById(userId, (err, user) => {
+      if (err) new Error(err);
+      if (!user) {
+        return res.json({ success: false, msg: "User not found" });
+      } else {
+        let userProfileDetails = user;
+        return res.json({
+          success: true,
+          userProfileDetails,
+        });
+      }
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

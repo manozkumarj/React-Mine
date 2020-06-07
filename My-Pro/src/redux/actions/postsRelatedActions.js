@@ -234,7 +234,7 @@ export const getProfileUserDetailsAndPosts = (username) => {
   let authToken = localStorage.getItem("authToken");
   const tokenUserDetails = validateToken();
 
-  apiEndPoint = `users/${username}`;
+  apiEndPoint = `users/by-username/${username}`;
   headers["x-auth-token"] = authToken;
 
   if (tokenUserDetails) {

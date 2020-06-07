@@ -204,10 +204,17 @@ const Profile = (props) => {
       loggedInUserFriends = [...removedSentRequestFromLoggedInUserFriends];
       setLoggedInUserFriends(loggedInUserFriends);
     } else if (actionType === "acceptRequest") {
-      let status = "friends";
+      let status = "friend";
+
+      let removedSentRequestFromLoggedInUserFriends = loggedInUserFriends.filter(
+        (friend) => {
+          console.log("friend.friendId --> " + friend.friendId);
+          return friend.friendId != profileUserId;
+        }
+      );
 
       loggedInUserFriends = [
-        ...loggedInUserFriends,
+        ...removedSentRequestFromLoggedInUserFriends,
         { friendId: profileUserId, status },
       ];
       profileUserFriends = [
@@ -224,7 +231,7 @@ const Profile = (props) => {
 
     console.log("actionType --> " + actionType);
     console.log("profileUserId --> " + profileUserId);
-    // props.friendshipAction(profileUserId, actionType);
+    props.friendshipAction(profileUserId, actionType);
   };
 
   return (

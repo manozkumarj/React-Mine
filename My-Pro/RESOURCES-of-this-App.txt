@@ -24,5 +24,5 @@
 * https://www.npmjs.com/package/blueimp-file-upload#demo
 * https://html.developreference.com/article/16129464/Croppie%2C+base64+image%2C+transfer+to+node.js+via+%24http%2C+multipartyMiddleware
 * https://stackoverflow.com/questions/37696308/croppie-base64-image-transfer-to-node-js-via-http-multipartymiddleware
-* 
+* https://stackoverflow.com/questions/51154269/reactjs-fetch-a-quote-every-5-seconds-with-axios-and-display-it-in-the-p/51154431
 * 
