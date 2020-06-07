@@ -3,6 +3,7 @@ import "./friends.css";
 
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { friendshipAction } from "./../../../redux/actionCreators";
 
 const Friends = (props) => {
   const [profileUserFriends, setProfileUserFriends] = useState(null);
@@ -11,7 +12,6 @@ const Friends = (props) => {
   }, []);
 
   useEffect(() => {
-    // console.log(props);
     if (
       props.centralState.profilePageUserDetails &&
       props.centralState.loggedInUserDetails.friends
@@ -21,7 +21,15 @@ const Friends = (props) => {
       );
       setProfileUserFriends(filterFriends);
     }
-  }, [props.centralState.profilePageUserDetails]);
+
+    if (props.centralState.isRequestSucceeded) {
+      alert("Friend request action success");
+    }
+    if (props.centralState.hasRequestError) {
+      alert("Friend request action failed");
+    }
+    console.log(props);
+  }, [props, props.centralState.profilePageUserDetails]);
 
   return (
     <div className="friends-container">
@@ -39,10 +47,17 @@ const Friends = (props) => {
             console.log(friend);
             const handleUnfriend = (e) => {
               e.preventDefault();
-              console.log("Unfriend " + friend._id);
+              let actionType = "unfriend";
+              let friendId = friend.friendId;
+              console.log("Unfriend friendId -> " + friendId);
+              props.friendshipAction(friendId, actionType);
             };
             return (
-              <div className="individual-friend-div" key={friend._id}>
+              <div
+                className="individual-friend-div"
+                key={friend._id}
+                id={"individual-friend-div-" + friend._id}
+              >
                 <div className="friend-name">
                   <Link
                     to={"/" + friend.friendId.username}
@@ -63,7 +78,12 @@ const Friends = (props) => {
                     <Link to={"/" + friend.friendId.username}>
                       View Profile
                     </Link>
-                    <a href="#" onClick={handleUnfriend}>
+                    <a
+                      href="#"
+                      className="unfriend-individual-user"
+                      data-id={friend._id}
+                      onClick={handleUnfriend}
+                    >
                       Unfriend
                     </a>
                   </div>
@@ -82,4 +102,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, null)(Friends));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    friendshipAction: (friendId, actionType) =>
+      dispatch(friendshipAction(friendId, actionType)),
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Friends)
+);

@@ -213,13 +213,13 @@ const Profile = (props) => {
       let removedSentRequestFromLoggedInUserFriends = loggedInUserFriends.filter(
         (friend) => {
           console.log("friend.friendId --> " + friend.friendId);
-          return friend.friendId._id != profileUserId;
+          return friend.friendId._id !== profileUserId;
         }
       );
       let removedReceivedRequestFromProfileUserFriends = profileUserFriends.filter(
         (friend) => {
           console.log("friend.friendId --> " + friend.friendId);
-          return friend.friendId._id != loggedInUserId;
+          return friend.friendId._id !== loggedInUserId;
         }
       );
       // console.log(removedSentRequestFromLoggedInUserFriends);
@@ -237,13 +237,13 @@ const Profile = (props) => {
       let removedSentRequestFromLoggedInUserFriends = loggedInUserFriends.filter(
         (friend) => {
           console.log("friend.friendId --> " + friend.friendId);
-          return friend.friendId._id != profileUserId;
+          return friend.friendId._id !== profileUserId;
         }
       );
       let removedReceivedRequestFromProfileUserFriends = profileUserFriends.filter(
         (friend) => {
           console.log("friend.friendId --> " + friend.friendId);
-          return friend.friendId._id != loggedInUserId;
+          return friend.friendId._id !== loggedInUserId;
         }
       );
 

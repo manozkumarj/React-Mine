@@ -155,6 +155,11 @@
           event.stopPropagation();
         });
 
+        $(document).on("click", ".unfriend-individual-user", function () {
+          $getDataId = $(this).attr("data-id");
+          $("#individual-friend-div-" + $getDataId).slideUp("slow");
+        });
+
         $(document).on("click", "#navbar-dp-n-name-container", function () {
           // alert();
           $("#navbar-rightside-dropdown-div").toggle();
