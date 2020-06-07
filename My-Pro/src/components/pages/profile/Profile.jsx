@@ -66,7 +66,8 @@ const Profile = (props) => {
     if (username === props.centralState.loggedInUserDetails.username) {
       props.centralState.profilePageUserDetails =
         props.centralState.loggedInUserDetails;
-      props.getIndividualUserPosts(props.centralState.loggedInUserDetails._id);
+      // props.getIndividualUserPosts(props.centralState.loggedInUserDetails._id);
+      props.getProfileUserDetailsAndPosts(username);
     } else {
       props.getProfileUserDetailsAndPosts(username);
     }
@@ -76,7 +77,8 @@ const Profile = (props) => {
     setImagesUrl("http://localhost:8088/photo/");
     if (
       props.centralState.authToken &&
-      props.centralState.profilePageUserDetails
+      props.centralState.profilePageUserDetails &&
+      props.centralState.loggedInUserDetails.friends
     ) {
       setTimelinePhoto(
         props.centralState.profilePageUserDetails.profileCoverPhoto
@@ -147,7 +149,10 @@ const Profile = (props) => {
 
   useEffect(() => {
     // console.log(props);
-    if (props.centralState.profilePageUserDetails) {
+    if (
+      props.centralState.profilePageUserDetails &&
+      props.centralState.loggedInUserDetails.friends
+    ) {
       setProfilePageUserDetails(props.centralState.profilePageUserDetails);
       setProfileUserFriends(props.centralState.profilePageUserDetails.friends);
       let getCount = props.centralState.profilePageUserDetails.friends.filter(

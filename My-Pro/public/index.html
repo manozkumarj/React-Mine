@@ -148,9 +148,10 @@
         // Image viewer popup - starts
 
         $(document).on("click", ".friends-list-individual", function () {
+          $(".dropdown-content").hide();
+          $getDataId = $(this).attr("data-id");
           // alert();
-          $getId = $(this).attr("id");
-          $("#dropd-" + $getId).toggle();
+          $("#dropd-" + $getDataId).toggle();
           event.stopPropagation();
         });
 
