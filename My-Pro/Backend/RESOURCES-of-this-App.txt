@@ -19,7 +19,7 @@
 ************************ Links helped to solve faced issues **************************************
 * https://stackoverflow.com/questions/31530200/node-multer-unexpected-field
 * https://stackoverflow.com/questions/39716569/nodejs-unhandledpromiserejectionwarning
-
+* https://stackoverflow.com/questions/22441482/order-and-limit-results-in-a-query-with-a-callback
 
 ************************ Didn't use But useful **************************************
 * https://www.youtube.com/watch?v=MdjqacsMn8s
