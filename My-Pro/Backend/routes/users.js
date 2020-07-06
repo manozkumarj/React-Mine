@@ -153,6 +153,10 @@ router.get("/by-username/:username", auth, async (req, res) => {
           .populate("postedTo", "fullName primaryDp username")
           .populate("postedBy", "fullName primaryDp username")
           .populate("comments.commentedBy", "fullName primaryDp username")
+          .populate(
+            "reactions.reactedBy",
+            "fullName primaryDp secondaryDp username profileCoverPhoto"
+          )
           .exec()
           .then((posts) => {
             // console.log("Populated results");
