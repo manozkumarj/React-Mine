@@ -281,7 +281,7 @@ const PostReactions = (props) => {
       setPostReactions(filterPostReactions);
       setIsReactedToThisPost(false);
     }
-    // props.upsertReaction(post._id, actionType, reactionTypeId);
+    props.upsertReaction(post._id, actionType, reactionTypeId);
   };
 
   const keyPress = (e) => {

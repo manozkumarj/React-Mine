@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./profileLeftSideSection.css";
 // import zuck from "../../../images/zuck.jpg";
 // import mark from "../../../images/mark.jpg";
@@ -17,6 +17,13 @@ const ProfileLeftSideSection = (props) => {
     isSessionAndProfileUserSame,
     setIsSessionAndProfileUserSame,
   ] = useState(false);
+
+  useEffect(() => {
+    console.log("props.match.path --> " + props.match.path);
+    setUserPrimaryDp(defaultAvatar);
+    setUserSecondaryDp(defaultAvatar);
+    setId("");
+  }, [props.centralState.profilePageUserDetails]);
 
   useEffect(() => {
     setImagesUrl("http://localhost:8088/photo/");
@@ -92,11 +99,19 @@ const ProfileLeftSideSection = (props) => {
           </div>
         </div>
 
-        <div className="userFullnameDiv">
-          <Link to={"/" + username} className="hover-ul">
-            {fullname}
-          </Link>
-        </div>
+        {props.centralState.profilePageUserDetails && (
+          <div className="userFullnameDiv">
+            <Link to={"/" + username} className="hover-ul">
+              {fullname}
+            </Link>
+          </div>
+        )}
+
+        {!props.centralState.profilePageUserDetails && (
+          <div className="userFullnameDiv">
+            <span className="hover-ul">Loading...</span>
+          </div>
+        )}
 
         <div className="animateLinksDiv">
           <ul className="profileRelatedLinks">
@@ -133,4 +148,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(ProfileLeftSideSection);
+export default withRouter(
+  connect(mapStateToProps, null)(ProfileLeftSideSection)
+);
