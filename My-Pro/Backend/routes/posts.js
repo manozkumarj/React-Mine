@@ -370,6 +370,10 @@ router.get("/:postId", async (req, res) => {
       .populate("postedTo", "fullName primaryDp username profileCoverPhoto")
       .populate("postedBy", "fullName primaryDp username profileCoverPhoto")
       .populate(
+        "reactions.reactedBy",
+        "fullName primaryDp secondaryDp username profileCoverPhoto"
+      )
+      .populate(
         "comments.commentedBy",
         "fullName primaryDp username profileCoverPhoto"
       )

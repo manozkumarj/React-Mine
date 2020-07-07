@@ -13,7 +13,10 @@
 
 
 
-
+**************************** For future **************************************************
+* https://www.npmjs.com/package/react-player && https://davidwalsh.name/react-video-player is an example
+* https://www.npmjs.com/package/jimp  --> Nice Images compression Package
+* 
 
 
 
