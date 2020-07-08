@@ -636,18 +636,41 @@ router.get("/drop", async (req, res) => {
 router.get("/by-id/:id", async (req, res) => {
   let userId = req.params.id;
   try {
-    User.findById(userId, (err, user) => {
-      if (err) new Error(err);
-      if (!user) {
-        return res.json({ success: false, msg: "User not found" });
-      } else {
-        let userProfileDetails = user;
-        return res.json({
-          success: true,
-          userProfileDetails,
-        });
-      }
-    });
+    User.findById(userId)
+      .sort({ milliseconds: -1 })
+      .populate(
+        "friends.friendId",
+        "fullName primaryDp username profileCoverPhoto"
+      )
+      .exec()
+      .then((user) => {
+        if (!user) {
+          return res.json({ success: false, msg: "User not found" });
+        } else {
+          let userProfileDetails = user;
+          return res.json({
+            success: true,
+            userProfileDetails,
+          });
+        }
+      })
+      .catch((err) => {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+      });
+
+    // User.findById(userId, (err, user) => {
+    //   if (err) new Error(err);
+    //   if (!user) {
+    //     return res.json({ success: false, msg: "User not found" });
+    //   } else {
+    //     let userProfileDetails = user;
+    //     return res.json({
+    //       success: true,
+    //       userProfileDetails,
+    //     });
+    //   }
+    // });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

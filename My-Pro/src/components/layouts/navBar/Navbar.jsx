@@ -44,7 +44,7 @@ const Navbar = (props) => {
   useEffect(() => {
     console.log("Making an API call every 10 seconds");
     loadData();
-    setInterval(loadData, 1000 * 10);
+    // setInterval(loadData, 1000 * 10);
   }, []);
 
   const loadData = async () => {
