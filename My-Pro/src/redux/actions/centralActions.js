@@ -51,32 +51,35 @@ export const searchUsers = (searchWord) => {
 
 export const friendshipAction = (friendId, actionType) => {
   console.log("friendshipAction func triggered");
-  let authToken = localStorage.getItem("authToken");
-  const tokenUserDetails = validateToken();
-  // console.log(tokenUserDetails);
-  if (tokenUserDetails) {
-    if (actionType === "sendRequest") {
-      apiEndPoint = `users/send-friend-request`;
-    } else if (actionType === "cancelRequest") {
-      apiEndPoint = `users/cancel-friend-request`;
-    } else if (actionType === "deleteRequest") {
-      apiEndPoint = `users/delete-friend-request`;
-    } else if (actionType === "acceptRequest") {
-      apiEndPoint = `users/accept-friend-request`;
-    } else if (actionType === "unfriend") {
-      apiEndPoint = `users/unfriend`;
-    }
-    headers["x-auth-token"] = authToken;
+  return async (dispatch) => {
+    let authToken = await localStorage.getItem("authToken");
+    const tokenUserDetails = validateToken();
+    // console.log(tokenUserDetails);
+    if (tokenUserDetails) {
+      if (actionType === "sendRequest") {
+        apiEndPoint = `users/send-friend-request`;
+      } else if (actionType === "cancelRequest") {
+        apiEndPoint = `users/cancel-friend-request`;
+      } else if (actionType === "deleteRequest") {
+        apiEndPoint = `users/delete-friend-request`;
+      } else if (actionType === "acceptRequest") {
+        apiEndPoint = `users/accept-friend-request`;
+      } else if (actionType === "unfriend") {
+        apiEndPoint = `users/unfriend`;
+      } else {
+        return { status: "error", msg: "Invalid actionType" };
+      }
+      headers["x-auth-token"] = authToken;
 
-    let obj = {
-      friendId,
-    };
+      let obj = {
+        friendId,
+      };
 
-    return (dispatch) => {
-      API.put(apiEndPoint, obj, { headers })
+      return API.put(apiEndPoint, obj, { headers })
         .then((res) => {
           console.log(res.data);
           dispatch({ type: FRIENDSHIP_ACTION_SUCCESS, payload: res.data });
+          return { status: "success", msg: "Friendship actions is success" };
         })
         .catch((err) => {
           console.log(err.response);
@@ -84,9 +87,10 @@ export const friendshipAction = (friendId, actionType) => {
             type: FRIENDSHIP_ACTION_ERROR,
             payload: err.response,
           });
+          return { status: "error", msg: err };
         });
-    };
-  }
+    }
+  };
 };
 
 export const resetState = () => {

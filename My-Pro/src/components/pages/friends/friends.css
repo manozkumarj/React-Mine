@@ -36,7 +36,7 @@
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 105px;
+  min-width: 130px;
   overflow: auto;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
   border: 1px solid #ccc;

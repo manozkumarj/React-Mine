@@ -4,6 +4,7 @@ import "./sentRequests.css";
 import RightSideSection from "./../../layouts/rightSideSection/RightSideSection";
 import LeftSideSection from "./../../layouts/leftSideSection/LeftSideSection";
 import { connect, useDispatch, useSelector } from "react-redux";
+import { friendshipAction } from "./../../../redux/actionCreators";
 import { searchUsers } from "./../../../redux/actionCreators";
 import defaultAvatar from "../../../images/avatar.png";
 import { getLoggedInUserDetails } from "./../../../redux/actionCreators";
@@ -12,9 +13,6 @@ const SentRequests = (props) => {
   const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
   const [isLoading, setIsLoading] = useState(true);
   const [usersList, setUsersList] = useState(
-    props.centralState.loggedInUserFriends
-  );
-  const [loggedInUserFriends, setLoggedInUserFriends] = useState(
     props.centralState.loggedInUserFriends
   );
 
@@ -50,6 +48,24 @@ const SentRequests = (props) => {
     }
   };
 
+  let handleClick = async (id) => {
+    console.log("user._id --> " + id);
+
+    try {
+      const response = await dispatch(friendshipAction(id, "cancelRequest"));
+      if (response.status === "success") {
+        let removeItem = usersList.filter((user) => user._id !== id);
+        setUsersList(removeItem);
+      } else {
+        alert("friendshipAction dispatch triggered an error");
+      }
+    } catch (e) {
+      console.log("friendshipAction dispatch triggered an error");
+      console.log(e);
+      alert("friendshipAction dispatch triggered an error");
+    }
+  };
+
   return (
     <div className="three-divs-container" id="main">
       <div className="left-and-middle-divs-container">
@@ -62,7 +78,7 @@ const SentRequests = (props) => {
             <div className="friends-container-header">Sent Requests</div>
             <div className="friends">
               {isLoading && <div>Loading...</div>}
-              {isLoading && usersList && usersList.length === 0 && (
+              {!isLoading && usersList && usersList.length === 0 && (
                 <div>No sent Requests</div>
               )}
               {!isLoading &&
@@ -76,52 +92,53 @@ const SentRequests = (props) => {
                       className="individual-friend-div"
                       id="individual-friend-div"
                       key={user.friendId._id}
+                      data-id={user.friendId._id}
                     >
-                      <div className="flexBox">
-                        <div className="friend-name">
-                          <Link
-                            to={"/" + user.friendId.username}
-                            className="global-aTag-style"
-                          >
-                            <img
-                              src={userPrimaryDp}
-                              className="search_result_user_dp"
-                              alt="Username"
-                            />
-                          </Link>
-                          <Link
-                            to={"/" + user.friendId.username}
-                            className="global-aTag-style"
-                          >
-                            {user.friendId.fullName}
-                          </Link>
-                        </div>
-                        <div className="friendship-status-div">
-                          <div
-                            className="friends-list-individual request-friendshp-btn"
-                            id="1"
-                          >
-                            Friends
-                          </div>
-                        </div>
+                      <div className="friend-name">
+                        <Link
+                          to={"/" + user.friendId.username}
+                          className="global-aTag-style"
+                        >
+                          <img
+                            src={userPrimaryDp}
+                            className="search_result_user_dp"
+                            alt="Username"
+                          />
+                        </Link>
+                        <Link
+                          to={"/" + user.friendId.username}
+                          className="global-aTag-style"
+                        >
+                          {user.friendId.fullName}
+                        </Link>
                       </div>
 
-                      <div className="flexBox">
-                        <div className="friendship-status-div">
-                          <div
-                            className="friends-list-individual request-friendshp-btn"
-                            id="1"
-                          >
+                      <div className="friendship-status-div">
+                        <button
+                          className={
+                            "friends-list-individual friendship-status-btn friendship-status-btn-" +
+                            user.friendId._id
+                          }
+                          id="individual-friend-div"
+                          data-id={user.friendId._id}
+                        >
+                          Request Sent <span> &#8595;</span>
+                        </button>
+                        <div
+                          className="dropdown-content"
+                          id={"dropd-" + user.friendId._id}
+                        >
+                          <Link to={"/" + user.friendId.username}>
                             View Profile
-                          </div>
-                        </div>
-                        <div className="friendship-status-div">
-                          <div
-                            className="friends-list-individual request-friendshp-btn"
-                            id="1"
+                          </Link>
+                          <span
+                            href="#"
+                            className="cancel-individual-user"
+                            data-id={user.friendId._id}
+                            onClick={() => handleClick(user.friendId._id)}
                           >
-                            Cancel request
-                          </div>
+                            Cancel Request
+                          </span>
                         </div>
                       </div>
                     </div>

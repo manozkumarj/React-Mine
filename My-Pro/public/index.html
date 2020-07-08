@@ -160,6 +160,16 @@
           $("#individual-friend-div-" + $getDataId).slideUp("slow");
         });
 
+        $(document).on("click", ".cancel-individual-user", function () {
+          $getDataId = $(this).attr("data-id");
+          console.log("$getDataId --> " + $getDataId);
+          $(".friendship-status-btn-" + $getDataId).attr(
+            "disabled",
+            "disabled"
+          );
+          $(".friendship-status-btn-" + $getDataId).text("Cancelling...");
+        });
+
         $(document).on("click", "#navbar-dp-n-name-container", function () {
           // alert();
           $("#navbar-rightside-dropdown-div").toggle();

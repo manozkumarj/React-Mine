@@ -32,7 +32,8 @@
   font-weight: bold;
 }
 
-.request-friendshp-btn {
+.request-friendshp-btn,
+.friendship-status-btn {
   font-size: 13px;
   font-weight: bold;
   border: 0;
