@@ -9,7 +9,11 @@ import {
 import { LOGIN_SUCCESS, LOGIN_FAILED } from "./../actionTypes/loginTypes";
 
 // Auth related
-import { SET_TOKEN, REMOVE_TOKEN } from "./../actionTypes/authTypes";
+import {
+  SET_TOKEN,
+  REMOVE_TOKEN,
+  SET_LOGGEDIN_USER_DETAILS,
+} from "./../actionTypes/authTypes";
 
 // Logged In user related
 import {
@@ -75,6 +79,7 @@ const initialState = {
   filteredPost: null,
   loggedInUserId: userId,
   loggedInUserUsername: username,
+  loggedInUserFriends: null,
   searchResults: null,
   searchError: null,
   isRequestSucceeded: null,
@@ -127,6 +132,7 @@ const centralReducer = (state = initialState, action) => {
         loginErrorData: null,
         loggedInUserId: action.payload.user._id,
         loggedInUserUsername: action.payload.user.username,
+        loggedInUserFriends: action.payload.user.friends,
       };
 
     case LOGIN_FAILED:
@@ -145,6 +151,13 @@ const centralReducer = (state = initialState, action) => {
       return {
         ...state,
         authToken: action.payload,
+      };
+
+    case SET_LOGGEDIN_USER_DETAILS:
+      return {
+        ...state,
+        loggedInUserDetails: action.payload.userProfileDetails,
+        loggedInUserFriends: action.payload.userProfileDetails.friends,
       };
 
     case REMOVE_TOKEN:

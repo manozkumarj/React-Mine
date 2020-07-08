@@ -5,9 +5,12 @@ import "./navbar.css";
 // import zuck from "../../../images/zuck.jpg";
 // import mark from "../../../images/mark.jpg";
 import defaultAvatar from "../../../images/avatar.png";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { removeToken } from "./../../../redux/actions/authActions";
-import { searchUsers } from "./../../../redux/actionCreators";
+import {
+  searchUsers,
+  getLoggedInUserDetails,
+} from "./../../../redux/actionCreators";
 
 const Navbar = (props) => {
   const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
@@ -15,6 +18,12 @@ const Navbar = (props) => {
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState(null);
   const [searchWord, setSearchWord] = useState(null);
+
+  const dispatch = useDispatch();
+  let currentLoggedInUserId = useSelector(
+    (state) => state.central.loggedInUserId
+  );
+
   useEffect(() => {
     setImagesUrl("http://localhost:8088/photo/");
     if (props.centralState.authToken) {
@@ -31,6 +40,25 @@ const Navbar = (props) => {
     }
     // console.log(props);
   }, [props]);
+
+  useEffect(() => {
+    console.log("Making an API call every 10 seconds");
+    loadData();
+    setInterval(loadData, 1000 * 10);
+  }, []);
+
+  const loadData = async () => {
+    try {
+      let d = new Date();
+      console.log(d.getSeconds());
+      const response = await dispatch(
+        getLoggedInUserDetails(currentLoggedInUserId)
+      );
+    } catch (e) {
+      console.log("getLoggedInUserDetails dispatch triggered an error");
+      console.log(e);
+    }
+  };
 
   const { open } = props;
   const history = useHistory();

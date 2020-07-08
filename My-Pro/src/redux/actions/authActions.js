@@ -2,7 +2,18 @@ import {
   SET_TOKEN,
   REMOVE_TOKEN,
   AUTH_STATE,
+  SET_LOGGEDIN_USER_DETAILS,
 } from "./../actionTypes/authTypes";
+
+import API from "./../../api";
+import validateToken from "./../validateToken";
+
+let headers = {
+  "Content-Type": "application/json",
+};
+
+// All types of post creation handler -- Starts
+let apiEndPoint;
 
 export const setToken = (token) => {
   localStorage.setItem("authToken", token);
@@ -24,3 +35,26 @@ export const getAuthState = () => {
     dispatch({ type: AUTH_STATE, payload: userToken });
   };
 };
+
+// Fetching individual user's details handler -- Starts
+export const getLoggedInUserDetails = (id) => {
+  let authToken = localStorage.getItem("authToken");
+  const tokenUserDetails = validateToken();
+  // console.log(tokenUserDetails);
+  if (tokenUserDetails) {
+    apiEndPoint = `users/by-id/${id}`;
+    headers["x-auth-token"] = authToken;
+
+    return (dispatch) => {
+      API.get(apiEndPoint, { headers })
+        .then((res) => {
+          console.log(res.data);
+          dispatch({ type: SET_LOGGEDIN_USER_DETAILS, payload: res.data });
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    };
+  }
+};
+// Fetching individual user's details handler -- Ends

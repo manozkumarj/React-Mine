@@ -10,10 +10,14 @@ const LeftSideSection = (props) => {
   const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
   const [userPrimaryDp, setUserPrimaryDp] = useState(defaultAvatar);
   const [userSecondaryDp, setUserSecondaryDp] = useState(defaultAvatar);
+  const [loggedInUserDetails, setLoggedInUserDetails] = useState(null);
+  const [friendRequests, setFriendRequests] = useState(null);
+  const [sentFriendRequests, setSentFriendRequests] = useState(null);
 
   useEffect(() => {
     setImagesUrl("http://localhost:8088/photo/");
     if (props.centralState.authToken) {
+      setLoggedInUserDetails(props.centralState.loggedInUserDetails);
       setUserPrimaryDp(
         props.centralState.loggedInUserDetails.primaryDp
           ? imagesUrl + props.centralState.loggedInUserDetails.primaryDp
@@ -25,6 +29,13 @@ const LeftSideSection = (props) => {
           ? imagesUrl + props.centralState.loggedInUserDetails.secondaryDp
           : defaultAvatar
       );
+      let friends = props.centralState.loggedInUserFriends;
+      if (friends && friends.length > 0) {
+        let requests = friends.filter((friend) => friend.status === "pending");
+        setFriendRequests(requests.length);
+        let sentRequests = friends.filter((friend) => friend.status === "sent");
+        setSentFriendRequests(sentRequests.length);
+      }
     }
     console.log(props);
   }, [props]);
@@ -65,10 +76,18 @@ const LeftSideSection = (props) => {
               <Link to="/search">Search Friends</Link>
             </li>
             <li>
-              <Link to="/settings">Settings</Link>
+              <Link to="/post-types">Advanced Posts</Link>
+            </li>
+
+            <li>
+              <Link to="/friend-requests">
+                Friend Requests - {friendRequests}
+              </Link>
             </li>
             <li>
-              <Link to="/post-types">Advanced Posts</Link>
+              <Link to="/sent-requests">
+                Sent Friend Requests - {sentFriendRequests}
+              </Link>
             </li>
           </ul>
         </div>

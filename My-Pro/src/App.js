@@ -47,7 +47,6 @@ class App extends Component {
                   <PrivateRoute exact path="/post/:postId" component={Home} />
                   <PrivateRoute exact path="/profile" component={Profile} />
                   <PrivateRoute exact path="/register" component={Register} />
-                  <PrivateRoute exact path="/settings" component={Settings} />
                   <PrivateRoute exact path="/about" component={About} />
                   <PrivateRoute
                     exact
@@ -57,6 +56,16 @@ class App extends Component {
                   <PrivateRoute
                     exact
                     path="/search/:word?"
+                    component={Search}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/friend-requests"
+                    component={Search}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/sent-requests"
                     component={Search}
                   />
                   <PrivateRoute exact path="/login" component={Login} />

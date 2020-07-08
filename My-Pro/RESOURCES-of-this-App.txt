@@ -9,7 +9,8 @@
 * https://www.npmjs.com/package/browser-image-compression  ---> Using plugin for img compression
 * https://www.valentinog.com/blog/formdata/
 * https://stackoverflow.com/questions/35940290/how-to-convert-base64-string-to-javascript-file-object-like-as-from-file-input-f#:~:text=length%2C%20u8arr%20%3D%20new%20Uint8Array(,log(file)%3B
-
+* https://stackoverflow.com/questions/48601813/how-to-call-an-api-every-minute-for-a-dashboard-in-react
+* 
 
 
 

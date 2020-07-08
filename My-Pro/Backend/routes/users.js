@@ -325,7 +325,7 @@ router.post(
           res.json({
             success: true,
             token: randomChars + "@@" + token,
-            user: userPayload,
+            user,
           });
         } else {
           return res.json({ success: false, msg: "Wrong password" });
