@@ -98,8 +98,10 @@ const Profile = (props) => {
 
       let getLoggedInUserFriends;
       if (loggedInUserFriends) {
+        console.log("1");
         getLoggedInUserFriends = loggedInUserFriends;
       } else {
+        console.log("2");
         getLoggedInUserFriends = props.centralState.loggedInUserDetails.friends;
         setLoggedInUserFriends(getLoggedInUserFriends);
       }

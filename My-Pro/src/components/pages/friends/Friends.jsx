@@ -2,11 +2,18 @@ import React, { useState, useEffect } from "react";
 import "./friends.css";
 
 import { withRouter, Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { friendshipAction } from "./../../../redux/actionCreators";
 
 const Friends = (props) => {
+  let getCurrentLoggedInUserId = useSelector(
+    (state) => state.central.loggedInUserId
+  );
   const [profileUserFriends, setProfileUserFriends] = useState(null);
+  const [currentLoggedInUserId, setCurrentLoggedInUserId] = useState(
+    getCurrentLoggedInUserId
+  );
+  console.log("currentLoggedInUserId -> " + currentLoggedInUserId);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -44,11 +51,12 @@ const Friends = (props) => {
         {profileUserFriends &&
           profileUserFriends.length > 0 &&
           profileUserFriends.map((friend) => {
+            console.log("friend Id -> " + friend.friendId._id);
             console.log(friend);
             const handleUnfriend = (e) => {
               e.preventDefault();
               let actionType = "unfriend";
-              let friendId = friend.friendId;
+              let friendId = friend.friendId._id;
               console.log("Unfriend friendId -> " + friendId);
               props.friendshipAction(friendId, actionType);
             };
@@ -66,28 +74,36 @@ const Friends = (props) => {
                     {friend.friendId.fullName}
                   </Link>
                 </div>
-                <div className="friendship-status-div">
-                  <div
-                    className="friends-list-individual request-friendshp-btn"
-                    id="individual-friend-div"
-                    data-id={friend._id}
-                  >
-                    Friend <span> &#8595;</span>
-                  </div>
-                  <div className="dropdown-content" id={"dropd-" + friend._id}>
-                    <Link to={"/" + friend.friendId.username}>
-                      View Profile
-                    </Link>
-                    <a
-                      href="#"
-                      className="unfriend-individual-user"
+
+                {friend.friendId._id !== currentLoggedInUserId && (
+                  <div className="friendship-status-div">
+                    <div
+                      className="friends-list-individual request-friendshp-btn"
+                      id="individual-friend-div"
                       data-id={friend._id}
-                      onClick={handleUnfriend}
                     >
-                      Unfriend
-                    </a>
+                      Friend <span> &#8595;</span>
+                    </div>
+                    <div
+                      className="dropdown-content"
+                      id={"dropd-" + friend._id}
+                    >
+                      <Link to={"/" + friend.friendId.username}>
+                        View Profile
+                      </Link>
+                      <a
+                        href="#"
+                        className="unfriend-individual-user"
+                        data-id={friend._id}
+                        onClick={handleUnfriend}
+                      >
+                        Unfriend
+                      </a>
+                    </div>
                   </div>
-                </div>
+                )}
+
+                {friend.friendId._id === currentLoggedInUserId && "It's you"}
               </div>
             );
           })}

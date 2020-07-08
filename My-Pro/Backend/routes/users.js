@@ -290,7 +290,7 @@ router.post(
       "Please enter a password with 6 or more charactors"
     ).isLength({ min: 6 }),
   ],
-  (req, res) => {
+  async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ msg: errors.array() });
@@ -299,39 +299,58 @@ router.post(
     const email = req.body.email;
     const password = req.body.password;
 
-    User.getUserByEmail(email, (err, user) => {
-      if (err) new Error(err);
-      if (!user) {
-        return res.json({ success: false, msg: "User not found" });
-      }
+    try {
+      User.findOne({ email })
+        .sort({ milliseconds: -1 })
+        .populate(
+          "friends.friendId",
+          "fullName primaryDp username profileCoverPhoto"
+        )
+        .exec()
+        .then((user) => {
+          if (!user) {
+            return res.json({ success: false, msg: "User not found" });
+          } else {
+            User.comparePassword(password, user.password, (err, isMatch) => {
+              if (err) new Error(err);
+              if (isMatch) {
+                let userPayload = {
+                  _id: user._id,
+                  username: user.username,
+                  fullName: user.fullName,
+                  email: user.email,
+                  primaryDp: user.primaryDp,
+                  secondaryDp: user.secondaryDp,
+                  profileCoverPhoto: user.profileCoverPhoto,
+                };
 
-      User.comparePassword(password, user.password, (err, isMatch) => {
-        if (err) new Error(err);
-        if (isMatch) {
-          let userPayload = {
-            _id: user._id,
-            username: user.username,
-            fullName: user.fullName,
-            email: user.email,
-            primaryDp: user.primaryDp,
-            secondaryDp: user.secondaryDp,
-            profileCoverPhoto: user.profileCoverPhoto,
-          };
-
-          const token = jwt.sign({ data: userPayload }, config.jwtSecret, {
-            expiresIn: 604800, // 1 week
-          });
-          let randomChars = helpers.randomString();
-          res.json({
-            success: true,
-            token: randomChars + "@@" + token,
-            user,
-          });
-        } else {
-          return res.json({ success: false, msg: "Wrong password" });
-        }
-      });
-    });
+                const token = jwt.sign(
+                  { data: userPayload },
+                  config.jwtSecret,
+                  {
+                    expiresIn: 604800, // 1 week
+                  }
+                );
+                let randomChars = helpers.randomString();
+                res.json({
+                  success: true,
+                  token: randomChars + "@@" + token,
+                  user,
+                });
+              } else {
+                return res.json({ success: false, msg: "Wrong password" });
+              }
+            });
+          }
+        })
+        .catch((err) => {
+          console.error(err.message);
+          res.status(500).send("Server Error");
+        });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
   }
 );
 
@@ -658,19 +677,6 @@ router.get("/by-id/:id", async (req, res) => {
         console.error(err.message);
         res.status(500).send("Server Error");
       });
-
-    // User.findById(userId, (err, user) => {
-    //   if (err) new Error(err);
-    //   if (!user) {
-    //     return res.json({ success: false, msg: "User not found" });
-    //   } else {
-    //     let userProfileDetails = user;
-    //     return res.json({
-    //       success: true,
-    //       userProfileDetails,
-    //     });
-    //   }
-    // });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

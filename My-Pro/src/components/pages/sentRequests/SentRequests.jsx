@@ -77,30 +77,51 @@ const SentRequests = (props) => {
                       id="individual-friend-div"
                       key={user.friendId._id}
                     >
-                      <div className="friend-name">
-                        <Link
-                          to={"/" + user.friendId.username}
-                          className="global-aTag-style"
-                        >
-                          <img
-                            src={userPrimaryDp}
-                            className="search_result_user_dp"
-                            alt="Username"
-                          />
-                        </Link>
-                        <Link
-                          to={"/" + user.friendId.username}
-                          className="global-aTag-style"
-                        >
-                          {user.friendId.fullName}
-                        </Link>
+                      <div className="flexBox">
+                        <div className="friend-name">
+                          <Link
+                            to={"/" + user.friendId.username}
+                            className="global-aTag-style"
+                          >
+                            <img
+                              src={userPrimaryDp}
+                              className="search_result_user_dp"
+                              alt="Username"
+                            />
+                          </Link>
+                          <Link
+                            to={"/" + user.friendId.username}
+                            className="global-aTag-style"
+                          >
+                            {user.friendId.fullName}
+                          </Link>
+                        </div>
+                        <div className="friendship-status-div">
+                          <div
+                            className="friends-list-individual request-friendshp-btn"
+                            id="1"
+                          >
+                            Friends
+                          </div>
+                        </div>
                       </div>
-                      <div className="friendship-status-div">
-                        <div
-                          className="friends-list-individual request-friendshp-btn"
-                          id="1"
-                        >
-                          Friends
+
+                      <div className="flexBox">
+                        <div className="friendship-status-div">
+                          <div
+                            className="friends-list-individual request-friendshp-btn"
+                            id="1"
+                          >
+                            View Profile
+                          </div>
+                        </div>
+                        <div className="friendship-status-div">
+                          <div
+                            className="friends-list-individual request-friendshp-btn"
+                            id="1"
+                          >
+                            Cancel request
+                          </div>
                         </div>
                       </div>
                     </div>

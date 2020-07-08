@@ -271,6 +271,7 @@ const centralReducer = (state = initialState, action) => {
         fetchedPosts: action.payload.posts,
         isLoading: false,
         loggedInUserDetails: action.payload.authUserdetails,
+        loggedInUserFriends: action.payload.userProfileDetails.friends,
       };
 
     case PROFILE_PAGE_USER_DETAILS_AND_POSTS_ERROR:

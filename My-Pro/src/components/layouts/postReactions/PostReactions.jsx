@@ -43,14 +43,14 @@ const PostReactions = (props) => {
     // console.log(props);
 
     if (postReactions && postReactions.length > 0) {
-      console.log("postReactions is below --> ");
-      console.log(postReactions);
+      // console.log("postReactions is below --> ");
+      // console.log(postReactions);
 
       let getIndex = postReactions.findIndex(
         (user) => user.reactedBy._id === loggedInUserId
       );
-      console.log("loggedInUserId --> " + loggedInUserId);
-      console.log("getIndex --> " + getIndex);
+      // console.log("loggedInUserId --> " + loggedInUserId);
+      // console.log("getIndex --> " + getIndex);
 
       if (getIndex > -1) {
         setIsReactedToThisPost(true);
