@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./search.css";
+import "./friendRequests.css";
 import RightSideSection from "./../../layouts/rightSideSection/RightSideSection";
 import LeftSideSection from "./../../layouts/leftSideSection/LeftSideSection";
 import { connect } from "react-redux";
 import { searchUsers } from "./../../../redux/actionCreators";
 import defaultAvatar from "../../../images/avatar.png";
 
-const Search = (props) => {
+const FriendRequests = (props) => {
   const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState(null);
@@ -40,24 +40,23 @@ const Search = (props) => {
 
         <div className="middle-section">
           <div className="friends-container">
-            <div className="friends-container-header">Search Results</div>
+            <div className="friends-container-header">Friend Requests</div>
             <div className="friends">
-              {isSearching && <div>Loading...</div>}
               {!isSearching &&
                 searchResults &&
                 searchResults.map((user) => {
-                  let userPrimaryDp = user.friendId.primaryDp
-                    ? imagesUrl + user.friendId.primaryDp
+                  let userPrimaryDp = user.primaryDp
+                    ? imagesUrl + user.primaryDp
                     : defaultAvatar;
                   return (
                     <div
                       className="individual-friend-div"
                       id="individual-friend-div"
-                      key={user.friendId._id}
+                      key={user._id}
                     >
                       <div className="friend-name">
                         <Link
-                          to={"/" + user.friendId.username}
+                          to={"/" + user.username}
                           className="global-aTag-style"
                         >
                           <img
@@ -67,10 +66,10 @@ const Search = (props) => {
                           />
                         </Link>
                         <Link
-                          to={"/" + user.friendId.username}
+                          to={"/" + user.username}
                           className="global-aTag-style"
                         >
-                          {user.friendId.fullName}
+                          {user.fullName}
                         </Link>
                       </div>
                       <div className="friendship-status-div">
@@ -108,4 +107,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(FriendRequests);

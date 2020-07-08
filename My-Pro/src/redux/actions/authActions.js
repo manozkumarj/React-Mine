@@ -38,23 +38,29 @@ export const getAuthState = () => {
 
 // Fetching individual user's details handler -- Starts
 export const getLoggedInUserDetails = (id) => {
-  let authToken = localStorage.getItem("authToken");
-  const tokenUserDetails = validateToken();
-  // console.log(tokenUserDetails);
-  if (tokenUserDetails) {
-    apiEndPoint = `users/by-id/${id}`;
-    headers["x-auth-token"] = authToken;
-
-    return (dispatch) => {
-      API.get(apiEndPoint, { headers })
+  return (dispatch) => {
+    let authToken = localStorage.getItem("authToken");
+    const tokenUserDetails = validateToken();
+    // console.log(tokenUserDetails);
+    if (tokenUserDetails) {
+      apiEndPoint = `users/by-id/${id}`;
+      headers["x-auth-token"] = authToken;
+      return API.get(apiEndPoint, { headers })
         .then((res) => {
           console.log(res.data);
           dispatch({ type: SET_LOGGEDIN_USER_DETAILS, payload: res.data });
+          return {
+            status: "success",
+            msg: "Success",
+            data: res.data.userProfileDetails.friends,
+          };
         })
         .catch((err) => {
           console.log(err.response);
         });
-    };
-  }
+    } else {
+      return { status: "error", msg: "Something went wrong" };
+    }
+  };
 };
 // Fetching individual user's details handler -- Ends

@@ -28,6 +28,9 @@ import ResetPassword from "./components/pages/resetPassword/ResetPassword";
 
 import PrivateRoute from "./routing/PrivateRoute";
 
+import FriendRequests from "./components/pages/friendRequests/FriendRequests";
+import SentRequests from "./components/pages/sentRequests/SentRequests";
+
 class App extends Component {
   render() {
     return (
@@ -48,6 +51,16 @@ class App extends Component {
                   <PrivateRoute exact path="/profile" component={Profile} />
                   <PrivateRoute exact path="/register" component={Register} />
                   <PrivateRoute exact path="/about" component={About} />
+                  <PrivateRoute
+                    exact
+                    path="/friend-requests"
+                    component={FriendRequests}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/sent-requests"
+                    component={SentRequests}
+                  />
                   <PrivateRoute
                     exact
                     path="/post-types"

@@ -1,35 +1,54 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./search.css";
+import "./sentRequests.css";
 import RightSideSection from "./../../layouts/rightSideSection/RightSideSection";
 import LeftSideSection from "./../../layouts/leftSideSection/LeftSideSection";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { searchUsers } from "./../../../redux/actionCreators";
 import defaultAvatar from "../../../images/avatar.png";
+import { getLoggedInUserDetails } from "./../../../redux/actionCreators";
 
-const Search = (props) => {
+const SentRequests = (props) => {
   const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
-  const [isSearching, setIsSearching] = useState(false);
-  const [searchResults, setSearchResults] = useState(null);
-  // const [searchWord, setSearchWord] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [usersList, setUsersList] = useState(
+    props.centralState.loggedInUserFriends
+  );
+  const [loggedInUserFriends, setLoggedInUserFriends] = useState(
+    props.centralState.loggedInUserFriends
+  );
+
+  const dispatch = useDispatch();
+  let currentLoggedInUserId = useSelector(
+    (state) => state.central.loggedInUserId
+  );
+
   useEffect(() => {
-    window.scrollTo(0, 0);
-    console.log("props are below");
-    console.log(props);
-    let searchWord = props.match.params.word;
-    console.log(`Current searched word is -> ${searchWord}`);
-    props.searchUsers(searchWord);
-    setImagesUrl("http://localhost:8088/photo/");
-    // setSearchWord(searchWord);
+    loadData();
   }, []);
 
-  useEffect(() => {
-    if (props.centralState.searchResults) {
-      setSearchResults(props.centralState.searchResults);
-      setIsSearching(false);
+  const loadData = async () => {
+    setIsLoading(true);
+    try {
+      const response = await dispatch(
+        getLoggedInUserDetails(currentLoggedInUserId)
+      );
+      console.log("response is below");
+      console.log(response);
+
+      let friends = response.data;
+      if (friends && friends.length > 0) {
+        let requests = friends.filter((friend) => friend.status === "sent");
+        setUsersList(requests);
+      }
+
+      setIsLoading(false);
+    } catch (e) {
+      console.log("getLoggedInUserDetails dispatch triggered an error");
+      console.log(e);
+      setIsLoading(false);
     }
-    console.log(props);
-  }, [props]);
+  };
 
   return (
     <div className="three-divs-container" id="main">
@@ -40,12 +59,15 @@ const Search = (props) => {
 
         <div className="middle-section">
           <div className="friends-container">
-            <div className="friends-container-header">Search Results</div>
+            <div className="friends-container-header">Sent Requests</div>
             <div className="friends">
-              {isSearching && <div>Loading...</div>}
-              {!isSearching &&
-                searchResults &&
-                searchResults.map((user) => {
+              {isLoading && <div>Loading...</div>}
+              {isLoading && usersList && usersList.length === 0 && (
+                <div>No sent Requests</div>
+              )}
+              {!isLoading &&
+                usersList &&
+                usersList.map((user) => {
                   let userPrimaryDp = user.friendId.primaryDp
                     ? imagesUrl + user.friendId.primaryDp
                     : defaultAvatar;
@@ -108,4 +130,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(SentRequests);
