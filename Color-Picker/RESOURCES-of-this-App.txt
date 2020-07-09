@@ -1,0 +1,1 @@
+* http://casesandberg.github.io/react-color/
