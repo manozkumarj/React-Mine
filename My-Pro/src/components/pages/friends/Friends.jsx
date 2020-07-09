@@ -30,7 +30,7 @@ const Friends = (props) => {
     }
 
     if (props.centralState.isRequestSucceeded) {
-      alert("Friend request action success");
+      console.log("Friend request action success");
     }
     if (props.centralState.hasRequestError) {
       alert("Friend request action failed");

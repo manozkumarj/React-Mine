@@ -36,3 +36,12 @@
 .dropdown-content a:hover {
   background-color: #ddd;
 }
+
+.changing-status {
+  background-color: #999;
+  color: #000;
+}
+.changed-status-nagative {
+  background-color: red;
+  color: #fff;
+}

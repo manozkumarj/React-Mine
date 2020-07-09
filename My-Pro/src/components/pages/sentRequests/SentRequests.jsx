@@ -12,9 +12,9 @@ import { getLoggedInUserDetails } from "./../../../redux/actionCreators";
 const SentRequests = (props) => {
   const [imagesUrl, setImagesUrl] = useState("http://localhost:8088/photo/");
   const [isLoading, setIsLoading] = useState(true);
-  const [usersList, setUsersList] = useState(
-    props.centralState.loggedInUserFriends
-  );
+  const [usersList, setUsersList] = useState([]);
+
+  let loopId = 0;
 
   const dispatch = useDispatch();
   let currentLoggedInUserId = useSelector(
@@ -36,11 +36,25 @@ const SentRequests = (props) => {
 
       let friends = response.data;
       if (friends && friends.length > 0) {
-        let requests = friends.filter((friend) => friend.status === "sent");
-        setUsersList(requests);
+        let filterSentRequests = friends.filter(
+          (friend) => friend.status === "sent"
+        );
+        if (filterSentRequests.length > 0) {
+          let mapFilterSentRequests = filterSentRequests.map((friend) => {
+            return {
+              ...friend,
+              cancellingRequest: false,
+              cancelledRequest: false,
+            };
+          });
+          setUsersList(mapFilterSentRequests);
+          setIsLoading(false);
+        } else {
+          setIsLoading(false);
+        }
+      } else {
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
     } catch (e) {
       console.log("getLoggedInUserDetails dispatch triggered an error");
       console.log(e);
@@ -48,14 +62,39 @@ const SentRequests = (props) => {
     }
   };
 
-  let handleClick = async (id) => {
+  let handleClick = async (index, id) => {
+    console.log("index --> " + index);
     console.log("user._id --> " + id);
+
+    let mapper = usersList.map((friend) => {
+      if (friend.friendId._id === id) {
+        return { ...friend, cancellingRequest: true };
+      } else {
+        return friend;
+      }
+    });
+
+    setUsersList(mapper);
 
     try {
       const response = await dispatch(friendshipAction(id, "cancelRequest"));
       if (response.status === "success") {
-        let removeItem = usersList.filter((user) => user._id !== id);
-        setUsersList(removeItem);
+        // let removeItem = usersList.filter((user) => user.friendId._id !== id);
+        // setUsersList(removeItem);
+
+        let mapper = usersList.map((friend) => {
+          if (friend.friendId._id === id) {
+            return {
+              ...friend,
+              cancellingRequest: false,
+              cancelledRequest: true,
+            };
+          } else {
+            return friend;
+          }
+        });
+
+        setUsersList(mapper);
       } else {
         alert("friendshipAction dispatch triggered an error");
       }
@@ -114,16 +153,46 @@ const SentRequests = (props) => {
                       </div>
 
                       <div className="friendship-status-div">
-                        <button
-                          className={
-                            "friends-list-individual friendship-status-btn friendship-status-btn-" +
-                            user.friendId._id
-                          }
-                          id="individual-friend-div"
-                          data-id={user.friendId._id}
-                        >
-                          Request Sent <span> &#8595;</span>
-                        </button>
+                        {!user.cancellingRequest && user.cancelledRequest && (
+                          <button
+                            disabled
+                            className={
+                              "friendship-status-btn changed-status-nagative friendship-status-btn-" +
+                              user.friendId._id
+                            }
+                            id="individual-friend-div"
+                            data-id={user.friendId._id}
+                          >
+                            Request Cancelled
+                          </button>
+                        )}
+
+                        {user.cancellingRequest && (
+                          <button
+                            disabled
+                            className={
+                              "friendship-status-btn changing-status friendship-status-btn-" +
+                              user.friendId._id
+                            }
+                            id="individual-friend-div"
+                            data-id={user.friendId._id}
+                          >
+                            Cancelling...
+                          </button>
+                        )}
+
+                        {!user.cancellingRequest && !user.cancelledRequest && (
+                          <button
+                            className={
+                              "friends-list-individual friendship-status-btn friendship-status-btn-" +
+                              user.friendId._id
+                            }
+                            id="individual-friend-div"
+                            data-id={user.friendId._id}
+                          >
+                            Request Sent <span> &#8595;</span>
+                          </button>
+                        )}
                         <div
                           className="dropdown-content"
                           id={"dropd-" + user.friendId._id}
@@ -135,7 +204,9 @@ const SentRequests = (props) => {
                             href="#"
                             className="cancel-individual-user"
                             data-id={user.friendId._id}
-                            onClick={() => handleClick(user.friendId._id)}
+                            onClick={() =>
+                              handleClick(++loopId, user.friendId._id)
+                            }
                           >
                             Cancel Request
                           </span>
