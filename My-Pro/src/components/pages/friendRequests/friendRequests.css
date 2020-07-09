@@ -13,3 +13,38 @@
   margin: 0px 5px;
   border-radius: 3px;
 }
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 130px;
+  overflow: auto;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.dropdown-content a,
+.dropdown-content span {
+  color: black;
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover,
+.dropdown-content span:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.changing-status {
+  background-color: #999;
+  color: #000;
+}
+.changed-status-nagative {
+  background-color: red;
+  color: #fff;
+}

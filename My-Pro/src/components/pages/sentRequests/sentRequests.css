@@ -26,15 +26,18 @@
   z-index: 1;
 }
 
-.dropdown-content a {
+.dropdown-content a,
+.dropdown-content span {
   color: black;
   padding: 8px 12px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown-content a:hover {
+.dropdown-content a:hover,
+.dropdown-content span:hover {
   background-color: #ddd;
+  cursor: pointer;
 }
 
 .changing-status {

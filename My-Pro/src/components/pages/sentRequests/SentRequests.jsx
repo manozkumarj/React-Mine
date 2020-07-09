@@ -14,8 +14,6 @@ const SentRequests = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [usersList, setUsersList] = useState([]);
 
-  let loopId = 0;
-
   const dispatch = useDispatch();
   let currentLoggedInUserId = useSelector(
     (state) => state.central.loggedInUserId
@@ -62,8 +60,7 @@ const SentRequests = (props) => {
     }
   };
 
-  let handleClick = async (index, id) => {
-    console.log("index --> " + index);
+  let handleClick = async (id) => {
     console.log("user._id --> " + id);
 
     let mapper = usersList.map((friend) => {
@@ -204,9 +201,7 @@ const SentRequests = (props) => {
                             href="#"
                             className="cancel-individual-user"
                             data-id={user.friendId._id}
-                            onClick={() =>
-                              handleClick(++loopId, user.friendId._id)
-                            }
+                            onClick={() => handleClick(user.friendId._id)}
                           >
                             Cancel Request
                           </span>
