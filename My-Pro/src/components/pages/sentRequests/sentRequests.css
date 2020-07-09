@@ -48,3 +48,21 @@
   background-color: red;
   color: #fff;
 }
+.emptyRecords-no-border {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #999;
+}
+.animationLoadingContent {
+  left: 0px;
+  top: 20px;
+  height: 45px;
+}
+.animationLoading {
+  height: auto;
+}

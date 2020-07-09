@@ -217,6 +217,46 @@ const MiddleSection = (props) => {
                 </div>
               </div>
             </div>
+
+            <div className="item">
+              <div className="animationLoading">
+                <div className="animationLoadingContainer">
+                  <div className="animationLoadingUser"></div>
+                  <div className="animationLoadingRightContainer">
+                    <div className="animationLoadingUsername"></div>
+                    <div className="animationLoadingTimestamp"></div>
+                  </div>
+                </div>
+                <div className="animationLoadingDivider"></div>
+                <div className="animationLoadingContent"></div>
+                <div className="animationLoadingReactionsCounter"></div>
+                <div className="animationLoadingReactionsDiv">
+                  <div className="animationLoadingReaction"></div>
+                  <div className="animationLoadingReaction"></div>
+                  <div className="animationLoadingReaction"></div>
+                </div>
+              </div>
+            </div>
+
+            <div className="item">
+              <div className="animationLoading">
+                <div className="animationLoadingContainer">
+                  <div className="animationLoadingUser"></div>
+                  <div className="animationLoadingRightContainer">
+                    <div className="animationLoadingUsername"></div>
+                    <div className="animationLoadingTimestamp"></div>
+                  </div>
+                </div>
+                <div className="animationLoadingDivider"></div>
+                <div className="animationLoadingContent"></div>
+                <div className="animationLoadingReactionsCounter"></div>
+                <div className="animationLoadingReactionsDiv">
+                  <div className="animationLoadingReaction"></div>
+                  <div className="animationLoadingReaction"></div>
+                  <div className="animationLoadingReaction"></div>
+                </div>
+              </div>
+            </div>
           </div>
         )}
         {/* *******************  Context loader - ends ******************** */}

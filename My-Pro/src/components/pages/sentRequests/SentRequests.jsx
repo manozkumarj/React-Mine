@@ -113,9 +113,41 @@ const SentRequests = (props) => {
           <div className="friends-container">
             <div className="friends-container-header">Sent Requests</div>
             <div className="friends">
-              {isLoading && <div>Loading...</div>}
+              {isLoading && (
+                <div>
+                  <div className="loading-item">
+                    <div className="animationLoading">
+                      <div className="animationLoadingContent"></div>
+                    </div>
+                  </div>
+                  <div className="loading-item">
+                    <div className="animationLoading">
+                      <div className="animationLoadingContent"></div>
+                    </div>
+                  </div>
+                  <div className="loading-item">
+                    <div className="animationLoading">
+                      <div className="animationLoadingContent"></div>
+                    </div>
+                  </div>
+                  <div className="loading-item">
+                    <div className="animationLoading">
+                      <div className="animationLoadingContent"></div>
+                    </div>
+                  </div>
+                  <div className="loading-item">
+                    <div className="animationLoading">
+                      <div className="animationLoadingContent"></div>
+                    </div>
+                  </div>
+                </div>
+              )}
               {!isLoading && usersList && usersList.length === 0 && (
-                <div>No sent Requests</div>
+                <div className="empty-item">
+                  <div className="emptyRecords-no-border">
+                    No sent Requests found
+                  </div>
+                </div>
               )}
               {!isLoading &&
                 usersList &&
