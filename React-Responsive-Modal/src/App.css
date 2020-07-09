@@ -1,0 +1,8 @@
+.App {
+  text-align: center;
+}
+
+.react-responsive-modal-overlay {
+  overflow-y: scroll !important;
+  padding: 2.5rem !important;
+}

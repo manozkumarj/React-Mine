@@ -1,0 +1,36 @@
+.customOverlay-1 {
+  padding: 2.5rem !important;
+}
+
+.customOverlay {
+  background: rgba(36, 123, 160, 0.7);
+  padding: 10rem !important;
+}
+
+.customModal-1 {
+  position: normal !important;
+  background: #fff;
+  width: 600px;
+  padding: 0;
+}
+
+.customModal {
+  position: normal !important;
+  background: #fff;
+  width: 300px;
+  padding: 0;
+}
+
+.customModal p {
+  padding: 0;
+  margin: 0;
+}
+
+.react-responsive-modal-closeButton {
+  position: absolute;
+  right: -35px !important;
+  top: -15px !important;
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 100;
+}
