@@ -49,11 +49,11 @@ const resizeImages = async (req, res, next) => {
   await Promise.all(
     req.files.map(async (file) => {
       // const filename = file.originalname.replace(/\..+$/, "");
-      const newFilename = `${userId}-${getMilliseconds}-${looper++}${Date.now()}.jpeg`;
+      const newFilename = `${userId}-${getMilliseconds}-${looper++}${Date.now()}.png`;
 
       await sharp(file.buffer)
-        .toFormat("jpeg")
-        .jpeg({ quality: 40 })
+        .toFormat("png")
+        .png({ quality: 10 })
         .toFile(`./pictures/images/${newFilename}`);
 
       req.body.images.push(newFilename);
