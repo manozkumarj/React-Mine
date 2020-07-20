@@ -1,1 +1,5 @@
 * https://www.npmjs.com/package/react-player
+* 
+
+
+* Nice package but didn't use yet - https://video-react.js.org/components/player/
