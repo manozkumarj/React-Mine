@@ -62,9 +62,19 @@ class App extends Component {
       plainText: newPlainTextValue,
     });
 
-    let rgex = /@{{(.*?)}}@/;
+    let getMentionesArray = newValue.match(/@@@{{\S+/g);
+    console.log(getMentionesArray);
 
-    console.log(newValue.match(/@{{\S+/g));
+    if (getMentionesArray && getMentionesArray.length > 0) {
+      let mentionesArray = getMentionesArray.map((mention) => {
+        let splitOne = mention.split("@@@");
+        let replaceBraces = splitOne[1].replace(/\{|\}/gi, "");
+        return replaceBraces;
+        // let splitTwo = splitOne.split('@@@{{');
+      });
+      console.log("mentionesArray is below");
+      console.log(mentionesArray);
+    }
   };
 
   handleChangeSingle = (e, newValue, newPLainTextValue, mentions) => {
@@ -95,7 +105,7 @@ class App extends Component {
             type="user"
             appendSpaceOnAdd={true}
             trigger="@"
-            markup=" @{{__display__}}@ "
+            markup=" @@@{{__display__}}@@@ "
             data={userMentionData}
             className="mentions__mention"
           />
