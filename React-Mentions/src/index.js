@@ -89,7 +89,9 @@ class App extends Component {
         >
           <Mention
             type="user"
+            appendSpaceOnAdd={true}
             trigger="@"
+            markup="{{__display__}}"
             data={userMentionData}
             className="mentions__mention"
           />
