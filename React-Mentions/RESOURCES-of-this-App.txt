@@ -1,1 +1,3 @@
 * https://stackblitz.com/edit/react-mentions
+* https://stackoverflow.com/questions/53801173/react-mentions-text-area-doesnt-grow-with-text
+* 

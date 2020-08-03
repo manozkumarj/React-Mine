@@ -8,8 +8,8 @@ class App extends Component {
     super();
     this.state = {
       name: "React",
-      value: "Hi @{{user||123||John Reynolds}}",
-      singleLineValue: "Hi @{{user||234||Holly Reynolds}}",
+      value: "",
+      singleLineValue: "",
       mentionData: null,
       users: [
         {
@@ -78,22 +78,6 @@ class App extends Component {
         <hr />
         <h3>A list of users mentioned:</h3>
         <p>{JSON.stringify(uniqueUsers)}</p>
-
-        <MentionsInput
-          value={this.state.singleLineValue}
-          onChange={this.handleChangeSingle}
-          markup="@{{__type__||__id__||__display__}}"
-          placeholder="Type anything, use the @ symbol to tag other users."
-          className="mentions"
-          singleLine
-        >
-          <Mention
-            type="user"
-            trigger="@"
-            data={userMentionData}
-            className="mentions__mention"
-          />
-        </MentionsInput>
       </div>
     );
   }

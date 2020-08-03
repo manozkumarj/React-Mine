@@ -2,7 +2,7 @@ import _clone from "lodash/clone";
 import _escapeRegExp from "lodash/escapeRegExp";
 import _uniqBy from "lodash/uniqBy";
 
-export function swapTags(text) {
+export const swapTags = (text) => {
   let displayText = _clone(text);
   const tags = text.match(/@\{\{[^\}]+\}\}/gi) || [];
   tags.map((myTag) => {
@@ -15,15 +15,17 @@ export function swapTags(text) {
     );
   });
   return displayText;
-}
+};
 
-export function getUsersFromTags(text) {
+export const getUsersFromTags = (text) => {
   let displayText = _clone(text);
+  // console.log(displayText);
   const tags = text.match(/@\{\{[^\}]+\}\}/gi) || [];
   const allUserIds = tags.map((myTag) => {
     const tagData = myTag.slice(3, -2);
     const tagDataArray = tagData.split("||");
-    return { _id: tagDataArray[1], name: tagDataArray[2] };
+    return { id: tagDataArray[1] };
   });
-  return _uniqBy(allUserIds, (myUser) => myUser._id);
-}
+  // console.log(allUserIds);
+  return _uniqBy(allUserIds, (myUser) => myUser.id);
+};
