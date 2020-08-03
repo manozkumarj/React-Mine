@@ -61,6 +61,10 @@ class App extends Component {
       mentionData: { newValue, newPlainTextValue, mentions },
       plainText: newPlainTextValue,
     });
+
+    let rgex = /@{{(.*?)}}@/;
+
+    console.log(newValue.match(/@{{\S+/g));
   };
 
   handleChangeSingle = (e, newValue, newPLainTextValue, mentions) => {
@@ -91,7 +95,7 @@ class App extends Component {
             type="user"
             appendSpaceOnAdd={true}
             trigger="@"
-            markup="{{__display__}}"
+            markup="@{{__display__}}@"
             data={userMentionData}
             className="mentions__mention"
           />
