@@ -18,3 +18,12 @@
   height: 30px;
   width: 30px;
 }
+.individual-mention-container:hover {
+  background-color: blue;
+  color: #fdf;
+}
+
+.active {
+  background-color: blue;
+  color: #fdf;
+}

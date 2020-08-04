@@ -1,1 +1,3 @@
 * https://www.draft-js-plugins.com/plugin/mention
+
+* https://stackoverflow.com/questions/35824424/select-and-highlight-element-by-using-arrow-keys

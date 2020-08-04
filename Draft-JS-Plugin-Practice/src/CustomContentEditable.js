@@ -11,11 +11,45 @@ export default function CustomContentEditable() {
   const [showTagsContainer, setShowTagsContainer] = useState(false);
   const [showEmojisContainer, setShowEmojisContainer] = useState(false);
 
+  const [mentionableUsers, setMentionableUsers] = useState([
+    {
+      _id: 1,
+      name: "Manoj Kumar",
+      photo: kohli,
+    },
+    {
+      _id: 2,
+      name: "Mahesh Kumar",
+      photo: zuck,
+    },
+    {
+      _id: 3,
+      name: "Raj Kumar",
+      photo: avatar,
+    },
+    {
+      _id: 4,
+      name: "Mallesh",
+      photo: kohli,
+    },
+    {
+      _id: 5,
+      name: "Ravi Kiran",
+      photo: zuck,
+    },
+  ]);
+
   const contentEditableDiv = document.getElementById("editable-div");
+
+  var mentionsListIndex = 0;
+  var mentionsListHighlightItem = 1;
+  var firstList = document.getElementsByClassName(
+    "individual-mention-container"
+  );
 
   const handleKeyUp = (e) => {
     // console.log("handleKeyUp");
-    console.log(` ${e.keyCode}`);
+    // console.log(` ${e.keyCode}`);
 
     if (e.keyCode === 32 || e.key === " ") {
       //   console.log("It's space");
@@ -33,7 +67,9 @@ export default function CustomContentEditable() {
       setShowTagsContainer(false);
       setShowEmojisContainer(false);
 
-      document.getElementById("individual-mentions-container").focus();
+      firstList[0].classList.add("active");
+
+      document.addEventListener("keydown", handleHightlightList);
     }
     if (isItSpace && e.keyCode === 51) {
       console.log("It's SPACE then #");
@@ -49,10 +85,55 @@ export default function CustomContentEditable() {
     }
   };
 
+  const handleHightlightList = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    e.returnValue = false;
+    e.cancelBubble = true;
+    console.log(
+      "handleHightlightList is triggered - " +
+        mentionsListIndex +
+        " - " +
+        e.which
+    );
+
+    [].forEach.call(firstList, function (el) {
+      el.classList.remove("active");
+    });
+
+    if (e.which === 38) {
+      if (mentionsListHighlightItem === 1) {
+        mentionsListIndex = firstList.length - 1;
+        mentionsListHighlightItem = firstList.length;
+      }
+      firstList[--mentionsListIndex].classList.add("active");
+      --mentionsListHighlightItem;
+    } else if (e.which === 40) {
+      if (mentionsListHighlightItem === firstList.length) {
+        mentionsListIndex = 0;
+        mentionsListHighlightItem = 1;
+      }
+      firstList[++mentionsListIndex].classList.add("active");
+      ++mentionsListHighlightItem;
+    } else if (e.which === 13) {
+      handleIndividualMention();
+      setShowMentionsContainer(false);
+      setShowTagsContainer(false);
+      setShowEmojisContainer(false);
+      document.removeEventListener("keydown", handleHightlightList);
+    }
+
+    return false;
+  };
+
   const handleGetText = () => {
     console.log("Need to show contentEditable text");
     let wholeContent = contentEditableDiv.textContent.trim();
     console.log(wholeContent);
+  };
+
+  const handleIndividualMention = () => {
+    console.log("handleIndividualMention clicked");
   };
 
   return (
@@ -71,22 +152,26 @@ export default function CustomContentEditable() {
           className="individual-mentions-container"
           id="individual-mentions-container"
         >
-          <div className="individual-mention-container">
-            <img
-              src={kohli}
-              alt="kohli"
-              className="individual-mention-user-img"
-            />
-            <div className="individual-mention-user-details">Manoj Kumar</div>
-          </div>
-          <div className="individual-mention-container">
-            <img
-              src={zuck}
-              alt="zuck"
-              className="individual-mention-user-img"
-            />
-            <div className="individual-mention-user-details">Mahesh Kumar</div>
-          </div>
+          {mentionableUsers &&
+            mentionableUsers.length > 0 &&
+            mentionableUsers.map((mentionableUser) => (
+              <div
+                className="individual-mention-container"
+                id="individual-mention-container-1"
+                onClick={handleIndividualMention}
+                onKeyUp={handleIndividualMention}
+                key={mentionableUser._id}
+              >
+                <img
+                  src={mentionableUser.photo}
+                  alt="kohli"
+                  className="individual-mention-user-img"
+                />
+                <div className="individual-mention-user-details">
+                  {mentionableUser.name}
+                </div>
+              </div>
+            ))}
         </div>
       </div>
       <div style={{ display: showTagsContainer ? "block" : "none" }}>
