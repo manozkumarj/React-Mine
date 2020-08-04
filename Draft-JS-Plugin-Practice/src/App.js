@@ -1,13 +1,14 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
-import CustomMentionEditor from "./CustomComponentMentionEditor";
+// import CustomMentionEditor from "./CustomComponentMentionEditor";
+// import Contenteditable from "./Contenteditable";
+import CustomContentEditable from "./CustomContentEditable";
 
 function App() {
   return (
     <div className="App">
-      <CustomMentionEditor />
+      <CustomContentEditable />
     </div>
   );
 }

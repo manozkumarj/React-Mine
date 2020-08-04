@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { EditorState } from "draft-js";
-import Editor from "draft-js-plugins-editor";
+import Editor, { createEditorStateWithText } from "draft-js-plugins-editor";
 import createMentionPlugin, {
   defaultSuggestionsFilter,
 } from "draft-js-mention-plugin";
@@ -11,6 +11,9 @@ import mentionsStyles from "./mentionsStyles.css";
 import pluginStyles from "../node_modules/draft-js-mention-plugin/lib/plugin.css";
 import "draft-js-emoji-plugin/lib/plugin.css";
 import createEmojiPlugin from "draft-js-emoji-plugin";
+
+const text = `Cool, we can have all sorts of Emojis here. 🙌
+🌿☃️🎉🙈 aaaand maybe a few more here 🐲☀️🗻 Quite fun!`;
 
 export default class SimpleMentionEditor extends Component {
   constructor(props) {
@@ -25,7 +28,8 @@ export default class SimpleMentionEditor extends Component {
   }
 
   state = {
-    editorState: EditorState.createEmpty(),
+    // editorState: EditorState.createEmpty(),
+    editorState: createEditorStateWithText(text),
     suggestions: mentions,
   };
 
