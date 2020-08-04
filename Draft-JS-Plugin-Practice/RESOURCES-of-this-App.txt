@@ -1,0 +1,1 @@
+* https://www.draft-js-plugins.com/plugin/mention
