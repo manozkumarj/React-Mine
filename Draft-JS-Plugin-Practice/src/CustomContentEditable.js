@@ -150,7 +150,7 @@ export default function CustomContentEditable() {
     setPlainText(wholeContent);
   };
 
-  const handleIndividualMention = () => {
+  const handleIndividualMention = async () => {
     console.log("handleIndividualMention clicked");
     console.log(mentionableUsers[mentionsListIndex]);
 
@@ -160,9 +160,20 @@ export default function CustomContentEditable() {
       <span data-key="1">{getMentionableUserDetails.username}</span>
     );
     // contentEditableDiv.append(doGeneateMentionableUser);
-    pasteHtmlAtCaret(
-      `<span data-key="1">${getMentionableUserDetails.username}</span> `
+    let waitUntillPaster = await pasteHtmlAtCaret(
+      `<span data-key="1" contenteditable=false> @<img src=${getMentionableUserDetails.photo} class="mentioned-user-photo" />${getMentionableUserDetails.username} </span>`
     );
+
+    var range = document.createRange();
+    var sel = window.getSelection();
+    range.setStart(
+      contentEditableDiv.childNodes[contentEditableDiv.childNodes.length - 1],
+      0
+    );
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    contentEditableDiv.focus();
   };
 
   const pasteHtmlAtCaret = (html, selectPastedContent = false) => {
