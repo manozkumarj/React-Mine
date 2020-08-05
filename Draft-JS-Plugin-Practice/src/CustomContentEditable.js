@@ -155,14 +155,15 @@ export default function CustomContentEditable() {
     console.log(wholeContent);
     setMentionsPlainText(wholeContent);
     // setMentionsHTMLContent(wholeHTMLContent);
-    console.log(mentionedHtmlPartsLength);
+    // console.log(mentionedHtmlPartsLength);
 
     if (mentionedHtmlPartsLength > 0) {
       console.log(mentionedHtmlParts);
 
       for (let i = 0; i < mentionedHtmlPartsLength; i++) {
-        // console.log(mentionedHtmlParts[i].innerHTML);
-        console.log(mentionedHtmlParts[i].innerText);
+        let mentionedHtmlPartInnerHTML = mentionedHtmlParts[i].innerHTML;
+        // console.log(mentionedHtmlPartInnerHTML);
+        console.log(mentionedHtmlParts[i].textContent);
       }
     }
   };
@@ -180,19 +181,20 @@ export default function CustomContentEditable() {
     );
     // contentEditableDiv.append(doGeneateMentionableUser);
     let waitUntillPaster = await pasteHtmlAtCaret(
-      `<span data-key="1" contenteditable=false class="mentioned-user-container"><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo" /><span className="mentioned-user-username">${getMentionableUserDetails.username}</span></span>`
+      `<span data-key="1" contenteditable=false class="mentioned-user-container"><span className="mentionSymbol">@</span><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo primary-user" /><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo secondary-user" /><span className="mentioned-user-username">${getMentionableUserDetails.username}</span></span>`
     );
 
     var range = document.createRange();
     var sel = window.getSelection();
-    range.setStart(
-      contentEditableDiv.childNodes[contentEditableDiv.childNodes.length - 1],
-      0
-    );
-    range.collapse(true);
-    sel.removeAllRanges();
-    sel.addRange(range);
-    contentEditableDiv.focus();
+
+    // range.setStart(
+    //   contentEditableDiv.childNodes[contentEditableDiv.childNodes.length - 1],
+    //   0
+    // );
+    // range.collapse(true);
+    // sel.removeAllRanges();
+    // sel.addRange(range);
+    // contentEditableDiv.focus();
   };
 
   const pasteHtmlAtCaret = (html, selectPastedContent = false) => {
