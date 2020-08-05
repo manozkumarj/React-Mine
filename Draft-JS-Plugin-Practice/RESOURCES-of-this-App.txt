@@ -1,3 +1,5 @@
 * https://www.draft-js-plugins.com/plugin/mention
 
 * https://stackoverflow.com/questions/35824424/select-and-highlight-element-by-using-arrow-keys
+* https://gist.github.com/michelcmorel/6725279  --> https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
+* 
