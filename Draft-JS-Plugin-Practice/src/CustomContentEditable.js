@@ -6,7 +6,8 @@ import zuck from "./images/zuck.jpg";
 import kohli from "./images/kohli.jpg";
 
 export default function CustomContentEditable() {
-  const [plainText, setPlainText] = useState("");
+  const [mentionsPlainText, setMentionsPlainText] = useState("");
+  const [mentionsHTMLContent, setMentionsHTMLContent] = useState("");
   const [isItSpace, setIsItSpace] = useState(false);
   const [showMentionsContainer, setShowMentionsContainer] = useState(false);
   const [showTagsContainer, setShowTagsContainer] = useState(false);
@@ -146,8 +147,24 @@ export default function CustomContentEditable() {
   const handleGetText = () => {
     console.log("Need to show contentEditable text");
     let wholeContent = contentEditableDiv.textContent.trim();
+    let wholeHTMLContent = contentEditableDiv.innerHTML;
+    let mentionedHtmlParts = contentEditableDiv.getElementsByClassName(
+      "mentioned-user-container"
+    );
+    let mentionedHtmlPartsLength = mentionedHtmlParts.length;
     console.log(wholeContent);
-    setPlainText(wholeContent);
+    setMentionsPlainText(wholeContent);
+    // setMentionsHTMLContent(wholeHTMLContent);
+    console.log(mentionedHtmlPartsLength);
+
+    if (mentionedHtmlPartsLength > 0) {
+      console.log(mentionedHtmlParts);
+
+      for (let i = 0; i < mentionedHtmlPartsLength; i++) {
+        // console.log(mentionedHtmlParts[i].innerHTML);
+        console.log(mentionedHtmlParts[i].innerText);
+      }
+    }
   };
 
   const handleIndividualMention = async () => {
@@ -157,11 +174,13 @@ export default function CustomContentEditable() {
     let getMentionableUserDetails = mentionableUsers[mentionsListIndex];
 
     let doGeneateMentionableUser = (
-      <span data-key="1">{getMentionableUserDetails.username}</span>
+      <span>
+        <span data-key="1">{getMentionableUserDetails.username}</span>
+      </span>
     );
     // contentEditableDiv.append(doGeneateMentionableUser);
     let waitUntillPaster = await pasteHtmlAtCaret(
-      `<span data-key="1" contenteditable=false> @<img src=${getMentionableUserDetails.photo} class="mentioned-user-photo" />${getMentionableUserDetails.username} </span>`
+      `<span data-key="1" contenteditable=false class="mentioned-user-container"><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo" /><span className="mentioned-user-username">${getMentionableUserDetails.username}</span></span>`
     );
 
     var range = document.createRange();
@@ -273,7 +292,8 @@ export default function CustomContentEditable() {
       <button className="button" onClick={handleGetText}>
         Get Text
       </button>
-      <div style={{ margin: "50px auto" }}>{plainText}</div>
+      <div style={{ margin: "50px auto" }}>{mentionsPlainText}</div>
+      <div style={{ margin: "50px auto" }}>{mentionsHTMLContent}</div>
     </div>
   );
 }
