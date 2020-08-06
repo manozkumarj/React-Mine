@@ -61,6 +61,80 @@ export default function CustomContentEditable() {
     "individual-mention-container"
   );
 
+  // contentEditableDiv.addEventListener(
+  //   "mousedown mouseup keydown keyup",
+  //   getCaretPosition
+  // );
+
+  const getCaretPosition = (e) => {
+    let editableDiv = document.getElementById("editable-div");
+    let currentKeyCode = e.keyCode;
+    var caretPos = 0,
+      sel,
+      range;
+    if (window.getSelection) {
+      sel = window.getSelection();
+      if (sel.rangeCount) {
+        range = sel.getRangeAt(0);
+        if (range.commonAncestorContainer.parentNode == editableDiv) {
+          caretPos = range.endOffset;
+        }
+      }
+    } else if (document.selection && document.selection.createRange) {
+      range = document.selection.createRange();
+      if (range.parentElement() == editableDiv) {
+        var tempEl = document.createElement("span");
+        editableDiv.insertBefore(tempEl, editableDiv.firstChild);
+        var tempRange = range.duplicate();
+        tempRange.moveToElementText(tempEl);
+        tempRange.setEndPoint("EndToEnd", range);
+        caretPos = tempRange.text.length;
+      }
+    }
+    // console.log("caretPos -> " + caretPos);
+    // console.log(` ${currentKeyCode}`);
+    let getCurrentContent = editableDiv.textContent;
+
+    let cursorAfterElementIndex = caretPos;
+    let cursorForeAfterElementIndex = caretPos + 1;
+    let cursorBeforeElementIndex = caretPos - 1;
+    let cursorForeBeforeElementIndex = caretPos - 2;
+
+    let cursorAfterElement = getCurrentContent[cursorAfterElementIndex];
+    let cursorForeAfterElement = getCurrentContent[cursorForeAfterElementIndex];
+    let cursorBeforeElement = getCurrentContent[cursorBeforeElementIndex];
+    let cursorForeBeforeElement =
+      getCurrentContent[cursorForeBeforeElementIndex];
+
+    if (currentKeyCode !== 16) {
+      console.log(
+        "cursorForeBeforeElement -> " +
+          getCurrentContent[cursorForeBeforeElementIndex]
+      );
+      console.log(
+        "cursorBeforeElement -> " + getCurrentContent[cursorBeforeElementIndex]
+      );
+      console.log(
+        "cursorAfterElement -> " + getCurrentContent[cursorAfterElementIndex]
+      );
+      console.log(
+        "cursorForeAfterElement -> " +
+          getCurrentContent[cursorForeAfterElementIndex]
+      );
+    }
+
+    if (
+      (cursorForeBeforeElement === " " ||
+        cursorForeBeforeElement === undefined) &&
+      cursorBeforeElement === "@" &&
+      (cursorAfterElement === " " || cursorAfterElement === undefined)
+    ) {
+      console.log("need to show Friends suggessions container");
+    }
+
+    return caretPos;
+  };
+
   const handleKeyUp = (e) => {
     // console.log("handleKeyUp");
     // console.log(` ${e.keyCode}`);
@@ -253,7 +327,8 @@ export default function CustomContentEditable() {
         id="editable-div"
         spellCheck={false}
         contentEditable={true}
-        onKeyUp={handleKeyUp}
+        onKeyUp={getCaretPosition}
+        onMouseUp={getCaretPosition}
       ></div>
 
       <div style={{ display: showMentionsContainer ? "block" : "none" }}>

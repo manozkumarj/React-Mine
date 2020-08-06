@@ -4,4 +4,5 @@
 * https://gist.github.com/michelcmorel/6725279  --> https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
 * https://stackoverflow.com/questions/32371343/make-some-keywords-not-editable-in-content-editable-div
 * https://stackoverflow.com/questions/6249095/how-to-set-caretcursor-position-in-contenteditable-element-div
+* https://stackoverflow.com/questions/3972014/get-contenteditable-caret-index-position
 * 
