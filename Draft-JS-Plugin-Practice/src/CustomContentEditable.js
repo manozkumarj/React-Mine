@@ -66,8 +66,12 @@ export default function CustomContentEditable() {
   //   getCaretPosition
   // );
 
+  let getStringFromPosition;
+  let getStringToPosition;
+  let showMentionableContainer = false;
   const getCaretPosition = (e) => {
     let editableDiv = document.getElementById("editable-div");
+    let editableDivTextContent = editableDiv.textContent;
     let currentKeyCode = e.keyCode;
     var caretPos = 0,
       sel,
@@ -92,7 +96,7 @@ export default function CustomContentEditable() {
       }
     }
     // console.log("caretPos -> " + caretPos);
-    // console.log(` ${currentKeyCode}`);
+    console.log(` ${currentKeyCode}`);
     let getCurrentContent = editableDiv.textContent;
 
     let cursorAfterElementIndex = caretPos;
@@ -106,22 +110,24 @@ export default function CustomContentEditable() {
     let cursorForeBeforeElement =
       getCurrentContent[cursorForeBeforeElementIndex];
 
-    if (currentKeyCode !== 16) {
-      console.log(
-        "cursorForeBeforeElement -> " +
-          getCurrentContent[cursorForeBeforeElementIndex]
-      );
-      console.log(
-        "cursorBeforeElement -> " + getCurrentContent[cursorBeforeElementIndex]
-      );
-      console.log(
-        "cursorAfterElement -> " + getCurrentContent[cursorAfterElementIndex]
-      );
-      console.log(
-        "cursorForeAfterElement -> " +
-          getCurrentContent[cursorForeAfterElementIndex]
-      );
-    }
+    // console.log("cursorBeforeElementIndex -> " + cursorBeforeElementIndex);
+
+    // if (currentKeyCode !== 16) {
+    //   console.log(
+    //     "cursorForeBeforeElement -> " +
+    //       getCurrentContent[cursorForeBeforeElementIndex]
+    //   );
+    //   console.log(
+    //     "cursorBeforeElement -> " + getCurrentContent[cursorBeforeElementIndex]
+    //   );
+    //   console.log(
+    //     "cursorAfterElement -> " + getCurrentContent[cursorAfterElementIndex]
+    //   );
+    //   console.log(
+    //     "cursorForeAfterElement -> " +
+    //       getCurrentContent[cursorForeAfterElementIndex]
+    //   );
+    // }
 
     if (
       (cursorForeBeforeElement === " " ||
@@ -130,6 +136,36 @@ export default function CustomContentEditable() {
       (cursorAfterElement === " " || cursorAfterElement === undefined)
     ) {
       console.log("need to show Friends suggessions container");
+      getStringFromPosition = cursorBeforeElementIndex;
+      getStringToPosition = cursorAfterElementIndex;
+      showMentionableContainer = true;
+    }
+
+    if (showMentionableContainer && currentKeyCode != 32) {
+      getStringToPosition = cursorAfterElementIndex;
+      // console.log("---");
+    } else {
+      showMentionableContainer = false;
+      getStringFromPosition = null;
+      getStringToPosition = null;
+      // console.log("**");
+    }
+
+    // console.log(
+    //   "showMentionableContainer -> " +
+    //     showMentionableContainer +
+    //     " && getStringFromPosition -> " +
+    //     getStringFromPosition +
+    //     " && getStringToPosition -> " +
+    //     getStringToPosition
+    // );
+
+    if (showMentionableContainer) {
+      let searchedFor = editableDivTextContent.slice(
+        getStringFromPosition + 1,
+        getStringToPosition
+      );
+      console.log("searchedFor --> " + searchedFor);
     }
 
     return caretPos;
