@@ -185,6 +185,10 @@ export default function CustomContentEditable() {
       `<span data-key="1" contenteditable=false class="mentioned-user-container"><span className="mentionSymbol">@</span><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo primary-user" /><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo secondary-user" /><span className="mentioned-user-username">${getMentionableUserDetails.username}</span></span>`
     );
 
+    // let waitUntillPaster = await pasteHtmlAtCaret(
+    //   `<span class="mentioned-user-username">@${getMentionableUserDetails.username}</span>`
+    // );
+
     // var range = document.createRange();
     // var sel = window.getSelection();
 
@@ -232,15 +236,20 @@ export default function CustomContentEditable() {
         // do nothing
       } else {
         console.log("replace word --> " + lastWord);
-        console.log(typeof lastWord);
 
         if (/\s/.test(lastWord)) {
-          lastWord = lastWord.toString();
-          console.log(typeof lastWord);
-          let splitLastWord = lastWord.split(" ");
-          console.log(splitLastWord);
-          lastWord = splitLastWord[1];
-          console.log(lastWord);
+          // lastWord = lastWord.toString();
+          // console.log(typeof lastWord[6]);
+          // console.log(lastWord[6]);
+          // console.log(lastWord.lastIndexOf(/\s/));
+          // let splitLastWord = lastWord.toString().split(" ");
+          // let getLastword = lastWord.split(" ").pop();
+          // console.log("getLastword -> " + getLastword);
+
+          // console.log(splitLastWord);
+          // lastWord = splitLastWord[1];
+          // console.log(lastWord);
+          lastWord = "@" + searchFor;
         }
 
         /* Find word start and end */
