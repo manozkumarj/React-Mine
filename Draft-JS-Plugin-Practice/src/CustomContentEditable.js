@@ -82,7 +82,7 @@ export default function CustomContentEditable() {
     }
 
     if (isItSpace && e.keyCode === 50) {
-      console.log("It's SPACE then @");
+      // console.log("It's SPACE then @");
       setShowMentionsContainer(true);
       setShowTagsContainer(false);
       setShowEmojisContainer(false);
@@ -162,8 +162,8 @@ export default function CustomContentEditable() {
   };
 
   const handleIndividualMention = async () => {
-    console.log("handleIndividualMention clicked");
-    console.log(mentionableUsers[mentionsListIndex]);
+    // console.log("handleIndividualMention clicked");
+    // console.log(mentionableUsers[mentionsListIndex]);
 
     let contentEditableDiv_clone = document.getElementById("editable-div");
 
@@ -212,8 +212,12 @@ export default function CustomContentEditable() {
       preceding = precedingRange.text;
     }
 
+    console.log(range);
+
     var words = range.toString().trim().split(" "),
       lastWord = words[words.length - 1];
+
+    // console.log(lastWord);
 
     if (lastWord) {
       var resultValue = " "; // this value is coming from some other function
@@ -221,7 +225,18 @@ export default function CustomContentEditable() {
         console.log("do nothing: " + lastWord);
         // do nothing
       } else {
-        console.log("replace word " + lastWord);
+        console.log("replace word --> " + lastWord);
+
+        let reWhiteSpace = new RegExp(/^\s+$/);
+
+        if (lastWord.includes(" ")) {
+          lastWord = lastWord.toString();
+          console.log(typeof lastWord);
+          let splitLastWord = lastWord.split(" ");
+          console.log(splitLastWord);
+          lastWord = splitLastWord[1];
+          console.log(lastWord);
+        }
 
         /* Find word start and end */
         var wordStart = range.endContainer.data.lastIndexOf(lastWord);
