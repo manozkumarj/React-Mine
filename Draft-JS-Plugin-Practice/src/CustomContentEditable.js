@@ -57,6 +57,7 @@ export default function CustomContentEditable() {
 
   var mentionsListIndex = 0;
   var mentionsListHighlightItem = 1;
+  var searchFor = "";
   var mentionsUsersList = document.getElementsByClassName(
     "individual-mention-container"
   );
@@ -65,111 +66,6 @@ export default function CustomContentEditable() {
   //   "mousedown mouseup keydown keyup",
   //   getCaretPosition
   // );
-
-  let getStringFromPosition;
-  let getStringToPosition;
-  let showMentionableContainer = false;
-  const getCaretPosition = (e) => {
-    let editableDiv = document.getElementById("editable-div");
-    let editableDivTextContent = editableDiv.textContent;
-    let currentKeyCode = e.keyCode;
-    var caretPos = 0,
-      sel,
-      range;
-    if (window.getSelection) {
-      sel = window.getSelection();
-      if (sel.rangeCount) {
-        range = sel.getRangeAt(0);
-        if (range.commonAncestorContainer.parentNode == editableDiv) {
-          caretPos = range.endOffset;
-        }
-      }
-    } else if (document.selection && document.selection.createRange) {
-      range = document.selection.createRange();
-      if (range.parentElement() == editableDiv) {
-        var tempEl = document.createElement("span");
-        editableDiv.insertBefore(tempEl, editableDiv.firstChild);
-        var tempRange = range.duplicate();
-        tempRange.moveToElementText(tempEl);
-        tempRange.setEndPoint("EndToEnd", range);
-        caretPos = tempRange.text.length;
-      }
-    }
-    // console.log("caretPos -> " + caretPos);
-    console.log(` ${currentKeyCode}`);
-    let getCurrentContent = editableDiv.textContent;
-
-    let cursorAfterElementIndex = caretPos;
-    let cursorForeAfterElementIndex = caretPos + 1;
-    let cursorBeforeElementIndex = caretPos - 1;
-    let cursorForeBeforeElementIndex = caretPos - 2;
-
-    let cursorAfterElement = getCurrentContent[cursorAfterElementIndex];
-    let cursorForeAfterElement = getCurrentContent[cursorForeAfterElementIndex];
-    let cursorBeforeElement = getCurrentContent[cursorBeforeElementIndex];
-    let cursorForeBeforeElement =
-      getCurrentContent[cursorForeBeforeElementIndex];
-
-    // console.log("cursorBeforeElementIndex -> " + cursorBeforeElementIndex);
-
-    // if (currentKeyCode !== 16) {
-    //   console.log(
-    //     "cursorForeBeforeElement -> " +
-    //       getCurrentContent[cursorForeBeforeElementIndex]
-    //   );
-    //   console.log(
-    //     "cursorBeforeElement -> " + getCurrentContent[cursorBeforeElementIndex]
-    //   );
-    //   console.log(
-    //     "cursorAfterElement -> " + getCurrentContent[cursorAfterElementIndex]
-    //   );
-    //   console.log(
-    //     "cursorForeAfterElement -> " +
-    //       getCurrentContent[cursorForeAfterElementIndex]
-    //   );
-    // }
-
-    if (
-      (cursorForeBeforeElement === " " ||
-        cursorForeBeforeElement === undefined) &&
-      cursorBeforeElement === "@" &&
-      (cursorAfterElement === " " || cursorAfterElement === undefined)
-    ) {
-      console.log("need to show Friends suggessions container");
-      getStringFromPosition = cursorBeforeElementIndex;
-      getStringToPosition = cursorAfterElementIndex;
-      showMentionableContainer = true;
-    }
-
-    if (showMentionableContainer && currentKeyCode != 32) {
-      getStringToPosition = cursorAfterElementIndex;
-      // console.log("---");
-    } else {
-      showMentionableContainer = false;
-      getStringFromPosition = null;
-      getStringToPosition = null;
-      // console.log("**");
-    }
-
-    // console.log(
-    //   "showMentionableContainer -> " +
-    //     showMentionableContainer +
-    //     " && getStringFromPosition -> " +
-    //     getStringFromPosition +
-    //     " && getStringToPosition -> " +
-    //     getStringToPosition
-    // );
-
-    if (showMentionableContainer) {
-      let searchedFor = editableDivTextContent.slice(
-        getStringFromPosition + 1,
-        getStringToPosition
-      );
-      console.log("searchedFor --> " + searchedFor);
-    }
-
-    return caretPos;
-  };
 
   const handleKeyUp = (e) => {
     // console.log("handleKeyUp");
@@ -210,16 +106,21 @@ export default function CustomContentEditable() {
   };
 
   const handleHightlightList = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    e.returnValue = false;
-    e.cancelBubble = true;
-    console.log(
-      "handleHightlightList is triggered - " +
-        mentionsListIndex +
-        " - " +
-        e.which
-    );
+    if (e.which === 13 || e.which === 38 || e.which === 40) {
+      e.stopPropagation();
+      e.preventDefault();
+      e.returnValue = false;
+      e.cancelBubble = true;
+    }
+
+    searchFor = searchFor + e.key;
+
+    // console.log(
+    //   "handleHightlightList is triggered - " +
+    //     mentionsListIndex +
+    //     " - " +
+    //     e.which
+    // );
 
     [].forEach.call(mentionsUsersList, function (el) {
       el.classList.remove("active");
@@ -244,43 +145,27 @@ export default function CustomContentEditable() {
         ++mentionsListHighlightItem;
       }
     } else if (e.which === 13) {
+      getWordPrecedingCaret();
       handleIndividualMention();
       setShowMentionsContainer(false);
       setShowTagsContainer(false);
       setShowEmojisContainer(false);
       document.removeEventListener("keydown", handleHightlightList);
+      searchFor = "";
     }
+
+    // console.log("e -> " + e);
+    // console.log(e);
+    console.log("searchFor -> " + searchFor);
 
     return false;
-  };
-
-  const handleGetText = () => {
-    console.log("Need to show contentEditable text");
-    let wholeContent = contentEditableDiv.textContent.trim();
-    let wholeHTMLContent = contentEditableDiv.innerHTML;
-    let mentionedHtmlParts = contentEditableDiv.getElementsByClassName(
-      "mentioned-user-container"
-    );
-    let mentionedHtmlPartsLength = mentionedHtmlParts.length;
-    console.log(wholeContent);
-    setMentionsPlainText(wholeContent);
-    // setMentionsHTMLContent(wholeHTMLContent);
-    // console.log(mentionedHtmlPartsLength);
-
-    if (mentionedHtmlPartsLength > 0) {
-      console.log(mentionedHtmlParts);
-
-      for (let i = 0; i < mentionedHtmlPartsLength; i++) {
-        let mentionedHtmlPartInnerHTML = mentionedHtmlParts[i].innerHTML;
-        // console.log(mentionedHtmlPartInnerHTML);
-        console.log(mentionedHtmlParts[i].textContent);
-      }
-    }
   };
 
   const handleIndividualMention = async () => {
     console.log("handleIndividualMention clicked");
     console.log(mentionableUsers[mentionsListIndex]);
+
+    let contentEditableDiv_clone = document.getElementById("editable-div");
 
     let getMentionableUserDetails = mentionableUsers[mentionsListIndex];
 
@@ -289,22 +174,72 @@ export default function CustomContentEditable() {
         <span data-key="1">{getMentionableUserDetails.username}</span>
       </span>
     );
-    // contentEditableDiv.append(doGeneateMentionableUser);
+    // contentEditableDiv_clone.append(doGeneateMentionableUser);
     let waitUntillPaster = await pasteHtmlAtCaret(
       `<span data-key="1" contenteditable=false class="mentioned-user-container"><span className="mentionSymbol">@</span><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo primary-user" /><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo secondary-user" /><span className="mentioned-user-username">${getMentionableUserDetails.username}</span></span>`
     );
 
-    var range = document.createRange();
-    var sel = window.getSelection();
+    // var range = document.createRange();
+    // var sel = window.getSelection();
 
-    // range.setStart(
-    //   contentEditableDiv.childNodes[contentEditableDiv.childNodes.length - 1],
-    //   0
-    // );
+    // range.setStart(contentEditableDiv_clone.childNodes[2], 0);
     // range.collapse(true);
     // sel.removeAllRanges();
     // sel.addRange(range);
-    // contentEditableDiv.focus();
+    // contentEditableDiv_clone.focus();
+  };
+
+  const getWordPrecedingCaret = () => {
+    let containerEl = document.getElementById("editable-div");
+
+    var preceding = "",
+      sel,
+      range,
+      precedingRange;
+    if (window.getSelection) {
+      sel = window.getSelection();
+      if (sel.rangeCount > 0) {
+        range = sel.getRangeAt(0).cloneRange();
+        range.collapse(true);
+        range.setStart(containerEl, 0);
+        preceding = range.toString();
+      }
+    } else if ((sel = document.selection) && sel.type != "Control") {
+      range = sel.createRange();
+      precedingRange = range.duplicate();
+      precedingRange.moveToElementText(containerEl);
+      precedingRange.setEndPoint("EndToStart", range);
+      preceding = precedingRange.text;
+    }
+
+    var words = range.toString().trim().split(" "),
+      lastWord = words[words.length - 1];
+
+    if (lastWord) {
+      var resultValue = " "; // this value is coming from some other function
+      if (resultValue == lastWord) {
+        console.log("do nothing: " + lastWord);
+        // do nothing
+      } else {
+        console.log("replace word " + lastWord);
+
+        /* Find word start and end */
+        var wordStart = range.endContainer.data.lastIndexOf(lastWord);
+        var wordEnd = wordStart + lastWord.length;
+        console.log("pos: (" + wordStart + ", " + wordEnd + ")");
+
+        range.setStart(range.endContainer, wordStart);
+        range.setEnd(range.endContainer, wordEnd);
+        range.deleteContents();
+        range.insertNode(document.createTextNode(resultValue));
+        // delete That specific word and replace if with resultValue
+
+        /* Merge multiple text nodes */
+
+        containerEl.normalize();
+      }
+      return lastWord;
+    }
   };
 
   const pasteHtmlAtCaret = (html, selectPastedContent = false) => {
@@ -356,6 +291,30 @@ export default function CustomContentEditable() {
     }
   };
 
+  const handleGetText = () => {
+    console.log("Need to show contentEditable text");
+    let wholeContent = contentEditableDiv.textContent.trim();
+    let wholeHTMLContent = contentEditableDiv.innerHTML;
+    let mentionedHtmlParts = contentEditableDiv.getElementsByClassName(
+      "mentioned-user-container"
+    );
+    let mentionedHtmlPartsLength = mentionedHtmlParts.length;
+    console.log(wholeContent);
+    setMentionsPlainText(wholeContent);
+    // setMentionsHTMLContent(wholeHTMLContent);
+    // console.log(mentionedHtmlPartsLength);
+
+    if (mentionedHtmlPartsLength > 0) {
+      console.log(mentionedHtmlParts);
+
+      for (let i = 0; i < mentionedHtmlPartsLength; i++) {
+        let mentionedHtmlPartInnerHTML = mentionedHtmlParts[i].innerHTML;
+        // console.log(mentionedHtmlPartInnerHTML);
+        console.log(mentionedHtmlParts[i].textContent);
+      }
+    }
+  };
+
   return (
     <div className="holderrr">
       <div
@@ -363,8 +322,7 @@ export default function CustomContentEditable() {
         id="editable-div"
         spellCheck={false}
         contentEditable={true}
-        onKeyUp={getCaretPosition}
-        onMouseUp={getCaretPosition}
+        onKeyUp={handleKeyUp}
       ></div>
 
       <div style={{ display: showMentionsContainer ? "block" : "none" }}>

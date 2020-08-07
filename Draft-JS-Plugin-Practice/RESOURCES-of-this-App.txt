@@ -5,4 +5,5 @@
 * https://stackoverflow.com/questions/32371343/make-some-keywords-not-editable-in-content-editable-div
 * https://stackoverflow.com/questions/6249095/how-to-set-caretcursor-position-in-contenteditable-element-div
 * https://stackoverflow.com/questions/3972014/get-contenteditable-caret-index-position
+* https://stackoverflow.com/questions/27656887/replace-specific-word-in-contenteditable
 * 
