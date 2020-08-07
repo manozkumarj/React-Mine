@@ -106,14 +106,20 @@ export default function CustomContentEditable() {
   };
 
   const handleHightlightList = (e) => {
-    if (e.which === 13 || e.which === 38 || e.which === 40) {
+    if (
+      e.which === 13 ||
+      e.which === 37 ||
+      e.which === 38 ||
+      e.which === 39 ||
+      e.which === 40
+    ) {
       e.stopPropagation();
       e.preventDefault();
       e.returnValue = false;
       e.cancelBubble = true;
+    } else {
+      searchFor = searchFor + e.key;
     }
-
-    searchFor = searchFor + e.key;
 
     // console.log(
     //   "handleHightlightList is triggered - " +
@@ -217,7 +223,7 @@ export default function CustomContentEditable() {
     var words = range.toString().trim().split(" "),
       lastWord = words[words.length - 1];
 
-    // console.log(lastWord);
+    console.log(words);
 
     if (lastWord) {
       var resultValue = " "; // this value is coming from some other function
@@ -226,10 +232,9 @@ export default function CustomContentEditable() {
         // do nothing
       } else {
         console.log("replace word --> " + lastWord);
+        console.log(typeof lastWord);
 
-        let reWhiteSpace = new RegExp(/^\s+$/);
-
-        if (lastWord.includes(" ")) {
+        if (/\s/.test(lastWord)) {
           lastWord = lastWord.toString();
           console.log(typeof lastWord);
           let splitLastWord = lastWord.split(" ");
