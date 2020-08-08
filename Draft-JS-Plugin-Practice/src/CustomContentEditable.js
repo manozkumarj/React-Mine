@@ -81,7 +81,7 @@ export default function CustomContentEditable() {
       setIsItSpace(false);
     }
 
-    if (isItSpace && e.keyCode === 50) {
+    if (e.keyCode === 50) {
       // console.log("It's SPACE then @");
       setShowMentionsContainer(true);
       setShowTagsContainer(false);
@@ -182,12 +182,8 @@ export default function CustomContentEditable() {
     );
     // contentEditableDiv_clone.append(doGeneateMentionableUser);
     let waitUntillPaster = await pasteHtmlAtCaret(
-      `<span data-key="1" contenteditable=false class="mentioned-user-container"><span className="mentionSymbol">@</span><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo primary-user" /><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo secondary-user" /><span className="mentioned-user-username">${getMentionableUserDetails.username}</span></span>`
+      `<span data-key="1" contenteditable=false class="mentioned-user-container"><span className="mentionSymbol">@</span><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo primary-user" /><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo secondary-user" /><span className="mentioned-user-username">${getMentionableUserDetails.username} </span></span> `
     );
-
-    // let waitUntillPaster = await pasteHtmlAtCaret(
-    //   `<span class="mentioned-user-username">@${getMentionableUserDetails.username}</span>`
-    // );
 
     // var range = document.createRange();
     // var sel = window.getSelection();
