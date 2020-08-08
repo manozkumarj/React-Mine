@@ -52,6 +52,9 @@ export default function CustomContentEditable() {
       photo: kohli,
     },
   ]);
+  const [filteredMentionableUsers, setFilteredMentionableUsers] = useState(
+    mentionableUsers
+  );
 
   const contentEditableDiv = document.getElementById("editable-div");
 
@@ -89,7 +92,7 @@ export default function CustomContentEditable() {
 
       mentionsUsersList[0].classList.add("active");
 
-      document.addEventListener("keydown", handleHightlightList);
+      document.addEventListener("keydown", handleHighlightList);
     }
     if (isItSpace && e.keyCode === 51) {
       console.log("It's SPACE then #");
@@ -105,9 +108,12 @@ export default function CustomContentEditable() {
     }
   };
 
-  const handleHightlightList = (e) => {
+  const handleHighlightList = async (e) => {
     if (
+      e.which === 8 ||
       e.which === 13 ||
+      e.which === 16 ||
+      e.which === 17 ||
       e.which === 37 ||
       e.which === 38 ||
       e.which === 39 ||
@@ -119,10 +125,17 @@ export default function CustomContentEditable() {
       e.cancelBubble = true;
     } else {
       searchFor = searchFor + e.key;
+      mentionsListIndex = 0;
+      mentionsListHighlightItem = 1;
     }
 
+    // console.log("e -> " + e);
+    // console.log(e);
+    console.log("searchFor -> " + searchFor);
+    let modifiedFilteredList = await filterMentionableUsersList(searchFor);
+
     // console.log(
-    //   "handleHightlightList is triggered - " +
+    //   "handleHighlightList is triggered - " +
     //     mentionsListIndex +
     //     " - " +
     //     e.which
@@ -152,28 +165,31 @@ export default function CustomContentEditable() {
       }
     } else if (e.which === 13) {
       getWordPrecedingCaret();
-      handleIndividualMention();
+      handleIndividualMention(null, modifiedFilteredList);
       setShowMentionsContainer(false);
       setShowTagsContainer(false);
       setShowEmojisContainer(false);
-      document.removeEventListener("keydown", handleHightlightList);
+      document.removeEventListener("keydown", handleHighlightList);
       searchFor = "";
+      setFilteredMentionableUsers(mentionableUsers);
     }
-
-    // console.log("e -> " + e);
-    // console.log(e);
-    console.log("searchFor -> " + searchFor);
 
     return false;
   };
 
-  const handleIndividualMention = async () => {
+  const handleIndividualMention = async (e, listt) => {
     // console.log("handleIndividualMention clicked");
     // console.log(mentionableUsers[mentionsListIndex]);
 
+    if (!listt) {
+      listt = filteredMentionableUsers;
+    }
+
+    console.log(listt);
+
     let contentEditableDiv_clone = document.getElementById("editable-div");
 
-    let getMentionableUserDetails = mentionableUsers[mentionsListIndex];
+    let getMentionableUserDetails = listt[mentionsListIndex];
 
     let doGeneateMentionableUser = (
       <span>
@@ -316,6 +332,20 @@ export default function CustomContentEditable() {
     }
   };
 
+  const filterMentionableUsersList = (searchFor) => {
+    searchFor = searchFor.toLocaleLowerCase();
+    let filteredMentionableUsersList;
+    if (mentionableUsers.length > 0) {
+      filteredMentionableUsersList = mentionableUsers.filter(
+        (mentionableUser) => {
+          return mentionableUser.name.toLocaleLowerCase().includes(searchFor);
+        }
+      );
+      setFilteredMentionableUsers(filteredMentionableUsersList);
+    }
+    return filteredMentionableUsersList;
+  };
+
   const handleGetText = () => {
     console.log("Need to show contentEditable text");
     let wholeContent = contentEditableDiv.textContent.trim();
@@ -356,13 +386,13 @@ export default function CustomContentEditable() {
           className="individual-mentions-container"
           id="individual-mentions-container"
         >
-          {mentionableUsers &&
-            mentionableUsers.length > 0 &&
-            mentionableUsers.map((mentionableUser) => (
+          {filteredMentionableUsers &&
+            filteredMentionableUsers.length > 0 &&
+            filteredMentionableUsers.map((mentionableUser) => (
               <div
                 className="individual-mention-container"
                 id="individual-mention-container-1"
-                onClick={handleIndividualMention}
+                // onClick={handleIndividualMention}
                 onKeyUp={handleIndividualMention}
                 key={mentionableUser._id}
               >
