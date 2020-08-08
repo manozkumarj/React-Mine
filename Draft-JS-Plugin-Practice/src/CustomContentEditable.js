@@ -72,7 +72,7 @@ export default function CustomContentEditable() {
 
   const handleKeyUp = (e) => {
     // console.log("handleKeyUp");
-    // console.log(` ${e.keyCode}`);
+    console.log(` ${e.keyCode}`);
 
     if (e.keyCode === 32 || e.key === " ") {
       //   console.log("It's space");
@@ -90,7 +90,7 @@ export default function CustomContentEditable() {
       setShowTagsContainer(false);
       setShowEmojisContainer(false);
 
-      mentionsUsersList[0].classList.add("active");
+      // mentionsUsersList[0].classList.add("active");
 
       document.addEventListener("keydown", handleHighlightList);
     }
@@ -108,6 +108,20 @@ export default function CustomContentEditable() {
     }
   };
 
+  const handleOnMouseDown = async (index) => {
+    let modifiedFilteredList = await filterMentionableUsersList(searchFor);
+    console.log("index -> " + index);
+    getWordPrecedingCaret();
+    handleIndividualMention(null, modifiedFilteredList, index);
+    setShowMentionsContainer(false);
+    setShowTagsContainer(false);
+    setShowEmojisContainer(false);
+    document.removeEventListener("keydown", handleHighlightList);
+    searchFor = "";
+    setFilteredMentionableUsers(mentionableUsers);
+    console.log("Ended");
+  };
+
   const handleHighlightList = async (e) => {
     if (
       e.which === 8 ||
@@ -117,7 +131,8 @@ export default function CustomContentEditable() {
       e.which === 37 ||
       e.which === 38 ||
       e.which === 39 ||
-      e.which === 40
+      e.which === 40 ||
+      e.which === undefined
     ) {
       e.stopPropagation();
       e.preventDefault();
@@ -129,10 +144,14 @@ export default function CustomContentEditable() {
       mentionsListHighlightItem = 1;
     }
 
-    // console.log("e -> " + e);
+    console.log("e -> " + e.key);
     // console.log(e);
     console.log("searchFor -> " + searchFor);
     let modifiedFilteredList = await filterMentionableUsersList(searchFor);
+
+    if (e.key === undefined) {
+      contentEditableDiv.focus();
+    }
 
     // console.log(
     //   "handleHighlightList is triggered - " +
@@ -163,7 +182,7 @@ export default function CustomContentEditable() {
         mentionsUsersList[++mentionsListIndex].classList.add("active");
         ++mentionsListHighlightItem;
       }
-    } else if (e.which === 13) {
+    } else if (e.which === 13 || e.which === undefined) {
       getWordPrecedingCaret();
       handleIndividualMention(null, modifiedFilteredList);
       setShowMentionsContainer(false);
@@ -172,12 +191,13 @@ export default function CustomContentEditable() {
       document.removeEventListener("keydown", handleHighlightList);
       searchFor = "";
       setFilteredMentionableUsers(mentionableUsers);
+      console.log("Ended");
     }
 
     return false;
   };
 
-  const handleIndividualMention = async (e, listt) => {
+  const handleIndividualMention = async (e, listt, selectableIndex = null) => {
     // console.log("handleIndividualMention clicked");
     // console.log(mentionableUsers[mentionsListIndex]);
 
@@ -189,7 +209,9 @@ export default function CustomContentEditable() {
 
     let contentEditableDiv_clone = document.getElementById("editable-div");
 
-    let getMentionableUserDetails = listt[mentionsListIndex];
+    let indexoff = selectableIndex ? selectableIndex : mentionsListIndex;
+
+    let getMentionableUserDetails = listt[indexoff];
 
     let doGeneateMentionableUser = (
       <span>
@@ -388,11 +410,11 @@ export default function CustomContentEditable() {
         >
           {filteredMentionableUsers &&
             filteredMentionableUsers.length > 0 &&
-            filteredMentionableUsers.map((mentionableUser) => (
+            filteredMentionableUsers.map((mentionableUser, index) => (
               <div
                 className="individual-mention-container"
                 id="individual-mention-container-1"
-                // onClick={handleIndividualMention}
+                onMouseDown={() => handleOnMouseDown(index)}
                 onKeyUp={handleIndividualMention}
                 key={mentionableUser._id}
               >
