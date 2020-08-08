@@ -90,7 +90,7 @@ export default function CustomContentEditable() {
       setShowTagsContainer(false);
       setShowEmojisContainer(false);
 
-      // mentionsUsersList[0].classList.add("active");
+      mentionsUsersList[0].classList.add("active");
 
       document.addEventListener("keydown", handleHighlightList);
     }
@@ -124,10 +124,10 @@ export default function CustomContentEditable() {
 
   const handleHighlightList = async (e) => {
     if (
-      e.which === 8 ||
       e.which === 13 ||
       e.which === 16 ||
       e.which === 17 ||
+      e.which === 18 ||
       e.which === 37 ||
       e.which === 38 ||
       e.which === 39 ||
@@ -139,7 +139,14 @@ export default function CustomContentEditable() {
       e.returnValue = false;
       e.cancelBubble = true;
     } else {
-      searchFor = searchFor + e.key;
+      // if (!showMentionsContainer && e.which === 8) {
+      //   e.stopPropagation();
+      //   e.preventDefault();
+      //   e.returnValue = false;
+      //   e.cancelBubble = true;
+      // }
+      if (e.which !== 8) searchFor = searchFor + e.key;
+      else if (e.which === 8) searchFor = searchFor.slice(0, -1);
       mentionsListIndex = 0;
       mentionsListHighlightItem = 1;
     }
@@ -192,6 +199,10 @@ export default function CustomContentEditable() {
       searchFor = "";
       setFilteredMentionableUsers(mentionableUsers);
       console.log("Ended");
+    }
+
+    if (showMentionsContainer) {
+      mentionsUsersList[0].classList.add("active");
     }
 
     return false;
@@ -355,17 +366,21 @@ export default function CustomContentEditable() {
   };
 
   const filterMentionableUsersList = (searchFor) => {
-    searchFor = searchFor.toLocaleLowerCase();
-    let filteredMentionableUsersList;
-    if (mentionableUsers.length > 0) {
-      filteredMentionableUsersList = mentionableUsers.filter(
-        (mentionableUser) => {
-          return mentionableUser.name.toLocaleLowerCase().includes(searchFor);
-        }
-      );
-      setFilteredMentionableUsers(filteredMentionableUsersList);
+    if (searchFor.trim()) {
+      searchFor = searchFor.toLocaleLowerCase();
+      let filteredMentionableUsersList;
+      if (mentionableUsers.length > 0) {
+        filteredMentionableUsersList = mentionableUsers.filter(
+          (mentionableUser) => {
+            return mentionableUser.name.toLocaleLowerCase().includes(searchFor);
+          }
+        );
+        setFilteredMentionableUsers(filteredMentionableUsersList);
+      }
+      return filteredMentionableUsersList;
+    } else {
+      return mentionableUsers;
     }
-    return filteredMentionableUsersList;
   };
 
   const handleGetText = () => {

@@ -1,10 +1,11 @@
 .holderrr {
-  width: 50%;
-  margin: auto;
+  width: 70%;
+  margin: 15px auto;
 }
 .editable-div {
   border: 2px solid #ccc;
   min-height: 100px;
+  padding: 5px;
 }
 
 .individual-mention-container {
