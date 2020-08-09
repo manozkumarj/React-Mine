@@ -90,7 +90,8 @@ export default function CustomContentEditable() {
       setShowTagsContainer(false);
       setShowEmojisContainer(false);
 
-      mentionsUsersList[0].classList.add("active");
+      searchFor = "";
+      // mentionsUsersList[0].classList.add("active");
 
       document.addEventListener("keydown", handleHighlightList);
     }
@@ -117,7 +118,7 @@ export default function CustomContentEditable() {
     setShowTagsContainer(false);
     setShowEmojisContainer(false);
     document.removeEventListener("keydown", handleHighlightList);
-    searchFor = "";
+    // searchFor = "";
     setFilteredMentionableUsers(mentionableUsers);
     console.log("Ended");
   };
