@@ -30,3 +30,32 @@
   background-color: blue;
   color: #fdf;
 }
+
+.mentioned-user-container {
+  display: inline-flex;
+  /* align-items: center; */
+  background-color: cadetblue;
+  padding: 0px 5px;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 3px;
+  margin: 2px;
+  border: 1px solid #999;
+}
+/* .mentionSymbol {
+  display: none;
+} */
+.mentioned-user-photo {
+  height: 22px;
+  margin: auto 2px;
+  border-radius: 100px;
+}
+.primary-user {
+  z-index: 2;
+}
+.secondary-user {
+  margin-left: -8px;
+}
+.mentioned-user-username {
+  color: blue;
+}

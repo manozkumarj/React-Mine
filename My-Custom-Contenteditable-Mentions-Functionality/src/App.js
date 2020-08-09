@@ -10,7 +10,7 @@ const App = () => {
   const [mentionsHTMLContent, setMentionsHTMLContent] = useState("");
   const [showMentionsContainer, setShowMentionsContainer] = useState(false);
   const [showMentionableUsers, setShowMentionableUsers] = useState("");
-  const [fiteredMentionableUsers, setFiteredMentionableUsers] = useState([]);
+  const [filteredMentionableUsers, setFilteredMentionableUsers] = useState([]);
   const [mentionableUsers, setMentionableUsers] = useState([
     {
       _id: 1,
@@ -51,14 +51,14 @@ const App = () => {
   ]);
 
   useEffect(() => {
-    if (fiteredMentionableUsers && fiteredMentionableUsers.length > 0) {
+    if (filteredMentionableUsers && filteredMentionableUsers.length > 0) {
       let mentionsUsersList = document.getElementsByClassName(
         "individual-mention-container"
       );
       mentionsUsersList[0].classList.add("active");
       console.log("Need active first child");
     }
-  }, [fiteredMentionableUsers]);
+  }, [filteredMentionableUsers]);
 
   var searchableWord = "";
   var aboutToHide = false;
@@ -70,7 +70,7 @@ const App = () => {
     searchableWord = "";
     mentionsListIndex = 0;
     mentionsListHighlightItem = 1;
-    setFiteredMentionableUsers(mentionableUsers);
+    setFilteredMentionableUsers(mentionableUsers);
     document.removeEventListener("keydown", handleHighlightList);
   };
 
@@ -130,7 +130,7 @@ const App = () => {
     // console.log(` ${e.keyCode}`);
     if (!showMentionsContainer && e.keyCode === 50) {
       console.log("@ symbol triggered");
-      setFiteredMentionableUsers(mentionableUsers);
+      setFilteredMentionableUsers(mentionableUsers);
       generateMentionableUsers(mentionableUsers);
       document.removeEventListener("keydown", handleHighlightList);
       document.addEventListener("keydown", handleHighlightList);
@@ -156,14 +156,14 @@ const App = () => {
     const isLetter = /^[a-z]$/i.test(e.key);
     const isNumber = /^[0-9]$/i.test(e.key);
 
+    let listOfFilteredUsers = [...filteredMentionableUsers];
+
     if (isLetter || isNumber) {
       console.log("pressed either number or letter");
       let keyIs = e.key.toString();
       searchableWord = searchableWord + keyIs;
       console.log("searchableWord -> " + searchableWord);
-      let modifiedFilteredList = await filterMentionableUsersList(
-        searchableWord
-      );
+      await filterMentionableUsersList(searchableWord);
     }
 
     let mentionsUsersList = document.getElementsByClassName(
@@ -230,7 +230,137 @@ const App = () => {
       }
     } else if (e.which === 13) {
       console.log("pressed enter");
+      getWordPrecedingCaret();
+      handleIndividualMention(null, listOfFilteredUsers);
       handleIndividualUserSelection();
+    }
+  };
+
+  const getWordPrecedingCaret = () => {
+    let containerEl = document.getElementById("editable-div");
+
+    var preceding = "",
+      sel,
+      range,
+      precedingRange;
+    if (window.getSelection) {
+      sel = window.getSelection();
+      if (sel.rangeCount > 0) {
+        range = sel.getRangeAt(0).cloneRange();
+        range.collapse(true);
+        range.setStart(containerEl, 0);
+        preceding = range.toString();
+      }
+    } else if ((sel = document.selection) && sel.type != "Control") {
+      range = sel.createRange();
+      precedingRange = range.duplicate();
+      precedingRange.moveToElementText(containerEl);
+      precedingRange.setEndPoint("EndToStart", range);
+      preceding = precedingRange.text;
+    }
+
+    console.log(range);
+
+    var words = range.toString().trim().split(" "),
+      lastWord = words[words.length - 1];
+
+    console.log(words);
+
+    if (lastWord) {
+      var resultValue = " "; // this value is coming from some other function
+      if (resultValue == lastWord) {
+        console.log("do nothing: " + lastWord);
+        // do nothing
+      } else {
+        console.log("replace word --> " + lastWord);
+
+        /* Find word start and end */
+        var wordStart = range.endContainer.data.lastIndexOf(lastWord);
+        var wordEnd = wordStart + lastWord.length;
+        console.log("pos: (" + wordStart + ", " + wordEnd + ")");
+
+        range.setStart(range.endContainer, wordStart);
+        range.setEnd(range.endContainer, wordEnd);
+        range.deleteContents();
+        range.insertNode(document.createTextNode(resultValue));
+        // delete That specific word and replace if with resultValue
+
+        /* Merge multiple text nodes */
+
+        containerEl.normalize();
+      }
+      return lastWord;
+    }
+  };
+
+  const handleIndividualMention = async (
+    e,
+    listOfFilteredUsers,
+    selectableIndex = null
+  ) => {
+    console.log(filteredMentionableUsers);
+
+    let indexoff = mentionsListIndex;
+
+    let getMentionableUserDetails = mentionableUsers[indexoff];
+
+    let doGeneateMentionableUser = (
+      <span>
+        <span data-key="1">{getMentionableUserDetails.username}</span>
+      </span>
+    );
+    // contentEditableDiv_clone.append(doGeneateMentionableUser);
+    let waitUntillPaster = await pasteHtmlAtCaret(
+      `<span data-key="1" contenteditable=false class="mentioned-user-container"><span className="mentionSymbol">@</span><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo primary-user" /><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo secondary-user" /><span className="mentioned-user-username">${getMentionableUserDetails.username} </span></span> `
+    );
+  };
+
+  const pasteHtmlAtCaret = (html, selectPastedContent = false) => {
+    var sel, range;
+    if (window.getSelection) {
+      // IE9 and non-IE
+      sel = window.getSelection();
+      if (sel.getRangeAt && sel.rangeCount) {
+        range = sel.getRangeAt(0);
+        range.deleteContents();
+
+        // Range.createContextualFragment() would be useful here but is
+        // only relatively recently standardized and is not supported in
+        // some browsers (IE9, for one)
+        var el = document.createElement("div");
+        el.innerHTML = html;
+        var frag = document.createDocumentFragment(),
+          node,
+          lastNode;
+        while ((node = el.firstChild)) {
+          lastNode = frag.appendChild(node);
+        }
+        var firstNode = frag.firstChild;
+        range.insertNode(frag);
+
+        // Preserve the selection
+        if (lastNode) {
+          range = range.cloneRange();
+          range.setStartAfter(lastNode);
+          if (selectPastedContent) {
+            range.setStartBefore(firstNode);
+          } else {
+            range.collapse(true);
+          }
+          sel.removeAllRanges();
+          sel.addRange(range);
+        }
+      }
+    } else if ((sel = document.selection) && sel.type != "Control") {
+      // IE < 9
+      var originalRange = sel.createRange();
+      originalRange.collapse(true);
+      sel.createRange().pasteHTML(html);
+      if (selectPastedContent) {
+        range = sel.createRange();
+        range.setEndPoint("StartToStart", originalRange);
+        range.select();
+      }
     }
   };
 
@@ -246,7 +376,7 @@ const App = () => {
           }
         );
         if (filteredMentionableUsersList.length > 0) {
-          setFiteredMentionableUsers(filteredMentionableUsersList);
+          setFilteredMentionableUsers(filteredMentionableUsersList);
           generateMentionableUsers(filteredMentionableUsersList);
         } else {
           mentionsContainerHider();
@@ -254,7 +384,7 @@ const App = () => {
       }
     } else {
       console.log("filterMentionableUsersList else");
-      setFiteredMentionableUsers(mentionableUsers);
+      setFilteredMentionableUsers(mentionableUsers);
       generateMentionableUsers(mentionableUsers);
     }
   };
