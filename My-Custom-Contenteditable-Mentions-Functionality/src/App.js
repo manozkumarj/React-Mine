@@ -165,26 +165,32 @@ const App = () => {
     // If presses backspace
     if (e.which === 8) {
       searchableWord = searchableWord.slice(0, -1);
-      searchableWord = searchableWord.trim();
+      searchableWord = searchableWord;
       console.log("searchableWord -> " + searchableWord);
-      if (!searchableWord) {
+      let modifiedFilteredList = filterMentionableUsersList(searchableWord);
+      if (!searchableWord && !aboutToHide) {
         console.log("searchableWord if");
-        aboutToHide = true;
-        let modifiedFilteredList = await filterMentionableUsersList(
-          searchableWord
+        console.log(
+          "searchableWord -> " +
+            searchableWord +
+            " && aboutToHide -> " +
+            aboutToHide
         );
-        if (aboutToHide) {
-          console.log("searchableWord else if");
-          mentionsContainerHider();
-          aboutToHide = false;
-          return false;
-        }
-        return false;
+        aboutToHide = true;
+      } else if (!searchableWord && aboutToHide) {
+        console.log("searchableWord else if");
+        console.log(
+          "searchableWord -> " +
+            searchableWord +
+            " && aboutToHide -> " +
+            aboutToHide
+        );
+        mentionsContainerHider();
+        aboutToHide = null;
       }
-      let modifiedFilteredList = await filterMentionableUsersList(
-        searchableWord
-      );
+      return false;
     }
+    aboutToHide = false;
 
     if (e.which === 27) {
       console.log("pressed ESC");
@@ -200,7 +206,6 @@ const App = () => {
         mentionsUsersList[--mentionsListIndex].classList.add("active");
         --mentionsListHighlightItem;
       }
-      return false;
     } else if (e.which === 40) {
       console.log("pressed 40");
       if (mentionsListHighlightItem === mentionsUsersList.length) {
@@ -211,11 +216,9 @@ const App = () => {
         mentionsUsersList[++mentionsListIndex].classList.add("active");
         ++mentionsListHighlightItem;
       }
-      return false;
     } else if (e.which === 13) {
       console.log("pressed enter");
       handleIndividualUserSelection();
-      return false;
     }
   };
 
