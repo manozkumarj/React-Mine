@@ -1,0 +1,32 @@
+.holderrr {
+  width: 70%;
+  margin: 15px auto;
+}
+.editable-div {
+  position: relative;
+  border: 2px solid #ccc;
+  min-height: 100px;
+  padding: 5px;
+}
+.whole-mentions-container {
+  background: #fff;
+  -webkit-box-shadow: -2px 4px 14px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: -2px 4px 14px 0px rgba(0, 0, 0, 0.75);
+  z-index: 18;
+}
+.individual-mention-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+.individual-mention-user-img {
+  height: 30px;
+  width: 30px;
+}
+
+.active,
+.individual-mention-container:hover {
+  background-color: blue;
+  color: #fdf;
+}
