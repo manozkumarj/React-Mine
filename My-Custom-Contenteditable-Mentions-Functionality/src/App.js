@@ -91,7 +91,8 @@ const App = () => {
             }
             id="individual-mention-container-1"
             key={getMentionableUser._id}
-            onClick={handleIndividualUserSelection}
+            // onClick={handleIndividualUserSelection}
+            onMouseDown={() => handleOnMouseDown(index)}
             onMouseOver={handleMouseHover}
           >
             <img
@@ -135,6 +136,13 @@ const App = () => {
       document.removeEventListener("keydown", handleHighlightList);
       document.addEventListener("keydown", handleHighlightList);
     }
+  };
+
+  const handleOnMouseDown = (getIndex) => {
+    console.log(getIndex);
+    getWordPrecedingCaret();
+    handleIndividualMention(null, null, getIndex);
+    handleIndividualUserSelection();
   };
 
   const handleHighlightList = async (e) => {
@@ -300,7 +308,7 @@ const App = () => {
   ) => {
     console.log(filteredMentionableUsers);
 
-    let indexoff = mentionsListIndex;
+    let indexoff = selectableIndex ? selectableIndex : mentionsListIndex;
 
     let getMentionableUserDetails = mentionableUsers[indexoff];
 
