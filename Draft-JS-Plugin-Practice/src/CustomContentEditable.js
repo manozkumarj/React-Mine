@@ -100,10 +100,11 @@ export default function CustomContentEditable() {
       setShowTagsContainer(false);
       setShowEmojisContainer(false);
 
-      searchFor = "";
       // mentionsUsersList[0].classList.add("active");
 
+      document.removeEventListener("keydown", handleHighlightList);
       document.addEventListener("keydown", handleHighlightList);
+      searchFor = "";
     }
     if (isItSpace && e.keyCode === 51) {
       console.log("It's SPACE then #");
@@ -132,6 +133,7 @@ export default function CustomContentEditable() {
     // searchFor = "";
     setFilteredMentionableUsers(mentionableUsers);
     console.log("Ended");
+    mentionsContainerHider();
   };
 
   const handleHighlightList = async (e) => {
@@ -144,6 +146,7 @@ export default function CustomContentEditable() {
       e.which === 40 ||
       e.which === undefined
     ) {
+      searchFor = "";
       e.stopPropagation();
       e.preventDefault();
       e.returnValue = false;
@@ -164,14 +167,24 @@ export default function CustomContentEditable() {
         e.preventDefault();
         e.returnValue = false;
         e.cancelBubble = true;
+        searchFor = "";
       }
-      if (e.which !== 8) searchFor = searchFor + e.key;
-      else if (e.which === 8) searchFor = searchFor.slice(0, -1);
+
+      // if (e.which !== 8) searchFor = searchFor + e.key;
+
+      if (e.keyCode >= 48 && e.keyCode <= 57 && e.key !== "@") {
+        // alert("input was 0-9");
+        searchFor = searchFor + e.key;
+      }
+      if (e.keyCode >= 65 && e.keyCode <= 90) {
+        // alert("input was a-z");
+        searchFor = searchFor + e.key;
+      } else if (e.which === 8) searchFor = searchFor.slice(0, -1);
       mentionsListIndex = 0;
       mentionsListHighlightItem = 1;
     }
 
-    console.log("e -> " + e.key);
+    console.log("e -> " + e.keyCode);
     // console.log(e);
     console.log("searchFor -> " + searchFor);
     let modifiedFilteredList = await filterMentionableUsersList(searchFor);
@@ -386,8 +399,8 @@ export default function CustomContentEditable() {
   };
 
   const filterMentionableUsersList = (searchFor) => {
-    if (searchFor.trim()) {
-      console.log("filterMentionableUsersList if");
+    if (searchFor && searchFor.trim()) {
+      console.log("filterMentionableUsersList if & searchFor -> " + searchFor);
       searchFor = searchFor.toLocaleLowerCase();
       let filteredMentionableUsersList;
       if (mentionableUsers.length > 0) {
@@ -396,11 +409,16 @@ export default function CustomContentEditable() {
             return mentionableUser.name.toLocaleLowerCase().includes(searchFor);
           }
         );
-        setFilteredMentionableUsers(filteredMentionableUsersList);
+        if (filteredMentionableUsersList.length > 0) {
+          setFilteredMentionableUsers(filteredMentionableUsersList);
+        } else {
+          mentionsContainerHider();
+        }
       }
       return filteredMentionableUsersList;
     } else {
       console.log("filterMentionableUsersList else");
+      setFilteredMentionableUsers(mentionableUsers);
       return mentionableUsers;
     }
   };
