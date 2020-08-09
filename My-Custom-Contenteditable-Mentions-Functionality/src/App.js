@@ -64,6 +64,7 @@ const App = () => {
   var aboutToHide = false;
   var mentionsListIndex = 0;
   var mentionsListHighlightItem = 1;
+  var localFilteredMentionableUsers = [...mentionableUsers];
 
   const mentionsContainerHider = () => {
     setShowMentionsContainer(false);
@@ -71,6 +72,7 @@ const App = () => {
     mentionsListIndex = 0;
     mentionsListHighlightItem = 1;
     setFilteredMentionableUsers(mentionableUsers);
+    localFilteredMentionableUsers = [...mentionableUsers];
     document.removeEventListener("keydown", handleHighlightList);
   };
 
@@ -132,6 +134,7 @@ const App = () => {
     if (!showMentionsContainer && e.keyCode === 50) {
       console.log("@ symbol triggered");
       setFilteredMentionableUsers(mentionableUsers);
+      localFilteredMentionableUsers = [...mentionableUsers];
       generateMentionableUsers(mentionableUsers);
       document.removeEventListener("keydown", handleHighlightList);
       document.addEventListener("keydown", handleHighlightList);
@@ -142,7 +145,23 @@ const App = () => {
     console.log(getIndex);
     getWordPrecedingCaret();
     handleIndividualMention(null, null, getIndex);
-    handleIndividualUserSelection();
+    mentionsContainerHider();
+
+    let contentEditableDiv_clone = document.getElementById("editable-div");
+
+    let range = document.createRange();
+    let sel = window.getSelection();
+
+    range.setStart(
+      contentEditableDiv_clone.childNodes[
+        contentEditableDiv_clone.childNodes.length - 1
+      ],
+      0
+    );
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    contentEditableDiv_clone.focus();
   };
 
   const handleHighlightList = async (e) => {
@@ -214,7 +233,7 @@ const App = () => {
 
     if (e.which === 27) {
       console.log("pressed ESC");
-      handleIndividualUserSelection();
+      mentionsContainerHider();
       return false;
     } else if (e.which === 38) {
       console.log("pressed 38");
@@ -240,7 +259,7 @@ const App = () => {
       console.log("pressed enter");
       getWordPrecedingCaret();
       handleIndividualMention(null, listOfFilteredUsers);
-      handleIndividualUserSelection();
+      mentionsContainerHider();
     }
   };
 
@@ -310,7 +329,7 @@ const App = () => {
 
     let indexoff = selectableIndex ? selectableIndex : mentionsListIndex;
 
-    let getMentionableUserDetails = mentionableUsers[indexoff];
+    let getMentionableUserDetails = localFilteredMentionableUsers[indexoff];
 
     let doGeneateMentionableUser = (
       <span>
@@ -385,6 +404,7 @@ const App = () => {
         );
         if (filteredMentionableUsersList.length > 0) {
           setFilteredMentionableUsers(filteredMentionableUsersList);
+          localFilteredMentionableUsers = [...filteredMentionableUsersList];
           generateMentionableUsers(filteredMentionableUsersList);
         } else {
           mentionsContainerHider();
@@ -393,6 +413,7 @@ const App = () => {
     } else {
       console.log("filterMentionableUsersList else");
       setFilteredMentionableUsers(mentionableUsers);
+      localFilteredMentionableUsers = [...mentionableUsers];
       generateMentionableUsers(mentionableUsers);
     }
   };
