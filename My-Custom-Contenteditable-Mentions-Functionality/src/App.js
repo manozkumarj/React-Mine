@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import avatar from "./images/avatar.png";
@@ -50,36 +50,60 @@ const App = () => {
     },
   ]);
 
+  useEffect(() => {
+    if (fiteredMentionableUsers && fiteredMentionableUsers.length > 0) {
+      let mentionsUsersList = document.getElementsByClassName(
+        "individual-mention-container"
+      );
+      mentionsUsersList[0].classList.add("active");
+      console.log("Need active first child");
+    }
+  }, [fiteredMentionableUsers]);
+
   var searchableWord = "";
+  var aboutToHide = false;
+  var mentionsListIndex = 0;
+  var mentionsListHighlightItem = 1;
 
   const mentionsContainerHider = () => {
     setShowMentionsContainer(false);
     searchableWord = "";
+    mentionsListIndex = 0;
+    mentionsListHighlightItem = 1;
     setFiteredMentionableUsers(mentionableUsers);
     document.removeEventListener("keydown", handleHighlightList);
   };
 
   const generateMentionableUsers = (getMentionableUsers) => {
+    setShowMentionableUsers("");
+    let loopId = 0;
     let generatingMentionableUsers =
       getMentionableUsers &&
       getMentionableUsers.length > 0 &&
-      getMentionableUsers.map((getMentionableUser, index) => (
-        <div
-          className="individual-mention-container"
-          id="individual-mention-container-1"
-          key={getMentionableUser._id}
-          onClick={handleIndividualUserSelection}
-        >
-          <img
-            src={getMentionableUser.photo}
-            alt="kohli"
-            className="individual-mention-user-img"
-          />
-          <div className="individual-mention-user-details">
-            {getMentionableUser.name}
+      getMentionableUsers.map((getMentionableUser, index) => {
+        loopId++;
+        return (
+          <div
+            className={
+              loopId === 0
+                ? "individual-mention-container active"
+                : "individual-mention-container"
+            }
+            id="individual-mention-container-1"
+            key={getMentionableUser._id}
+            onClick={handleIndividualUserSelection}
+          >
+            <img
+              src={getMentionableUser.photo}
+              alt="kohli"
+              className="individual-mention-user-img"
+            />
+            <div className="individual-mention-user-details">
+              {getMentionableUser.name}
+            </div>
           </div>
-        </div>
-      ));
+        );
+      });
     setShowMentionableUsers(generatingMentionableUsers);
     setShowMentionsContainer(true);
   };
@@ -130,11 +154,31 @@ const App = () => {
       );
     }
 
+    let mentionsUsersList = document.getElementsByClassName(
+      "individual-mention-container"
+    );
+
+    [].forEach.call(mentionsUsersList, function (el) {
+      el.classList.remove("active");
+    });
+
     // If presses backspace
     if (e.which === 8) {
       searchableWord = searchableWord.slice(0, -1);
+      searchableWord = searchableWord.trim();
+      console.log("searchableWord -> " + searchableWord);
       if (!searchableWord) {
-        mentionsContainerHider();
+        console.log("searchableWord if");
+        aboutToHide = true;
+        let modifiedFilteredList = await filterMentionableUsersList(
+          searchableWord
+        );
+        if (aboutToHide) {
+          console.log("searchableWord else if");
+          mentionsContainerHider();
+          aboutToHide = false;
+          return false;
+        }
         return false;
       }
       let modifiedFilteredList = await filterMentionableUsersList(
@@ -148,9 +192,25 @@ const App = () => {
       return false;
     } else if (e.which === 38) {
       console.log("pressed 38");
+      if (mentionsListHighlightItem === 1) {
+        mentionsListIndex = mentionsUsersList.length - 1;
+        mentionsListHighlightItem = mentionsUsersList.length;
+        mentionsUsersList[mentionsListIndex].classList.add("active");
+      } else {
+        mentionsUsersList[--mentionsListIndex].classList.add("active");
+        --mentionsListHighlightItem;
+      }
       return false;
     } else if (e.which === 40) {
       console.log("pressed 40");
+      if (mentionsListHighlightItem === mentionsUsersList.length) {
+        mentionsListIndex = 0;
+        mentionsListHighlightItem = 1;
+        mentionsUsersList[mentionsListIndex].classList.add("active");
+      } else {
+        mentionsUsersList[++mentionsListIndex].classList.add("active");
+        ++mentionsListHighlightItem;
+      }
       return false;
     } else if (e.which === 13) {
       console.log("pressed enter");
