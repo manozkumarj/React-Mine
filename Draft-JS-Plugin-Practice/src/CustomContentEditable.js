@@ -283,20 +283,20 @@ export default function CustomContentEditable() {
       } else {
         console.log("replace word --> " + lastWord);
 
-        if (/\s/.test(lastWord)) {
-          // lastWord = lastWord.toString();
-          // console.log(typeof lastWord[6]);
-          // console.log(lastWord[6]);
-          // console.log(lastWord.lastIndexOf(/\s/));
-          // let splitLastWord = lastWord.toString().split(" ");
-          // let getLastword = lastWord.split(" ").pop();
-          // console.log("getLastword -> " + getLastword);
+        // if (/\s/.test(lastWord)) {
+        // lastWord = lastWord.toString();
+        // console.log(typeof lastWord[6]);
+        // console.log(lastWord[6]);
+        // console.log(lastWord.lastIndexOf(/\s/));
+        // let splitLastWord = lastWord.toString().split(" ");
+        // let getLastword = lastWord.split(" ").pop();
+        // console.log("getLastword -> " + getLastword);
 
-          // console.log(splitLastWord);
-          // lastWord = splitLastWord[1];
-          // console.log(lastWord);
-          lastWord = "@" + searchFor;
-        }
+        // console.log(splitLastWord);
+        // lastWord = splitLastWord[1];
+        // console.log(lastWord);
+        //   lastWord = "@" + searchFor;
+        // }
 
         /* Find word start and end */
         var wordStart = range.endContainer.data.lastIndexOf(lastWord);
