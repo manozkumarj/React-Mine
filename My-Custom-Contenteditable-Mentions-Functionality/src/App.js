@@ -10,7 +10,6 @@ const App = () => {
   const [mentionsHTMLContent, setMentionsHTMLContent] = useState("");
   const [showMentionsContainer, setShowMentionsContainer] = useState(false);
   const [showMentionableUsers, setShowMentionableUsers] = useState("");
-  const [searchableWord, setSearchableWord] = useState("");
   const [fiteredMentionableUsers, setFiteredMentionableUsers] = useState([]);
   const [mentionableUsers, setMentionableUsers] = useState([
     {
@@ -51,6 +50,15 @@ const App = () => {
     },
   ]);
 
+  var searchableWord = "";
+
+  const mentionsContainerHider = () => {
+    setShowMentionsContainer(false);
+    searchableWord = "";
+    setFiteredMentionableUsers(mentionableUsers);
+    document.removeEventListener("keydown", handleHighlightList);
+  };
+
   const generateMentionableUsers = (getMentionableUsers) => {
     let generatingMentionableUsers =
       getMentionableUsers &&
@@ -84,7 +92,7 @@ const App = () => {
   // OnFocus
   const handleKeyUp = (e) => {
     // console.log(` ${e.keyCode}`);
-    if (e.keyCode === 50) {
+    if (!showMentionsContainer && e.keyCode === 50) {
       console.log("@ symbol triggered");
       setFiteredMentionableUsers(mentionableUsers);
       generateMentionableUsers(mentionableUsers);
@@ -97,6 +105,7 @@ const App = () => {
     console.log("e -> " + e.keyCode);
     if (
       e.keyCode === 13 ||
+      e.keyCode === 27 ||
       e.keyCode === 37 ||
       e.keyCode === 38 ||
       e.keyCode === 39 ||
@@ -108,7 +117,36 @@ const App = () => {
       e.cancelBubble = true;
     }
 
-    if (e.which === 38) {
+    const isLetter = /^[a-z]$/i.test(e.key);
+    const isNumber = /^[0-9]$/i.test(e.key);
+
+    if (isLetter || isNumber) {
+      console.log("pressed either number or letter");
+      let keyIs = e.key.toString();
+      searchableWord = searchableWord + keyIs;
+      console.log("searchableWord -> " + searchableWord);
+      let modifiedFilteredList = await filterMentionableUsersList(
+        searchableWord
+      );
+    }
+
+    // If presses backspace
+    if (e.which === 8) {
+      searchableWord = searchableWord.slice(0, -1);
+      if (!searchableWord) {
+        mentionsContainerHider();
+        return false;
+      }
+      let modifiedFilteredList = await filterMentionableUsersList(
+        searchableWord
+      );
+    }
+
+    if (e.which === 27) {
+      console.log("pressed ESC");
+      handleIndividualUserSelection();
+      return false;
+    } else if (e.which === 38) {
       console.log("pressed 38");
       return false;
     } else if (e.which === 40) {
@@ -118,6 +156,31 @@ const App = () => {
       console.log("pressed enter");
       handleIndividualUserSelection();
       return false;
+    }
+  };
+
+  const filterMentionableUsersList = (searchFor) => {
+    if (searchFor && searchFor.trim()) {
+      console.log("filterMentionableUsersList if & searchFor -> " + searchFor);
+      searchFor = searchFor.toLocaleLowerCase();
+      let filteredMentionableUsersList;
+      if (mentionableUsers.length > 0) {
+        filteredMentionableUsersList = mentionableUsers.filter(
+          (mentionableUser) => {
+            return mentionableUser.name.toLocaleLowerCase().includes(searchFor);
+          }
+        );
+        if (filteredMentionableUsersList.length > 0) {
+          setFiteredMentionableUsers(filteredMentionableUsersList);
+          generateMentionableUsers(filteredMentionableUsersList);
+        } else {
+          mentionsContainerHider();
+        }
+      }
+    } else {
+      console.log("filterMentionableUsersList else");
+      setFiteredMentionableUsers(mentionableUsers);
+      generateMentionableUsers(mentionableUsers);
     }
   };
 
