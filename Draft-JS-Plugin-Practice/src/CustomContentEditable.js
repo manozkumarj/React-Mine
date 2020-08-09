@@ -70,6 +70,16 @@ export default function CustomContentEditable() {
   //   getCaretPosition
   // );
 
+  const mentionsContainerHider = () => {
+    setShowMentionsContainer(false);
+    searchFor = "";
+    mentionsListIndex = 0;
+    mentionsListHighlightItem = 1;
+    setFilteredMentionableUsers(mentionableUsers);
+    document.removeEventListener("keydown", handleHighlightList);
+    document.removeEventListener("keyup", handleHighlightList);
+  };
+
   const handleKeyUp = (e) => {
     // console.log("handleKeyUp");
     console.log(` ${e.keyCode}`);
@@ -130,9 +140,7 @@ export default function CustomContentEditable() {
       e.which === 16 ||
       e.which === 17 ||
       e.which === 18 ||
-      e.which === 37 ||
       e.which === 38 ||
-      e.which === 39 ||
       e.which === 40 ||
       e.which === undefined
     ) {
@@ -147,6 +155,16 @@ export default function CustomContentEditable() {
       //   e.returnValue = false;
       //   e.cancelBubble = true;
       // }
+
+      if (
+        (showMentionsContainer && e.which === 37) ||
+        (showMentionsContainer && e.which === 39)
+      ) {
+        e.stopPropagation();
+        e.preventDefault();
+        e.returnValue = false;
+        e.cancelBubble = true;
+      }
       if (e.which !== 8) searchFor = searchFor + e.key;
       else if (e.which === 8) searchFor = searchFor.slice(0, -1);
       mentionsListIndex = 0;
@@ -397,8 +415,8 @@ export default function CustomContentEditable() {
     let mentionedHtmlPartsLength = mentionedHtmlParts.length;
     console.log(wholeContent);
     setMentionsPlainText(wholeContent);
-    // setMentionsHTMLContent(wholeHTMLContent);
-    // console.log(mentionedHtmlPartsLength);
+    setMentionsHTMLContent(wholeHTMLContent);
+    console.log(mentionedHtmlPartsLength);
 
     if (mentionedHtmlPartsLength > 0) {
       console.log(mentionedHtmlParts);
@@ -418,6 +436,7 @@ export default function CustomContentEditable() {
         id="editable-div"
         spellCheck={false}
         contentEditable={true}
+        onMouseDown={mentionsContainerHider}
         onKeyUp={handleKeyUp}
       ></div>
 
