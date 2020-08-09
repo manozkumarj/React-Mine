@@ -110,10 +110,11 @@ export default function CustomContentEditable() {
   };
 
   const handleOnMouseDown = async (index) => {
-    let modifiedFilteredList = await filterMentionableUsersList(searchFor);
+    console.log(searchFor);
+    // let modifiedFilteredList = await filterMentionableUsersList(searchFor);
     console.log("index -> " + index);
     getWordPrecedingCaret();
-    handleIndividualMention(null, modifiedFilteredList, index);
+    handleIndividualMention(null, filteredMentionableUsers, index);
     setShowMentionsContainer(false);
     setShowTagsContainer(false);
     setShowEmojisContainer(false);
@@ -190,7 +191,7 @@ export default function CustomContentEditable() {
         mentionsUsersList[++mentionsListIndex].classList.add("active");
         ++mentionsListHighlightItem;
       }
-    } else if (e.which === 13 || e.which === undefined) {
+    } else if (e.which === 13) {
       getWordPrecedingCaret();
       handleIndividualMention(null, modifiedFilteredList);
       setShowMentionsContainer(false);
@@ -368,6 +369,7 @@ export default function CustomContentEditable() {
 
   const filterMentionableUsersList = (searchFor) => {
     if (searchFor.trim()) {
+      console.log("filterMentionableUsersList if");
       searchFor = searchFor.toLocaleLowerCase();
       let filteredMentionableUsersList;
       if (mentionableUsers.length > 0) {
@@ -380,6 +382,7 @@ export default function CustomContentEditable() {
       }
       return filteredMentionableUsersList;
     } else {
+      console.log("filterMentionableUsersList else");
       return mentionableUsers;
     }
   };
