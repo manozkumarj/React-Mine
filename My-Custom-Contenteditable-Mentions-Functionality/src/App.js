@@ -92,6 +92,7 @@ const App = () => {
             id="individual-mention-container-1"
             key={getMentionableUser._id}
             onClick={handleIndividualUserSelection}
+            onMouseOver={handleMouseHover}
           >
             <img
               src={getMentionableUser.photo}
@@ -106,6 +107,17 @@ const App = () => {
       });
     setShowMentionableUsers(generatingMentionableUsers);
     setShowMentionsContainer(true);
+  };
+
+  const handleMouseHover = () => {
+    console.log("handleMouseHover triggered");
+    let mentionsUsersList = document.getElementsByClassName(
+      "individual-mention-container"
+    );
+
+    [].forEach.call(mentionsUsersList, function (el) {
+      el.classList.remove("active");
+    });
   };
 
   // OnFocus
