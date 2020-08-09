@@ -94,7 +94,7 @@ const App = () => {
             id="individual-mention-container-1"
             key={getMentionableUser._id}
             // onClick={handleIndividualUserSelection}
-            onMouseDown={() => handleOnMouseDown(index)}
+            onMouseDown={(event) => handleOnMouseDown(event, index)}
             onMouseOver={handleMouseHover}
           >
             <img
@@ -141,7 +141,12 @@ const App = () => {
     }
   };
 
-  const handleOnMouseDown = (getIndex) => {
+  const handleOnMouseDown = (e, getIndex) => {
+    e.stopPropagation();
+    e.preventDefault();
+    e.returnValue = false;
+    e.cancelBubble = true;
+
     console.log(getIndex);
     getWordPrecedingCaret();
     handleIndividualMention(null, null, getIndex);
@@ -149,19 +154,11 @@ const App = () => {
 
     let contentEditableDiv_clone = document.getElementById("editable-div");
 
-    let range = document.createRange();
-    let sel = window.getSelection();
-
-    range.setStart(
-      contentEditableDiv_clone.childNodes[
-        contentEditableDiv_clone.childNodes.length - 1
-      ],
-      0
-    );
-    range.collapse(true);
-    sel.removeAllRanges();
-    sel.addRange(range);
-    contentEditableDiv_clone.focus();
+    // contentEditableDiv_clone.focus();
+    // contentEditableDiv_clone.click();
+    // contentEditableDiv_clone.focus();
+    // contentEditableDiv_clone.normalize();
+    console.log("ok clicked");
   };
 
   const handleHighlightList = async (e) => {
