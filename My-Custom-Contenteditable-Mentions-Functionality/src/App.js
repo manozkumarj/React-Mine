@@ -382,7 +382,7 @@ const App = () => {
     //   `<span data-key="1" contenteditable=false class="mentioned-user-container"><span className="mentionSymbol">@</span><img src=${emojiPath} class="mentioned-user-photo primary-user" /></span> `
     // );
     let waitUntillPaster = await pasteHtmlAtCaret(
-      `<span data-key="1" contenteditable=false class="mentioned-user-container"><span className="mentionSymbol"><img src=${emojiPath} class="mentioned-user-photo primary-user" /></span></span> `
+      `<span data-key="1" contenteditable=false class="mentioned-emoji-container"><span className="mentionSymbol"><img src=${emojiPath} class="mentioned-emoji-photo" /></span></span> `
     );
   };
 

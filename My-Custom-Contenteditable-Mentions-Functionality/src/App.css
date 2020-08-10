@@ -7,6 +7,7 @@
   border: 2px solid #ccc;
   min-height: 100px;
   padding: 5px;
+  font-size: 25px;
 }
 .whole-mentions-container {
   background: #fff;
@@ -48,15 +49,21 @@
   color: #fdf;
 }
 
-.mentioned-user-container {
+.mentioned-user-container,
+.mentioned-emoji-container {
   display: inline-flex;
   /* align-items: center; */
-  background-color: cadetblue;
-  padding: 0px 5px;
   color: #fff;
   font-weight: bold;
   border-radius: 3px;
   margin: 2px;
+}
+.mentioned-emoji-container {
+  margin: 2px 0;
+}
+.mentioned-user-container {
+  padding: 0px 5px;
+  background-color: cadetblue;
   border: 1px solid #999;
 }
 /* .mentionSymbol {
@@ -65,6 +72,11 @@
 .mentioned-user-photo {
   height: 17px;
   margin: auto 2px;
+  border-radius: 100px;
+}
+.mentioned-emoji-photo {
+  height: 25px;
+  /* margin: auto 2px; */
   border-radius: 100px;
 }
 .primary-user {
