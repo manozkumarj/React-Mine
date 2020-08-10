@@ -1,9 +1,22 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
+// Import images
 import avatar from "./images/avatar.png";
 import zuck from "./images/zuck.jpg";
 import kohli from "./images/kohli.jpg";
+
+// Import emojis
+import one from "./emojis/smiling-face-with-heart-shaped-eyes-72.png";
+import two from "./emojis/angry-face-72.png";
+import three from "./emojis/anguished-face-72.png";
+import four from "./emojis/astonished-face-72.png";
+import five from "./emojis/black-sun-with-rays-72.png";
+import six from "./emojis/blossom-72.png";
+import seven from "./emojis/broken-heart-72.png";
+import eight from "./emojis/clapping-hands-sign-72.png";
+import nine from "./emojis/clinking-beer-mugs-72.png";
+import ten from "./emojis/confetti-ball-72.png";
 
 const App = () => {
   const [mentionsPlainText, setMentionsPlainText] = useState("");
@@ -340,6 +353,36 @@ const App = () => {
     }
   };
 
+  const setEndOfContenteditable = (contentEditableElement) => {
+    var range, selection;
+    if (document.createRange) {
+      //Firefox, Chrome, Opera, Safari, IE 9+
+      range = document.createRange(); //Create a range (a range is a like the selection but invisible)
+      range.selectNodeContents(contentEditableElement); //Select the entire contents of the element with the range
+      range.collapse(false); //collapse the range to the end point. false means collapse to end rather than the start
+      selection = window.getSelection(); //get the selection object (allows you to change selection)
+      selection.removeAllRanges(); //remove any selections already made
+      selection.addRange(range); //make the range you have just created the visible selection
+    } else if (document.selection) {
+      //IE 8 and lower
+      range = document.body.createTextRange(); //Create a range (a range is a like the selection but invisible)
+      range.moveToElementText(contentEditableElement); //Select the entire contents of the element with the range
+      range.collapse(false); //collapse the range to the end point. false means collapse to end rather than the start
+      range.select(); //Select the range (make it the visible selection
+    }
+  };
+
+  const handleEmojiOnMouseDown = async (e, emojiPath) => {
+    let containerEl = document.getElementById("editable-div");
+    setEndOfContenteditable(containerEl);
+    // containerEl.click();
+    // containerEl.focus();
+    // console.log(emojiPath);
+    let waitUntillPaster = await pasteHtmlAtCaret(
+      `<span data-key="1" contenteditable=false class="mentioned-user-container"><span className="mentionSymbol">@</span><img src=${emojiPath} class="mentioned-user-photo primary-user" /></span> `
+    );
+  };
+
   const handleIndividualMention = async (
     e,
     listOfFilteredUsers,
@@ -483,7 +526,7 @@ const App = () => {
         onBlur={(e) => handleBlur(e)}
       ></div>
 
-      {/* Starts */}
+      {/* Mentions Starts */}
       <div
         style={{
           display: showMentionsContainer ? "block" : "none",
@@ -494,7 +537,77 @@ const App = () => {
           {showMentionableUsers}
         </div>
       </div>
-      {/* Ends */}
+      {/* Mentions Ends */}
+
+      {/* Emojis Starts */}
+      <div>
+        <div
+          className="whole-mentions-container whole-emojis-container"
+          id="whole-mentions-container"
+        >
+          <img
+            src={one}
+            alt="one"
+            className="single-emoji"
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, one)}
+          />
+          <img
+            src={two}
+            alt="one"
+            className="single-emoji"
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, two)}
+          />
+          <img
+            src={three}
+            alt="one"
+            className="single-emoji"
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, three)}
+          />
+          <img
+            src={four}
+            alt="one"
+            className="single-emoji"
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, four)}
+          />
+          <img
+            src={five}
+            alt="one"
+            className="single-emoji"
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, five)}
+          />
+          <img
+            src={six}
+            alt="one"
+            className="single-emoji"
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, six)}
+          />
+          <img
+            src={seven}
+            alt="one"
+            className="single-emoji"
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, seven)}
+          />
+          <img
+            src={eight}
+            alt="one"
+            className="single-emoji"
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, eight)}
+          />
+          <img
+            src={nine}
+            alt="one"
+            className="single-emoji"
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, nine)}
+          />
+          <img
+            src={ten}
+            alt="one"
+            className="single-emoji"
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, ten)}
+          />
+        </div>
+      </div>
+      {/* Emojis Ends */}
 
       <button
         className="button"

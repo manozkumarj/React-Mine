@@ -1,2 +1,7 @@
 * https://recalll.co/ask/v/topic/javascript-Set-cursor-position-on-contentEditable-div/59f8bb7a1126f472258b4faf
 * 
+
+
+* https://www.piliapp.com/facebook-symbols/ --> onClick insert emoji into textarea
+* https://emojipedia.org/facebook/
+* 
