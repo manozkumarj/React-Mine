@@ -378,8 +378,11 @@ const App = () => {
     // containerEl.click();
     // containerEl.focus();
     // console.log(emojiPath);
+    // let waitUntillPaster = await pasteHtmlAtCaret(
+    //   `<span data-key="1" contenteditable=false class="mentioned-user-container"><span className="mentionSymbol">@</span><img src=${emojiPath} class="mentioned-user-photo primary-user" /></span> `
+    // );
     let waitUntillPaster = await pasteHtmlAtCaret(
-      `<span data-key="1" contenteditable=false class="mentioned-user-container"><span className="mentionSymbol">@</span><img src=${emojiPath} class="mentioned-user-photo primary-user" /></span> `
+      `<span data-key="1" contenteditable=false class="mentioned-user-container"><span className="mentionSymbol"><img src=${emojiPath} class="mentioned-user-photo primary-user" /></span></span> `
     );
   };
 
