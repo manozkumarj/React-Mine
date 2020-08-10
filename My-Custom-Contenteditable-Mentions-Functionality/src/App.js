@@ -51,7 +51,11 @@ const App = () => {
   ]);
 
   useEffect(() => {
-    if (filteredMentionableUsers && filteredMentionableUsers.length > 0) {
+    if (
+      showMentionsContainer &&
+      filteredMentionableUsers &&
+      filteredMentionableUsers.length > 0
+    ) {
       let mentionsUsersList = document.getElementsByClassName(
         "individual-mention-container"
       );
@@ -67,13 +71,16 @@ const App = () => {
   var localFilteredMentionableUsers = [...mentionableUsers];
 
   const mentionsContainerHider = () => {
+    document
+      .getElementById("editable-div")
+      .removeEventListener("keydown", handleHighlightList);
     setShowMentionsContainer(false);
     searchableWord = "";
     mentionsListIndex = 0;
     mentionsListHighlightItem = 1;
     setFilteredMentionableUsers(mentionableUsers);
     localFilteredMentionableUsers = [...mentionableUsers];
-    document.removeEventListener("keydown", handleHighlightList);
+    console.log("mentionsContainerHider trigger");
   };
 
   const generateMentionableUsers = (getMentionableUsers) => {
@@ -126,6 +133,18 @@ const App = () => {
   // OnFocus
   const handleFocus = () => {
     console.log("handleFocus");
+    mentionsContainerHider();
+  };
+
+  // OnBlur
+  const handleBlur = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    e.returnValue = false;
+    e.cancelBubble = true;
+
+    console.log("handleBlur");
+    mentionsContainerHider();
   };
 
   // OnFocus
@@ -136,8 +155,12 @@ const App = () => {
       setFilteredMentionableUsers(mentionableUsers);
       localFilteredMentionableUsers = [...mentionableUsers];
       generateMentionableUsers(mentionableUsers);
-      document.removeEventListener("keydown", handleHighlightList);
-      document.addEventListener("keydown", handleHighlightList);
+      document
+        .getElementById("editable-div")
+        .removeEventListener("keydown", handleHighlightList);
+      document
+        .getElementById("editable-div")
+        .addEventListener("keydown", handleHighlightList);
     }
   };
 
@@ -418,7 +441,9 @@ const App = () => {
   const handleIndividualUserSelection = () => {
     setShowMentionableUsers("");
     setShowMentionsContainer(false);
-    document.removeEventListener("keydown", handleHighlightList);
+    document
+      .getElementById("editable-div")
+      .removeEventListener("keydown", handleHighlightList);
   };
 
   const handleGetText = () => {
@@ -455,6 +480,7 @@ const App = () => {
         contentEditable={true}
         onFocus={handleFocus}
         onKeyUp={handleKeyUp}
+        onBlur={(e) => handleBlur(e)}
       ></div>
 
       {/* Starts */}
