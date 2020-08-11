@@ -7,7 +7,7 @@
   border: 2px solid #ccc;
   min-height: 100px;
   padding: 5px;
-  font-size: 25px;
+  font-size: 18px;
 }
 .whole-mentions-container {
   background: #fff;
@@ -75,7 +75,7 @@
   border-radius: 100px;
 }
 .mentioned-emoji-photo {
-  height: 25px;
+  height: 20px;
   /* margin: auto 2px; */
   border-radius: 100px;
 }
