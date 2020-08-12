@@ -1,5 +1,6 @@
 * https://recalll.co/ask/v/topic/javascript-Set-cursor-position-on-contentEditable-div/59f8bb7a1126f472258b4faf
 * https://stackoverflow.com/questions/1125292/how-to-move-cursor-to-end-of-contenteditable-entity
+* https://www.geeksforgeeks.org/replace-a-dom-element-with-another-dom-element-in-place/
 * 
 
 

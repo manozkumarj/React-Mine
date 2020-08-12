@@ -93,7 +93,7 @@ const App = () => {
     mentionsListHighlightItem = 1;
     setFilteredMentionableUsers(mentionableUsers);
     localFilteredMentionableUsers = [...mentionableUsers];
-    console.log("mentionsContainerHider trigger");
+    // console.log("mentionsContainerHider trigger");
   };
 
   const generateMentionableUsers = (getMentionableUsers) => {
@@ -133,7 +133,7 @@ const App = () => {
   };
 
   const handleMouseHover = () => {
-    console.log("handleMouseHover triggered");
+    // console.log("handleMouseHover triggered");
     let mentionsUsersList = document.getElementsByClassName(
       "individual-mention-container"
     );
@@ -145,7 +145,7 @@ const App = () => {
 
   // OnFocus
   const handleFocus = () => {
-    console.log("handleFocus");
+    // console.log("handleFocus");
     mentionsContainerHider();
   };
 
@@ -156,7 +156,7 @@ const App = () => {
     e.returnValue = false;
     e.cancelBubble = true;
 
-    console.log("handleBlur");
+    // console.log("handleBlur");
     mentionsContainerHider();
   };
 
@@ -164,7 +164,7 @@ const App = () => {
   const handleKeyUp = (e) => {
     // console.log(` ${e.keyCode}`);
     if (!showMentionsContainer && e.keyCode === 50) {
-      console.log("@ symbol triggered");
+      // console.log("@ symbol triggered");
       setFilteredMentionableUsers(mentionableUsers);
       localFilteredMentionableUsers = [...mentionableUsers];
       generateMentionableUsers(mentionableUsers);
@@ -194,11 +194,11 @@ const App = () => {
     // contentEditableDiv_clone.click();
     // contentEditableDiv_clone.focus();
     // contentEditableDiv_clone.normalize();
-    console.log("ok clicked");
+    // console.log("ok clicked");
   };
 
   const handleHighlightList = async (e) => {
-    console.log("e -> " + e.keyCode);
+    // console.log("e -> " + e.keyCode);
     if (
       e.keyCode === 13 ||
       e.keyCode === 27 ||
@@ -219,7 +219,7 @@ const App = () => {
     let listOfFilteredUsers = [...filteredMentionableUsers];
 
     if (isLetter || isNumber) {
-      console.log("pressed either number or letter");
+      // console.log("pressed either number or letter");
       let keyIs = e.key.toString();
       searchableWord = searchableWord + keyIs;
       console.log("searchableWord -> " + searchableWord);
@@ -241,7 +241,7 @@ const App = () => {
       console.log("searchableWord -> " + searchableWord);
       let modifiedFilteredList = filterMentionableUsersList(searchableWord);
       if (!searchableWord && !aboutToHide) {
-        console.log("searchableWord if");
+        // console.log("searchableWord if");
         console.log(
           "searchableWord -> " +
             searchableWord +
@@ -250,7 +250,7 @@ const App = () => {
         );
         aboutToHide = true;
       } else if (!searchableWord && aboutToHide) {
-        console.log("searchableWord else if");
+        // console.log("searchableWord else if");
         console.log(
           "searchableWord -> " +
             searchableWord +
@@ -265,11 +265,11 @@ const App = () => {
     aboutToHide = false;
 
     if (e.which === 27) {
-      console.log("pressed ESC");
+      // console.log("pressed ESC");
       mentionsContainerHider();
       return false;
     } else if (e.which === 38) {
-      console.log("pressed 38");
+      // console.log("pressed 38");
       if (mentionsListHighlightItem === 1) {
         mentionsListIndex = mentionsUsersList.length - 1;
         mentionsListHighlightItem = mentionsUsersList.length;
@@ -279,7 +279,7 @@ const App = () => {
         --mentionsListHighlightItem;
       }
     } else if (e.which === 40) {
-      console.log("pressed 40");
+      // console.log("pressed 40");
       if (mentionsListHighlightItem === mentionsUsersList.length) {
         mentionsListIndex = 0;
         mentionsListHighlightItem = 1;
@@ -289,7 +289,7 @@ const App = () => {
         ++mentionsListHighlightItem;
       }
     } else if (e.which === 13) {
-      console.log("pressed enter");
+      // console.log("pressed enter");
       getWordPrecedingCaret();
       handleIndividualMention(null, listOfFilteredUsers);
       mentionsContainerHider();
@@ -329,15 +329,15 @@ const App = () => {
     if (lastWord) {
       var resultValue = " "; // this value is coming from some other function
       if (resultValue == lastWord) {
-        console.log("do nothing: " + lastWord);
+        // console.log("do nothing: " + lastWord);
         // do nothing
       } else {
-        console.log("replace word --> " + lastWord);
+        // console.log("replace word --> " + lastWord);
 
         /* Find word start and end */
         var wordStart = range.endContainer.data.lastIndexOf(lastWord);
         var wordEnd = wordStart + lastWord.length;
-        console.log("pos: (" + wordStart + ", " + wordEnd + ")");
+        // console.log("pos: (" + wordStart + ", " + wordEnd + ")");
 
         range.setStart(range.endContainer, wordStart);
         range.setEnd(range.endContainer, wordEnd);
@@ -459,7 +459,7 @@ const App = () => {
 
   const filterMentionableUsersList = (searchFor) => {
     if (searchFor && searchFor.trim()) {
-      console.log("filterMentionableUsersList if & searchFor -> " + searchFor);
+      // console.log("filterMentionableUsersList if & searchFor -> " + searchFor);
       searchFor = searchFor.toLocaleLowerCase();
       let filteredMentionableUsersList;
       if (mentionableUsers.length > 0) {
@@ -477,7 +477,7 @@ const App = () => {
         }
       }
     } else {
-      console.log("filterMentionableUsersList else");
+      // console.log("filterMentionableUsersList else");
       setFilteredMentionableUsers(mentionableUsers);
       localFilteredMentionableUsers = [...mentionableUsers];
       generateMentionableUsers(mentionableUsers);
@@ -493,28 +493,37 @@ const App = () => {
   };
 
   const handleGetText = () => {
+    // console.log("Need to show contentEditable text");
+    console.clear();
     let contentEditableDiv = document.getElementById("editable-div");
-    console.log("Need to show contentEditable text");
     let wholeContent = contentEditableDiv.textContent.trim();
-    let wholeHTMLContent = contentEditableDiv.innerHTML;
-    let mentionedHtmlParts = contentEditableDiv.getElementsByClassName(
+    let getMentionedEmojisClasses = contentEditableDiv.getElementsByClassName(
+      "mentioned-emoji-photo"
+    );
+    let getMentionedEmojisClassesLength = getMentionedEmojisClasses.length;
+    console.log("Mentioned emojis count -> " + getMentionedEmojisClassesLength);
+
+    // Mentioned users code - starts
+    let getMentionedUsersClasses = contentEditableDiv.getElementsByClassName(
       "mentioned-user-container"
     );
-    let mentionedHtmlPartsLength = mentionedHtmlParts.length;
-    console.log(wholeContent);
+    let getMentionedUsersClassesLength = getMentionedUsersClasses.length;
+    console.log("Mentioned users count -> " + getMentionedUsersClassesLength);
+    // console.log(wholeContent);
     setMentionsPlainText(wholeContent);
-    // setMentionsHTMLContent(wholeHTMLContent);
-    // console.log(mentionedHtmlPartsLength);
 
-    if (mentionedHtmlPartsLength > 0) {
-      console.log(mentionedHtmlParts);
-
-      for (let i = 0; i < mentionedHtmlPartsLength; i++) {
-        let mentionedHtmlPartInnerHTML = mentionedHtmlParts[i].innerHTML;
+    if (getMentionedUsersClassesLength > 0) {
+      for (let i = 0; i < getMentionedUsersClassesLength; i++) {
+        let individualMentionedUserTextContext =
+          getMentionedUsersClasses[i].textContent;
         // console.log(mentionedHtmlPartInnerHTML);
-        console.log(mentionedHtmlParts[i].textContent);
+        console.log(individualMentionedUserTextContext);
       }
     }
+    // Mentioned users code - ends
+
+    let wholeHTMLContent = contentEditableDiv.innerHTML;
+    setMentionsHTMLContent(wholeHTMLContent);
   };
 
   return (
