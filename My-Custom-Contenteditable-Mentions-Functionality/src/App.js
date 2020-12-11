@@ -244,18 +244,18 @@ const App = () => {
         // console.log("searchableWord if");
         console.log(
           "searchableWord -> " +
-            searchableWord +
-            " && aboutToHide -> " +
-            aboutToHide
+          searchableWord +
+          " && aboutToHide -> " +
+          aboutToHide
         );
         aboutToHide = true;
       } else if (!searchableWord && aboutToHide) {
         // console.log("searchableWord else if");
         console.log(
           "searchableWord -> " +
-            searchableWord +
-            " && aboutToHide -> " +
-            aboutToHide
+          searchableWord +
+          " && aboutToHide -> " +
+          aboutToHide
         );
         mentionsContainerHider();
         aboutToHide = null;
@@ -372,7 +372,7 @@ const App = () => {
     }
   };
 
-  const handleEmojiOnMouseDown = async (e, emojiPath) => {
+  const handleEmojiOnMouseDown = async (e, emojiPath, emojiId) => {
     let containerEl = document.getElementById("editable-div");
     setEndOfContenteditable(containerEl);
     // containerEl.click();
@@ -382,7 +382,7 @@ const App = () => {
     //   `<span data-key="1" contenteditable=false class="mentioned-user-container"><span className="mentionSymbol">@</span><img src=${emojiPath} class="mentioned-user-photo primary-user" /></span> `
     // );
     let waitUntillPaster = await pasteHtmlAtCaret(
-      `<span data-key="1" contenteditable=false class="mentioned-emoji-container"><span className="mentionSymbol"><img src=${emojiPath} class="mentioned-emoji-photo" /></span></span> `
+      `<span data-key="1" contenteditable=false class="mentioned-emoji-container"><span className="mentionSymbol"><img src=${emojiPath} class="mentioned-emoji-photo" data-id="${emojiId}" /></span></span> `
     );
   };
 
@@ -391,7 +391,7 @@ const App = () => {
     listOfFilteredUsers,
     selectableIndex = null
   ) => {
-    console.log(filteredMentionableUsers);
+    // console.log(filteredMentionableUsers);
 
     let indexoff = selectableIndex ? selectableIndex : mentionsListIndex;
 
@@ -404,7 +404,7 @@ const App = () => {
     );
     // contentEditableDiv_clone.append(doGeneateMentionableUser);
     let waitUntillPaster = await pasteHtmlAtCaret(
-      `<span data-key="1" contenteditable=false class="mentioned-user-container"><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo primary-user" /><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo secondary-user" /><span className="mentioned-user-username">${getMentionableUserDetails.username} </span></span> `
+      `<span data-key="1" contenteditable=false class="mentioned-user-container"><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo primary-user" /><img src=${getMentionableUserDetails.photo} class="mentioned-user-photo secondary-user" /><span className="mentioned-user-username" style="font-size: 16px">${getMentionableUserDetails.username} </span></span> `
     );
   };
 
@@ -503,6 +503,19 @@ const App = () => {
     let getMentionedEmojisClassesLength = getMentionedEmojisClasses.length;
     console.log("Mentioned emojis count -> " + getMentionedEmojisClassesLength);
 
+    if (getMentionedEmojisClassesLength > 0) {
+      for (let i = 0; i < getMentionedEmojisClassesLength; i++) {
+        let individualMentionedEmojiDataId = getMentionedEmojisClasses[
+          i
+        ].getAttribute("data-id");
+        console.log(
+          "individualMentionedEmojiDataId -> " + individualMentionedEmojiDataId
+        );
+      }
+    }
+
+    console.log("**************************");
+
     // Mentioned users code - starts
     let getMentionedUsersClasses = contentEditableDiv.getElementsByClassName(
       "mentioned-user-container"
@@ -561,61 +574,67 @@ const App = () => {
             src={one}
             alt="one"
             className="single-emoji"
-            onMouseDown={(event) => handleEmojiOnMouseDown(event, one)}
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, one, "one")}
           />
           <img
             src={two}
             alt="one"
             className="single-emoji"
-            onMouseDown={(event) => handleEmojiOnMouseDown(event, two)}
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, two, "two")}
           />
           <img
             src={three}
             alt="one"
             className="single-emoji"
-            onMouseDown={(event) => handleEmojiOnMouseDown(event, three)}
+            onMouseDown={(event) =>
+              handleEmojiOnMouseDown(event, three, "three")
+            }
           />
           <img
             src={four}
             alt="one"
             className="single-emoji"
-            onMouseDown={(event) => handleEmojiOnMouseDown(event, four)}
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, four, "four")}
           />
           <img
             src={five}
             alt="one"
             className="single-emoji"
-            onMouseDown={(event) => handleEmojiOnMouseDown(event, five)}
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, five, "five")}
           />
           <img
             src={six}
             alt="one"
             className="single-emoji"
-            onMouseDown={(event) => handleEmojiOnMouseDown(event, six)}
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, six, "six")}
           />
           <img
             src={seven}
             alt="one"
             className="single-emoji"
-            onMouseDown={(event) => handleEmojiOnMouseDown(event, seven)}
+            onMouseDown={(event) =>
+              handleEmojiOnMouseDown(event, seven, "seven")
+            }
           />
           <img
             src={eight}
             alt="one"
             className="single-emoji"
-            onMouseDown={(event) => handleEmojiOnMouseDown(event, eight)}
+            onMouseDown={(event) =>
+              handleEmojiOnMouseDown(event, eight, "eight")
+            }
           />
           <img
             src={nine}
             alt="one"
             className="single-emoji"
-            onMouseDown={(event) => handleEmojiOnMouseDown(event, nine)}
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, nine, "nine")}
           />
           <img
             src={ten}
             alt="one"
             className="single-emoji"
-            onMouseDown={(event) => handleEmojiOnMouseDown(event, ten)}
+            onMouseDown={(event) => handleEmojiOnMouseDown(event, ten, "ten")}
           />
         </div>
       </div>
