@@ -1,0 +1,87 @@
+.dp-change-upload-container {
+  display: flex;
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+  border: 2px dashed #999;
+  border-radius: 5px;
+}
+.dp-change-upload-section {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+.dp-change-upload-photo-icon {
+  height: 25px;
+  margin: auto 5px;
+}
+.dp-change-container {
+  background: #fff;
+  border: 1px solid #cccccc;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  border-radius: 5px;
+  margin-bottom: 10em;
+  padding: 15px;
+}
+.reactEasyCrop_Container {
+  border-radius: 5px;
+}
+.crop-container {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  padding: 50px;
+  margin: 10px auto;
+}
+
+.controls {
+  width: 80%;
+  margin: 10px auto;
+}
+
+.slider {
+  padding: 22px 0px;
+}
+
+.cropped-image-container {
+  margin: 30px auto;
+  text-align: center;
+}
+.cropped-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 100px;
+  border: 2px solid #999;
+}
+.dp-change-buttons-container {
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid var(--site-color);
+}
+.dp-change-button {
+  padding: 5px 20px;
+  border: 2px solid var(--site-color);
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 3px;
+}
+.dp-change-back-button {
+  background-color: #fff;
+  color: var(--site-color);
+}
+.dp-change-continue-button {
+  background: var(--site-color);
+  color: #fff;
+}
+
+.no-top-border-margin-12 {
+  border: none;
+  margin: 12px;
+  padding: 0;
+}

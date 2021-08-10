@@ -1,0 +1,331 @@
+/* posts related - starts */
+.all-posts-container {
+  margin-bottom: 20em;
+}
+
+.post-n-user-details-container,
+.post-n-user-details-comment-container {
+  /* height: 45px; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* padding: 5px; */
+}
+
+/* .post-n-user-details-comment-container {
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+  } */
+.post-individual-comment-container:last-child,
+.dropdown ul li:last-child {
+  border-bottom: none;
+}
+
+.post-dps-container,
+.post-comments-dps-container {
+  display: flex;
+  height: 100%;
+}
+.post-dps-container {
+  padding: 5px;
+}
+.post-comments-dps-container {
+  padding-right: 5px;
+}
+.post-user-dp {
+  height: 40px;
+  width: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+.post-comment-user-dp {
+  height: 30px;
+  width: 30px;
+  border-radius: 100px;
+  cursor: pointer;
+}
+.post-user-dp-primary-a,
+.post-comment-user-dp-primary-a {
+  z-index: 5;
+}
+.post-user-dp-secondary {
+  margin-left: -15px;
+}
+.post-comment-user-dp-secondary {
+  margin-left: -8px;
+}
+
+.postInfo-n-user-details-div {
+  width: 100%;
+  /* margin-left: 6px; */
+}
+.post-details-div {
+  font-weight: bold;
+  font-size: 17px;
+  position: relative;
+}
+
+.post-details-div a {
+  color: var(--site-color);
+}
+
+.post-individual-comment-container {
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+  /* align-items: center; */
+}
+.post-comment-details-div {
+  font-size: 15px;
+}
+
+.post-details-div a:hover {
+  color: var(--site-color);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.post-vr-dots {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+.post-vr-dots:before {
+  content: "\2807";
+  font-size: 25px;
+  color: #999;
+}
+.post-comment-vr-dots:before {
+  content: "\2807";
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+}
+
+.post-comment {
+  font-size: 14px;
+  color: #000;
+  /* padding: 5px; */
+}
+
+.post-description-container {
+  height: auto;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+.post-description {
+  word-wrap: break-word;
+  font-size: 15px;
+  font-weight: normal;
+  zoom: 1;
+}
+.greet-section-container {
+  border-top: 1px solid #ccc;
+  display: flex;
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+}
+.greetIcon {
+  width: 60px;
+}
+.greet-section-item {
+  flex: 1;
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+}
+.greet-icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border-right: 1px solid #ccc; */
+}
+.open-letter-text {
+  margin: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+.greet-view-text {
+  font-size: 14px;
+}
+.greet-count {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--site-color);
+}
+.greet-hr {
+  width: 50%;
+  margin: 3px auto;
+}
+
+.flip-button-container {
+  margin: 5px;
+  text-align: center;
+}
+
+.flip-button {
+  background: #999;
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.comment-input-container {
+  border-top: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* display: none; */
+}
+.comment-box {
+  width: 96%;
+  margin: 7px;
+  font-size: 15px;
+}
+.post-actions-counter-container {
+  display: flex;
+  height: 30px;
+  padding: 0px 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #ccc;
+}
+.post-actions-reaction-counter,
+.post-actions-comments-counter {
+  cursor: pointer;
+}
+.post-actions-reaction-counter:hover,
+.post-actions-comments-counter:hover {
+  text-decoration: underline;
+}
+.more-reactions-container-holder {
+  display: none;
+  width: 68%;
+  position: absolute;
+  bottom: 0;
+}
+.more-reactions-container {
+  position: absolute;
+  bottom: 35px;
+  background-color: #fff;
+  z-index: 8;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: -2px 4px 14px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -2px 4px 14px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: -2px 4px 14px 0px rgba(0, 0, 0, 0.75);
+  /* display: none; */
+}
+.more-reactions-emoji {
+  width: 33px;
+  height: 33px;
+  padding: 5px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.more-reactions-emoji:hover {
+  border: 1px solid var(--site-color);
+}
+.reacted-emoji-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reacted-emoji {
+  width: 25px;
+}
+.reacted-emoji-text {
+  margin: auto 3px;
+}
+.post-actions-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #ccc;
+}
+.action-item {
+  flex: 1;
+  display: block;
+  /* padding: 8px; */
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  border-right: 1px solid #ccc;
+  cursor: pointer;
+}
+.more-reactions-action-item {
+  display: block;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: normal;
+  cursor: pointer;
+}
+.action-item:last-child {
+  border-right: none;
+}
+
+.like-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-comments-container {
+  border-top: 1px solid #ccc;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 120px;
+  background-color: #fff;
+  z-index: 8;
+  border: 1px solid #ccc;
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
+}
+
+.dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: normal;
+}
+.dropdown ul li {
+  padding: 8px 12px;
+  border-bottom: 1px solid #ccc;
+}
+
+.dropdown ul li:hover {
+  background-color: rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+}
+.post-picture-div {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid #ccc;
+}
+
+.post-picture-div img {
+  max-width: 100%;
+  cursor: pointer;
+}
+
+.react-player__preview {
+  height: 200px !important;
+}

@@ -1,0 +1,21 @@
+* To use Redux
+    -> Need to install 'redux react-redux redux-thunk axios' packages
+
+* To use redux-devtools-extension
+    -> Need to install 'redux-devtools-extension' package
+
+* To use Router
+    -> Need to install 'react-router-dom' package
+
+* To show notifications like Facebook
+    -> Need to install 'react-notifications-component' package
+
+* To detect Internet connection
+    -> Need to install 'react-detect-offline' package
+
+https://www.npmjs.com/package/react-detect-offline
+
+* To Implement flipcard
+    -> Need to install 'react-card-flip' package
+
+* 

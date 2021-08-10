@@ -1,0 +1,23 @@
+/* Greet div related - starts */
+.greet-div {
+  height: 120px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.greet {
+  font-size: 19px;
+  font-weight: bold;
+  zoom: 1;
+  padding-bottom: 7px;
+}
+
+.greet-name {
+  font-size: 20px;
+  font-weight: bold;
+  zoom: 1;
+  color: var(--site-color);
+}
+/* Greet div related - ends */

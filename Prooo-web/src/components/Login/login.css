@@ -1,0 +1,61 @@
+.component-container {
+  width: 50%;
+  margin: 70px auto;
+  background: #fff;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  border: 1px solid #cccccc;
+  padding: 30px 15px;
+}
+.heading-b4-login {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--site-color);
+}
+.dividable-hr-primary {
+  width: 90%;
+}
+.dividable-hr-secondary {
+  width: 80%;
+}
+.dividable-hr-primary,
+.dividable-hr-secondary {
+  margin: 10px auto;
+  border: 1px solid var(--site-color);
+}
+
+.form-holder {
+  width: 60%;
+  margin: auto;
+  /* border: 1px solid red; */
+}
+.form-field-holder {
+  margin: auto;
+}
+.form-field {
+  width: 93%;
+  border: 1px solid #999;
+  border-radius: 5px;
+  padding: 5px 8px;
+  margin: 5px 0px;
+  font-size: 16px;
+}
+
+.form-button {
+  width: 99%;
+  padding: 8px 0px;
+  margin: 5px 0px;
+  background: var(--site-color);
+  color: #fff;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+.disableButton {
+  background: #999 !important;
+  cursor: default !important;
+}

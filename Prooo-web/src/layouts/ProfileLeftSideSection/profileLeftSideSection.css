@@ -1,0 +1,22 @@
+.profile-auth-user-dps-lg-container {
+  position: relative;
+  width: 80%;
+  border: 4px double var(--site-color);
+  border-radius: 5px;
+}
+.dp-change-text {
+  position: absolute;
+  z-index: 10;
+  top: 70%;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #fff;
+}
+.primary-dp-change-text {
+  left: 6%;
+}
+.secondary-dp-change-text {
+  left: 70%;
+}

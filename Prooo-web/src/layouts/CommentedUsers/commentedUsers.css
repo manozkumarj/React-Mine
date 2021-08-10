@@ -1,0 +1,12 @@
+.no-border-shadow-margin-top-10 {
+  border: none !important;
+  box-shadow: none !important;
+  margin-top: 10px !important;
+}
+.border-bottom {
+  border-bottom: 2px solid #ccc !important;
+}
+.no-border,
+.border-bottom:last-child {
+  border: none !important;
+}

@@ -1,0 +1,22 @@
+.settings-input-field {
+  border: 1px solid #ccc;
+  width: 94%;
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.save-button {
+  width: 100%;
+  background-color: var(--site-color);
+  color: #fff;
+  border-radius: 3px;
+  padding: 8px 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.customize-settings-error {
+  font-size: 13px;
+  display: block;
+  margin: 5px auto;
+}

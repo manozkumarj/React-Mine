@@ -1,0 +1,22 @@
+.gender-selection-container {
+  display: flex;
+  margin: 5px 0px;
+  margin-bottom: 8px;
+  padding: 5px 0px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+.gender-selection-title,
+.gender-selection-option {
+  margin: auto 8px;
+  font-size: 15px;
+}
+.gender-selection-title {
+  font-weight: bold;
+}
+.gender-selection-option-radio {
+  margin: auto 2px;
+}
+.error-msg {
+  color: #ea4f35;
+}

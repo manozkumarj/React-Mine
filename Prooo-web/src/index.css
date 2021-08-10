@@ -1,0 +1,406 @@
+:root {
+  /* --site-color: #003d99; */
+  --site-color: #002699;
+  --global-bg-color: #e9e9e9;
+  --max-width: 1190px;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  /* box-sizing: border-box; */
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  background: var(--global-bg-color);
+  /* background: #fff; */
+  color: #1c1e21;
+  direction: ltr;
+  /* line-height: 1.34; */
+  margin: 0;
+  padding: 0;
+  unicode-bidi: embed;
+  overflow-y: scroll;
+}
+
+a {
+  text-decoration: none;
+  color: var(--site-color);
+}
+ul {
+  list-style: none;
+}
+input,
+textarea,
+button,
+select {
+  border: none;
+  outline: 0px;
+}
+
+button {
+  cursor: pointer;
+}
+
+textarea {
+  font-family: helvetica, arial, sans-serif;
+  min-height: 62px;
+  border-radius: 3px;
+  outline: 0px;
+  resize: none;
+}
+
+.show {
+  display: block !important;
+}
+
+.center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pointer {
+  cursor: pointer;
+}
+.default-cursor {
+  cursor: default !important;
+}
+.disable-button {
+  background-color: #999 !important;
+  cursor: default !important;
+}
+.deleted-button {
+  background-color: #ea4f35 !important;
+  cursor: default !important;
+}
+.danger-button {
+  background-color: #ea4f35 !important;
+}
+.accepted-button {
+  background-color: #009933 !important;
+  cursor: default !important;
+}
+.positive-li {
+  color: #009933 !important;
+  font-weight: bold;
+}
+.negative-li {
+  color: #ea4f35 !important;
+  font-weight: bold;
+}
+
+.highlight-a-tag-on-hover:hover {
+  text-decoration: underline;
+}
+
+.three-dots-section {
+  width: 100%;
+  overflow: hidden;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.emptyRecords {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Notification */
+.notification-container-bottom-left {
+  bottom: 60px !important;
+}
+.notification-container-bottom-right {
+  bottom: 60px !important;
+}
+
+/* Modal related CSS - starts */
+.modal-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 50;
+  overflow-y: scroll;
+  min-height: 100%;
+  max-height: auto;
+  display: none;
+  /* padding: 0 20px; */
+}
+
+.reacted-users-modal-container,
+.commented-users-modal-container,
+.create-post-layer-one-modal-container,
+.create-post-layer-two-modal-container,
+.letter-viewer-modal-container,
+.create-flipcard-layer-one-modal-container,
+.create-flipcard-layer-two-modal-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 50;
+  overflow-y: scroll;
+  min-height: 100%;
+  max-height: auto;
+  display: none;
+  /* padding: 0 20px; */
+}
+.create-post-layer-two-modal-container,
+.create-flipcard-layer-two-modal-container {
+  z-index: 60;
+}
+.letter-viewer-modal-container {
+  z-index: 70;
+}
+.reacted-users-modal-inner-container,
+.commented-users-modal-inner-container,
+.create-post-layer-one-modal-inner-container,
+.create-post-layer-two-modal-inner-container,
+.letter-viewer-modal-inner-container,
+.create-flipcard-layer-one-modal-inner-container,
+.create-flipcard-layer-two-modal-inner-container {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 26px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0 auto 40px;
+  position: relative;
+  z-index: 55;
+  width: 35%;
+  margin: 50px auto;
+  padding: 20px;
+}
+.create-post-layer-one-modal-inner-container,
+.create-post-layer-two-modal-inner-container,
+.letter-viewer-modal-inner-container,
+.create-flipcard-layer-one-modal-inner-container,
+.create-flipcard-layer-two-modal-inner-container {
+  width: 35%;
+}
+.create-post-layer-two-modal-inner-container,
+.create-flipcard-layer-two-modal-inner-container {
+  z-index: 65;
+}
+.letter-viewer-modal-inner-container {
+  padding: 0px;
+  /* background: transparent; */
+  z-index: 75;
+}
+
+.post-photo-modal-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 50;
+  padding: 50px;
+  display: none;
+  /* border: 1px solid blue; */
+}
+.post-photo-modal-inner-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  /* border: 1px solid red; */
+}
+.post-photo-modal-photo-container {
+  position: absolute;
+  /* width: 70%; */
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid blue; */
+  background-color: #000;
+}
+.leftArrow-in-modal {
+  position: absolute;
+  left: 5px;
+  top: 38%;
+  bottom: 0;
+  z-index: 50;
+  height: 60px;
+  cursor: pointer;
+}
+.rightArrow-in-modal {
+  position: absolute;
+  top: 38%;
+  bottom: 0;
+  right: 5px;
+  z-index: 50;
+  height: 60px;
+  cursor: pointer;
+}
+.post-photo-modal-details-container {
+  position: absolute;
+  width: 30%;
+  height: 100%;
+  right: 0;
+  /* border: 1px solid red; */
+  background-color: #fff;
+}
+
+.modal-header,
+.common-header-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--site-color);
+  color: #000;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #000;
+}
+.no-border-and-shadow-and-padding {
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0px !important;
+}
+.height-40 {
+  height: 40px !important;
+}
+.sample_popup {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 26px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0 auto 40px;
+  position: relative;
+  z-index: 55;
+  width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  /* display: none; */
+}
+
+.overlayClose {
+  position: fixed;
+  right: 15px;
+  top: 15px;
+}
+
+.srollable-overlayClose {
+  position: fixed;
+  right: 35px;
+  top: 15px;
+}
+
+.close_popup {
+  font-size: 22px;
+  line-height: 0.5;
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  color: #aaa;
+  text-shadow: 0 -1px 1px rbga(0, 0, 0, 0.6);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Modal related CSS - ends */
+
+/* Mentions related - starts */
+.textarea__suggestions,
+.comment-box__suggestions {
+  z-index: 8 !important;
+}
+.textarea__suggestions__item:last-child {
+  border-bottom: none;
+}
+.mentions {
+  /* margin: 1em 0; */
+  margin: 0px;
+}
+
+.mentions--singleLine .mentions__control {
+  display: inline-block;
+}
+.mentions--singleLine .mentions__higlighter {
+  padding: 1px;
+  border: 2px inset transparent;
+}
+.mentions--singleLine .mentions__input {
+  padding: 5px;
+  border: 2px inset;
+}
+
+.mentions--multiLine .mentions__control {
+  font-family: monospace;
+  font-size: 14pt;
+  border: 1px solid silver;
+}
+.mentions--multiLine .mentions__highlighter {
+  padding: 9px;
+}
+.mentions--multiLine .mentions__input {
+  padding: 9px;
+  min-height: 63px;
+  outline: 0;
+  border: 0;
+}
+
+.mentions__suggestions__list,
+.comment-box__suggestions__list {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  font-size: 10pt;
+}
+
+.mentions__suggestions__item,
+.comment-box__suggestions__item {
+  padding: 5px 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.mentions__suggestions__item--focused {
+  /* background-color: #b5dee0; */
+  font-weight: bold;
+  /* background-color: #fff !important;
+  color: red; */
+}
+
+.mentions__mention {
+  background-color: #e6e6e6;
+  /* background-color: #fff !important; */
+  font-weight: bold;
+  /* color: var(--site-color) !important;
+  outline: none; */
+}
+
+.textarea__input {
+  min-height: 20px;
+}
+.textarea__highlighter {
+  min-height: 100px;
+}
+.textarea__suggestions__list,
+.comment-box__suggestions__list {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: -2px 4px 14px 0px rgba(0, 0, 0, 0.75);
+}
+.textarea__suggestions__item,
+.comment-box__suggestions__item {
+  padding: 5px 15px;
+  border-bottom: 1px solid #ccc;
+}
+.textarea__suggestions__item--focused,
+.comment-box__suggestions__item--focused {
+  background-color: var(--site-color);
+  color: #fff;
+}
+
+/* Mentions related - ends */

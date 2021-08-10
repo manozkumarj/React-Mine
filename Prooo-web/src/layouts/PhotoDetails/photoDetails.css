@@ -1,0 +1,16 @@
+.no-top-margin {
+  margin-top: 0px !important;
+  height: 100%;
+}
+.photo-details-holder {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.post-dps-containerheight-auto {
+  height: auto !important;
+}
+.border-bottom {
+  border-bottom: 1px solid #ccc;
+}

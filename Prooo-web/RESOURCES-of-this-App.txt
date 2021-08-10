@@ -1,0 +1,26 @@
+* https://stackoverflow.com/questions/11891065/css-only-scrollable-table-with-fixed-headers
+* https://stackoverflow.com/questions/486563/overflowhidden-dots-at-the-end
+* For textarea auto resize - https://codesandbox.io/s/l7y53n0k0z && https://github.com/jackmoore/autosize
+* For more options dropdown - https://codedaily.io/tutorials/63/Create-a-Dropdown-in-React-that-Closes-When-the-Body-is-Clicked && https://github.com/codedailyio/teach/tree/outsideClick
+* 
+
+
+* For Emojis - https://www.freepngimg.com/search/?query=emoji&pg=1
+* 
+
+
+
+
+
+-------------------------------- Links solved the issues ------------------------------------------
+* https://stackoverflow.com/questions/53464595/how-to-use-componentwillmount-in-react-hooks
+* https://stackoverflow.com/questions/29725828/update-style-of-a-component-onscroll-in-react-js
+* https://stackoverflow.com/questions/27784212/how-to-use-radio-buttons-in-reactjs
+* http://expressjs.com/en/resources/middleware/multer.html
+* 
+
+-------------------------------- Didn't use but helpful links ------------------------------------------
+* https://stackoverflow.com/questions/54633690/how-can-i-use-multiple-refs-for-an-array-of-elements-with-hooks
+* https://www.freecodecamp.org/news/horizontal-scrolling-using-flexbox-f9d16817f742/
+* https://stackoverflow.com/questions/60045028/how-can-i-add-meta-tags-for-sharing-a-particular-link-in-react-js
+* 

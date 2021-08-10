@@ -1,0 +1,40 @@
+.about-container {
+  background: #fff;
+  border: 1px solid #cccccc;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  border-radius: 5px;
+  margin-bottom: 10em;
+}
+
+.about-header {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  /* background: var(--site-color); */
+  border-bottom: 1px solid #ccc;
+  padding: 0px 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.profile-user-details-container {
+  margin: 15px;
+}
+
+.user-details-field-container {
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+  margin: 5px 0px;
+}
+.user-details-field-container:last-child {
+  border: none;
+}
+.user-details-field-label {
+  font-size: 15px;
+  font-weight: bold;
+}
+.user-details-field {
+  color: var(--site-color);
+  font-size: 18px;
+  font-weight: bold;
+}
